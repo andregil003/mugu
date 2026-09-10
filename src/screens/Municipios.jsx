@@ -3,6 +3,8 @@
 // Con multas → rojo activo y navegable. Sin multas → gris y no seleccionable.
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRotate } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useI18n } from '@/lib/i18n'
@@ -165,7 +167,7 @@ export default function Municipios() {
             onClick={actualizar}
             disabled={actualizando}
           >
-            {actualizando ? 'Actualizando…' : '↻ Actualizar datos'}
+            {actualizando ? 'Actualizando…' : <><FontAwesomeIcon icon={faRotate} className="mr-2" />Actualizar datos</>}
           </Button>
         </CardContent>
       </Card>

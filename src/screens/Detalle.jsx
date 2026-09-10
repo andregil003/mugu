@@ -1,5 +1,5 @@
 // pantalla_detalle_multa: destino final de búsquedas — razón + stepper semáforo + acciones.
-// Stepper: Notificación 🟢 → Apelación 🟡 → Pago 🔴 (según plazos legales de core.js).
+// Stepper: Notificación (verde) → Apelación (amarillo) → Pago (rojo) según plazos legales de core.js.
 import { useEffect, useState } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
