@@ -56,5 +56,10 @@
     "apelacionTitulo":  "InformaciÃ³n de apelaciÃ³n",
     "apelacionTexto":  "PodÃ©s apelar en el juzgado de trÃ¡nsito correspondiente dentro de los plazos legales. LlevÃ¡ tu boleta, identificaciÃ³n y los documentos de respaldo.",
     "pagoTitulo":  "InformaciÃ³n de pago",
-    "pagoTexto":  "PodÃ©s pagar en las ventanillas de la entidad que emitiÃ³ la multa o por los canales autorizados. Pagar dentro de los primeros 15 dÃ­as puede aplicar descuento."
+    "pagoTexto":  "PodÃ©s pagar en las ventanillas de la entidad que emitiÃ³ la multa o por los canales autorizados. Pagar dentro de los primeros 15 dÃ­as puede aplicar descuento.",
+    "errorNoMatchPlacaNumero":  "No encontramos ese nÃºmero de multa asociada a la placa. Se requiere de 3 dÃ­as hÃ¡biles para que aparezca en el sistema luego de ser notificada.",
+    "labelTipoPlaca":  "Tipo de placa",
+    "labelPlacaResto":  "NÃºmero y letras de la placa",
+    "labelPlacaPreview":  "Placa:",
+    "abrirCalendario":  "Abrir calendario"
 }

@@ -69,14 +69,75 @@ export function puedePrescripcion(fechaInfraccion) {
   return diasDesde(fechaInfraccion) > PLAZO_PRESCRIPCION_DIAS
 }
 
+// Siglas de placa de Guatemala y su tipo de vehículo (lista oficial).
+export const SIGLAS_PLACA = [
+  { sigla: 'P', tipo: 'Particular' },
+  { sigla: 'M', tipo: 'Motocicleta' },
+  { sigla: 'A', tipo: 'Alquiler' },
+  { sigla: 'C', tipo: 'Comercial, transporte extraurbano de personas o carga y escolar' },
+  { sigla: 'TE', tipo: 'Transporte extraurbano de personas o carga' },
+  { sigla: 'U', tipo: 'Transporte urbano' },
+  { sigla: 'TRC', tipo: 'Agrícola, industrial o de construcción' },
+  { sigla: 'MT', tipo: 'Mototaxis o similares' },
+  { sigla: 'TC', tipo: 'Remolques y semirremolques' },
+  { sigla: 'O', tipo: 'Oficial' },
+  { sigla: 'CD', tipo: 'Cuerpo o misión diplomática' },
+  { sigla: 'CC', tipo: 'Cuerpo o misión consular' },
+  { sigla: 'MI', tipo: 'Organismos, ONG extranjeras, misiones o funcionarios internacionales' },
+]
+
 /**
- * Valida formato de placa guatemalteca: 3 letras + 3-4 números (P123ABC o P1234ABC).
+ * Valida formato de placa guatemalteca: TIPO + 3 números + 3 letras (ej. P123ABC).
+ * El TIPO debe ser una sigla existente de la lista oficial.
  * @param {string} placa
  * @returns {boolean}
  */
 export function validarPlaca(placa) {
   if (!placa) return false
-  return /^[A-Za-z]{3}\d{3,4}$/.test(placa.trim())
+  const m = /^([A-Z]{1,3})(\d{3})([A-Z]{3})$/i.exec(placa.trim())
+  if (!m) return false
+  return SIGLAS_PLACA.some((s) => s.sigla === m[1].toUpperCase())
+}
+
+/**
+ * ¿La sigla existe en la lista oficial de tipos de placa?
+ * @param {string} sigla
+ * @returns {boolean}
+ */
+export function validarSigla(sigla) {
+  return SIGLAS_PLACA.some((s) => s.sigla === sigla)
+}
+
+/**
+ * Compone la placa completa a partir de la sigla y el resto digitado.
+ * @param {string} sigla ej. "P" o "CD"
+ * @param {string} resto ej. "123 abc"
+ * @returns {string} ej. "P123ABC"
+ */
+export function componerPlaca(sigla, resto) {
+  const s = (sigla || '').trim().toUpperCase()
+  const r = (resto || '').toString().trim().toUpperCase().replace(/[^A-Z0-9]/g, '')
+  return `${s}${r}`
+}
+
+// ============================================================
+// VALIDACIÓN INTERNA (demo) — sin base de datos por ahora.
+// Solo la placa + número de multa de los placeholders hace match.
+// ============================================================
+const MULTAS_DEMO_INTERNAS = [
+  { placa: 'P123ABC', no_multa: '123456' },
+]
+
+/**
+ * Match local placa + número de multa (mientras no haya backend).
+ * @param {string} placa
+ * @param {string} noMulta
+ * @returns {boolean}
+ */
+export function coincideMultaLocal(placa, noMulta) {
+  const p = (placa || '').toString().trim().toUpperCase()
+  const n = (noMulta || '').toString().trim()
+  return MULTAS_DEMO_INTERNAS.some((m) => m.placa === p && m.no_multa === n)
 }
 
 /**
