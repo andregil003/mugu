@@ -99,5 +99,6 @@ function guardarCache(multas) {
 export async function cargarInfracciones() {
   const res = await fetch('/infracciones.json')
   if (!res.ok) throw new Error('No se pudo cargar infracciones.json')
-  return res.json()
+  const data = await res.json()
+  return data.infracciones ?? data
 }

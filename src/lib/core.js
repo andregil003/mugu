@@ -70,13 +70,19 @@ export function puedePrescripcion(fechaInfraccion) {
 }
 
 /**
- * Valida formato de placa guatemalteca: 3 letras + 3-4 números (P123ABC o P1234ABC).
+ * Valida formato de placa guatemalteca (Acuerdo Gubernativo 487-2013 / SAT).
+ * Formatos aceptados:
+ *  - Con prefijo de tipo de vehículo: P123ABC, M123ABC, C1234ABC, TE123ABC,
+ *    TRC1234ABC, CD123ABC, MT123ABC, DIS1234 … (1-3 letras + 3-4 dígitos + sufijo opcional de letras)
+ *  - Sin prefijo (placas antiguas): 123ABC, 1234
+ * Se toleran guiones y espacios (P-123ABC).
  * @param {string} placa
  * @returns {boolean}
  */
 export function validarPlaca(placa) {
   if (!placa) return false
-  return /^[A-Za-z]{3}\d{3,4}$/.test(placa.trim())
+  const p = placa.trim().toUpperCase().replace(/[\s-]/g, '')
+  return /^(?:[A-Z]{1,3}\d{3,4}[A-Z]{0,3}|\d{3,4}[A-Z]{0,3})$/.test(p)
 }
 
 /**
@@ -91,23 +97,48 @@ export function validarFechaNoFutura(fecha) {
 }
 
 /**
- * Infiere el tipo de vehículo desde el prefijo de la placa guatemalteca.
- * P=particular, M=moto, C=comercial, B=bus, T=taxi, O=oficial, CD=diplomático.
+ * Infiere el tipo de vehículo desde el prefijo de la placa guatemalteca
+ * (Acuerdo 487-2013: P, A, C, TE, U, TRC, M, MT, TC, O, CD, CC, MI, DIS).
  * @param {string} placa
  * @returns {string} tipo de vehículo
  */
 export function inferirTipoVehiculo(placa) {
   if (!placa) return 'otro'
-  const p = placa.trim().toUpperCase()
-  if (p.startsWith('CD')) return 'diplomatico'
-  const prefijo = p[0]
+  const p = placa.trim().toUpperCase().replace(/[\s-]/g, '')
+  if (/^(CD|CC|MI)/.test(p)) return 'diplomatico'
+  const prefijos = [
+    'TRC',
+    'DIS',
+    'MT',
+    'TC',
+    'TE',
+    'M',
+    'A',
+    'C',
+    'U',
+    'O',
+    'P',
+    'B',
+    'T',
+  ]
+  const prefijo = prefijos.find((x) => p.startsWith(x))
   const tipos = {
     P: 'particular',
-    M: 'moto',
+    M: 'motocicleta',
+    MT: 'mototaxi',
+    A: 'alquiler',
     C: 'comercial',
+    U: 'urbano',
+    TE: 'extraurbano',
+    TC: 'remolque',
+    TRC: 'agricola',
+    O: 'oficial',
+    CD: 'diplomatico',
+    CC: 'consular',
+    MI: 'mision_internacional',
+    DIS: 'distribuidor',
     B: 'bus',
     T: 'taxi',
-    O: 'oficial',
   }
-  return tipos[prefijo] ?? 'otro'
+  return prefijo ? (tipos[prefijo] ?? 'otro') : 'otro'
 }
