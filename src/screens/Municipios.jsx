@@ -10,6 +10,7 @@ import { sincronizarCacheDiario, forzarActualizacion } from '@/lib/data'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { inferirTipoVehiculo, normalizarEntidad } from '@/lib/core'
 import { MOCK_MULTAS } from '@/lib/demo'
+import ModuleLayout from '@/components/layout/ModuleLayout'
 
 // Etiquetas visibles por tipo de vehículo (claves de i18n)
 const TIPO_LABEL = {
@@ -109,7 +110,7 @@ export default function Municipios() {
   }
 
   return (
-    <div className="min-h-svh bg-gradient-to-b from-violet-50 via-white to-white">
+    <ModuleLayout>
       <div className="mx-auto max-w-5xl px-4 py-6">
         <Button
           variant="ghost"
@@ -198,6 +199,6 @@ export default function Municipios() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </ModuleLayout>
   )
 }

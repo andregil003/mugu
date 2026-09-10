@@ -8,6 +8,7 @@ import { useI18n } from '@/lib/i18n'
 import { cargarInfracciones, sincronizarCacheDiario } from '@/lib/data'
 import { listarMultas } from '@/lib/demo'
 import { formatearFecha, normalizarEntidad } from '@/lib/core'
+import ModuleLayout from '@/components/layout/ModuleLayout'
 
 function formatoMonto(monto) {
   const n = Number(String(monto ?? '').replace(/[^0-9.]/g, ''))
@@ -67,7 +68,7 @@ export default function Multas() {
   }
 
   return (
-    <div className="min-h-svh bg-gradient-to-b from-violet-50 via-white to-white">
+    <ModuleLayout>
       <div className="mx-auto max-w-3xl px-4 py-6">
         <Button
           variant="ghost"
@@ -161,6 +162,6 @@ export default function Multas() {
           </div>
         )}
       </div>
-    </div>
+    </ModuleLayout>
   )
 }

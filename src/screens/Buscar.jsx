@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { useI18n } from '@/lib/i18n'
 import { validarPlaca } from '@/lib/core'
+import ModuleLayout from '@/components/layout/ModuleLayout'
 
 export default function Buscar() {
   const { t } = useI18n()
@@ -24,7 +25,7 @@ export default function Buscar() {
   }
 
   return (
-    <div className="min-h-svh bg-gradient-to-b from-violet-50 via-white to-white">
+    <ModuleLayout>
       <div className="mx-auto max-w-2xl px-4 py-6">
         <Button
           variant="ghost"
@@ -83,6 +84,6 @@ export default function Buscar() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </ModuleLayout>
   )
 }
