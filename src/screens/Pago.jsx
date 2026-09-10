@@ -1,5 +1,5 @@
 // pantalla_info_pagar: pasarelas de pago o instrucciones bancarias.
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useI18n } from '@/lib/i18n'
@@ -7,6 +7,9 @@ import { useI18n } from '@/lib/i18n'
 export default function Pago() {
   const { t } = useI18n()
   const navigate = useNavigate()
+  const [params] = useSearchParams()
+  const placa = params.get('placa') ?? ''
+  const entidad = params.get('entidad') ?? ''
 
   return (
     <div className="mx-auto max-w-md px-4 py-8">
@@ -16,8 +19,16 @@ export default function Pago() {
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground">{t('pagoTexto')}</p>
-          <Button variant="outline" className="w-full" onClick={() => navigate('/detalle')}>
-            ← Volver
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() =>
+              navigate(
+                `/detalle?placa=${encodeURIComponent(placa)}&entidad=${encodeURIComponent(entidad)}`
+              )
+            }
+          >
+            ← {t('volver')}
           </Button>
         </CardContent>
       </Card>

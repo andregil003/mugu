@@ -2,13 +2,15 @@
 // Los JSON se importan directo (Vite los empaqueta en el build).
 import { createContext, useContext, useMemo, useState } from 'react'
 import es from './es.json'
+import en from './en.json'
 import kiche from './kiche.json'
 import kawchiquel from './kawchiquel.json'
 
 export const IDIOMAS = [
   { codigo: 'es', nombre: 'Español', diccionario: es },
+  { codigo: 'en', nombre: 'English', diccionario: en },
   { codigo: 'kiche', nombre: "K'iche'", diccionario: kiche },
-  { codigo: 'kawchiquel', nombre: 'Kawchiquel', diccionario: kawchiquel },
+  { codigo: 'kawchiquel', nombre: 'Kaqchikel', diccionario: kawchiquel },
 ]
 
 const I18nContext = createContext(null)

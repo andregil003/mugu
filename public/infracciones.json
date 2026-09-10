@@ -175,6 +175,132 @@
       "emisores": ["PNC", "PMT municipal"],
       "verificar": true,
       "consejo": "Monto pendiente de verificacion contra la cartilla oficial."
+    },
+    {
+      "id": "articulo_181_25",
+      "nombre": "Artículo 181-25",
+      "descripcion": "Estacionarte en contra de la dirección de la vía (en el carril más próximo pero en sentido contrario)",
+      "consejo": "Es la clásica multa de cepo. Si te lo pusieron, el cepo se libera al recibir la papeleta, sin pago inmediato obligatorio (Decreto 33-2024).",
+      "monto": 200
+    },
+    {
+      "id": "articulo_181_26",
+      "nombre": "Artículo 181-26",
+      "descripcion": "Estacionarte dejando más de 25 centímetros entre el vehículo y la banqueta",
+      "consejo": "De las más fáciles de evitar: pegá bien el vehículo a la banqueta. Si te multaron igual, revisá que la distancia esté bien medida.",
+      "monto": 200
+    },
+    {
+      "id": "articulo_181_27",
+      "nombre": "Artículo 181-27",
+      "descripcion": "Estacionarte o parar donde bloqueás la circulación o ponés en peligro a otros usuarios",
+      "consejo": "Suele venir con cepo. Verificá que el cepo se haya colocado legalmente (solo en vía pública) y que la papeleta tenga los 6 requisitos del Decreto 33-2024.",
+      "monto": 200
+    },
+    {
+      "id": "articulo_181_34",
+      "nombre": "Artículo 181-34",
+      "descripcion": "Circular sin cinturón de seguridad (salvo excepciones del reglamento)",
+      "consejo": "El cinturón salva vidas y es de las multas más comunes. Si el conductor lo traía pero el copiloto no, la multa aplica igual: revisá quién iba en el vehículo.",
+      "monto": 200
+    },
+    {
+      "id": "articulo_182_19",
+      "nombre": "Artículo 182-19",
+      "descripcion": "No ceder el paso a los peatones cuando tienen prioridad (pasos de cebra, cruces)",
+      "consejo": "En un paso de cebra el peatón siempre tiene prioridad. Si te multaron, verificá que el paso estuviera señalizado y que el peatón realmente estuviera cruzando.",
+      "monto": 300
+    },
+    {
+      "id": "articulo_182_20",
+      "nombre": "Artículo 182-20",
+      "descripcion": "No ceder el paso a los ciclistas cuando tienen prioridad",
+      "consejo": "Los ciclistas tienen prioridad en ciclovías y cuando circulan por la derecha. Si la multa no describe bien el lugar, hay argumento para impugnar.",
+      "monto": 300
+    },
+    {
+      "id": "articulo_183_1",
+      "nombre": "Artículo 183-1",
+      "descripcion": "Conducir sin tener licencia de conducir",
+      "consejo": "Es distinto a licencia vencida: acá directamente no tenés licencia. El curso vial reduce la multa a Q300.",
+      "monto": 400
+    },
+    {
+      "id": "articulo_184_2",
+      "nombre": "Artículo 184-2",
+      "descripcion": "No tener la tarjeta de circulación del vehículo",
+      "consejo": "Desde el Decreto 33-2024 se acepta la tarjeta de circulación ELECTRÓNICA digital. Si la mostraste en tu teléfono y te multaron igual, hay argumento para impugnar.",
+      "monto": 500
+    },
+    {
+      "id": "articulo_184_3",
+      "nombre": "Artículo 184-3",
+      "descripcion": "Circular cuando la autoridad dispuso una restricción (cierres, contraflujos, emergencias)",
+      "consejo": "Aplica en cierres por obras, manifestaciones o emergencias. Si no había señalización visible del cierre, podés impugnar con fotos del lugar.",
+      "monto": 500
+    },
+    {
+      "id": "articulo_184_4",
+      "nombre": "Artículo 184-4",
+      "descripcion": "Circular con vehículo de carga en horarios o rutas prohibidas",
+      "consejo": "Las ciudades restringen horarios y rutas para carga pesada. Verificá el horario permitido de tu ruta; si la señal no estaba visible, impugná.",
+      "monto": 500
+    },
+    {
+      "id": "articulo_184_8",
+      "nombre": "Artículo 184-8",
+      "descripcion": "Transportar personas en lugares exteriores de unidades de transporte público (parrillas, estribos)",
+      "consejo": "Es peligroso y muy sancionado: nadie puede ir fuera de la cabina en buses o camiones.",
+      "monto": 500
+    },
+    {
+      "id": "articulo_184_9",
+      "nombre": "Artículo 184-9",
+      "descripcion": "Recoger o dejar pasajeros haciendo parada en lugar no autorizado",
+      "consejo": "Aplica a transporte público que para fuera de las paradas establecidas. Si la parada no estaba señalizada, hay argumento para revisar la multa.",
+      "monto": 500
+    },
+    {
+      "id": "articulo_184_11",
+      "nombre": "Artículo 184-11",
+      "descripcion": "Circular en moto por aceras, banquetas, pasos peatonales o ciclovías",
+      "consejo": "Las motos no pueden circular por espacios peatonales ni ciclovías. Es de las multas más comunes a motociclistas en la ciudad.",
+      "monto": 500
+    },
+    {
+      "id": "articulo_184_12",
+      "nombre": "Artículo 184-12",
+      "descripcion": "Circular en moto entre carriles, parar entre carriles o zigzaguear",
+      "consejo": "El 'filtrado' entre carriles con tráfico detenido es ilegal. Circulá en tu carril y evitá el zigzag: además de la multa, es causa de accidentes.",
+      "monto": 500
+    },
+    {
+      "id": "articulo_185_a_1",
+      "nombre": "Artículo 185-A-1",
+      "descripcion": "Retirar, dañar, alterar o cubrir señales de tránsito",
+      "consejo": "Multa de mayor cuantía (Q1,000). Si la señal ya estaba dañada antes, documentá el estado del lugar.",
+      "monto": 1000
+    },
+    {
+      "id": "articulo_185_a_2",
+      "nombre": "Artículo 185-A-2",
+      "descripcion": "Faltar el respeto, ofender, agredir o insultar a la autoridad de tránsito",
+      "consejo": "Además de la multa (Q1,000), el caso puede certificarse al Ministerio Público si constituye delito. Mantené la calma y anotá los datos del agente.",
+      "monto": 1000
+    },
+    {
+      "id": "articulo_185_b",
+      "nombre": "Artículo 185-B",
+      "descripcion": "Colocar obstáculos en la vía pública para carreras o actividades similares sin permiso",
+      "consejo": "Multa de Q5,000. La autoridad avisa al Ministerio Público: puede haber consecuencias penales además de la multa.",
+      "monto": 5000
+    },
+    {
+      "id": "articulo_185_c",
+      "nombre": "Artículo 185-C",
+      "descripcion": "Usar la vía pública para carreras, concursos o actividades similares sin permiso",
+      "consejo": "Multa de Q25,000 por cada conductor participante. La autoridad avisa al Ministerio Público obligatoriamente.",
+      "monto": 25000
     }
   ]
 }

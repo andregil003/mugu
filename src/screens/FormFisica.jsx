@@ -1,13 +1,12 @@
 // pantalla_formulario_fisica (Flujo B): búsqueda con datos del documento impreso.
-// Validaciones locales (sin backend por ahora):
+// Validaciones locales:
 //   1. Placa: menú desplegable de tipo (sigla) + renglón con números y 3 letras.
 //      Formato final: TIPO + 3 números + 3 letras (ej. P123ABC).
 //   2. Número de multa: únicamente 6 dígitos.
 //   3/4. Fechas con calendario (input type=date + botón), notificación opcional.
-//   5. Lista de municipalidades/emisores (portal SAT), opcional.
-// Match: si placa + número de multa coinciden con la demo interna → /detalle.
-//        Si no → mensaje de espera de 3 días hábiles.
-import { useState } from 'react'
+//   5. Municipalidades/emisores (entidades.json).
+// Match contra el backend real (cache diario); si no aparece → espera de 3 días.
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
@@ -28,23 +27,12 @@ import {
   validarPlaca,
   validarFechaNoFutura,
   componerPlaca,
-  coincideMultaLocal,
 } from '@/lib/core'
+import { sincronizarCacheDiario } from '@/lib/data'
 
-// Emisores de multas de tránsito según el portal SAT (portal.sat.gob.gt/portal/multas/)
-const ENTIDADES = [
-  { id: 'pnc', nombre: 'PNC — Policía Nacional Civil' },
-  { id: 'emetra', nombre: 'EMETRA' },
-  { id: 'emixtra', nombre: 'Emixtra (Mixco)' },
-  { id: 'villanueva', nombre: 'Villa Nueva' },
-  { id: 'santacatarinapinula', nombre: 'Santa Catarina Pinula' },
-  { id: 'palencia', nombre: 'Palencia' },
-  { id: 'sanlucassacatepequez', nombre: 'San Lucas Sacatepéquez' },
-  { id: 'amatitlan', nombre: 'Amatitlán' },
-  { id: 'escuintla', nombre: 'Escuintla' },
-  { id: 'antiguaguatemala', nombre: 'Antigua Guatemala' },
-  { id: 'jutiapa', nombre: 'Jutiapa' },
-]
+function normalizarEntidad(nombre = '') {
+  return nombre.toLowerCase().replace(/[^a-z0-9]+/g, '_')
+}
 
 const HOY = new Date().toISOString().slice(0, 10)
 
@@ -57,9 +45,18 @@ export default function FormFisica() {
   const [fecha, setFecha] = useState('')
   const [fechaNotif, setFechaNotif] = useState('')
   const [entidad, setEntidad] = useState('')
+  const [entidades, setEntidades] = useState([])
   const [error, setError] = useState('')
+  const [buscando, setBuscando] = useState(false)
 
   const placaCompleta = componerPlaca(tipoPlaca, restoPlaca)
+
+  useEffect(() => {
+    fetch('/entidades.json')
+      .then((r) => r.json())
+      .then((d) => setEntidades(d.entidades ?? []))
+      .catch(() => {})
+  }, [])
 
   function onRestoPlacaChange(e) {
     // Solo letras y números; mayúsculas; máx. 6 caracteres (3 números + 3 letras)
@@ -71,7 +68,7 @@ export default function FormFisica() {
     setNoMulta(e.target.value.replace(/\D/g, '').slice(0, 6))
   }
 
-  function buscar(e) {
+  async function buscar(e) {
     e.preventDefault()
     setError('')
 
@@ -80,10 +77,10 @@ export default function FormFisica() {
       return
     }
     if (!validarPlaca(placaCompleta)) {
-      setError('Formato de placa inválido: tipo + 3 números + 3 letras (ej. P123ABC)')
+      setError('El formato de placa es inválido: tipo + 3 números + 3 letras (ej. P123ABC)')
       return
     }
-    if (noMulta.length !== 6) {
+    if (!/^\d{6}$/.test(noMulta.trim())) {
       setError('El número de multa debe tener exactamente 6 dígitos')
       return
     }
@@ -95,10 +92,25 @@ export default function FormFisica() {
       setError('La fecha de notificación no puede ser futura')
       return
     }
+    if (!entidad) {
+      setError('Seleccioná la municipalidad')
+      return
+    }
 
-    // Validación interna (demo): placa + número de multa
-    if (!coincideMultaLocal(placaCompleta, noMulta)) {
-      setError(t('errorNoMatchPlacaNumero'))
+    setBuscando(true)
+    const multas = await sincronizarCacheDiario()
+    setBuscando(false)
+
+    const encontrada = multas.some(
+      (m) =>
+        m.placa === placaCompleta &&
+        normalizarEntidad(m.entidad) === entidad &&
+        (!m.no_multa || m.no_multa === noMulta.trim())
+    )
+
+    if (!encontrada) {
+      // Delay de digitación de remisiones: esperar 3 días
+      setError(t('errorNoEncontrado'))
       return
     }
 
@@ -176,20 +188,24 @@ export default function FormFisica() {
               <label className="mb-1 block text-sm font-medium">{t('labelMunicipalidad')}</label>
               <Select value={entidad} onValueChange={setEntidad}>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder={`${t('labelMunicipalidad')} (opcional)`} />
+                  <SelectValue placeholder={t('labelMunicipalidad')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {ENTIDADES.map((e) => (
+                  {entidades.map((e) => (
                     <SelectItem key={e.id} value={e.id}>
-                      {e.nombre}
+                      {e.corto}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
             {error && <p className="text-sm text-red-600">{error}</p>}
-            <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-              {t('botonBuscar')}
+            <Button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700"
+              disabled={buscando}
+            >
+              {buscando ? '…' : t('botonBuscar')}
             </Button>
           </form>
         </CardContent>

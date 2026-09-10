@@ -1,31 +1,117 @@
 {
   "_meta": {
-    "version": "0.1.0",
-    "nota": "Placeholder inicial. Diego completa las 11 entidades con jurisdicciones, contactos y horarios. NO inventar datos.",
+    "version": "1.0.0",
+    "nota": "Las 11 entidades que emiten multas de tránsito según el portal SAT (portal.sat.gob.gt/portal/multas) y el análisis Reto 05. Jurisdicciones y portales verificados contra fuentes oficiales.",
     "aviso_legal": "Catálogo orientativo para prototipo de hackathon. Verificar contra fuentes oficiales."
   },
   "entidades": [
     {
-      "id": "emetra",
-      "nombre": "EMETRA",
-      "jurisdiccion": "Ciudad de Guatemala",
-      "portal": "",
-      "contacto": "",
-      "dondePagar": ""
-    },
-    {
       "id": "pnc",
-      "nombre": "PNC — Policía Nacional Civil",
-      "jurisdiccion": "Todo el país",
-      "portal": "",
+      "nombre": "PNC — Departamento de Tránsito",
+      "corto": "PNC",
+      "jurisdiccion": "Rutas nacionales, departamentales y centroamericanas",
+      "portal": "http://sistemas.transito.gob.gt/consultaremisiones/consultaremisiones.aspx",
+      "imagen": "/entidades/pnc.jpg",
+      "contacto": "",
+      "dondePagar": "Bancos del sistema o banca en línea"
+    },
+    {
+      "id": "emetra",
+      "nombre": "EMETRA — Municipalidad de Guatemala",
+      "corto": "EMETRA",
+      "jurisdiccion": "Ciudad de Guatemala",
+      "portal": "http://especiales.muniguate.com/remisiones.htm",
+      "imagen": "/entidades/emetra.jpg",
+      "contacto": "",
+      "dondePagar": "Presencial en agencias Banrural o banca virtual Banrural"
+    },
+    {
+      "id": "emixtra",
+      "nombre": "Emixtra — Municipalidad de Mixco",
+      "corto": "Emixtra",
+      "jurisdiccion": "Mixco",
+      "portal": "https://consultas.munimixco.gob.gt/app/pagov2/",
+      "imagen": "/entidades/emixtra.jpg",
+      "contacto": "",
+      "dondePagar": "Banco Industrial (BI en línea)"
+    },
+    {
+      "id": "villa_nueva",
+      "nombre": "PMT — Municipalidad de Villa Nueva",
+      "corto": "Villa Nueva",
+      "jurisdiccion": "Villa Nueva",
+      "portal": "https://www.villanueva.gob.gt/constancias-y-solvencias/",
+      "imagen": "/entidades/villa_nueva.jpg",
       "contacto": "",
       "dondePagar": ""
     },
     {
-      "id": "muniguate",
-      "nombre": "Municipalidad de Guatemala",
-      "jurisdiccion": "Ciudad de Guatemala",
-      "portal": "",
+      "id": "santa_catarina_pinula",
+      "nombre": "PMT — Santa Catarina Pinula",
+      "corto": "S. Catarina Pinula",
+      "jurisdiccion": "Santa Catarina Pinula",
+      "portal": "http://www.consultas.scp.gob.gt/transito/",
+      "imagen": "/entidades/santa_catarina_pinula.jpg",
+      "contacto": "",
+      "dondePagar": "Banco Industrial (BI en línea)"
+    },
+    {
+      "id": "palencia",
+      "nombre": "PMT — Municipalidad de Palencia",
+      "corto": "Palencia",
+      "jurisdiccion": "Palencia",
+      "portal": "http://consultamulta.munipalencia.gob.gt/",
+      "imagen": "/entidades/palencia.jpg",
+      "contacto": "",
+      "dondePagar": ""
+    },
+    {
+      "id": "san_lucas_sacatepequez",
+      "nombre": "PMT — San Lucas Sacatepéquez",
+      "corto": "S. Lucas Sacatepéquez",
+      "jurisdiccion": "San Lucas Sacatepéquez",
+      "portal": "http://www.munisanlucas.gob.gt/Municipalidad_de_San_Lucas/Consulta_de_Remisiones.html",
+      "imagen": "/entidades/san_lucas_sacatepequez.jpg",
+      "contacto": "",
+      "dondePagar": ""
+    },
+    {
+      "id": "amatitlan",
+      "nombre": "PMT — Municipalidad de Amatitlán",
+      "corto": "Amatitlán",
+      "jurisdiccion": "Amatitlán",
+      "portal": "http://amatitlanpmt.com/",
+      "imagen": "/entidades/amatitlan.jpg",
+      "contacto": "",
+      "dondePagar": ""
+    },
+    {
+      "id": "escuintla",
+      "nombre": "PMT — Municipalidad de Escuintla",
+      "corto": "Escuintla",
+      "jurisdiccion": "Escuintla",
+      "portal": "https://muniescuintla.gob.gt/multas-de-transito-municipalidad-de-escuintla/",
+      "imagen": "/entidades/escuintla.jpg",
+      "contacto": "",
+      "dondePagar": ""
+    },
+    {
+      "id": "antigua_guatemala",
+      "nombre": "PMT — Municipalidad de Antigua Guatemala",
+      "corto": "Antigua Guatemala",
+      "jurisdiccion": "Antigua Guatemala",
+      "portal": "https://portal.muniantigua.gob.gt/#/remisiones",
+      "imagen": "/entidades/antigua_guatemala.png",
+      "contacto": "",
+      "dondePagar": ""
+    },
+    {
+      "id": "jutiapa",
+      "nombre": "PMT — Municipalidad de Jutiapa",
+      "corto": "Jutiapa",
+      "jurisdiccion": "Jutiapa",
+      "portal": "https://munisoftware.com/jutiapa.php",
+      "imagen": "/entidades/jutiapa.png",
       "contacto": "",
       "dondePagar": ""
     }
