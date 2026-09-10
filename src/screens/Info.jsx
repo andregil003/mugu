@@ -1,5 +1,7 @@
 // pantalla_tabla_informativa (Flujo C): tipos de multas a lenguaje casual.
 import { useEffect, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useI18n } from '@/lib/i18n'
 import { cargarInfracciones } from '@/lib/data'
@@ -26,6 +28,12 @@ export default function Info() {
                 <p className="text-sm text-muted-foreground">
                   {i.descripcion ?? ''}
                 </p>
+                {i.consejo && (
+                  <p className="mt-2 flex items-start gap-2 rounded-lg bg-emerald-100/70 px-3 py-2 text-xs leading-relaxed text-emerald-900">
+                    <FontAwesomeIcon icon={faLightbulb} className="mt-0.5 shrink-0" />
+                    <span>{i.consejo}</span>
+                  </p>
+                )}
                 <p className="mt-1 text-xs text-muted-foreground">
                   Monto: Q{i.monto ?? i.multa ?? ''}
                 </p>
