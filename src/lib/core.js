@@ -23,6 +23,68 @@ export function diasDesde(fechaInfraccion) {
 }
 
 /**
+ * Fecha de hoy en formato ISO (YYYY-MM-DD), local.
+ * @returns {string}
+ */
+export function hoyISO() {
+  const h = new Date()
+  return `${h.getFullYear()}-${String(h.getMonth() + 1).padStart(2, '0')}-${String(
+    h.getDate()
+  ).padStart(2, '0')}`
+}
+
+/**
+ * Devuelve la fecha (YYYY-MM-DD) resultante de sumar días a una fecha ISO.
+ * @param {string} fechaISO ISO (YYYY-MM-DD)
+ * @param {number} dias puede ser negativo
+ * @returns {string}
+ */
+export function fechaMasDias(fechaISO, dias = 0) {
+  if (!fechaISO) return ''
+  const f = new Date(fechaISO)
+  if (isNaN(f)) return fechaISO
+  f.setDate(f.getDate() + dias)
+  return `${f.getFullYear()}-${String(f.getMonth() + 1).padStart(2, '0')}-${String(
+    f.getDate()
+  ).padStart(2, '0')}`
+}
+
+/**
+ * Días restantes (o transcurridos, si es negativo) hasta una fecha objetivo.
+ * @param {string} fechaObjetivoISO ISO (YYYY-MM-DD)
+ * @returns {number}
+ */
+export function diasRestantesPara(fechaObjetivoISO) {
+  if (!fechaObjetivoISO) return 0
+  const f = new Date(`${fechaObjetivoISO}T00:00:00`)
+  const hoy = new Date(`${hoyISO()}T00:00:00`)
+  return Math.round((f - hoy) / (1000 * 60 * 60 * 24))
+}
+
+/**
+ * Formatea una fecha ISO a DD/MM/AAAA para mostrar.
+ * @param {string} fechaISO
+ * @returns {string}
+ */
+export function formatearFecha(fechaISO) {
+  if (!fechaISO) return '—'
+  const f = new Date(fechaISO)
+  if (isNaN(f)) return fechaISO
+  return `${String(f.getDate()).padStart(2, '0')}/${String(
+    f.getMonth() + 1
+  ).padStart(2, '0')}/${f.getFullYear()}`
+}
+
+/**
+ * Fecha de hoy menos N días (útil para datos de demostración).
+ * @param {number} dias
+ * @returns {string}
+ */
+export function fechaHaceDias(dias) {
+  return fechaMasDias(hoyISO(), -dias)
+}
+
+/**
  * Semáforo de legalidad según los días transcurridos.
  * @param {string} fechaInfraccion ISO (YYYY-MM-DD)
  * @returns {{ color: 'verde'|'amarillo'|'rojo', dias: number, motivo: string }}
