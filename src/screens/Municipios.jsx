@@ -182,7 +182,7 @@ export default function Municipios() {
             onClick={actualizar}
             disabled={actualizando}
           >
-            {actualizando ? 'Actualizando…' : <><FontAwesomeIcon icon={faRotate} className="mr-2" />Actualizar datos</>}
+            {actualizando ? t('actualizando') : <><FontAwesomeIcon icon={faRotate} className="mr-2" />{t('actualizarDatos')}</>}
           </Button>
         </CardContent>
       </Card>
