@@ -12,19 +12,19 @@
       "codigo": "Art. 90 Reglamento (273-98)",
       "nombre": "No respetar semaforo en rojo o senal de alto",
       "descripcion": "Pasar con luz roja del semaforo o ignorar una senal de ALTO",
-      "monto": 400,
-      "descuento_curso_vial": 300,
+      "monto": 200,
+      "descuento_curso_vial": 150,
       "categoria": "grave",
       "emisores": ["PNC", "EMETRA", "PMT municipal"],
-      "consejo": "Si la notificacion no llego en 120 dias, prescribe. Si llego, el curso vial reduce la multa a Q300."
+      "consejo": "Si la notificacion no llego en 120 dias, prescribe. Si llego, el curso vial reduce la multa a Q150."
     },
     {
       "id": "estacionamiento_prohibido",
       "codigo": "Ley 132-96 / Reglamento 273-98",
       "nombre": "Estacionar en lugar prohibido",
       "descripcion": "Estacionar en zonas prohibidas (rampas, pasos de cebra, lugares con senal de no estacionar)",
-      "monto": 400,
-      "descuento_curso_vial": 300,
+      "monto": 500,
+      "descuento_curso_vial": 375,
       "categoria": "grave",
       "emisores": ["EMETRA", "PMT municipal"],
       "consejo": "Verifica si el cepo se coloco legalmente: solo en via publica y se libera al recibir la papeleta, sin pago inmediato obligatorio (Decreto 33-2024)."
@@ -133,24 +133,22 @@
       "codigo": "Ley 132-96",
       "nombre": "Exceso de velocidad",
       "descripcion": "Superar los limites de velocidad establecidos",
-      "monto": null,
-      "descuento_curso_vial": null,
+      "monto": 300,
+      "descuento_curso_vial": 225,
       "categoria": "grave",
       "emisores": ["PNC", "PMT municipal"],
-      "verificar": true,
-      "consejo": "Monto pendiente de verificacion contra la cartilla oficial. Guatemala tiene 511 intersecciones con videoanalitica pero aun NO multan automaticamente."
+      "consejo": "El curso vial reduce la multa a Q225. Guatemala tiene 511 intersecciones con videoanalitica pero aun NO multan automaticamente."
     },
     {
       "id": "celular_conduciendo",
       "codigo": "Ley 132-96",
       "nombre": "Uso de telefono celular mientras conduce",
       "descripcion": "Usar el telefono celular u otro dispositivo mientras se conduce",
-      "monto": null,
-      "descuento_curso_vial": null,
+      "monto": 100,
+      "descuento_curso_vial": 75,
       "categoria": "grave",
       "emisores": ["PNC", "EMETRA", "PMT municipal"],
-      "verificar": true,
-      "consejo": "Monto pendiente de verificacion contra la cartilla oficial."
+      "consejo": "El curso vial reduce la multa a Q75."
     },
     {
       "id": "sentido_contrario",
