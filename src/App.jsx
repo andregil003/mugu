@@ -5,6 +5,7 @@
 // Detalle → Apelacion | Pago
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import { I18nProvider } from '@/lib/i18n'
+import AppShell from '@/components/AppShell'
 import Entrada from '@/screens/Entrada'
 import Idioma from '@/screens/Idioma'
 import Bienvenida from '@/screens/Bienvenida'
@@ -21,19 +22,21 @@ function App() {
   return (
     <I18nProvider>
       <HashRouter>
-        <Routes>
-          <Route path="/" element={<Entrada />} />
-          <Route path="/idioma" element={<Idioma />} />
-          <Route path="/bienvenida" element={<Bienvenida />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/buscar" element={<Buscar />} />
-          <Route path="/resultados" element={<Resultados />} />
-          <Route path="/multa-fisica" element={<FormFisica />} />
-          <Route path="/info" element={<Info />} />
-          <Route path="/detalle" element={<Detalle />} />
-          <Route path="/apelacion" element={<Apelacion />} />
-          <Route path="/pago" element={<Pago />} />
-        </Routes>
+        <AppShell>
+          <Routes>
+            <Route path="/" element={<Entrada />} />
+            <Route path="/idioma" element={<Idioma />} />
+            <Route path="/bienvenida" element={<Bienvenida />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/buscar" element={<Buscar />} />
+            <Route path="/resultados" element={<Resultados />} />
+            <Route path="/multa-fisica" element={<FormFisica />} />
+            <Route path="/info" element={<Info />} />
+            <Route path="/detalle" element={<Detalle />} />
+            <Route path="/apelacion" element={<Apelacion />} />
+            <Route path="/pago" element={<Pago />} />
+          </Routes>
+        </AppShell>
       </HashRouter>
     </I18nProvider>
   )
