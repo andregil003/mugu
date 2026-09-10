@@ -28,6 +28,9 @@ export default function Detalle() {
 
   const [razon, setRazon] = useState('')
   const [monto, setMonto] = useState('')
+  const [noMulta, setNoMulta] = useState('')
+  const [categoria, setCategoria] = useState('')
+  const [fechaMulta, setFechaMulta] = useState(fecha)
 
   useEffect(() => {
     let activo = true
@@ -46,15 +49,19 @@ export default function Detalle() {
       const inf = infracciones.find((i) => i.id === multa?.infraccion)
       setRazon(inf?.nombre ?? multa?.infraccion ?? 'Multa de tránsito')
       setMonto(multa?.monto ? `Q${multa.monto}` : '')
+      setNoMulta(multa?.no_multa ?? '')
+      setCategoria(multa?.categoria ?? inf?.categoria ?? '')
+      // Prioridad: query param > fecha_notificacion > fecha de la multa
+      setFechaMulta(fecha || multa?.fecha_notificacion || multa?.fecha || '')
     }
     cargar()
     return () => {
       activo = false
     }
-  }, [placa, entidad])
+  }, [placa, entidad, fecha])
 
   // Fase del stepper según la fecha de la multa
-  const semaforo = calcularSemaforo(fecha)
+  const semaforo = calcularSemaforo(fechaMulta)
   const faseActual = semaforo.color === 'verde' ? 0 : semaforo.color === 'amarillo' ? 1 : 2
 
   return (
@@ -71,6 +78,16 @@ export default function Detalle() {
           <div className="rounded-lg border p-4 text-center">
             <p className="text-lg font-semibold">{razon}</p>
             {monto && <p className="text-sm text-muted-foreground">{monto}</p>}
+            {noMulta && (
+              <p className="mt-1 text-xs text-muted-foreground">
+                No. de multa: {noMulta}
+              </p>
+            )}
+            {categoria && (
+              <p className="text-xs text-muted-foreground capitalize">
+                Tipo: {categoria.replace('_', ' ')}
+              </p>
+            )}
           </div>
 
           {/* Stepper semáforo */}
