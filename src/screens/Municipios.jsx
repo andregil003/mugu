@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotate } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import PageHero from '@/components/PageHero'
 import { useI18n } from '@/lib/i18n'
 import { sincronizarCacheDiario, forzarActualizacion } from '@/lib/data'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
@@ -95,32 +96,18 @@ export default function Municipios() {
   }
 
   return (
-    <div className="mx-auto max-w-lg px-4 py-6">
-      <Button
-        variant="ghost"
-        className="mb-4 -ml-1 text-muted-foreground transition hover:-translate-x-0.5 hover:text-foreground active:scale-95"
-        onClick={() => navigate('/buscar')}
-      >
-        ← {t('volver')}
-      </Button>
-
-      <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-600 shadow-lg">
-        <div className="px-5 py-5 text-white">
-          <p className="text-xs font-medium uppercase tracking-widest text-blue-100">
-            {placa}
-          </p>
-          <h1 className="mt-1 text-2xl font-bold">{t('municipiosTitulo')}</h1>
-          {tipoVehiculo && (
-            <p className="mt-1 text-sm text-blue-100">
-              {t(TIPO_LABEL[tipoVehiculo] ?? 'tipoOtro')}
-            </p>
-          )}
-        </div>
-      </div>
+    <div className="mx-auto w-full max-w-4xl px-4 py-6 lg:py-10">
+      <PageHero
+        eyebrow={placa}
+        titulo={t('municipiosTitulo')}
+        subtitulo={
+          tipoVehiculo ? t(TIPO_LABEL[tipoVehiculo] ?? 'tipoOtro') : undefined
+        }
+      />
 
       <Card className="mt-4 rounded-2xl shadow-sm transition-shadow hover:shadow-md">
         <CardContent className="space-y-4 py-5">
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
             {entidades.map((e) => {
               const n = conteo[e.id] ?? 0
               const activo = n > 0
@@ -137,8 +124,8 @@ export default function Municipios() {
                   title={`${e.corto}${activo ? ` — ${n} multa(s)` : ' — sin multas'}`}
                   className={`group flex flex-col items-center gap-2 rounded-xl border p-3 text-center transition-all duration-200 ${
                     activo
-                      ? 'cursor-pointer border-gray-200 bg-white shadow-sm hover:-translate-y-0.5 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10 active:scale-95'
-                      : 'cursor-not-allowed border-gray-200 bg-gray-50'
+                      ? 'cursor-pointer border-border bg-card shadow-sm hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 active:scale-95'
+                      : 'cursor-not-allowed border-border bg-muted/40'
                   }`}
                 >
                   <span className="relative block h-16 w-full">
@@ -146,7 +133,7 @@ export default function Municipios() {
                       src={e.imagen}
                       alt={`${e.corto} — ${e.jurisdiccion}`}
                       loading="lazy"
-                      className={`mx-auto h-16 w-16 rounded-lg border border-gray-200 object-contain p-0.5 transition-all duration-200 ${
+                      className={`mx-auto h-16 w-16 rounded-lg border border-border object-contain p-0.5 transition-all duration-200 ${
                         activo
                           ? 'group-hover:scale-105 group-hover:shadow-md'
                           : 'grayscale opacity-50'
@@ -157,16 +144,16 @@ export default function Municipios() {
                         {n}
                       </span>
                     ) : (
-                      <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-gray-200 text-[10px] leading-none text-gray-400 ring-2 ring-white">
-                        — 
+                      <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-muted text-[10px] leading-none text-muted-foreground ring-2 ring-white">
+                        —
                       </span>
                     )}
                   </span>
                   <span
                     className={`text-[11px] font-medium leading-tight transition-colors ${
                       activo
-                        ? 'text-gray-800 group-hover:text-blue-700'
-                        : 'text-gray-400'
+                        ? 'text-foreground group-hover:text-primary'
+                        : 'text-muted-foreground'
                     }`}
                   >
                     {e.corto}
@@ -178,7 +165,7 @@ export default function Municipios() {
 
           <Button
             variant="ghost"
-            className="w-full transition hover:bg-blue-50 hover:text-blue-700 active:scale-[0.98]"
+            className="w-full transition hover:bg-primary/10 hover:text-primary active:scale-[0.98]"
             onClick={actualizar}
             disabled={actualizando}
           >
