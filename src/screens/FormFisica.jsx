@@ -1,6 +1,6 @@
 // pantalla_formulario_fisica (Flujo B): búsqueda con datos del documento impreso.
 // Si no se encuentra la multa → mensaje de espera de 3 días (delay de digitación).
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -16,11 +16,9 @@ import { useI18n } from '@/lib/i18n'
 import { validarPlaca, validarFechaNoFutura } from '@/lib/core'
 import { sincronizarCacheDiario } from '@/lib/data'
 
-const ENTIDADES = [
-  { id: 'emetra', nombre: 'EMETRA' },
-  { id: 'pnc', nombre: 'PNC' },
-  { id: 'muniguate', nombre: 'MuniGuate' },
-]
+function normalizarEntidad(nombre = '') {
+  return nombre.toLowerCase().replace(/[^a-z0-9]+/g, '_')
+}
 
 export default function FormFisica() {
   const { t } = useI18n()
@@ -30,8 +28,16 @@ export default function FormFisica() {
   const [fecha, setFecha] = useState('')
   const [fechaNotif, setFechaNotif] = useState('')
   const [entidad, setEntidad] = useState('')
+  const [entidades, setEntidades] = useState([])
   const [error, setError] = useState('')
   const [buscando, setBuscando] = useState(false)
+
+  useEffect(() => {
+    fetch('/entidades.json')
+      .then((r) => r.json())
+      .then((d) => setEntidades(d.entidades ?? []))
+      .catch(() => {})
+  }, [])
 
   async function buscar(e) {
     e.preventDefault()
@@ -61,7 +67,7 @@ export default function FormFisica() {
     const encontrada = multas.some(
       (m) =>
         m.placa === placa.trim().toUpperCase() &&
-        m.entidad.toLowerCase() === entidad &&
+        normalizarEntidad(m.entidad) === entidad &&
         (!m.no_multa || m.no_multa === noMulta.trim())
     )
 
@@ -119,9 +125,9 @@ export default function FormFisica() {
                   <SelectValue placeholder={t('labelMunicipalidad')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {ENTIDADES.map((e) => (
+                  {entidades.map((e) => (
                     <SelectItem key={e.id} value={e.id}>
-                      {e.nombre}
+                      {e.corto}
                     </SelectItem>
                   ))}
                 </SelectContent>

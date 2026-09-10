@@ -2,10 +2,14 @@
 // Diseño responsive y apilado: tabla de datos → motivo legal + explicación clara →
 // línea de tiempo horizontal → fecha de notificación → prescripción → situación → acciones.
 // Muestras: navbar (logo MUGU) arriba y footer abajo.
+// Contrato backend: tipo_multa (Papeleta/Cepo/Fotovelocímetro), motivo_legal,
+// estado (pendiente/pagada/impugnada/prescrita), fecha_notificacion, infraccion.
 import { useEffect, useState } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
 import { useI18n } from '@/lib/i18n'
 import {
   inferirTipoVehiculo,
@@ -18,7 +22,6 @@ import {
   normalizarEntidad,
 } from '@/lib/core'
 import { cargarInfracciones, sincronizarCacheDiario } from '@/lib/data'
-import { listarMultas } from '@/lib/demo'
 import {
   PLAZO_IMPUTACION_DIAS,
   PLAZO_PRESCRIPCION_DIAS,
@@ -45,38 +48,32 @@ const TIPO_LABEL = {
   otro: 'tipoOtro',
 }
 
-// Explicaciones en lenguaje claro (provisional: se afinarán después)
-const EXPLICACION = {
-  semaforo_rojo:
-    'Pasaste con el semáforo en rojo o ignoraste una señal de ALTO. Las cámaras o agentes de tránsito detectan esta falta y se registra automáticamente con tu placa.',
-  estacionamiento_prohibido:
-    'Estacionaste en una zona señalizada como prohibida (cerca de esquinas, pasos peatonales, rampas o con señal de no estacionar).',
-  licencia_vencida:
-    'Al momento del control, tu licencia de conducir estaba vencida. Conducir sin licencia vigente es una infracción al Reglamento de Tránsito.',
-  sin_tarjeta_circulacion:
-    'No llevabas la tarjeta de circulación vigente del vehículo; este documento acredita que el vehículo está registrado y al día.',
-  basura_vehiculo:
-    'Arrojaste basura, colillas u objetos desde el vehículo a la vía. Mantener limpio el entorno es parte de las normas de tránsito.',
-  sin_placas:
-    'El vehículo circulaba sin placas de matrícula o con placas que no correspondían al vehículo.',
-  sin_casco_moto:
-    'Circulabas en motocicleta sin casco protector ni chaleco reflectivo, que son obligatorios en Guatemala.',
-  sobrecarga_vehiculo:
-    'El vehículo llevaba más peso o pasajeros de los permitidos para su tipo.',
-  sin_seguro:
-    'No presentaste el seguro obligatorio vigente del vehículo al momento del control.',
-  alterar_seguridad_transito:
-    'Se modificaron señales, aceras, bordillos u otros elementos de seguridad vial sin autorización.',
-  alcohol_drogas:
-    'Conducías bajo los efectos de alcohol u otras drogas. Es una de las faltas más graves y puede incluir sanciones adicionales.',
-  exceso_velocidad:
-    'Circulabas a una velocidad mayor a la permitida para esa vía; la velocidad máxima se registra con radares o control de velocidad.',
-  celular_conduciendo:
-    'Usabas el teléfono u otro dispositivo móvil mientras conducías, lo cual reduce tu atención al volante.',
-  sentido_contrario:
-    'Circular en sentido contrario al indicado es una falta grave, aunque la vía lo permita por error o costumbre.',
-  sin_luces_noche:
-    'Circular de noche sin las luces encendidas o con el sistema de iluminación en mal estado.',
+const TIPO_MULTA_LABEL = {
+  PAPELETA: 'tipoMultaPapeleta',
+  CEPO: 'tipoMultaCepo',
+  FOTOVELOCIMETRO: 'tipoMultaFotovelocimetro',
+  'FOTO-MULTA': 'tipoMultaFotovelocimetro',
+}
+
+const ESTADO_LABEL = {
+  pendiente: 'estadoPendiente',
+  pagada: 'estadoPagada',
+  impugnada: 'estadoImpugnada',
+  prescrita: 'estadoPrescrita',
+}
+
+const ESTADO_BADGE = {
+  pendiente: 'bg-amber-100 text-amber-700',
+  pagada: 'bg-emerald-100 text-emerald-700',
+  impugnada: 'bg-blue-100 text-blue-700',
+  prescrita: 'bg-violet-100 text-violet-700',
+}
+
+const TIPO_MULTA_BADGE = {
+  PAPELETA: 'bg-amber-100 text-amber-700',
+  CEPO: 'bg-gray-200 text-gray-700',
+  FOTOVELOCIMETRO: 'bg-sky-100 text-sky-700',
+  'FOTO-MULTA': 'bg-sky-100 text-sky-700',
 }
 
 function formatoMonto(monto) {
@@ -85,17 +82,18 @@ function formatoMonto(monto) {
 }
 
 function normalizar(m, placa) {
-  const tipoMulta = (m.tipoMulta ?? 'PAPELETA').toUpperCase()
+  const tipoMulta = (m.tipoMulta ?? m.tipo_multa ?? 'PAPELETA').toUpperCase()
   return {
     noMulta: m.no_multa ?? m.noMulta ?? m.numero ?? m.remision ?? '—',
     placa: m.placa ?? placa,
     tipoVehiculo: m.tipoVehiculo ?? m.tipo_vehiculo ?? inferirTipoVehiculo(placa),
     entidad: m.entidad,
     fecha: m.fecha ?? fechaHaceDias(21),
-    infraccion: m.infraccion ?? 'semaforo_rojo',
+    infraccion: m.infraccion ?? '',
+    motivoLegal: m.motivo_legal ?? m.motivoLegal ?? '',
     monto: m.monto ?? 0,
     tipoMulta,
-    esFoto: tipoMulta === 'FOTO-MULTA',
+    esFoto: tipoMulta === 'FOTO-MULTA' || tipoMulta === 'FOTOVELOCIMETRO',
     estado: m.estado ?? 'pendiente',
     categoria: m.categoria ?? '',
     fechaNotificacion: m.fecha_notificacion ?? m.fechaNotificacion ?? '',
@@ -162,9 +160,11 @@ export default function Detalle() {
   const fechaParam = params.get('fecha') ?? ''
 
   const [multa, setMulta] = useState(null)
+  const [noEncontrada, setNoEncontrada] = useState(false)
   const [entidades, setEntidades] = useState([])
   const [motivoLegal, setMotivoLegal] = useState('')
   const [razonClara, setRazonClara] = useState('')
+  const [consejo, setConsejo] = useState('')
   const [fechaNotif, setFechaNotif] = useState(() => hoyISO())
 
   useEffect(() => {
@@ -185,30 +185,23 @@ export default function Detalle() {
       const candidatas = reales.filter(
         (m) =>
           String(m.placa ?? '').trim().toUpperCase() === p &&
-          normalizarEntidad(m.entidad) === entidad
+          (!entidad || normalizarEntidad(m.entidad) === entidad)
       )
       const seleccion =
         candidatas.find(
           (m) => String(m.no_multa ?? m.noMulta ?? m.numero ?? m.remision) === noMultaParam
         ) ?? candidatas[0]
 
-      let lista
-      if (seleccion) {
-        lista = [normalizar({ ...seleccion, entidad }, placa)]
-      } else {
-        lista = listarMultas(placa, entidad, [])
+      // El backend no devuelve esta multa: no inventar datos
+      if (!seleccion) {
+        setNoEncontrada(true)
+        return
       }
 
-      // Con noMulta (demo), elegir la correspondiente
-      const elegida =
-        lista.find((m) => String(m.noMulta) === noMultaParam) ??
-        lista[0]
+      const elegida = normalizar({ ...seleccion, entidad }, placa)
 
-      if (!elegida) return
-
-      // Las multas de cámara/sensor no tienen fecha_extra: la notificación es
-      // la que registra el usuario. Si el backend ya trae fecha_notificacion
-      // (p. ej. de una papeleta digitalizada), se propone como fecha inicial.
+      // Si el backend ya trae fecha_notificacion (p. ej. papeleta digitalizada),
+      // se propone como fecha inicial de la línea de tiempo.
       if (elegida.fechaNotificacion) {
         const iso = String(elegida.fechaNotificacion).slice(0, 10)
         if (iso >= (elegida.fecha ?? '') && iso <= hoyISO()) {
@@ -218,14 +211,14 @@ export default function Detalle() {
 
       const inf = infracciones.find((i) => i.id === elegida.infraccion)
       setMotivoLegal(
-        inf
-          ? `ARTÍCULO ${inf.articulo}: ${inf.nombre}`
-          : elegida.infraccion ?? 'Multa de tránsito'
+        elegida.motivoLegal ||
+          (inf ? `ARTÍCULO ${inf.articulo}: ${inf.nombre}` : elegida.infraccion ?? 'Multa de tránsito')
       )
       setRazonClara(
-        EXPLICACION[elegida.infraccion] ??
+        inf?.descripcion ??
           'Esta infracción se registró sobre la placa del vehículo según la normativa de tránsito vigente.'
       )
+      setConsejo(inf?.consejo ?? '')
       setMulta(elegida)
       setEntidades(listaEntidades)
     }
@@ -234,6 +227,19 @@ export default function Detalle() {
       activo = false
     }
   }, [placa, entidad, noMultaParam, fechaParam])
+
+  if (noEncontrada) {
+    return (
+      <ModuleLayout>
+        <div className="mx-auto max-w-3xl px-4 py-10">
+          <div className="rounded-2xl border border-dashed border-gray-300 bg-white p-8 text-center text-sm text-muted-foreground">
+            <p className="font-semibold text-foreground">{t('errorNoEncontrado')}</p>
+            <p className="mt-1">{t('errorNoEncontradoNota')}</p>
+          </div>
+        </div>
+      </ModuleLayout>
+    )
+  }
 
   if (!multa) {
     return (
@@ -251,6 +257,11 @@ export default function Detalle() {
     (e) => e.id === entidad || normalizarEntidad(e.corto) === entidad
   )
   const entidadLabel = entidadObj?.corto ?? entidad.toUpperCase()
+
+  const tipoMultaLabel = multa.tipoMulta
+    ? t(TIPO_MULTA_LABEL[multa.tipoMulta] ?? 'tipoMultaPapeleta')
+    : ''
+  const estadoTabla = t(ESTADO_LABEL[multa.estado] ?? 'estadoPendiente')
 
   // Fechas y plazos
   const fechaEmision = multa.fecha
@@ -299,8 +310,6 @@ export default function Detalle() {
     return 'border-2 border-gray-300 bg-white'
   }
 
-  const estadoTabla = pagada ? t('estadoPagada') : t('estadoPendiente')
-
   const captionTimeline =
     fase === 'apelable'
       ? `${t('estadoApelableDesc')} ${t('vence')} el ${formatearFecha(fechaApelacionFin)}.`
@@ -333,9 +342,11 @@ export default function Detalle() {
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-2">
               <h1 className="text-3xl font-bold">{multa.placa}</h1>
-              <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold backdrop-blur">
-                {multa.esFoto ? t('tipoMultaFoto') : t('tipoMultaPapel')}
-              </span>
+              {tipoMultaLabel && (
+                <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold backdrop-blur">
+                  {tipoMultaLabel}
+                </span>
+              )}
               <span
                 className={`rounded-full px-3 py-1 text-xs font-semibold backdrop-blur ${
                   pagada ? 'bg-emerald-500/80' : 'bg-amber-500/80'
@@ -356,9 +367,10 @@ export default function Detalle() {
             {t('detalleTablaTitulo')}
           </h2>
           <div className="overflow-x-auto rounded-2xl border border-gray-200">
-            <table className="w-full min-w-[560px] table-auto text-left text-sm">
+            <table className="w-full min-w-[620px] table-auto text-left text-sm">
               <thead>
                 <tr className="border-b border-gray-200 bg-gradient-to-r from-violet-50 via-fuchsia-50 to-transparent text-[11px] uppercase tracking-wide text-gray-500">
+                  <th className="px-3 py-2.5 font-semibold">{t('detalleNoMulta')}</th>
                   <th className="px-3 py-2.5 font-semibold">{t('detallePlaca')}</th>
                   <th className="px-3 py-2.5 font-semibold">{t('detalleTipo')}</th>
                   <th className="px-3 py-2.5 font-semibold">{t('detalleEntidad')}</th>
@@ -371,6 +383,7 @@ export default function Detalle() {
               </thead>
               <tbody>
                 <tr className="align-top even:bg-gray-50/50">
+                  <td className="px-3 py-3 font-mono text-xs font-semibold">{multa.noMulta}</td>
                   <td className="px-3 py-3 font-semibold">{multa.placa}</td>
                   <td className="px-3 py-3">{tipoLabel}</td>
                   <td className="px-3 py-3">{entidadLabel}</td>
@@ -380,16 +393,16 @@ export default function Detalle() {
                   <td className="px-3 py-3">
                     <span
                       className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase ${
-                        multa.esFoto
-                          ? 'bg-sky-100 text-sky-700'
-                          : 'bg-amber-100 text-amber-700'
+                        TIPO_MULTA_BADGE[multa.tipoMulta] ??
+                        (multa.esFoto ? 'bg-sky-100 text-sky-700' : 'bg-amber-100 text-amber-700')
                       }`}
                     >
-                      {multa.tipoMulta}
+                      {tipoMultaLabel ||
+                        (multa.esFoto ? t('tipoMultaFoto') : t('tipoMultaPapel'))}
                     </span>
                   </td>
                   <td className="px-3 py-3 text-[13px] font-medium leading-snug">
-                    {motivoLegal}
+                    {multa.motivoLegal || motivoLegal}
                   </td>
                   <td className="px-3 py-3 font-mono font-semibold whitespace-nowrap">
                     {formatoMonto(multa.monto)}
@@ -397,9 +410,7 @@ export default function Detalle() {
                   <td className="px-3 py-3 whitespace-nowrap">
                     <span
                       className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${
-                        pagada
-                          ? 'bg-emerald-100 text-emerald-700'
-                          : 'bg-amber-100 text-amber-700'
+                        ESTADO_BADGE[multa.estado] ?? 'bg-amber-100 text-amber-700'
                       }`}
                     >
                       {estadoTabla}
@@ -423,6 +434,12 @@ export default function Detalle() {
           <p className="mt-1 text-[15px] leading-relaxed text-gray-900">
             {razonClara}
           </p>
+          {consejo && (
+            <p className="mt-3 flex items-start gap-2 rounded-xl bg-emerald-100/70 px-3 py-2 text-xs leading-relaxed text-emerald-900">
+              <FontAwesomeIcon icon={faLightbulb} className="mt-0.5 shrink-0" />
+              <span>{consejo}</span>
+            </p>
+          )}
         </section>
 
         {/* 3. Línea de tiempo horizontal */}

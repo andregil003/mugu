@@ -8,8 +8,9 @@ import { Card, CardContent } from '@/components/ui/card'
 import { useI18n } from '@/lib/i18n'
 import { sincronizarCacheDiario, forzarActualizacion } from '@/lib/data'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRotate } from '@fortawesome/free-solid-svg-icons'
 import { inferirTipoVehiculo, normalizarEntidad } from '@/lib/core'
-import { MOCK_MULTAS } from '@/lib/demo'
 import ModuleLayout from '@/components/layout/ModuleLayout'
 
 // Etiquetas visibles por tipo de vehículo (claves de i18n)
@@ -87,10 +88,6 @@ export default function Municipios() {
             const id = normalizarEntidad(m.entidad)
             conteos[id] = (conteos[id] ?? 0) + 1
           })
-      }
-      // Sin backend conectado → datos de demostración
-      if (Object.keys(conteos).length === 0) {
-        Object.assign(conteos, MOCK_MULTAS)
       }
 
       setConteo(conteos)
@@ -188,13 +185,13 @@ export default function Municipios() {
               })}
             </div>
 
-            <Button
+<Button
               variant="ghost"
               className="w-full transition hover:bg-violet-50 hover:text-violet-700 active:scale-[0.98]"
               onClick={actualizar}
               disabled={actualizando}
             >
-              {actualizando ? 'Actualizando…' : '↻ Actualizar datos'}
+              {actualizando ? t('actualizando') : <><FontAwesomeIcon icon={faRotate} className="mr-2" />{t('actualizarDatos')}</>}
             </Button>
           </CardContent>
         </Card>
