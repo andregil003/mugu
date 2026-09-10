@@ -141,6 +141,8 @@ export default function Detalle() {
         entidad,
         fecha: real.fecha ?? fechaParam ?? '',
         infraccion: real.infraccion ?? '',
+        motivoLegal: real.motivo_legal ?? '',
+        tipoMulta: real.tipo_multa ?? '',
         monto: real.monto ?? 0,
         estado: real.estado ?? 'pendiente',
         categoria: real.categoria ?? '',
@@ -268,8 +270,30 @@ export default function Detalle() {
     return 'border-2 border-gray-300 bg-white'
   }
 
-  const estadoTabla =
-    multa.estado === 'pagada' ? t('estadoPagada') : t('estadoPendiente')
+  const ESTADO_LABEL = {
+    pendiente: 'estadoPendiente',
+    pagada: 'estadoPagada',
+    impugnada: 'estadoImpugnada',
+    prescrita: 'estadoPrescrita',
+  }
+
+  const ESTADO_BADGE = {
+    pendiente: 'bg-amber-100 text-amber-700',
+    pagada: 'bg-emerald-100 text-emerald-700',
+    impugnada: 'bg-blue-100 text-blue-700',
+    prescrita: 'bg-violet-100 text-violet-700',
+  }
+
+  const TIPO_MULTA_LABEL = {
+    PAPELETA: 'tipoMultaPapeleta',
+    CEPO: 'tipoMultaCepo',
+    FOTOVELOCIMETRO: 'tipoMultaFotovelocimetro',
+  }
+
+  const estadoTabla = t(ESTADO_LABEL[multa.estado] ?? 'estadoPendiente')
+  const tipoMultaLabel = multa.tipoMulta
+    ? t(TIPO_MULTA_LABEL[multa.tipoMulta.toUpperCase()] ?? 'tipoMultaPapeleta')
+    : ''
 
   return (
     <div className="mx-auto max-w-lg px-4 py-6">
@@ -293,6 +317,11 @@ export default function Detalle() {
           <p className="mt-1 text-sm text-blue-100">
             {tipoLabel} · {entidadLabel} · {formatearFecha(fechaEmision)}
           </p>
+          {tipoMultaLabel && (
+            <span className="mt-2 inline-block rounded-full bg-white/20 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white ring-1 ring-white/30">
+              {tipoMultaLabel}
+            </span>
+          )}
         </div>
       </div>
 
@@ -326,8 +355,8 @@ export default function Detalle() {
                     <td className="px-3 py-2.5">{tipoLabel}</td>
                     <td className="px-3 py-2.5">{entidadLabel}</td>
                     <td className="px-3 py-2.5">{formatearFecha(fechaEmision)}</td>
-                    <td className="px-3 py-2.5 font-medium uppercase text-muted-foreground">
-                      {multa.infraccion?.replace(/_/g, ' ')}
+                    <td className="px-3 py-2.5 font-medium text-muted-foreground">
+                      {multa.motivoLegal || razonFormal || multa.infraccion?.replace(/_/g, ' ')}
                     </td>
                     <td className="px-3 py-2.5 font-mono font-semibold">
                       {formatoMonto(multa.monto)}
@@ -335,9 +364,7 @@ export default function Detalle() {
                     <td className="px-3 py-2.5">
                       <span
                         className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${
-                          pagada
-                            ? 'bg-emerald-100 text-emerald-700'
-                            : 'bg-amber-100 text-amber-700'
+                          ESTADO_BADGE[multa.estado] ?? 'bg-amber-100 text-amber-700'
                         }`}
                       >
                         {estadoTabla}
@@ -354,7 +381,9 @@ export default function Detalle() {
             <p className="text-xs font-semibold uppercase tracking-wide text-emerald-600">
               {t('razonFormal')}
             </p>
-            <p className="mt-1 text-sm italic text-gray-400">{razonFormal}</p>
+            <p className="mt-1 text-sm italic text-gray-400">
+              {multa.motivoLegal || razonFormal}
+            </p>
             <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-emerald-600">
               {t('razonClara')}
             </p>
