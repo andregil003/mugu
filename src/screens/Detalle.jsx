@@ -1,5 +1,5 @@
 // pantalla_detalle_multa: destino final de búsquedas — razón + stepper semáforo + acciones.
-// Stepper: Notificación (verde) → Apelación (amarillo) → Pago (rojo) según plazos legales de core.js.
+// Stepper: Notificación 🟢 → Apelación 🟡 → Pago 🔴 (según plazos legales de core.js).
 import { useEffect, useState } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
@@ -13,6 +13,10 @@ const PASOS = [
   { id: 'apelacion', clave: 'stepperApelacion', color: 'bg-amber-500' },
   { id: 'pago', clave: 'stepperPago', color: 'bg-red-500' },
 ]
+
+function normalizarEntidad(nombre = '') {
+  return nombre.toLowerCase().replace(/[^a-z0-9]+/g, '_')
+}
 
 export default function Detalle() {
   const { t } = useI18n()
@@ -37,7 +41,7 @@ export default function Detalle() {
       const multa = multas.find(
         (m) =>
           m.placa === placa &&
-          (!entidad || m.entidad.toLowerCase() === entidad)
+          (!entidad || normalizarEntidad(m.entidad) === entidad)
       )
       const inf = infracciones.find((i) => i.id === multa?.infraccion)
       setRazon(inf?.nombre ?? multa?.infraccion ?? 'Multa de tránsito')
