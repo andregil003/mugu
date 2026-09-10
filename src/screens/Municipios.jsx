@@ -118,7 +118,7 @@ export default function Municipios() {
                   disabled={!activo}
                   onClick={() =>
                     navigate(
-                      `/detalle?placa=${encodeURIComponent(placa)}&entidad=${e.id}`
+                      `/multas?placa=${encodeURIComponent(placa)}&entidad=${e.id}`
                     )
                   }
                   title={`${e.corto}${activo ? ` — ${n} multa(s)` : ' — sin multas'}`}

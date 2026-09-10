@@ -12,6 +12,7 @@ import Bienvenida from '@/screens/Bienvenida'
 import Menu from '@/screens/Menu'
 import Buscar from '@/screens/Buscar'
 import Resultados from '@/screens/Municipios'
+import Multas from '@/screens/Multas'
 import FormFisica from '@/screens/FormFisica'
 import Info from '@/screens/Info'
 import Detalle from '@/screens/Detalle'
@@ -30,6 +31,7 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/buscar" element={<Buscar />} />
             <Route path="/resultados" element={<Resultados />} />
+            <Route path="/multas" element={<Multas />} />
             <Route path="/multa-fisica" element={<FormFisica />} />
             <Route path="/info" element={<Info />} />
             <Route path="/detalle" element={<Detalle />} />
