@@ -58,7 +58,7 @@ export function listarMultas(placa, entidad, reales = []) {
   )
   if (pendientes.length > 0) {
     return pendientes.map((m) => ({
-      noMulta: m.noMulta ?? m.numero ?? m.remision ?? '—',
+      noMulta: m.no_multa ?? m.noMulta ?? m.numero ?? m.remision ?? '—',
       placa: m.placa ?? placa,
       entidad,
       tipoVehiculo: m.tipo_vehiculo ?? inferirTipoVehiculo(placa),
@@ -67,6 +67,9 @@ export function listarMultas(placa, entidad, reales = []) {
       monto: m.monto ?? 0,
       tipoMulta: (m.tipo_multa ?? m.tipo ?? 'PAPELETA').toUpperCase(),
       estado: m.estado ?? 'pendiente',
+      categoria: m.categoria ?? '',
+      fechaNotificacion:
+        m.fecha_notificacion ?? m.fechaNotificacion ?? '',
     }))
   }
   return multasDemo(placa, entidad)

@@ -32,7 +32,7 @@ const CACHE_TTL_SEG = 6 * 60 * 60; // 6 horas
 // SETUP AUTOMÁTICO — corré esto UNA vez
 // ============================================================
 
-/** Crea los encabezados y puebla los datos demo. No requiere nada manual. */
+/** Borra TODO y puebla los datos demo. No requiere nada manual. */
 function setup() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = ss.getSheetByName(HOJA);
@@ -40,7 +40,10 @@ function setup() {
     sheet = ss.insertSheet(HOJA);
   }
 
-  // Encabezados (se crean solos si la hoja está vacía)
+  // Limpiar TODO el contenido de la hoja (datos viejos, encabezados, formatos)
+  sheet.clear();
+
+  // Encabezados
   const encabezados = [
     'placa',
     'tipo_vehiculo',
@@ -49,31 +52,29 @@ function setup() {
     'infraccion',
     'monto',
     'estado',
+    'no_multa',
+    'categoria',
+    'fecha_notificacion',
   ];
+  sheet.getRange(1, 1, 1, encabezados.length).setValues([encabezados]);
 
-  if (sheet.getLastRow() === 0) {
-    sheet.getRange(1, 1, 1, encabezados.length).setValues([encabezados]);
-  }
-
-  // Datos demo (solo si no hay datos todavía)
-  if (sheet.getLastRow() === 1) {
-    const demo = [
-      ['P123ABC', 'particular', 'EMETRA', '2026-08-20', 'semaforo_rojo', 400, 'pendiente'],
-      ['P123ABC', 'particular', 'EMETRA', '2026-07-01', 'estacionamiento_prohibido', 400, 'pendiente'],
-      ['P123ABC', 'particular', 'PNC', '2026-05-10', 'licencia_vencida', 300, 'pagada'],
-      ['M789XYZ', 'moto', 'PNC', '2026-09-01', 'semaforo_rojo', 400, 'pendiente'],
-      ['M789XYZ', 'moto', 'MuniGuate', '2026-08-15', 'basura_vehiculo', 300, 'pendiente'],
-      ['C456DEF', 'comercial', 'EMETRA', '2026-03-01', 'sin_tarjeta_circulacion', 200, 'pagada'],
-      ['B111AAA', 'bus', 'PNC', '2026-09-05', 'exceso_velocidad', 500, 'pendiente'],
-      ['T222BBB', 'taxi', 'EMETRA', '2026-09-08', 'estacionamiento_prohibido', 400, 'pendiente'],
-    ];
-    sheet.getRange(2, 1, demo.length, encabezados.length).setValues(demo);
-  }
+  // Datos demo
+  const demo = [
+    ['P123ABC', 'particular', 'EMETRA', '2026-08-20', 'semaforo_rojo', 400, 'pendiente', '123456', 'grave', '2026-08-22'],
+    ['P123ABC', 'particular', 'EMETRA', '2026-07-01', 'estacionamiento_prohibido', 400, 'pendiente', '123457', 'grave', '2026-07-03'],
+    ['P123ABC', 'particular', 'PNC', '2026-05-10', 'licencia_vencida', 300, 'pagada', '123458', 'leve', '2026-05-12'],
+    ['M789XYZ', 'moto', 'PNC', '2026-09-01', 'semaforo_rojo', 400, 'pendiente', '123459', 'grave', '2026-09-03'],
+    ['M789XYZ', 'moto', 'MuniGuate', '2026-08-15', 'basura_vehiculo', 300, 'pendiente', '123460', 'leve', '2026-08-17'],
+    ['C456DEF', 'comercial', 'EMETRA', '2026-03-01', 'sin_tarjeta_circulacion', 200, 'pagada', '123461', 'leve', '2026-03-03'],
+    ['B111AAA', 'bus', 'PNC', '2026-09-05', 'exceso_velocidad', 500, 'pendiente', '123462', 'muy_grave', '2026-09-07'],
+    ['T222BBB', 'taxi', 'EMETRA', '2026-09-08', 'estacionamiento_prohibido', 400, 'pendiente', '123463', 'grave', '2026-09-10'],
+  ];
+  sheet.getRange(2, 1, demo.length, encabezados.length).setValues(demo);
 
   // Limpiar cache para que tome los datos nuevos
   CacheService.getScriptCache().remove(CACHE_KEY);
 
-  return '✅ Setup listo: hoja creada, encabezados y datos demo poblados.';
+  return '✅ Setup listo: hoja LIMPIADA y datos demo poblados.';
 }
 
 // ============================================================
@@ -101,6 +102,9 @@ function leerDatos() {
     infraccion: encabezados.indexOf('infraccion'),
     monto: encabezados.indexOf('monto'),
     estado: encabezados.indexOf('estado'),
+    no_multa: encabezados.indexOf('no_multa'),
+    categoria: encabezados.indexOf('categoria'),
+    fecha_notificacion: encabezados.indexOf('fecha_notificacion'),
   };
 
   const multas = [];
@@ -115,6 +119,9 @@ function leerDatos() {
       infraccion: (fila[idx.infraccion] || '').toString().trim(),
       monto: Number(fila[idx.monto]) || 0,
       estado: (fila[idx.estado] || 'pendiente').toString().trim().toLowerCase(),
+      no_multa: (fila[idx.no_multa] || '').toString().trim(),
+      categoria: (fila[idx.categoria] || '').toString().trim().toLowerCase(),
+      fecha_notificacion: formatearFecha(fila[idx.fecha_notificacion]),
     });
   }
 
@@ -166,7 +173,7 @@ function doGet(e) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-/** POST / con JSON { placa, tipo_vehiculo, entidad, fecha, infraccion, monto, estado } */
+/** POST / con JSON { placa, tipo_vehiculo, entidad, fecha, infraccion, monto, estado, no_multa, categoria, fecha_notificacion } */
 function doPost(e) {
   const salida = { ok: true };
 
@@ -182,6 +189,9 @@ function doPost(e) {
       body.infraccion || '',
       Number(body.monto) || 0,
       body.estado || 'pendiente',
+      (body.no_multa || '').toString().trim(),
+      (body.categoria || '').toString().trim().toLowerCase(),
+      body.fecha_notificacion || '',
     ]);
 
     // Invalidar cache para que la próxima lectura tome la multa nueva
@@ -200,11 +210,13 @@ function doPost(e) {
 // ============================================================
 // FORMATO DE DATOS (para poblar el Sheet manualmente si querés)
 // ============================================================
-// placa     | tipo_vehiculo | entidad  | fecha       | infraccion                | monto | estado
-// P123ABC   | particular    | EMETRA   | 2026-08-20  | semaforo_rojo             | 400   | pendiente
-// M789XYZ   | moto          | PNC      | 2026-09-01  | semaforo_rojo             | 400   | pendiente
-// C456DEF   | comercial     | EMETRA   | 2026-03-01  | sin_tarjeta_circulacion   | 200   | pagada
+// placa     | tipo_vehiculo | entidad  | fecha       | infraccion                | monto | estado    | no_multa | categoria | fecha_notificacion
+// P123ABC   | particular    | EMETRA   | 2026-08-20  | semaforo_rojo             | 400   | pendiente | 123456   | grave     | 2026-08-22
+// M789XYZ   | moto          | PNC      | 2026-09-01  | semaforo_rojo             | 400   | pendiente | 123457   | grave     | 2026-09-03
+// C456DEF   | comercial     | EMETRA   | 2026-03-01  | sin_tarjeta_circulacion   | 200   | pagada    | 123458   | leve      | 2026-03-03
 //
 // tipo_vehiculo válidos: particular | moto | comercial | bus | taxi | camion | otro
 // estado válidos: pendiente | pagada | impugnada | prescrita
+// categoria válidos: leve | grave | muy_grave
+// no_multa: solo números, 6 dígitos
 // infraccion: id del catálogo en public/infracciones.json

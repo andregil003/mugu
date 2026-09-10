@@ -41,8 +41,8 @@ export default function FormFisica() {
       setError('Formato de placa inválido')
       return
     }
-    if (!noMulta.trim()) {
-      setError('Falta el número de multa')
+    if (!/^\d{6}$/.test(noMulta.trim())) {
+      setError('El número de multa debe tener 6 dígitos')
       return
     }
     if (!validarFechaNoFutura(fecha)) {
@@ -61,7 +61,8 @@ export default function FormFisica() {
     const encontrada = multas.some(
       (m) =>
         m.placa === placa.trim().toUpperCase() &&
-        m.entidad.toLowerCase() === entidad
+        m.entidad.toLowerCase() === entidad &&
+        (!m.no_multa || m.no_multa === noMulta.trim())
     )
 
     if (!encontrada) {
@@ -96,8 +97,10 @@ export default function FormFisica() {
               <label className="mb-1 block text-sm font-medium">{t('labelNoMulta')}</label>
               <Input
                 value={noMulta}
-                onChange={(e) => setNoMulta(e.target.value)}
-                placeholder="000-0000"
+                onChange={(e) => setNoMulta(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                placeholder="123456"
+                inputMode="numeric"
+                maxLength={6}
                 required
               />
             </div>

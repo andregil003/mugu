@@ -86,7 +86,7 @@ function formatoMonto(monto) {
 function normalizar(m, placa) {
   const tipoMulta = (m.tipoMulta ?? 'PAPELETA').toUpperCase()
   return {
-    noMulta: m.noMulta ?? m.numero ?? m.remision ?? '—',
+    noMulta: m.no_multa ?? m.noMulta ?? m.numero ?? m.remision ?? '—',
     placa: m.placa ?? placa,
     tipoVehiculo: m.tipoVehiculo ?? m.tipo_vehiculo ?? inferirTipoVehiculo(placa),
     entidad: m.entidad,
@@ -96,6 +96,8 @@ function normalizar(m, placa) {
     tipoMulta,
     esFoto: tipoMulta === 'FOTO-MULTA',
     estado: m.estado ?? 'pendiente',
+    categoria: m.categoria ?? '',
+    fechaNotificacion: m.fecha_notificacion ?? m.fechaNotificacion ?? '',
   }
 }
 
@@ -202,6 +204,19 @@ export default function Detalle() {
         lista[0]
 
       if (!elegida) return
+
+      // Las multas de cámara/sensor no tienen fecha_extra: la notificación es
+      // la que registra el usuario. Si el backend ya trae fecha_notificacion
+      // (p. ej. de una papeleta digitalizada), se propone como fecha inicial.
+      if (elegida?.fechaNotificacion) {
+        const iso = String(elegida.fechaNotificacion).slice(0, 10)
+        if (
+          iso >= (elegida.fecha ?? '') &&
+          iso <= hoyISO()
+        ) {
+          setFechaNotif(iso)
+        }
+      }
 
       const inf = infracciones.find((i) => i.id === elegida.infraccion)
       setMotivoLegal(
