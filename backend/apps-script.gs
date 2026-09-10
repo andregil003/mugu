@@ -32,7 +32,7 @@ const CACHE_TTL_SEG = 6 * 60 * 60; // 6 horas
 // SETUP AUTOMÁTICO — corré esto UNA vez
 // ============================================================
 
-/** Crea los encabezados y puebla los datos demo. No requiere nada manual. */
+/** Borra TODO y puebla los datos demo. No requiere nada manual. */
 function setup() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = ss.getSheetByName(HOJA);
@@ -40,7 +40,10 @@ function setup() {
     sheet = ss.insertSheet(HOJA);
   }
 
-  // Encabezados (se crean solos si la hoja está vacía)
+  // Limpiar TODO el contenido de la hoja (datos viejos, encabezados, formatos)
+  sheet.clear();
+
+  // Encabezados
   const encabezados = [
     'placa',
     'tipo_vehiculo',
@@ -53,37 +56,25 @@ function setup() {
     'categoria',
     'fecha_notificacion',
   ];
+  sheet.getRange(1, 1, 1, encabezados.length).setValues([encabezados]);
 
-  // Agregar columnas nuevas que falten (no rompe hojas existentes)
-  const filaActual = sheet.getLastRow() === 0
-    ? []
-    : sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
-        .map((h) => h.toString().trim().toLowerCase());
-  const faltantes = encabezados.filter((h) => !filaActual.includes(h));
-  if (faltantes.length > 0) {
-    const colInicio = (filaActual.length || 0) + 1;
-    sheet.getRange(1, colInicio, 1, faltantes.length).setValues([faltantes]);
-  }
-
-  // Datos demo (solo si no hay datos todavía)
-  if (sheet.getLastRow() === 1) {
-    const demo = [
-      ['P123ABC', 'particular', 'EMETRA', '2026-08-20', 'semaforo_rojo', 400, 'pendiente', '123456', 'grave', '2026-08-22'],
-      ['P123ABC', 'particular', 'EMETRA', '2026-07-01', 'estacionamiento_prohibido', 400, 'pendiente', '123457', 'grave', '2026-07-03'],
-      ['P123ABC', 'particular', 'PNC', '2026-05-10', 'licencia_vencida', 300, 'pagada', '123458', 'leve', '2026-05-12'],
-      ['M789XYZ', 'moto', 'PNC', '2026-09-01', 'semaforo_rojo', 400, 'pendiente', '123459', 'grave', '2026-09-03'],
-      ['M789XYZ', 'moto', 'MuniGuate', '2026-08-15', 'basura_vehiculo', 300, 'pendiente', '123460', 'leve', '2026-08-17'],
-      ['C456DEF', 'comercial', 'EMETRA', '2026-03-01', 'sin_tarjeta_circulacion', 200, 'pagada', '123461', 'leve', '2026-03-03'],
-      ['B111AAA', 'bus', 'PNC', '2026-09-05', 'exceso_velocidad', 500, 'pendiente', '123462', 'muy_grave', '2026-09-07'],
-      ['T222BBB', 'taxi', 'EMETRA', '2026-09-08', 'estacionamiento_prohibido', 400, 'pendiente', '123463', 'grave', '2026-09-10'],
-    ];
-    sheet.getRange(2, 1, demo.length, encabezados.length).setValues(demo);
-  }
+  // Datos demo
+  const demo = [
+    ['P123ABC', 'particular', 'EMETRA', '2026-08-20', 'semaforo_rojo', 400, 'pendiente', '123456', 'grave', '2026-08-22'],
+    ['P123ABC', 'particular', 'EMETRA', '2026-07-01', 'estacionamiento_prohibido', 400, 'pendiente', '123457', 'grave', '2026-07-03'],
+    ['P123ABC', 'particular', 'PNC', '2026-05-10', 'licencia_vencida', 300, 'pagada', '123458', 'leve', '2026-05-12'],
+    ['M789XYZ', 'moto', 'PNC', '2026-09-01', 'semaforo_rojo', 400, 'pendiente', '123459', 'grave', '2026-09-03'],
+    ['M789XYZ', 'moto', 'MuniGuate', '2026-08-15', 'basura_vehiculo', 300, 'pendiente', '123460', 'leve', '2026-08-17'],
+    ['C456DEF', 'comercial', 'EMETRA', '2026-03-01', 'sin_tarjeta_circulacion', 200, 'pagada', '123461', 'leve', '2026-03-03'],
+    ['B111AAA', 'bus', 'PNC', '2026-09-05', 'exceso_velocidad', 500, 'pendiente', '123462', 'muy_grave', '2026-09-07'],
+    ['T222BBB', 'taxi', 'EMETRA', '2026-09-08', 'estacionamiento_prohibido', 400, 'pendiente', '123463', 'grave', '2026-09-10'],
+  ];
+  sheet.getRange(2, 1, demo.length, encabezados.length).setValues(demo);
 
   // Limpiar cache para que tome los datos nuevos
   CacheService.getScriptCache().remove(CACHE_KEY);
 
-  return '✅ Setup listo: hoja creada, encabezados y datos demo poblados.';
+  return '✅ Setup listo: hoja LIMPIADA y datos demo poblados.';
 }
 
 // ============================================================
