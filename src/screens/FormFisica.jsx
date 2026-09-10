@@ -128,31 +128,31 @@ export default function FormFisica() {
         <CardContent>
           <form onSubmit={buscar} className="space-y-4">
             <div>
-              <label className="mb-1 block text-sm font-medium">{t('labelTipoPlaca')}</label>
-              <Select value={tipoPlaca} onValueChange={setTipoPlaca}>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder={t('labelTipoPlaca')} />
-                </SelectTrigger>
-                <SelectContent>
-                  {SIGLAS_PLACA.map((s) => (
-                    <SelectItem key={s.sigla} value={s.sigla}>
-                      {s.sigla} — {s.tipo}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <label className="mb-1 block text-sm font-medium">{t('labelPlacaResto')}</label>
-              <Input
-                value={restoPlaca}
-                onChange={onRestoPlacaChange}
-                placeholder="123ABC"
-                inputMode="text"
-                autoComplete="off"
-                maxLength={6}
-                required
-              />
+              <label className="mb-1 block text-sm font-medium">{t('labelPlacaVehiculo')}</label>
+              <div className="flex gap-2">
+                <Select value={tipoPlaca} onValueChange={setTipoPlaca}>
+                  <SelectTrigger className="w-24">
+                    <SelectValue placeholder="P" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {SIGLAS_PLACA.map((s) => (
+                      <SelectItem key={s.sigla} value={s.sigla}>
+                        {s.sigla}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Input
+                  value={restoPlaca}
+                  onChange={onRestoPlacaChange}
+                  placeholder="123ABC"
+                  inputMode="text"
+                  autoComplete="off"
+                  maxLength={6}
+                  required
+                  className="flex-1"
+                />
+              </div>
               {placaCompleta && (
                 <p className="mt-1 text-xs text-muted-foreground">
                   {t('labelPlacaPreview')} <span className="font-semibold">{placaCompleta}</span>
