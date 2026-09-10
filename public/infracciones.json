@@ -1,0 +1,180 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "fuente": "Cartilla de Infracciones y Sanciones de Tránsito (transito.gob.gt) + Decreto 33-2024 (reformas a Ley de Tránsito 132-96)",
+    "fecha": "2026-09-09",
+    "nota": "Los montos marcados como null estan pendientes de verificacion contra la cartilla oficial vigente. NO inventar montos. Descuento por curso vial: 25% segun cartilla (Q100->Q75); algunas municipalidades ofrecen 50-60% (ej. MuniGuate).",
+    "aviso_legal": "Este catalogo es orientativo para prototipo de hackathon. No constituye asesoria legal. Verificar siempre contra la cartilla oficial y la notificacion recibida."
+  },
+  "infracciones": [
+    {
+      "id": "semaforo_rojo",
+      "codigo": "Art. 90 Reglamento (273-98)",
+      "nombre": "No respetar semaforo en rojo o senal de alto",
+      "descripcion": "Pasar con luz roja del semaforo o ignorar una senal de ALTO",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": ["PNC", "EMETRA", "PMT municipal"],
+      "consejo": "Si la notificacion no llego en 120 dias, prescribe. Si llego, el curso vial reduce la multa a Q300."
+    },
+    {
+      "id": "estacionamiento_prohibido",
+      "codigo": "Ley 132-96 / Reglamento 273-98",
+      "nombre": "Estacionar en lugar prohibido",
+      "descripcion": "Estacionar en zonas prohibidas (rampas, pasos de cebra, lugares con senal de no estacionar)",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": ["EMETRA", "PMT municipal"],
+      "consejo": "Verifica si el cepo se coloco legalmente: solo en via publica y se libera al recibir la papeleta, sin pago inmediato obligatorio (Decreto 33-2024)."
+    },
+    {
+      "id": "licencia_vencida",
+      "codigo": "Ley 132-96",
+      "nombre": "Conducir con licencia vencida",
+      "descripcion": "Conducir con licencia de conducir expirada",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "leve",
+      "emisores": ["PNC", "EMETRA", "PMT municipal"],
+      "consejo": "Renueva la licencia antes de pagar: la multa no exime del tramite. El curso vial reduce a Q225."
+    },
+    {
+      "id": "basura_vehiculo",
+      "codigo": "Ley 132-96",
+      "nombre": "Tirar basura desde un vehiculo",
+      "descripcion": "Arrojar desechos a la via publica desde el vehiculo",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "leve",
+      "emisores": ["PNC", "EMETRA", "PMT municipal"],
+      "consejo": "Ademas de la multa, es una falta ambiental. El curso vial reduce a Q225."
+    },
+    {
+      "id": "sin_tarjeta_circulacion",
+      "codigo": "Art. 18 bis (Decreto 33-2024)",
+      "nombre": "Circular sin tarjeta de circulacion o fotocopia autenticada",
+      "descripcion": "No portar la tarjeta de circulacion del vehiculo",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": ["PNC", "EMETRA", "PMT municipal"],
+      "consejo": "Desde el Decreto 33-2024 se acepta la tarjeta de circulacion ELECTRONICA digital. Si la mostraste en tu telefono y te multaron igual, hay argumento para impugnar."
+    },
+    {
+      "id": "sin_placas",
+      "codigo": "Ley 132-96",
+      "nombre": "Circular sin placas",
+      "descripcion": "Circular sin placas de circulacion o con placas no visibles",
+      "monto": 500,
+      "descuento_curso_vial": 375,
+      "categoria": "grave",
+      "emisores": ["PNC", "PMT municipal"],
+      "consejo": "Verifica que la placa este instalada correctamente antes de pagar. El curso vial reduce a Q375."
+    },
+    {
+      "id": "sin_casco_moto",
+      "codigo": "Ley 132-96",
+      "nombre": "Circular en moto sin casco o chaleco reflectivo",
+      "descripcion": "Conducir motocicleta sin casco de seguridad o sin chaleco reflectivo",
+      "monto": 500,
+      "descuento_curso_vial": 375,
+      "categoria": "grave",
+      "emisores": ["PNC", "EMETRA", "PMT municipal"],
+      "consejo": "Las motos son el 53% del parque vehicular y el 58% de las multas. El casco salva vidas: el curso vial reduce a Q375."
+    },
+    {
+      "id": "sobrecarga_vehiculo",
+      "codigo": "Ley 132-96",
+      "nombre": "Sobrecargar el vehiculo",
+      "descripcion": "Transportar mas pasajeros o carga de la permitida",
+      "monto": 500,
+      "descuento_curso_vial": 375,
+      "categoria": "grave",
+      "emisores": ["PNC", "PMT municipal"],
+      "consejo": "La sobrecarga es factor en volcamientos. El curso vial reduce a Q375."
+    },
+    {
+      "id": "sin_seguro",
+      "codigo": "Ley 132-96",
+      "nombre": "Conducir sin seguro",
+      "descripcion": "Circular sin seguro obligatorio del vehiculo",
+      "monto": 1000,
+      "descuento_curso_vial": 750,
+      "categoria": "muy_grave",
+      "emisores": ["PNC", "PMT municipal"],
+      "consejo": "El seguro obligatorio cubre danos a terceros. Verifica si tu poliza estaba vigente al momento de la multa: si si, impugna con la prueba."
+    },
+    {
+      "id": "alterar_seguridad_transito",
+      "codigo": "Ley 132-96",
+      "nombre": "Alterar la seguridad del transito sin autorizacion",
+      "descripcion": "Modificar elementos de seguridad vial (senales, semaforos, reductores) sin permiso",
+      "monto": 15000,
+      "descuento_curso_vial": null,
+      "categoria": "muy_grave",
+      "emisores": ["PNC", "PMT municipal"],
+      "consejo": "Multa grave: no aplica curso vial. Si la notificacion no cumple los 6 requisitos del Decreto 33-2024, impugna."
+    },
+    {
+      "id": "alcohol_drogas",
+      "codigo": "Ley 132-96",
+      "nombre": "Conducir bajo efectos de alcohol o drogas",
+      "descripcion": "Conducir con alcohol en sangre o bajo efectos de sustancias (multa administrativa adicional)",
+      "monto": 25000,
+      "descuento_curso_vial": null,
+      "categoria": "muy_grave",
+      "emisores": ["PNC"],
+      "consejo": "La multa administrativa adicional de Q25,000 se suma a otras sanciones. No aplica curso vial. Si el resultado del alcoholimetro fue cuestionable, un abogado puede revisar el procedimiento."
+    },
+    {
+      "id": "exceso_velocidad",
+      "codigo": "Ley 132-96",
+      "nombre": "Exceso de velocidad",
+      "descripcion": "Superar los limites de velocidad establecidos",
+      "monto": null,
+      "descuento_curso_vial": null,
+      "categoria": "grave",
+      "emisores": ["PNC", "PMT municipal"],
+      "verificar": true,
+      "consejo": "Monto pendiente de verificacion contra la cartilla oficial. Guatemala tiene 511 intersecciones con videoanalitica pero aun NO multan automaticamente."
+    },
+    {
+      "id": "celular_conduciendo",
+      "codigo": "Ley 132-96",
+      "nombre": "Uso de telefono celular mientras conduce",
+      "descripcion": "Usar el telefono celular u otro dispositivo mientras se conduce",
+      "monto": null,
+      "descuento_curso_vial": null,
+      "categoria": "grave",
+      "emisores": ["PNC", "EMETRA", "PMT municipal"],
+      "verificar": true,
+      "consejo": "Monto pendiente de verificacion contra la cartilla oficial."
+    },
+    {
+      "id": "sentido_contrario",
+      "codigo": "Ley 132-96",
+      "nombre": "Circular en sentido contrario",
+      "descripcion": "Circular contra el flujo de la via",
+      "monto": null,
+      "descuento_curso_vial": null,
+      "categoria": "muy_grave",
+      "emisores": ["PNC", "PMT municipal"],
+      "verificar": true,
+      "consejo": "Monto pendiente de verificacion. En 2026 se reportaron multas de Q20,000+ por circular contra la via (caso Puente El Incienso)."
+    },
+    {
+      "id": "sin_luces_noche",
+      "codigo": "Ley 132-96",
+      "nombre": "Circular sin luces de noche",
+      "descripcion": "Circular en horario nocturno sin luces encendidas",
+      "monto": null,
+      "descuento_curso_vial": null,
+      "categoria": "leve",
+      "emisores": ["PNC", "PMT municipal"],
+      "verificar": true,
+      "consejo": "Monto pendiente de verificacion contra la cartilla oficial."
+    }
+  ]
+}

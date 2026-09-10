@@ -1,0 +1,33 @@
+{
+  "_meta": {
+    "version": "0.1.0",
+    "nota": "Placeholder inicial. Diego completa las 11 entidades con jurisdicciones, contactos y horarios. NO inventar datos.",
+    "aviso_legal": "Catálogo orientativo para prototipo de hackathon. Verificar contra fuentes oficiales."
+  },
+  "entidades": [
+    {
+      "id": "emetra",
+      "nombre": "EMETRA",
+      "jurisdiccion": "Ciudad de Guatemala",
+      "portal": "",
+      "contacto": "",
+      "dondePagar": ""
+    },
+    {
+      "id": "pnc",
+      "nombre": "PNC — Policía Nacional Civil",
+      "jurisdiccion": "Todo el país",
+      "portal": "",
+      "contacto": "",
+      "dondePagar": ""
+    },
+    {
+      "id": "muniguate",
+      "nombre": "Municipalidad de Guatemala",
+      "jurisdiccion": "Ciudad de Guatemala",
+      "portal": "",
+      "contacto": "",
+      "dondePagar": ""
+    }
+  ]
+}
