@@ -8,6 +8,19 @@ import {
 } from './constantes'
 
 /**
+ * Normaliza un nombre/entidad a un id tipo slug (p.ej. "EMETRA" → "emetra").
+ * @param {string} nombre
+ * @returns {string}
+ */
+export function normalizarEntidad(nombre = '') {
+  return nombre
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '_')
+}
+
+/**
  * Días transcurridos desde la fecha de la infracción hasta hoy.
  * @param {string} fechaInfraccion ISO (YYYY-MM-DD)
  * @returns {number} días transcurridos (0 si la fecha es inválida o futura)
