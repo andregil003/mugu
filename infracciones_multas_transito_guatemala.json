@@ -1,0 +1,791 @@
+{
+  "pais": "Guatemala",
+  "tema": "Infracciones y multas de tránsito",
+  "total_infracciones": 98,
+  "infracciones": [
+    {
+      "numero": 1,
+      "infraccion": "No tener las bicicletas y motobicicletas el equipamiento básico en óptimas condiciones",
+      "articulo": "180-1",
+      "descripcion": "Circulabas en tu bicicleta o motobicicleta sin contar con el equipo de iluminación o elementos básicos obligatorios en óptimo funcionamiento.",
+      "monto_quetzales": 100,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 2,
+      "infraccion": "No respetar señales específicas de tránsito",
+      "articulo": "180-2",
+      "descripcion": "Ignoraste señales como la de no vehículos, prohibición de silencio, ceder el paso, prohibición de giro, límite de velocidad mínima o la obligación de seguir de frente.",
+      "monto_quetzales": 100,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 3,
+      "infraccion": "Circular en el arcén sin causa justificada",
+      "articulo": "180-3",
+      "descripcion": "Manejaste por el hombro o arcén de la carretera cuando no existía ninguna emergencia u omisión que lo justificara.",
+      "monto_quetzales": 100,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 4,
+      "infraccion": "No facilitar la incorporación al tránsito a otros vehículos",
+      "articulo": "180-4",
+      "descripcion": "No cediste el espacio necesario para que otros conductores pudieran integrarse a la circulación de la vía.",
+      "monto_quetzales": 100,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 5,
+      "infraccion": "No utilizar las señales manuales o lumínicas al maniobrar",
+      "articulo": "180-5",
+      "descripcion": "Realizaste un cambio de dirección, de carril, una desaceleración, un retroceso o un cambio de sentido sin advertirlo previamente con las luces direccionales o señales manuales.",
+      "monto_quetzales": 100,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 6,
+      "infraccion": "No respetar el derecho preferente a rebasar",
+      "articulo": "180-6",
+      "descripcion": "Iniciaste una maniobra de adelantamiento sin respetar el turno o la prioridad que le correspondía a otro conductor.",
+      "monto_quetzales": 100,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 7,
+      "infraccion": "Uso no previsto de advertencias auditivas o luminosas",
+      "articulo": "180-7",
+      "descripcion": "Hiciste uso de la bocina, luces altas o avisos lumínicos en situaciones no autorizadas o reglamentadas.",
+      "monto_quetzales": 100,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 8,
+      "infraccion": "Conducir utilizando auriculares o teléfonos",
+      "articulo": "180-8",
+      "descripcion": "Ibas al volante conectado a auriculares con reproductores de sonido, o bien utilizando teléfonos celulares y aparatos de comunicación con las manos.",
+      "monto_quetzales": 100,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 9,
+      "infraccion": "Circular sin portar la tarjeta de circulación",
+      "articulo": "181-1",
+      "descripcion": "Conducías un vehículo sin llevar físicamente la tarjeta de circulación original o una fotocopia autenticada de la misma.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 10,
+      "infraccion": "Portar placas de circulación en lugares no autorizados",
+      "articulo": "181-2",
+      "descripcion": "Llevabas las placas de identificación del vehículo colocadas en una posición distinta o no reglamentaria.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 11,
+      "infraccion": "No portar la licencia de conducir",
+      "articulo": "181-3",
+      "descripcion": "Conducías un vehículo sin portar contigo el documento físico de tu licencia de conducir.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 12,
+      "infraccion": "Carecer del equipamiento básico en vehículos automotores",
+      "articulo": "181-4",
+      "descripcion": "Tu vehículo de cuatro o más ruedas no contaba con las herramientas, bocina, retrovisores, limpiaparabrisas o triángulos de emergencia obligatorios.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 13,
+      "infraccion": "Vehículo de aprendizaje sin especificaciones",
+      "articulo": "181-5",
+      "descripcion": "Utilizaste un automóvil para prácticas de manejo o aprendizaje que no cumplía con los pedales, doble control u otras especificaciones técnicas reglamentarias.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 14,
+      "infraccion": "Producir ruidos estridentes o innecesarios",
+      "articulo": "181-6",
+      "descripcion": "Causaste molestias auditivas exageradas mediante el uso de los escapes, bocinas modificadas u otros aditamentos del vehículo.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 15,
+      "infraccion": "Transportar carga en forma inadecuada y peligrosa",
+      "articulo": "181-7",
+      "descripcion": "Llevabas mercancías mal sujetas que ponían en riesgo la estabilidad del vehículo o representaban un obstáculo en la vía.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 16,
+      "infraccion": "No señalizar carga que sobresale",
+      "articulo": "181-8",
+      "descripcion": "Transportabas objetos largos o anchos que sobresalían de la estructura del vehículo sin colocarles las banderas rojas de día o los reflejantes de noche.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 17,
+      "infraccion": "Conductor de transporte colectivo sin identificación",
+      "articulo": "181-9",
+      "descripcion": "Operabas una unidad de transporte público o colectivo sin exhibir de forma visible tu identificación reglamentaria.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 18,
+      "infraccion": "Circular en carriles no permitidos para transporte público",
+      "articulo": "181-10",
+      "descripcion": "Unidades de transporte colectivo transitaron por vías o carriles exclusivos ajenos a su ruta designada.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 19,
+      "infraccion": "Parada incorrecta de transporte colectivo",
+      "articulo": "181-11",
+      "descripcion": "Detuviste un bus o microbús separado de la acera a más de treinta centímetros o en posición no paralela a la misma.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 20,
+      "infraccion": "Parar transporte de pasajeros fuera de zona autorizada",
+      "articulo": "181-12",
+      "descripcion": "Efectuaste el ascenso o descenso de pasajeros a una distancia incorrecta de la parada oficial establecida.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 21,
+      "infraccion": "Transporte de carga en carriles prohibidos",
+      "articulo": "181-13",
+      "descripcion": "Un camión o vehículo pesado transitó por el carril izquierdo o por zonas prohibidas para su tipo de peso.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 22,
+      "infraccion": "No respetar señales de Alto, Semáforo o Agente",
+      "articulo": "181-14",
+      "descripcion": "Ignoraste una señal de alto, una luz roja del semáforo, el paso prohibido o las órdenes directas de un agente de tránsito.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 23,
+      "infraccion": "Circular en contra de la vía",
+      "articulo": "181-15",
+      "descripcion": "Manejaste tu vehículo en sentido contrario al flujo autorizado o señalizado en la calle o avenida.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 24,
+      "infraccion": "Forzar la marcha afectando al vehículo con prioridad",
+      "articulo": "181-16",
+      "descripcion": "Iniciaste la marcha de manera imprudente obligando al conductor que tenía la vía libre a frenar o desviar su trayectoria bruscamente.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 25,
+      "infraccion": "No observar las normas de prioridad de paso",
+      "articulo": "181-17",
+      "descripcion": "No cediste el paso en intersecciones o accesos donde la jerarquía vial favorecía a otro conductor.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 26,
+      "infraccion": "No respetar el turno en una fila de espera",
+      "articulo": "181-18",
+      "descripcion": "Te adelantaste indebidamente alterando el orden de una fila de vehículos detenidos por el tráfico o semáforos.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 27,
+      "infraccion": "Incorporación incorrecta a la circulación",
+      "articulo": "181-19",
+      "descripcion": "Te integraste al flujo vehicular desde un estacionamiento o vía lateral sin tomar las precauciones ni ceder el paso reglamentario.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 28,
+      "infraccion": "Virar o girar sin posicionamiento correcto",
+      "articulo": "181-20",
+      "descripcion": "Realizaste un giro a la derecha o izquierda colocándote en un carril equivocado o sin hacer la maniobra desde el costado correcto.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 29,
+      "infraccion": "Cambio de carril sin respetar prioridad",
+      "articulo": "181-21",
+      "descripcion": "Te pasaste a otro carril interrumpiendo la marcha del vehículo que ya circulaba en él.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 30,
+      "infraccion": "Retroceder indebidamente en la vía pública",
+      "articulo": "181-22",
+      "descripcion": "Realizaste una maniobra de reversa en un tramo prohibido o innecesario fuera de los supuestos permitidos por la ley.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 31,
+      "infraccion": "Rebasar por la derecha fuera de casos permitidos",
+      "articulo": "181-23",
+      "descripcion": "Adelantaste a otro vehículo por el carril derecho cuando las normas de la vía no lo autorizaban.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 32,
+      "infraccion": "Rebasar e integrarse obligando a modificar velocidad ajena",
+      "articulo": "181-24",
+      "descripcion": "Al retornar a tu carril tras rebasar, cortaste el espacio del otro conductor obligándolo a frenar o moverse.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 33,
+      "infraccion": "Estacionarse en contra de la vía",
+      "articulo": "181-25",
+      "descripcion": "Dejaste tu vehículo aparcado orientado en sentido contrario al flujo del carril más próximo.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 34,
+      "infraccion": "Estacionarse a más de 25 cm del bordillo",
+      "articulo": "181-26",
+      "descripcion": "Dejaste el automóvil separado de la banqueta a una distancia mayor de la permitida, obstruyendo parcialmente la calzada.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 35,
+      "infraccion": "Estacionar obstaculizando o poniendo en peligro",
+      "articulo": "181-27",
+      "descripcion": "Paraste o estacionaste el vehículo en un sitio que complicaba severamente la circulación o creaba riesgos para los usuarios.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 36,
+      "infraccion": "Circular sin luz baja durante el día",
+      "articulo": "181-28",
+      "descripcion": "Manejaste sin encender las luces bajas diurnas en vehículos o circunstancias en las que el reglamento lo exige obligatoriamente.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 37,
+      "infraccion": "No iluminar vehículos inmovilizados",
+      "articulo": "181-29",
+      "descripcion": "Dejaste un automotor detenido en una vía con mala iluminación nocturna sin dejar encendidas las luces de posición.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 38,
+      "infraccion": "No utilizar luces de emergencia",
+      "articulo": "181-30",
+      "descripcion": "Omitiste encender las luces intermitentes de emergencia al detenerte por una incidencia o parada obligatoria bajo baja visibilidad.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 39,
+      "infraccion": "No usar luces en túneles o mala visibilidad",
+      "articulo": "181-31",
+      "descripcion": "Conducías sin el sistema de luces de posición, bajas o gálibo encendido al atravesar túneles o con clima adverso.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 40,
+      "infraccion": "No respetar el orden jerárquico de las señales",
+      "articulo": "181-33",
+      "descripcion": "Desobedeciste la prelación entre mandos (por ejemplo, ignorar la orden de un agente de tránsito por seguir un semáforo).",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 41,
+      "infraccion": "Circular sin cinturón de seguridad",
+      "articulo": "181-34",
+      "descripcion": "Conducías o viajabas en los asientos delanteros sin llevar abrochado y tensado el cinturón de seguridad obligatorio.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 42,
+      "infraccion": "Remolcar en medios o lugares prohibidos",
+      "articulo": "181-35",
+      "descripcion": "Arrastraste un vehículo averiado utilizando métodos no autorizados o en tramos de vía restringidos (como autopistas).",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 43,
+      "infraccion": "Escape o silenciador inadecuado o deteriorado",
+      "articulo": "181-36",
+      "descripcion": "Transitaste con un sistema de escape incompleto, modificado con tubos resonadores o en mal estado que alteraba el ruido normal.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 44,
+      "infraccion": "Circular con llantas lisas o con roturas",
+      "articulo": "181-37",
+      "descripcion": "Manejabas un vehículo cuyas llantas carecían de dibujo reglamentario o presentaban daños estructurales visibles.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 45,
+      "infraccion": "Exceder tiempo de reparaciones en la vía pública",
+      "articulo": "181-38",
+      "descripcion": "Dejaste un vehículo averiado realizando reparaciones por más de dos horas en ciudad o más de doce horas en áreas extraurbanas.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 46,
+      "infraccion": "Circular sin permiso de aprendizaje vigente",
+      "articulo": "181-39",
+      "descripcion": "Conducías en fase de prácticas con un permiso temporal vencido o sin haberlo tramitado formalmente.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 47,
+      "infraccion": "Reparaciones de emergencia prohibidas en vías urbanas",
+      "articulo": "181-40",
+      "descripcion": "Intentaste arreglar una falla mecánica en vías urbanas principales donde la autoridad prohíbe explícitamente estas acciones.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 48,
+      "infraccion": "Negarse a recibir la boleta de notificación",
+      "articulo": "181-41",
+      "descripcion": "Rechazaste aceptar la papeleta de aviso, requerimiento de pago o citación entregada por la autoridad de tránsito.",
+      "monto_quetzales": 200,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 49,
+      "infraccion": "Conducir con licencia de conducir vencida",
+      "articulo": "182-1",
+      "descripcion": "Manejabas un vehículo portando un documento de licencia cuya fecha de vigencia ya había expirado.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 50,
+      "infraccion": "Transporte colectivo sin identificación del chofer",
+      "articulo": "182-2",
+      "descripcion": "Operabas una unidad de transporte público que carecía de los datos visibles del conductor a la vista de los pasajeros.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 51,
+      "infraccion": "Tirar basura o desechos en la vía pública",
+      "articulo": "182-3",
+      "descripcion": "Arrojaste papeles, bolsas o desperdicios hacia la calle desde el interior de tu vehículo en marcha o estacionado.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 52,
+      "infraccion": "Circular sin escape o silenciador",
+      "articulo": "182-4",
+      "descripcion": "Conducías un vehículo automotor completamente desprovisto del tubo de escape o silenciador reglamentario.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 53,
+      "infraccion": "Ruido estridente en zonas sensibles",
+      "articulo": "182-5",
+      "descripcion": "Provocaste ruidos exagerados con bocinas o altavoces cerca de hospitales, zonas residenciales o durante horas nocturnas.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 54,
+      "infraccion": "Uso indebido de sirenas de emergencia",
+      "articulo": "182-6",
+      "descripcion": "Instalaste o utilizaste sirenas y bocinas exclusivas de ambulancias, patrullas o bomberos en un vehículo particular.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 55,
+      "infraccion": "Rebasar a vehículo detenido ante paso peatonal",
+      "articulo": "182-7",
+      "descripcion": "Adelantaste a otro automotor que se había frenado correctamente para darle preferencia de paso a un peatón en un cebra.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 56,
+      "infraccion": "Circular por espacios peatonales",
+      "articulo": "182-8",
+      "descripcion": "Metiste un vehículo automotor sobre aceras, paseos o plazas peatonales sin contar con una autorización expresa de señalización.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 57,
+      "infraccion": "Instalar ventas callejeras u obstáculos en pasos peatonales",
+      "articulo": "182-9",
+      "descripcion": "Colocaste comercios informales o estructuras no autorizadas sobre banquetas, pasarelas o áreas públicas de tránsito.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 58,
+      "infraccion": "Abandonar materiales que entorpezcan la circulación",
+      "articulo": "182-10",
+      "descripcion": "Dejaste escombros o materias obstruyendo la calzada y dificultando el paso libre vehicular.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 59,
+      "infraccion": "Carga y descarga sin autorización",
+      "articulo": "182-11",
+      "descripcion": "Realizaste maniobras de distribución de mercancías en la vía pública infringiendo las normas u horarios establecidos por la municipalidad.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 60,
+      "infraccion": "Exceder los límites de velocidad permitidos",
+      "articulo": "182-12",
+      "descripcion": "Conducías a una velocidad superior al límite máximo establecido para esa ruta, detectado por radares o controles.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 61,
+      "infraccion": "Bloquear una intersección",
+      "articulo": "182-13",
+      "descripcion": "Te quedaste detenido en medio de un cruce vehicular o paso peatonal obstruyendo el tráfico transversal a pesar del semáforo.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 62,
+      "infraccion": "No respetar señales en cruces de ferrocarril",
+      "articulo": "182-14",
+      "descripcion": "Ignoraste barreras, luces o avisos de advertencia al aproximarte a una vía férrea.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 63,
+      "infraccion": "Giro continuo a la derecha incorrecto",
+      "articulo": "182-15",
+      "descripcion": "Viraste a la derecha con semáforo en rojo en un lugar no permitido o lo hiciste sin ceder el paso previo al tráfico transversal.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 64,
+      "infraccion": "Cambio de carril en intersecciones",
+      "articulo": "182-16",
+      "descripcion": "Te pasaste de carril justo encima o antes de un cruce, o no seguiste la dirección obligatoria marcada para ese carril.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 65,
+      "infraccion": "Cambio de sentido en lugares prohibidos",
+      "articulo": "182-17",
+      "descripcion": "Realizaste una \"Vuelta en U\" en tramos no autorizados, puentes, túneles o zonas donde se prohíbe rebasar.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 66,
+      "infraccion": "Rebasar en lugares prohibidos",
+      "articulo": "182-18",
+      "descripcion": "Adelantaste a otros vehículos en curvas, pendientes pronunciadas, intersecciones o zonas con visibilidad reducida.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 67,
+      "infraccion": "No ceder el paso a peatones",
+      "articulo": "182-19",
+      "descripcion": "Omitiste detenerte para darle la prioridad absoluta a los transeúntes en los pasos de cebra o zonas autorizadas.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 68,
+      "infraccion": "No ceder el paso a ciclistas",
+      "articulo": "182-20",
+      "descripcion": "No respetaste la prioridad de paso que tienen las bicicletas en ciclovías o al cruzar intersecciones.",
+      "monto_quetzales": 300,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 69,
+      "infraccion": "Conducir sin haber obtenido licencia",
+      "articulo": "183-1",
+      "descripcion": "Manejabas un vehículo automotor sin que las autoridades te hayan emitido jamás una licencia de conducir.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 70,
+      "infraccion": "Usar luces exclusivas de emergencia o mantenimiento",
+      "articulo": "183-2",
+      "descripcion": "Llevabas instaladas torretas de colores reservados exclusivamente para patrullas, bomberos, ambulancias o vehículos viales.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 71,
+      "infraccion": "Rebasar unidades de transporte público para hacer parada",
+      "articulo": "183-3",
+      "descripcion": "Adelantaste a otro bus o microbús con la única intención de ganarle el pasaje y pararte justo enfrente.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 72,
+      "infraccion": "Conducir con licencia de categoría incorrecta",
+      "articulo": "183-4",
+      "descripcion": "Operabas un vehículo (como un camión pesado o transporte colectivo) con una licencia de tipo inferior que no te habilitaba para ello.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 73,
+      "infraccion": "Utilizar carriles exclusivos de otros medios",
+      "articulo": "183-5",
+      "descripcion": "Circulaste con un vehículo particular por carriles diseñados exclusivamente para transporte público o ciclovías.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 74,
+      "infraccion": "No ceder el paso a escolares en zona escolar",
+      "articulo": "183-6",
+      "descripcion": "Incumpliste los límites de velocidad o las normas de precaución al circular por una zona escolar en horarios establecidos.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 75,
+      "infraccion": "Circular con un lado frontal completamente a oscuras",
+      "articulo": "183-7",
+      "descripcion": "Manejabas un vehículo automotor que tenía dañado por completo el sistema de iluminación de un lado de la parte delantera.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 76,
+      "infraccion": "No señalizar un obstáculo en la vía pública",
+      "articulo": "183-8",
+      "descripcion": "Dejaste una carga u objeto estorbando en la calzada sin colocar triángulos o luces reflectivas de advertencia para los conductores.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 77,
+      "infraccion": "Instalar señales de tránsito falsas o confusas",
+      "articulo": "183-9",
+      "descripcion": "Colocaste rótulos o artefactos particulares que emulaban señales de tránsito oficiales para confundir a los conductores.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 78,
+      "infraccion": "Incumplir normas de seguridad ante accidentes o averías",
+      "articulo": "183-10",
+      "descripcion": "Al quedarte varado o chocar, no colocaste los triángulos reflectivos de emergencia requeridos en las distancias correctas.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 79,
+      "infraccion": "Simular falla mecánica para estacionar en prohibido",
+      "articulo": "183-11",
+      "descripcion": "Dejaste el vehículo mal estacionado fingiendo un desperfecto mecánico para evadir la sanción de la autoridad.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 80,
+      "infraccion": "Retroceder en autopistas o vías rápidas",
+      "articulo": "183-12",
+      "descripcion": "Realizaste una maniobra de marcha atrás en vías de alta velocidad, poniendo en grave peligro el tráfico.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 81,
+      "infraccion": "Tirar basura u objetos que obstruyan la vía",
+      "articulo": "183-13",
+      "descripcion": "Arrojaste a la calle elementos de gran tamaño o basura capaz de entorpecer el desplazamiento seguro de otros vehículos.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 82,
+      "infraccion": "Efectuar reparaciones mecánicas no urgentes en la vía",
+      "articulo": "183-14",
+      "descripcion": "Realizaste trabajos de mecánica en plena calle que no correspondían a una emergencia imprevista.",
+      "monto_quetzales": 400,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 83,
+      "infraccion": "Circular sin placas de circulación",
+      "articulo": "184-1",
+      "descripcion": "Conducías un vehículo que no portaba las placas metálicas de identificación emitidas por la autoridad fiscal.",
+      "monto_quetzales": 500,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 84,
+      "infraccion": "No tener tarjeta de circulación",
+      "articulo": "184-2",
+      "descripcion": "El vehículo carecía por completo de registro y tarjeta de circulación autorizada para su tránsito.",
+      "monto_quetzales": 500,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 85,
+      "infraccion": "Circular ignorando restricciones de la autoridad",
+      "articulo": "184-3",
+      "descripcion": "Transitaste en horarios o zonas donde la municipalidad o gobernación había prohibido la circulación general.",
+      "monto_quetzales": 500,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 86,
+      "infraccion": "Vehículos de carga en rutas o horarios prohibidos",
+      "articulo": "184-4",
+      "descripcion": "Conducías camiones pesados incumpliendo las restricciones metropolitanas de circulación para el transporte de carga.",
+      "monto_quetzales": 500,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 87,
+      "infraccion": "Talleres reparando vehículos en la vía pública",
+      "articulo": "184-5",
+      "descripcion": "Propietarios de negocios mecánicos utilizaron la calle o avenidas frente a su local como extensión de su taller.",
+      "monto_quetzales": 500,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 88,
+      "infraccion": "Estacionar en zona prohibida específica / con cepo",
+      "articulo": "184-6",
+      "descripcion": "Dejaste el vehículo aparcado en áreas altamente restringidas o prohibidas por los artículos 152 y 153, ameritando inmovilización.",
+      "monto_quetzales": 500,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 89,
+      "infraccion": "Transportar exceso de pasajeros sobre el límite legal",
+      "articulo": "184-7",
+      "descripcion": "Llevabas a bordo a más personas de las plazas autorizadas en la tarjeta de circulación.",
+      "monto_quetzales": 500,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 90,
+      "infraccion": "Transportar personas en lugares exteriores del bus",
+      "articulo": "184-8",
+      "descripcion": "Llevabas pasajeros parados en las escaleras, parrillas, estribos o partes externas de unidades de transporte público.",
+      "monto_quetzales": 500,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 91,
+      "infraccion": "Recoger o dejar pasajeros en lugares no autorizados",
+      "articulo": "184-9",
+      "descripcion": "Unidades de transporte público realizaron paradas de abordaje fuera de las zonas oficialmente señalizadas.",
+      "monto_quetzales": 500,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 92,
+      "infraccion": "Incumplir uso de casco y chaleco en motocicletas",
+      "articulo": "184-10",
+      "descripcion": "Conductor o acompañante en moto no portaban el casco protector reglamentario o el chaleco reflectivo con número de placa.",
+      "monto_quetzales": 500,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 93,
+      "infraccion": "Motocicletas circulando en banquetas o ciclovías",
+      "articulo": "184-11",
+      "descripcion": "Conducías tu moto sobre aceras, pasos peatonales, paseos o carriles exclusivos para bicicletas.",
+      "monto_quetzales": 500,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 94,
+      "infraccion": "Motocicletas haciendo zig-zag o entre carriles",
+      "articulo": "184-12",
+      "descripcion": "Te desplazaste en moto haciendo maniobras de zig-zag o metiéndote peligrosamente entre los carriles de autos detenidos.",
+      "monto_quetzales": 500,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 95,
+      "infraccion": "Retirar, dañar o alterar señales de tránsito",
+      "articulo": "185-A-1",
+      "descripcion": "Quitaste, destruiste, pintaste o modificaste intencionalmente las señales viales informativas o reguladoras.",
+      "monto_quetzales": 1000,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 96,
+      "infraccion": "Faltar el respeto o agredir a la autoridad de tránsito",
+      "articulo": "185-A-2",
+      "descripcion": "Insultaste, amenazaste o agrediste verbal o físicamente a los agentes de la PMT, PNC o inspectores viales en funciones.",
+      "monto_quetzales": 1000,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 97,
+      "infraccion": "Alterar la seguridad vial colocando obstáculos para carreras",
+      "articulo": "185-B",
+      "descripcion": "Pusiste vallas o elementos imprevisibles en la calle para facilitar competencias o actividades no autorizadas.",
+      "monto_quetzales": 5000,
+      "moneda": "GTQ"
+    },
+    {
+      "numero": 98,
+      "infraccion": "Realizar carreras clandestinas o ignorar a vehículos de emergencia",
+      "articulo": "185-C",
+      "descripcion": "Participaste en competencias de velocidad ilegales en la vía pública sin permiso, o te negaste rotundamente a cederle el paso a una unidad de emergencia.",
+      "monto_quetzales": 25000,
+      "moneda": "GTQ"
+    }
+  ]
+}
