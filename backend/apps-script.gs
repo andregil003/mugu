@@ -23,7 +23,7 @@
  * CONTRATO GET / (cada multa):
  *   {
  *     placa, tipo_vehiculo, entidad, fecha, tipo_multa,
- *     infraccion,            // id corto SOLO para los 10 artículos mapeados; null si no
+ *     infraccion,            // id corto SOLO para los 28 artículos mapeados; null si no
  *     motivo_legal,          // texto formal "ARTICULO 181-14: ..." (tabla ARTICULOS)
  *     monto, estado, no_multa, categoria, fecha_notificacion
  *   }
@@ -158,12 +158,13 @@ const ARTICULOS = {
 };
 
 // ============================================================
-// MAPA artículo → id corto de infracción (SOLO estos 10)
+// MAPA artículo → id corto de infracción (28 mapeados)
 // El frontend usa `infraccion` para la razón clara y el consejo
 // (public/infracciones.json). Para el resto: infraccion = null
 // y el frontend muestra motivo_legal como fallback.
 // ============================================================
 const MAPA_ARTICULO_INFRACCION = {
+  // 10 originales con id propio en el catálogo
   '181-14': 'semaforo_rojo',
   '184-6': 'estacionamiento_prohibido',
   '182-1': 'licencia_vencida',
@@ -174,6 +175,25 @@ const MAPA_ARTICULO_INFRACCION = {
   '184-10': 'sin_casco_moto',
   '184-7': 'sobrecarga_vehiculo',
   '184-1': 'sin_placas',
+  // 18 nuevos con razón clara en infracciones.json
+  '181-25': 'articulo_181_25',
+  '181-26': 'articulo_181_26',
+  '181-27': 'articulo_181_27',
+  '181-34': 'articulo_181_34',
+  '182-19': 'articulo_182_19',
+  '182-20': 'articulo_182_20',
+  '183-1': 'articulo_183_1',
+  '184-2': 'articulo_184_2',
+  '184-3': 'articulo_184_3',
+  '184-4': 'articulo_184_4',
+  '184-8': 'articulo_184_8',
+  '184-9': 'articulo_184_9',
+  '184-11': 'articulo_184_11',
+  '184-12': 'articulo_184_12',
+  '185-A-1': 'articulo_185_a_1',
+  '185-A-2': 'articulo_185_a_2',
+  '185-B': 'articulo_185_b',
+  '185-C': 'articulo_185_c',
 };
 
 // Mapa inverso (infraccion → artículo) para POST
@@ -197,9 +217,9 @@ function construirMotivoLegal(infraccion) {
   return a ? a.motivo : '';
 }
 
-/** Extrae el artículo ("181-14") del motivo_legal y devuelve el id corto de infracción (o null) */
+/** Extrae el artículo ("181-14", "185-A-1", "185-B") del motivo_legal y devuelve el id corto de infracción (o null) */
 function derivarInfraccion(motivoLegal) {
-  const m = (motivoLegal || '').toString().match(/(\d{3}-\d{1,2})/);
+  const m = (motivoLegal || '').toString().match(/(\d{3}-(?:[A-Z](?:-\d{1,2})?|\d{1,2}))/);
   if (!m) return null;
   return MAPA_ARTICULO_INFRACCION[m[1]] || null;
 }
@@ -463,5 +483,5 @@ function doPost(e) {
 // estado válidos: pendiente | pagada | impugnada | prescrita
 // categoria (derivada del monto): 100-200 leve | 300-500 grave | 1000+ muy_grave
 // no_multa: solo números, 6 dígitos
-// infraccion: id del catálogo en public/infracciones.json — SOLO para los 10 artículos
+// infraccion: id del catálogo en public/infracciones.json — SOLO para los 28 artículos
 // mapeados en MAPA_ARTICULO_INFRACCION; el resto devuelve null (fallback: motivo_legal)
