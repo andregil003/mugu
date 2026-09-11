@@ -116,11 +116,11 @@ function calcularEstado(fechaEmision, fechaNotif) {
 }
 
 const COLOR_FASE = {
-  emitida: 'border-emerald-500 text-emerald-600 ring-emerald-500/20',
-  notificada: 'border-emerald-500 text-emerald-600 ring-emerald-500/20',
-  apelacion: 'border-amber-500 text-amber-600 ring-amber-500/20',
-  solopago: 'border-orange-500 text-orange-600 ring-orange-500/20',
-  prescripcion: 'border-red-500 text-red-600 ring-red-500/20',
+  emitida: 'border-emerald-500 text-emerald-600 ring-emerald-500/20 dark:text-emerald-400 dark:ring-emerald-500/30',
+  notificada: 'border-emerald-500 text-emerald-600 ring-emerald-500/20 dark:text-emerald-400 dark:ring-emerald-500/30',
+  apelacion: 'border-amber-500 text-amber-600 ring-amber-500/20 dark:text-amber-400 dark:ring-amber-500/30',
+  solopago: 'border-orange-500 text-orange-600 ring-orange-500/20 dark:text-orange-400 dark:ring-orange-500/30',
+  prescripcion: 'border-red-500 text-red-600 ring-red-500/20 dark:text-red-400 dark:ring-red-500/30',
 }
 
 const PASOS_LEGALES = [

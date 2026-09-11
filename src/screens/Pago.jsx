@@ -188,7 +188,7 @@ export default function Pago() {
 
         {estado === 'exito' ? (
           <div className="px-5 py-10 text-center">
-            <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+            <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400">
               <FontAwesomeIcon icon={faCircleCheck} className="h-8 w-8" />
             </span>
             <h3 className="mt-4 text-lg font-bold text-gray-900 dark:text-foreground">{t('pagoExito')}</h3>
@@ -224,7 +224,7 @@ export default function Pago() {
                   <p className="flex items-center gap-1.5 font-medium">
                     <FontAwesomeIcon
                       icon={faBuildingColumns}
-                      className="h-3.5 w-3.5 text-emerald-600"
+                      className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400"
                     />
                     {t(bancos[0])}
                   </p>

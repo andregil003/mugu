@@ -13,6 +13,20 @@
     <meta name="apple-mobile-web-app-title" content="MUGU" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script>
+      // Anti-flash de tema: aplica .dark en <html> ANTES del paint.
+      // Misma lógica que src/hooks/useDarkMode.js (localStorage 'darkMode' + prefers-color-scheme).
+      ;(function () {
+        try {
+          var stored = localStorage.getItem('darkMode')
+          var dark =
+            stored === 'true' ||
+            (stored !== 'false' &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches)
+          if (dark) document.documentElement.classList.add('dark')
+        } catch (e) {}
+      })()
+    </script>
     <meta
       name="description"
       content="MUGU (Multas Guate) — ¿Te llegó una multa? Te la explicamos: semáforo de legalidad, plazos y qué hacer."
