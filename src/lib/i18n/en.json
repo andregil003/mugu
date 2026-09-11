@@ -1,5 +1,5 @@
 {
-  "appNombre": "MultaClara",
+  "appNombre": "MUGU",
   "tagline": "From fine to education",
   "heroTitulo": "Got a fine? We'll explain it",
   "heroSubtitulo": "Understand what it means, whether it's valid, and what you can do",
@@ -142,5 +142,21 @@
   "apelacionCriterio": "Criterion",
   "apelacionDocumentos": "Documents and evidence",
   "apelacionContenido": "Content of the document",
-  "apelacionPlazo": "Deadline"
+  "apelacionPlazo": "Deadline",
+  "appNombreLargo": "MUGU (Guatemala Fines)",
+  "tamanoTitulo": "Text size",
+  "tamanoDesc": "Choose the text size for the whole app",
+  "tamanoNormal": "Normal",
+  "tamanoGrande": "Large",
+  "tamanoExtra": "Extra large",
+  "placasRecientes": "Recent plates",
+  "limpiar": "Clear",
+  "tipoPlacaLabel": "Plate type",
+  "infoBuscar": "Search infraction",
+  "infoCategoria": "Category",
+  "infoDescuento": "Traffic course discount",
+  "catLeve": "Minor",
+  "catGrave": "Serious",
+  "catMuyGrave": "Very serious",
+  "errorNoEncontrado3dias": "Remissions take up to 3 days to appear. If your fine doesn't show up, wait 3 days from the day you got it."
 }

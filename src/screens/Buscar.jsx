@@ -1,18 +1,33 @@
 // pantalla_ingreso_placa (Flujo A): búsqueda general solo con placa.
+// Guarda placas recientes en localStorage (caché local, sin cuentas) y
+// permite re-buscar con un toque o limpiar el historial.
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClockRotateLeft, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import PageHero from '@/components/PageHero'
 import { useI18n } from '@/lib/i18n'
 import { validarPlaca } from '@/lib/core'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
+
+const MAX_RECIENTES = 5
 
 export default function Buscar() {
   const { t } = useI18n()
   const navigate = useNavigate()
   const [placa, setPlaca] = useState('')
   const [error, setError] = useState('')
+  const [recientes, setRecientes] = useLocalStorage('placas', [])
+
+  function guardarReciente(p) {
+    const sinDuplicados = recientes.filter(
+      (x) => x.toUpperCase() !== p.toUpperCase()
+    )
+    setRecientes([p, ...sinDuplicados].slice(0, MAX_RECIENTES))
+  }
 
   function buscar(e) {
     e.preventDefault()
@@ -21,6 +36,12 @@ export default function Buscar() {
       setError('Formato inválido: verifica tu placa (ej. P123ABC o M123ABC)')
       return
     }
+    guardarReciente(p)
+    navigate(`/resultados?placa=${encodeURIComponent(p)}`)
+  }
+
+  function buscarReciente(p) {
+    guardarReciente(p)
     navigate(`/resultados?placa=${encodeURIComponent(p)}`)
   }
 
@@ -70,6 +91,38 @@ export default function Buscar() {
               vehículo.
             </p>
           </form>
+
+          {/* Placas recientes (caché local) */}
+          {recientes.length > 0 && (
+            <div className="mt-5 border-t border-gray-100 pt-4">
+              <div className="mb-2 flex items-center justify-between">
+                <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  <FontAwesomeIcon icon={faClockRotateLeft} className="h-3.5 w-3.5" />
+                  {t('placasRecientes')}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setRecientes([])}
+                  className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-muted-foreground transition hover:bg-red-50 hover:text-red-600 active:scale-95"
+                >
+                  <FontAwesomeIcon icon={faXmark} className="h-3 w-3" />
+                  {t('limpiar')}
+                </button>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {recientes.map((p) => (
+                  <button
+                    key={p}
+                    type="button"
+                    onClick={() => buscarReciente(p)}
+                    className="rounded-full border border-violet-200 bg-violet-50 px-3.5 py-1.5 font-mono text-sm font-semibold tracking-wider text-violet-800 transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-400 hover:bg-violet-100 hover:shadow-md active:scale-95"
+                  >
+                    {p}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

@@ -71,3 +71,36 @@ test('Flujo completo P123ABC/EMETRA: listado sin undefined, detalle sale, logo v
   )
   expect(criticos).toEqual([])
 })
+
+test('Nuevos módulos: tamaño de texto, placas recientes, tipo placa + datepicker', async ({
+  page,
+}) => {
+  // 1. Idioma → Español
+  await page.goto('/#/idioma')
+  await page.getByRole('button', { name: 'Español' }).click()
+  await page.waitForURL(/#\/bienvenida/)
+
+  // 2. Tamaño de texto: ir a /tamano, elegir Grande → clase en <html>
+  await page.goto('/#/tamano')
+  await page.getByRole('button', { name: /Grande/ }).click()
+  await expect(page.locator('html.texto-grande')).toHaveCount(1)
+
+  // 3. Buscar P123ABC → vuelve a /buscar → chip de placa reciente + limpiar
+  await page.goto('/#/buscar')
+  await page.getByLabel('Número de placa').fill('P123ABC')
+  await page.getByRole('button', { name: 'BUSCAR', exact: true }).click()
+  await page.waitForURL(/#\/resultados/)
+  await page.goto('/#/buscar')
+  await expect(page.getByText('Placas recientes')).toBeVisible()
+  await expect(page.getByRole('button', { name: 'P123ABC' })).toBeVisible()
+  await page.getByRole('button', { name: 'Limpiar' }).click()
+  await expect(page.getByText('Placas recientes')).toHaveCount(0)
+
+  // 4. FormFisica: tipo de placa (P) + calendario (date picker)
+  await page.goto('/#/multa-fisica')
+  await expect(page.getByLabel('Tipo de placa')).toBeVisible()
+  await expect(page.getByLabel('Tipo de placa')).toHaveText('P')
+  await page.getByLabel('Número de placa').fill('123ABC')
+  await page.getByRole('button', { name: 'Fecha de la infracción' }).click()
+  await expect(page.getByText(/Enero|Febrero|Marzo|Abril|Mayo|Junio|Julio|Agosto|Septiembre|Octubre|Noviembre|Diciembre/)).toBeVisible()
+})

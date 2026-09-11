@@ -46,11 +46,20 @@ export default function Multas() {
       if (!activo) return
 
       const p = placa.trim().toUpperCase()
+      // Aliases de la entidad (id, corto, nombre, jurisdicción) para matchear
+      // lo que manda el backend contra el id que viene en el query.
+      const aliasesEntidad = new Set()
+      entidades.forEach((e) => {
+        aliasesEntidad.add(normalizarEntidad(e.id))
+        aliasesEntidad.add(normalizarEntidad(e.corto))
+        aliasesEntidad.add(normalizarEntidad(e.nombre))
+        aliasesEntidad.add(normalizarEntidad(e.jurisdiccion))
+      })
       const lista = reales
         .filter(
           (m) =>
             String(m.placa ?? '').trim().toUpperCase() === p &&
-            normalizarEntidad(m.entidad) === entidad &&
+            aliasesEntidad.has(normalizarEntidad(m.entidad)) &&
             m.estado !== 'pagada'
         )
         .map((m) => {

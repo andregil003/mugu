@@ -1,12 +1,12 @@
-/* MultaClara — Service Worker (PWA)
+/* MUGU — Service Worker (PWA)
  * Estrategia:
  * - Precache de la app shell (assets del build) al instalar
  * - Cache-first para assets (rápido + offline)
  * - Network-first para /infracciones.json y el backend (siempre fresco si hay red)
  * - Cache del backend: 24h (coincide con el cache de localStorage en data.js)
  */
-const CACHE_SHELL = 'multaclara-shell-v2'
-const CACHE_DATA = 'multaclara-data-v1'
+const CACHE_SHELL = 'mugu-shell-v3'
+const CACHE_DATA = 'mugu-data-v1'
 
 self.addEventListener('install', (e) => {
   e.waitUntil(

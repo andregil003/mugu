@@ -7,7 +7,8 @@ export default function Entrada() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const idioma = localStorage.getItem('multaclara_idioma')
+    const idioma =
+      localStorage.getItem('mugu_idioma') ?? localStorage.getItem('multaclara_idioma')
     navigate(idioma ? '/bienvenida' : '/idioma', { replace: true })
   }, [navigate])
 

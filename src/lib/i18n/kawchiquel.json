@@ -1,5 +1,5 @@
 {
-    "appNombre": "MultaClara",
+    "appNombre": "MUGU",
     "tagline": "Chi multa pa tijonem",
     "heroTitulo": "Â¿Xak'ul jun multa? Laq qach'omaj",
     "heroSubtitulo": "Ch'omila achike rub'anik, we utz ri' we man utz ta, utz ri kab'an",
@@ -142,5 +142,21 @@
     "apelacionCriterio": "Rub'eyal",
     "apelacionDocumentos": "Taq wuj chuqa' taq retal",
     "apelacionContenido": "Ri ch'awen pa ri wuj",
-    "apelacionPlazo": "Q'ij"
+    "apelacionPlazo": "Q'ij",
+    "appNombreLargo": "MUGU (Multas Guate)",
+    "tamanoTitulo": "Runimilej tz'ib'",
+    "tamanoDesc": "Tacha' ri runimilej tz'ib' pa ronojel ri app",
+    "tamanoNormal": "Normal",
+    "tamanoGrande": "Nim",
+    "tamanoExtra": "Sib'alaj nim",
+    "placasRecientes": "K'ak' taq placa",
+    "limpiar": "Chajij",
+    "tipoPlacaLabel": "Runik'aj placa",
+    "infoBuscar": "Tzukuj ri k'ayewal",
+    "infoCategoria": "Ruwach",
+    "infoDescuento": "Q'axik ruma tijonik",
+    "catLeve": "Mani k'ax",
+    "catGrave": "K'ax",
+    "catMuyGrave": "Sib'alaj k'ax",
+    "errorNoEncontrado3dias": "Ri taq remisión k'o 3 q'ij chupam. We man k'utun ta ri ak'ayewal, choyej 3 q'ij."
 }

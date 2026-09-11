@@ -182,10 +182,21 @@ export default function Detalle() {
 
       // Buscar la multa elegida (por noMulta) primero en datos reales
       const p = placa.trim().toUpperCase()
+
+      // Aliases de la entidad: id, corto, nombre y jurisdicción normalizados.
+      // El backend puede mandar "EMETRA", "EMETRA — Municipalidad de Guatemala",
+      // "Municipalidad de Guatemala", etc.; el query trae el id ("emetra").
+      const aliasesEntidad = new Set()
+      listaEntidades.forEach((e) => {
+        aliasesEntidad.add(normalizarEntidad(e.id))
+        aliasesEntidad.add(normalizarEntidad(e.corto))
+        aliasesEntidad.add(normalizarEntidad(e.nombre))
+        aliasesEntidad.add(normalizarEntidad(e.jurisdiccion))
+      })
       const candidatas = reales.filter(
         (m) =>
           String(m.placa ?? '').trim().toUpperCase() === p &&
-          (!entidad || normalizarEntidad(m.entidad) === entidadNorm)
+          (!entidad || aliasesEntidad.has(normalizarEntidad(m.entidad)))
       )
       const seleccion =
         candidatas.find(
@@ -226,7 +237,7 @@ export default function Detalle() {
     return () => {
       activo = false
     }
-  }, [placa, entidad, entidadNorm, noMultaParam, fechaParam])
+  }, [placa, entidad, noMultaParam, fechaParam])
 
   if (noEncontrada) {
     return (
@@ -640,7 +651,7 @@ export default function Detalle() {
               }`}
               onClick={() =>
                 navigate(
-                  `/apelacion?placa=${encodeURIComponent(placa)}&entidad=${entidad}`
+                  `/apelacion?placa=${encodeURIComponent(placa)}&entidad=${entidad}&gestion=oposicion`
                 )
               }
             >
@@ -654,7 +665,7 @@ export default function Detalle() {
 
             <Button
               variant="ghost"
-              disabled={pagada}
+              disabled={pagada || fase !== 'prescrita'}
               className={`w-full rounded-2xl text-sm font-semibold transition-all active:scale-[0.98] ${
                 fase === 'prescrita'
                   ? 'border border-red-200 bg-red-50 text-red-700 hover:bg-red-100'
@@ -662,7 +673,7 @@ export default function Detalle() {
               }`}
               onClick={() =>
                 navigate(
-                  `/apelacion?placa=${encodeURIComponent(placa)}&entidad=${entidad}`
+                  `/apelacion?placa=${encodeURIComponent(placa)}&entidad=${entidad}&gestion=prescripcion`
                 )
               }
             >
@@ -670,7 +681,9 @@ export default function Detalle() {
             </Button>
             {!pagada && (
               <p className="text-center text-xs leading-relaxed text-muted-foreground">
-                {t('quitarMultaDesc')}
+                {fase === 'prescrita'
+                  ? t('quitarMultaDesc')
+                  : `${t('quitarMultaDesc')} ${t('vence')} el ${formatearFecha(fechaPrescripcion)}.`}
               </p>
             )}
           </div>

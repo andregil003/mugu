@@ -1,5 +1,5 @@
 {
-  "appNombre": "MultaClara",
+  "appNombre": "MUGU",
   "tagline": "De multa a educación",
   "heroTitulo": "¿Te llegó una multa? Te la explicamos",
   "heroSubtitulo": "Entendé qué significa, si es válida y qué podés hacer",
@@ -142,5 +142,21 @@
   "apelacionCriterio": "Criterio",
   "apelacionDocumentos": "Documentos y pruebas",
   "apelacionContenido": "Contenido del escrito",
-  "apelacionPlazo": "Plazo"
+  "apelacionPlazo": "Plazo",
+  "appNombreLargo": "MUGU (Multas Guate)",
+  "tamanoTitulo": "Tamaño de texto",
+  "tamanoDesc": "Elegí el tamaño de letra para toda la app",
+  "tamanoNormal": "Normal",
+  "tamanoGrande": "Grande",
+  "tamanoExtra": "Extra grande",
+  "placasRecientes": "Placas recientes",
+  "limpiar": "Limpiar",
+  "tipoPlacaLabel": "Tipo de placa",
+  "infoBuscar": "Buscar infracción",
+  "infoCategoria": "Categoría",
+  "infoDescuento": "Descuento por curso vial",
+  "catLeve": "Leve",
+  "catGrave": "Grave",
+  "catMuyGrave": "Muy grave",
+  "errorNoEncontrado3dias": "Las remisiones tardan hasta 3 días en aparecer. Si no aparece tu multa, esperá 3 días desde el día que te la dieron."
 }

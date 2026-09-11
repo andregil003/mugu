@@ -15,6 +15,7 @@ import {
   faClock,
 } from '@fortawesome/free-solid-svg-icons'
 import { useI18n } from '@/lib/i18n'
+import { cn } from '@/lib/utils'
 
 export default function Apelacion() {
   const { t } = useI18n()
@@ -22,6 +23,7 @@ export default function Apelacion() {
   const [params] = useSearchParams()
   const placa = params.get('placa') ?? ''
   const entidad = params.get('entidad') ?? ''
+  const gestion = params.get('gestion') ?? ''
 
   const [gestiones, setGestiones] = useState(null)
 
@@ -39,6 +41,19 @@ export default function Apelacion() {
       activo = false
     }
   }, [])
+
+  // Scroll + resaltado de la gestión pedida desde el detalle
+  // (/apelacion?gestion=oposicion | prescripcion)
+  useEffect(() => {
+    if (!gestiones || !gestion) return
+    const el = document.getElementById(`gestion-${gestion}`)
+    if (el) {
+      const timer = setTimeout(() => {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 150)
+      return () => clearTimeout(timer)
+    }
+  }, [gestiones, gestion])
 
   const ICONOS = {
     oposicion: faScaleBalanced,
@@ -74,7 +89,13 @@ export default function Apelacion() {
           {gestiones.map((g) => (
             <section
               key={g.id}
-              className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm"
+              id={`gestion-${g.id}`}
+              className={cn(
+                'overflow-hidden rounded-3xl border bg-white shadow-sm transition-all duration-300',
+                gestion === g.id
+                  ? 'border-amber-400 ring-4 ring-amber-200/60'
+                  : 'border-gray-100'
+              )}
             >
               {/* Encabezado de la gestión */}
               <div className="flex items-start gap-3 border-b border-gray-100 bg-gradient-to-r from-amber-50 to-white px-5 py-4">
