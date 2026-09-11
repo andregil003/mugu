@@ -43,12 +43,12 @@ export default function AppShell({ children }) {
       <GradientDots />
       {conHeader && (
         <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
-          <div className="mx-auto grid h-14 w-full max-w-5xl grid-cols-[1fr_auto_1fr] items-center gap-3 px-4">
-            {/* Logo */}
+          <div className="relative mx-auto flex h-14 w-full max-w-5xl items-center justify-between px-4">
+            {/* Logo — izquierda */}
             <button
               type="button"
               onClick={() => navigate(soloLogo ? '/idioma' : '/menu')}
-              className="flex shrink-0 items-center gap-2 justify-self-start transition hover:opacity-80 active:scale-95"
+              className="flex shrink-0 items-center gap-2 transition hover:opacity-80 active:scale-95"
               aria-label={t('appNombre')}
             >
               <img
@@ -66,10 +66,10 @@ export default function AppShell({ children }) {
               </span>
             </button>
 
-            {/* Nav desktop (oculto en portada /idioma) — centrado */}
+            {/* Nav desktop — centrado con absolute (solo desktop) */}
             {!soloLogo && (
               <nav
-                className="hidden items-center justify-center gap-1 lg:flex"
+                className="absolute left-1/2 hidden -translate-x-1/2 items-center justify-center gap-1 lg:flex"
                 aria-label={t('navAria')}
               >
                 {NAV_ITEMS.map((item) => (
@@ -91,7 +91,8 @@ export default function AppShell({ children }) {
               </nav>
             )}
 
-            <div className="flex items-center justify-end gap-1">
+            {/* Botones — derecha */}
+            <div className="flex items-center gap-1">
               {/* Tamaño de texto (accesibilidad) */}
               <button
                 type="button"
