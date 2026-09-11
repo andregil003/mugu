@@ -13,6 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { useI18n } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
+import FondoAnimado from '@/components/FondoAnimado'
 
 const RUTAS_SIN_NAV = ['/']
 const RUTAS_SOLO_LOGO = ['/idioma']
@@ -37,7 +38,8 @@ export default function AppShell({ children }) {
   const conHeader = !sinNav
 
   return (
-    <div className="flex min-h-svh flex-col">
+    <div className="relative flex min-h-svh flex-col">
+      <FondoAnimado />
       {conHeader && (
         <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
           <div className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between gap-3 px-4">

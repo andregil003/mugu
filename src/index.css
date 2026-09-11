@@ -156,4 +156,54 @@ body {
   .card-interactive {
     @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-green-900/10 active:scale-[0.98];
   }
+  /* Fondo animado: degradado verde sutil (claro) para que no se vea tan blanca */
+  .fondo-degradado {
+    background:
+      radial-gradient(ellipse 75% 55% at 15% 0%, oklch(0.955 0.04 152 / 0.55), transparent 62%),
+      radial-gradient(ellipse 65% 50% at 92% 18%, oklch(0.955 0.02 152 / 0.5), transparent 58%),
+      radial-gradient(ellipse 70% 55% at 50% 100%, oklch(0.927 0.03 152 / 0.45), transparent 60%),
+      linear-gradient(to bottom, oklch(0.985 0.005 152), oklch(0.972 0.018 152));
+  }
+  .dark .fondo-degradado {
+    background:
+      radial-gradient(ellipse 75% 55% at 15% 0%, oklch(0.3 0.04 152 / 0.5), transparent 62%),
+      radial-gradient(ellipse 65% 50% at 92% 18%, oklch(0.3 0.05 152 / 0.45), transparent 58%),
+      radial-gradient(ellipse 70% 55% at 50% 100%, oklch(0.24 0.025 152 / 0.5), transparent 60%),
+      linear-gradient(to bottom, oklch(0.185 0.02 152), oklch(0.2 0.025 152));
+  }
+  /* Iconos flotantes del fondo */
+  .icono-flotante {
+    color: oklch(0.393 0.095 152.535 / 0.16);
+    animation: flotar 16s ease-in-out infinite;
+    will-change: transform;
+  }
+  .dark .icono-flotante {
+    color: oklch(0.723 0.219 149.579 / 0.16);
+  }
+  .icono-deriva {
+    animation-name: deriva;
+  }
+  @keyframes flotar {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-2deg);
+    }
+    50% {
+      transform: translateY(-16px) rotate(3deg);
+    }
+  }
+  @keyframes deriva {
+    0%,
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(22px, -18px) rotate(4deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .icono-flotante {
+      animation: none;
+    }
+  }
 }
