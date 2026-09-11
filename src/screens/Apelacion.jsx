@@ -94,7 +94,7 @@ export default function Apelacion() {
         {t('volver')}
       </Button>
 
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-700 via-amber-600 to-orange-500 shadow-lg">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-800 via-green-700 to-emerald-600 shadow-lg">
         <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
         <div className="relative px-6 py-7 text-white">
           <h1 className="text-2xl font-bold">{t('apelacionTitulo')}</h1>

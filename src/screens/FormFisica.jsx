@@ -109,7 +109,7 @@ export default function FormFisica() {
       <form onSubmit={buscar} className="mt-4 space-y-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-foreground/10 transition-shadow hover:shadow-md">
             {/* Placa: tipo (siglas) + resto */}
             <div>
-              <label className="mb-1 block text-sm font-medium">{t('labelPlaca')}</label>
+              <label className="mb-1 block text-sm font-medium">{t('tipoPlacaLabel')}</label>
               <div className="flex gap-2">
                 <Select value={tipoPlaca} onValueChange={setTipoPlaca}>
                   <SelectTrigger

@@ -25,7 +25,7 @@ export default function Bienvenida() {
 
         <Button
           size="lg"
-          className="mt-8 w-full max-w-sm rounded-xl bg-white py-6 text-lg font-bold text-green-900 shadow-lg transition hover:bg-green-50 hover:shadow-xl active:scale-[0.98] lg:w-auto lg:px-10"
+          className="mt-8 mx-auto w-full max-w-sm rounded-xl bg-white py-6 text-lg font-bold text-green-900 shadow-lg transition hover:bg-green-50 hover:shadow-xl active:scale-[0.98] lg:w-auto lg:px-10"
           onClick={() => navigate('/menu')}
         >
           {t('queProcede')}

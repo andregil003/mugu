@@ -42,7 +42,7 @@ export default function AppShell({ children }) {
       {/* Fondo global: puntos con gradiente verde animado (detrás de todo el contenido) */}
       <GradientDots />
       {conHeader && (
-        <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
+        <header className="sticky top-0 z-40 border-b border-white/10 bg-gradient-to-br from-green-800 via-green-700 to-emerald-600 shadow-md">
           <div className="mx-auto grid h-14 w-full max-w-5xl grid-cols-[1fr_auto_1fr] items-center gap-3 px-4">
             {/* Logo */}
             <button
@@ -57,10 +57,10 @@ export default function AppShell({ children }) {
                 className="h-8 w-8 rounded-lg object-cover shadow-sm"
               />
               <span className="flex flex-col items-start leading-none">
-                <span className="text-base font-black tracking-tight">
+                <span className="text-base font-black tracking-tight text-white">
                   {t('appNombre')}
                 </span>
-                <span className="hidden text-[10px] font-medium text-muted-foreground sm:inline">
+                <span className="hidden text-[10px] font-medium text-white/70 sm:inline">
                   {t('tagline')}
                 </span>
               </span>
@@ -80,8 +80,8 @@ export default function AppShell({ children }) {
                     className={cn(
                       'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition active:scale-95',
                       estaActiva(pathname, item.activas)
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                        ? 'bg-white/20 text-white'
+                        : 'text-white/80 hover:bg-white/10 hover:text-white'
                     )}
                   >
                     <FontAwesomeIcon icon={item.icono} className="h-4 w-4" />
@@ -96,7 +96,7 @@ export default function AppShell({ children }) {
               <button
                 type="button"
                 onClick={() => navigate('/tamano')}
-                className="flex shrink-0 items-center gap-2 rounded-lg px-2.5 py-2 text-sm font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground active:scale-95"
+                className="flex shrink-0 items-center gap-2 rounded-lg px-2.5 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white active:scale-95"
                 aria-label={t('tamanoTitulo')}
                 title={t('tamanoTitulo')}
               >
@@ -108,7 +108,7 @@ export default function AppShell({ children }) {
               <button
                 type="button"
                 onClick={() => navigate('/idioma')}
-                className="flex shrink-0 items-center gap-2 rounded-lg px-2.5 py-2 text-sm font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground active:scale-95"
+                className="flex shrink-0 items-center gap-2 rounded-lg px-2.5 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white active:scale-95"
               >
                 <FontAwesomeIcon icon={faGlobe} className="h-4 w-4" />
                 <span className="hidden sm:inline">{t('labelIdioma')}</span>
@@ -132,7 +132,7 @@ export default function AppShell({ children }) {
 
           {/* Bottom-nav móvil */}
           <nav
-            className="fixed inset-x-0 bottom-0 z-40 border-t border-border/60 bg-background/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden"
+            className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-gradient-to-br from-green-800 via-green-700 to-emerald-600 pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_20px_rgba(0,0,0,0.15)] lg:hidden"
             aria-label={t('navAria')}
           >
             <div className="mx-auto grid h-16 max-w-md grid-cols-4">
@@ -144,19 +144,19 @@ export default function AppShell({ children }) {
                     type="button"
                     onClick={() => navigate(item.ruta)}
                     className={cn(
-                      'flex flex-col items-center justify-center gap-1 text-[11px] font-medium transition active:scale-95',
+                      'flex flex-col items-center justify-center gap-1 text-xs font-medium transition active:scale-95',
                       activo
-                        ? 'text-primary'
-                        : 'text-muted-foreground hover:text-foreground'
+                        ? 'text-white'
+                        : 'text-white/70 hover:text-white'
                     )}
                   >
                     <span
                       className={cn(
-                        'flex h-8 w-12 items-center justify-center rounded-full transition',
-                        activo && 'bg-primary/10'
+                        'flex h-10 w-14 items-center justify-center rounded-full transition',
+                        activo && 'bg-white/20'
                       )}
                     >
-                      <FontAwesomeIcon icon={item.icono} className="h-4 w-4" />
+                      <FontAwesomeIcon icon={item.icono} className="h-6 w-6" />
                     </span>
                     {t(item.clave)}
                   </button>

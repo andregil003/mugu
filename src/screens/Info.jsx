@@ -10,6 +10,8 @@ import {
   faXmark,
   faChevronLeft,
   faChevronRight,
+  faAnglesLeft,
+  faAnglesRight,
 } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -69,6 +71,24 @@ export default function Info() {
 
   const totalPaginas = Math.max(1, Math.ceil(filtradas.length / PAGE_SIZE))
   const paginaActual = filtradas.slice((pagina - 1) * PAGE_SIZE, pagina * PAGE_SIZE)
+
+  // Ventana de páginas con elipsis: 1 ... p-1 p p+1 ... N
+  function rangoPaginas(actual, total) {
+    const paginas = []
+    const inicio = Math.max(1, actual - 2)
+    const fin = Math.min(total, actual + 2)
+    if (inicio > 1) paginas.push(1)
+    if (inicio > 2) paginas.push('...')
+    for (let p = inicio; p <= fin; p++) paginas.push(p)
+    if (fin < total - 1) paginas.push('...')
+    if (fin < total) paginas.push(total)
+    return paginas
+  }
+
+  function irAPagina(p) {
+    setPagina(p)
+    window.scrollTo(0, 0) // al pasar de página, tirar hasta arriba
+  }
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-6">
@@ -198,30 +218,67 @@ export default function Info() {
         )}
       </div>
 
-      {/* Paginación */}
+      {/* Paginación: << < x x x ... > >> sin texto */}
       {totalPaginas > 1 && (
-        <div className="mt-5 flex items-center justify-between">
-          <Button
-            variant="outline"
-            size="sm"
+        <div className="mt-5 flex items-center justify-center gap-1">
+          <button
+            type="button"
             disabled={pagina === 1}
-            onClick={() => setPagina((p) => Math.max(1, p - 1))}
+            onClick={() => irAPagina(1)}
+            aria-label={t('infoPrimera')}
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-muted-foreground transition hover:border-gray-300 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+          >
+            <FontAwesomeIcon icon={faAnglesLeft} className="h-3.5 w-3.5" />
+          </button>
+          <button
+            type="button"
+            disabled={pagina === 1}
+            onClick={() => irAPagina(pagina - 1)}
+            aria-label={t('infoAnterior')}
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-muted-foreground transition hover:border-gray-300 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-40"
           >
             <FontAwesomeIcon icon={faChevronLeft} className="h-3.5 w-3.5" />
-            {t('infoAnterior')}
-          </Button>
-          <span className="text-xs font-medium text-muted-foreground">
-            {t('infoPagina')} {pagina} {t('infoDe')} {totalPaginas}
-          </span>
-          <Button
-            variant="outline"
-            size="sm"
+          </button>
+          {rangoPaginas(pagina, totalPaginas).map((p, idx) =>
+            p === '...' ? (
+              <span key={`e${idx}`} className="px-1 text-xs text-muted-foreground">
+                …
+              </span>
+            ) : (
+              <button
+                key={p}
+                type="button"
+                onClick={() => irAPagina(p)}
+                aria-current={p === pagina ? 'page' : undefined}
+                className={cn(
+                  'h-9 w-9 rounded-lg text-sm font-semibold transition active:scale-95',
+                  p === pagina
+                    ? 'bg-primary text-primary-foreground shadow-sm'
+                    : 'border border-gray-200 bg-white text-muted-foreground hover:border-gray-300 hover:text-foreground'
+                )}
+              >
+                {p}
+              </button>
+            )
+          )}
+          <button
+            type="button"
             disabled={pagina === totalPaginas}
-            onClick={() => setPagina((p) => Math.min(totalPaginas, p + 1))}
+            onClick={() => irAPagina(pagina + 1)}
+            aria-label={t('infoSiguiente')}
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-muted-foreground transition hover:border-gray-300 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-40"
           >
-            {t('infoSiguiente')}
             <FontAwesomeIcon icon={faChevronRight} className="h-3.5 w-3.5" />
-          </Button>
+          </button>
+          <button
+            type="button"
+            disabled={pagina === totalPaginas}
+            onClick={() => irAPagina(totalPaginas)}
+            aria-label={t('infoUltima')}
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-muted-foreground transition hover:border-gray-300 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+          >
+            <FontAwesomeIcon icon={faAnglesRight} className="h-3.5 w-3.5" />
+          </button>
         </div>
       )}
     </div>

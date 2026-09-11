@@ -3,7 +3,8 @@
 //                                      [Flujo B: FormFisica → Detalle]
 //                                      [Flujo C: Info]
 // Detalle → Apelacion | Pago
-import { HashRouter, Route, Routes } from 'react-router-dom'
+import { useEffect } from 'react'
+import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { I18nProvider } from '@/lib/i18n'
 import { TamanoProvider } from '@/lib/tamano'
 import AppShell from '@/components/AppShell'
@@ -21,11 +22,21 @@ import Detalle from '@/screens/Detalle'
 import Apelacion from '@/screens/Apelacion'
 import Pago from '@/screens/Pago'
 
+// Scroll al tope en cada cambio de ruta (no dejar al usuario a media página)
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
 function App() {
   return (
     <I18nProvider>
       <TamanoProvider>
         <HashRouter>
+          <ScrollToTop />
           <AppShell>
             <Routes>
               <Route path="/" element={<Entrada />} />

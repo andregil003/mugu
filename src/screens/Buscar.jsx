@@ -84,7 +84,7 @@ export default function Buscar() {
           <form onSubmit={buscar} className="space-y-4">
             <div>
               <label className="mb-1 block text-sm font-medium">
-                {t('labelPlaca')}
+                {t('tipoPlacaLabel')}
               </label>
               <div className="flex gap-2">
                 <Select value={tipoPlaca} onValueChange={setTipoPlaca}>
@@ -121,9 +121,6 @@ export default function Buscar() {
             >
               {t('botonBuscar')}
             </Button>
-            <p className="text-center text-xs text-muted-foreground">
-              {t('labelIdioma')}: {t('buscarAyudaPlaca')}.
-            </p>
           </form>
 
           {/* Placas recientes (caché local): slider horizontal + X en hover */}

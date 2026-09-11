@@ -196,6 +196,8 @@
   "infoDe": "de",
   "infoAnterior": "Anterior",
   "infoSiguiente": "Siguiente",
+  "infoPrimera": "Primera página",
+  "infoUltima": "Última página",
   "pagoPasarelaTitulo": "Pasarela de pago",
   "pagoPasarelaSubtitulo": "Simulación de pago en línea",
   "pagoDatosMulta": "Datos de la multa",

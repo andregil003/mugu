@@ -2,7 +2,30 @@
 
 Todos los cambios notables del proyecto. Formato basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/) y versionado semver.
 
-## [0.8.1] — 2026-09-11
+## [0.8.2] — 2026-09-11
+
+### UI/UX ronda André
+
+**Header + Nav**
+- Header con gradiente verde institucional (antes gris claro). Logo "MUGU" + tagline en blanco.
+- Bottom-nav móvil verde con iconos más grandes (`h-6 w-6`, antes `h-4 w-4`). Texto y fondo en blanco semitransparente.
+- Logo + MUGU aparecen en `/idioma` (alineados a la derecha en móvil).
+
+**Scroll**
+- `ScrollToTop` en `App.jsx`: al navegar a cualquier ruta, la página carga desde arriba (no forzar al usuario a subir manualmente).
+
+**Alineación / centrado**
+- Botón "¿Qué procede?" de Bienvenida centrado con `mx-auto`.
+- Apelación: tarjeta de gradiente verde institucional (antes naranja/amber).
+
+**Paginación Info**
+- Nueva paginación numérica `<< < 1 2 3 … N > >>` sin texto (antes "Página X de Y" con botones "Anterior/Siguiente").
+- Scroll al tope al cambiar de página.
+- Keys i18n: `infoPrimera`, `infoUltima` (4 idiomas).
+
+**Labels Buscar / FormFisica**
+- Quitar texto de ayuda "Idioma: escribí la placa tal como aparece en el vehículo." en Buscar.
+- Label del select de sigla cambiado de "Número de placa" a "Tipo de placa" en Buscar y FormFisica.
 
 ### Fondo global GradientDots
 

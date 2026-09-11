@@ -37,6 +37,20 @@ export default function Idioma() {
 
   return (
     <div className="mx-auto w-full max-w-md px-4 py-10">
+      {/* Logo + MUGU alineados a la derecha (móvil) */}
+      <div className="mb-6 flex items-center justify-end gap-2.5">
+        <img
+          src="/icon-192.png"
+          alt={t('appNombre')}
+          className="h-10 w-10 rounded-xl object-cover shadow-sm"
+        />
+        <span className="flex flex-col items-start leading-none">
+          <span className="text-lg font-black tracking-tight">{t('appNombre')}</span>
+          <span className="text-[10px] font-medium text-muted-foreground">
+            {t('tagline')}
+          </span>
+        </span>
+      </div>
       <div className="space-y-3">
         {idiomas.map((i) => (
           <button

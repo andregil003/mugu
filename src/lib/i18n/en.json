@@ -196,6 +196,8 @@
   "infoDe": "of",
   "infoAnterior": "Previous",
   "infoSiguiente": "Next",
+  "infoPrimera": "First page",
+  "infoUltima": "Last page",
   "pagoPasarelaTitulo": "Payment gateway",
   "pagoPasarelaSubtitulo": "Online payment simulation",
   "pagoDatosMulta": "Fine details",
