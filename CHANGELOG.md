@@ -2,14 +2,6 @@
 
 Todos los cambios notables del proyecto. Formato basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/) y versionado semver.
 
-## [0.6.1] — 2026-09-10
-
-### Fondo animado (PUCK main)
-
-- **`FondoAnimado`** nuevo componente: capa decorativa de fondo con 10 iconos de tránsito flotando (moto, semáforo, coche, señal de advertencia, escudo, carretera, velocímetro, bus, pin de ubicación) en verde institucional con opacidad baja.
-- **Degradado verde sutil** en el fondo (radiales + lineal) para que la página no se vea tan blanca; variante para modo oscuro.
-- Animaciones CSS (`flotar` / `deriva`) con duraciones y delays escalonados; `pointer-events-none`, `aria-hidden` y desactivadas con `prefers-reduced-motion`.
-
 ## [0.6.0] — 2026-09-10
 
 ### Fase 2 — i18n completo (PUCK main)
