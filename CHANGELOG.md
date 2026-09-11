@@ -18,6 +18,11 @@ Todos los cambios notables del proyecto. Formato basado en [Keep a Changelog](ht
 - `prefers-reduced-motion`: la onda se detiene (accesibilidad).
 - QA: build OK + 2/2 tests Playwright + verificación DOM (onda presente, animación corriendo, transform cambia en el tiempo).
 
+### Fondo estático (decisión de André)
+
+- Se quitó la animación por completo: sin onda, sin rotación.
+- Quedan solo los puntos decorativos estáticos (emerald-500 al 35%, 22px) + viñeta. El prop `duration` se eliminó del componente.
+
 ## [0.8.0] — 2026-09-11
 
 ### Ronda UX — 14 cambios de André (PUCK main)
