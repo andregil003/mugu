@@ -123,7 +123,7 @@ export default function Multas() {
       </div>
 
       {multas.length === 0 ? (
-        <div className="mt-6 rounded-2xl border border-dashed border-gray-300 bg-white p-8 text-center text-sm text-muted-foreground">
+        <div className="mt-6 rounded-2xl border border-dashed border-gray-300 bg-white p-8 text-center text-sm text-muted-foreground dark:border-border dark:bg-card">
           {t('multasListSin')}
         </div>
       ) : (
@@ -142,7 +142,7 @@ export default function Multas() {
                     )}&noMulta=${encodeURIComponent(m.noMulta)}`
                   )
                 }
-                className="group w-full rounded-2xl border border-gray-200 bg-white p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-500/10 active:scale-[0.99]"
+                className="group w-full rounded-2xl border border-gray-200 bg-white p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-500/10 active:scale-[0.99] dark:border-border dark:bg-card dark:hover:border-emerald-500/50"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
@@ -150,8 +150,8 @@ export default function Multas() {
                       <span
                         className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
                           esFoto
-                            ? 'bg-sky-100 text-sky-700'
-                            : 'bg-amber-100 text-amber-700'
+                            ? 'bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-400'
+                            : 'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400'
                         }`}
                       >
                         {m.tipoMulta}
@@ -160,7 +160,7 @@ export default function Multas() {
                         #{m.noMulta}
                       </span>
                     </div>
-                    <p className="mt-2 line-clamp-1 text-sm font-semibold text-gray-900">
+                    <p className="mt-2 line-clamp-1 text-sm font-semibold text-gray-900 dark:text-foreground">
                       {m.motivoLegal}
                     </p>
                     <p className="mt-1 text-xs text-muted-foreground">
@@ -168,21 +168,21 @@ export default function Multas() {
                     </p>
                   </div>
                   <div className="shrink-0 text-right">
-                    <p className="font-mono text-base font-bold text-gray-900">
+                    <p className="font-mono text-base font-bold text-gray-900 dark:text-foreground">
                       {formatoMonto(m.monto)}
                     </p>
                     <span
                       className={`mt-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold ${
                         pendiente
-                          ? 'bg-amber-100 text-amber-700'
-                          : 'bg-emerald-100 text-emerald-700'
+                          ? 'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400'
+                          : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400'
                       }`}
                     >
                       {pendiente ? t('estadoPendiente') : t('estadoPagada')}
                     </span>
                   </div>
                 </div>
-                <div className="mt-3 flex items-center justify-end gap-1 text-xs font-semibold text-emerald-700 transition-colors group-hover:text-emerald-800">
+                <div className="mt-3 flex items-center justify-end gap-1 text-xs font-semibold text-emerald-700 transition-colors group-hover:text-emerald-800 dark:text-emerald-400 dark:group-hover:text-emerald-300">
                   {t('verDetalle')} →
                 </div>
               </button>

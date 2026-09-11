@@ -113,20 +113,20 @@ export default function Apelacion() {
               key={g.id}
               id={`gestion-${g.id}`}
               className={cn(
-                'overflow-hidden rounded-3xl border bg-white shadow-sm transition-all duration-300',
+                'overflow-hidden rounded-3xl border bg-white dark:bg-card shadow-sm transition-all duration-300',
                 gestion === g.id
-                  ? 'border-gray-400 ring-4 ring-gray-200/60'
-                  : 'border-gray-100'
+                  ? 'border-gray-400 ring-4 ring-gray-200/60 dark:border-gray-500 dark:ring-gray-600/30'
+                  : 'border-gray-100 dark:border-border'
               )}
             >
               {/* Encabezado de la gestión */}
-              <div className="flex items-start gap-3 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white px-5 py-4">
-                <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-700">
+              <div className="flex items-start gap-3 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white px-5 py-4 dark:border-border dark:from-muted/50 dark:to-card">
+                <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-700 dark:bg-muted dark:text-foreground/80">
                   <FontAwesomeIcon icon={ICONOS[g.id] ?? faScaleBalanced} className="h-5 w-5" />
                 </span>
                 <div>
-                  <h2 className="text-base font-bold text-gray-900">{g.nombre}</h2>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                  <h2 className="text-base font-bold text-gray-900 dark:text-foreground">{g.nombre}</h2>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-muted-foreground">
                     {g.subtitulo}
                   </p>
                 </div>
@@ -134,31 +134,31 @@ export default function Apelacion() {
 
               <div className="space-y-4 px-5 py-4">
                 {/* Propósito */}
-                <p className="text-sm leading-relaxed text-gray-700">{g.proposito}</p>
+                <p className="text-sm leading-relaxed text-gray-700 dark:text-foreground/80">{g.proposito}</p>
 
                 {/* Lugar de presentación */}
-                <div className="rounded-2xl border-l-4 border-gray-300 bg-gray-50/80 p-3">
-                  <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-gray-700">
+                <div className="rounded-2xl border-l-4 border-gray-300 bg-gray-50/80 p-3 dark:border-border dark:bg-muted/50">
+                  <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-gray-700 dark:text-foreground/80">
                     <FontAwesomeIcon icon={faLocationDot} className="h-3.5 w-3.5" />
                     {t('apelacionLugar')}
                   </p>
-                  <ul className="mt-1.5 list-inside list-disc space-y-0.5 text-xs leading-relaxed text-gray-800/90">
+                  <ul className="mt-1.5 list-inside list-disc space-y-0.5 text-xs leading-relaxed text-gray-800/90 dark:text-foreground/90">
                     {g.lugar_de_presentacion.dependencias.map((d) => (
                       <li key={d}>{d}</li>
                     ))}
                   </ul>
-                  <p className="mt-1.5 text-[11px] italic text-gray-500">
+                  <p className="mt-1.5 text-[11px] italic text-gray-500 dark:text-muted-foreground">
                     {t('apelacionCriterio')}: {g.lugar_de_presentacion.criterio}
                   </p>
                 </div>
 
                 {/* Documentos requeridos */}
-                <div className="rounded-2xl border-l-4 border-gray-300 bg-gray-50/80 p-3">
-                  <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-gray-700">
+                <div className="rounded-2xl border-l-4 border-gray-300 bg-gray-50/80 p-3 dark:border-border dark:bg-muted/50">
+                  <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-gray-700 dark:text-foreground/80">
                     <FontAwesomeIcon icon={faFileLines} className="h-3.5 w-3.5" />
                     {t('apelacionDocumentos')}
                   </p>
-                  <ul className="mt-1.5 list-inside list-disc space-y-0.5 text-xs leading-relaxed text-gray-800/90">
+                  <ul className="mt-1.5 list-inside list-disc space-y-0.5 text-xs leading-relaxed text-gray-800/90 dark:text-foreground/90">
                     {g.documentos_y_pruebas_requeridos.map((d) => (
                       <li key={d}>{d}</li>
                     ))}
@@ -166,12 +166,12 @@ export default function Apelacion() {
                 </div>
 
                 {/* Contenido del escrito */}
-                <div className="rounded-2xl border-l-4 border-gray-300 bg-gray-50/80 p-3">
-                  <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-gray-700">
+                <div className="rounded-2xl border-l-4 border-gray-300 bg-gray-50/80 p-3 dark:border-border dark:bg-muted/50">
+                  <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-gray-700 dark:text-foreground/80">
                     <FontAwesomeIcon icon={faPenToSquare} className="h-3.5 w-3.5" />
                     {t('apelacionContenido')}
                   </p>
-                  <ul className="mt-1.5 list-inside list-disc space-y-0.5 text-xs leading-relaxed text-gray-800/90">
+                  <ul className="mt-1.5 list-inside list-disc space-y-0.5 text-xs leading-relaxed text-gray-800/90 dark:text-foreground/90">
                     {g.contenido_del_escrito.map((d) => (
                       <li key={d}>{d}</li>
                     ))}
@@ -179,9 +179,9 @@ export default function Apelacion() {
                 </div>
 
                 {/* Plazo */}
-                <div className="flex items-start gap-2 rounded-2xl border border-gray-200 bg-gray-50/80 px-3 py-2.5">
-                  <FontAwesomeIcon icon={faClock} className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
-                  <p className="text-xs font-semibold leading-relaxed text-gray-800">
+                <div className="flex items-start gap-2 rounded-2xl border border-gray-200 bg-gray-50/80 px-3 py-2.5 dark:border-border dark:bg-muted/50">
+                  <FontAwesomeIcon icon={faClock} className="mt-0.5 h-4 w-4 shrink-0 text-gray-600 dark:text-muted-foreground" />
+                  <p className="text-xs font-semibold leading-relaxed text-gray-800 dark:text-foreground">
                     {t('apelacionPlazo')}: {g.plazo_de_presentacion}
                   </p>
                 </div>

@@ -24,14 +24,14 @@ const OPCIONES = [
     icono: faFileLines,
     titulo: 'menuMultaFisica',
     desc: 'menuMultaDesc',
-    acento: 'bg-emerald-100 text-emerald-700',
+    acento: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400',
   },
   {
     ruta: '/info',
     icono: faCircleQuestion,
     titulo: 'menuNoEntiendo',
     desc: 'menuInfoDesc',
-    acento: 'bg-amber-100 text-amber-700',
+    acento: 'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400',
   },
 ]
 

@@ -93,14 +93,14 @@ export default function DatePicker({
             role="dialog"
             aria-modal="true"
             aria-label={t('dpPlaceholder')}
-            className="relative w-72 animate-in zoom-in-95 fade-in rounded-2xl border border-gray-200 bg-white p-3 shadow-2xl"
+            className="relative w-72 animate-in zoom-in-95 fade-in rounded-2xl border border-gray-200 bg-white p-3 shadow-2xl dark:border-border dark:bg-card"
           >
             {/* Cabecera del mes */}
             <div className="mb-2 flex items-center justify-between">
               <button
                 type="button"
                 onClick={() => cambiarMes(-1)}
-                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-emerald-50 hover:text-emerald-700 active:scale-90"
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-emerald-50 hover:text-emerald-700 active:scale-90 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-400"
                 aria-label={t('dpMesAnterior')}
               >
                 <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
@@ -111,7 +111,7 @@ export default function DatePicker({
               <button
                 type="button"
                 onClick={() => cambiarMes(1)}
-                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-emerald-50 hover:text-emerald-700 active:scale-90"
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-emerald-50 hover:text-emerald-700 active:scale-90 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-400"
                 aria-label={t('dpMesSiguiente')}
               >
                 <FontAwesomeIcon icon={faChevronRight} className="h-4 w-4" />
@@ -145,12 +145,12 @@ export default function DatePicker({
                     className={cn(
                       'flex h-9 w-9 items-center justify-center rounded-lg text-sm transition active:scale-90',
                       deshabilitado
-                        ? 'cursor-not-allowed text-gray-300'
+                        ? 'cursor-not-allowed text-gray-300 dark:text-muted-foreground'
                         : seleccionado
                           ? 'bg-emerald-600 font-bold text-white shadow-md'
                           : esHoy
-                            ? 'font-bold text-emerald-700 ring-1 ring-emerald-300 hover:bg-emerald-50'
-                            : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'
+                            ? 'font-bold text-emerald-700 ring-1 ring-emerald-300 hover:bg-emerald-50 dark:text-emerald-400 dark:ring-emerald-500 dark:hover:bg-emerald-950/40'
+                            : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 dark:text-foreground dark:hover:bg-emerald-950/40 dark:hover:text-emerald-400'
                     )}
                   >
                     {i + 1}

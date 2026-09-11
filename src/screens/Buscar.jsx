@@ -125,7 +125,7 @@ export default function Buscar() {
 
           {/* Placas recientes (caché local): slider horizontal + X en hover */}
           {recientes.length > 0 && (
-            <div className="mt-5 border-t border-gray-100 pt-4">
+            <div className="mt-5 border-t border-gray-100 pt-4 dark:border-border">
               <div className="mb-2 flex items-center justify-between">
                 <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   <FontAwesomeIcon icon={faClockRotateLeft} className="h-3.5 w-3.5" />
@@ -146,7 +146,7 @@ export default function Buscar() {
                     <button
                       type="button"
                       onClick={() => buscarReciente(p)}
-                      className="rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 font-mono text-sm font-semibold tracking-wider text-emerald-800 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-400 hover:bg-emerald-100 hover:shadow-md active:scale-95"
+                      className="rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 font-mono text-sm font-semibold tracking-wider text-emerald-800 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-400 hover:bg-emerald-100 hover:shadow-md active:scale-95 dark:border-emerald-950/50 dark:bg-emerald-950/30 dark:text-emerald-400 dark:hover:border-emerald-500 dark:hover:bg-emerald-950/50"
                     >
                       {p}
                     </button>

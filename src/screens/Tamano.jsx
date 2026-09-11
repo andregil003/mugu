@@ -59,8 +59,8 @@ export default function Tamano() {
               aria-pressed={activo}
               className={`flex flex-col items-center justify-center gap-2 rounded-2xl border px-3 py-6 transition-all duration-200 active:scale-[0.98] ${
                 activo
-                  ? 'border-emerald-400 bg-emerald-50 shadow-md ring-2 ring-emerald-200'
-                  : 'border-gray-200 bg-white shadow-sm hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md'
+                  ? 'border-emerald-400 bg-emerald-50 shadow-md ring-2 ring-emerald-200 dark:border-emerald-500 dark:bg-emerald-950/30 dark:ring-emerald-500/50'
+                  : 'border-gray-200 bg-white shadow-sm hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md dark:border-border dark:bg-card dark:hover:border-emerald-500/50'
               }`}
             >
               <span className={`font-black leading-none ${TAMANO_CLASE[op.codigo]}`}>Aa</span>
@@ -93,8 +93,8 @@ export default function Tamano() {
                 aria-pressed={activo}
                 className={`flex flex-col items-center justify-center gap-2 rounded-2xl border px-3 py-5 transition-all duration-200 active:scale-[0.98] ${
                   activo
-                    ? 'border-emerald-400 bg-emerald-50 shadow-md ring-2 ring-emerald-200'
-                    : 'border-gray-200 bg-white shadow-sm hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md'
+                    ? 'border-emerald-400 bg-emerald-50 shadow-md ring-2 ring-emerald-200 dark:border-emerald-500 dark:bg-emerald-950/30 dark:ring-emerald-500/50'
+                    : 'border-gray-200 bg-white shadow-sm hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md dark:border-border dark:bg-card dark:hover:border-emerald-500/50'
                 }`}
               >
                 <FontAwesomeIcon

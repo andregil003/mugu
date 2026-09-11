@@ -89,7 +89,7 @@ export default function Idioma() {
             role="dialog"
             aria-modal="true"
             aria-label={t('sugerirIdioma')}
-            className="relative w-full max-w-sm animate-in zoom-in-95 fade-in rounded-2xl border border-gray-200 bg-white p-5 shadow-2xl"
+            className="relative w-full max-w-sm animate-in zoom-in-95 fade-in rounded-2xl border border-gray-200 bg-white p-5 shadow-2xl dark:border-border dark:bg-card"
           >
             <div className="flex items-start justify-between gap-3">
               <h2 className="text-lg font-bold">{t('sugerirIdioma')}</h2>

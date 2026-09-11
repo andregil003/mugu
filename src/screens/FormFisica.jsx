@@ -106,7 +106,7 @@ export default function FormFisica() {
         titulo={t('formFisicaTitulo')}
         subtitulo={t('formFisicaSubtitulo')}
       />
-      <form onSubmit={buscar} className="mt-4 space-y-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-foreground/10 transition-shadow hover:shadow-md">
+      <form onSubmit={buscar} className="mt-4 space-y-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-foreground/10 transition-shadow hover:shadow-md dark:bg-card dark:ring-border">
             {/* Placa: tipo (siglas) + resto */}
             <div>
               <label className="mb-1 block text-sm font-medium">{t('tipoPlacaLabel')}</label>

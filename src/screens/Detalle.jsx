@@ -70,17 +70,17 @@ const ESTADO_LABEL = {
 }
 
 const ESTADO_BADGE = {
-  pendiente: 'bg-amber-100 text-amber-700',
-  pagada: 'bg-emerald-100 text-emerald-700',
-  impugnada: 'bg-blue-100 text-blue-700',
-  prescrita: 'bg-emerald-100 text-emerald-700',
+  pendiente: 'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400',
+  pagada: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400',
+  impugnada: 'bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400',
+  prescrita: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400',
 }
 
 const TIPO_MULTA_BADGE = {
-  PAPELETA: 'bg-amber-100 text-amber-700',
-  CEPO: 'bg-gray-200 text-gray-700',
-  FOTOVELOCIMETRO: 'bg-sky-100 text-sky-700',
-  'FOTO-MULTA': 'bg-sky-100 text-sky-700',
+  PAPELETA: 'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400',
+  CEPO: 'bg-gray-200 text-gray-700 dark:bg-muted dark:text-muted-foreground',
+  FOTOVELOCIMETRO: 'bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-400',
+  'FOTO-MULTA': 'bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-400',
 }
 
 function formatoMonto(monto) {
@@ -134,17 +134,17 @@ const PASOS_LEGALES = [
 const SITUACION = {
   apelable: {
     clave: 'estadoApelable',
-    caja: 'border-emerald-200 bg-emerald-50 text-emerald-900',
+    caja: 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-950/50 dark:bg-emerald-950/30 dark:text-emerald-400',
     punto: 'bg-emerald-500',
   },
   soloPago: {
     clave: 'estadoSoloPago',
-    caja: 'border-amber-200 bg-amber-50 text-amber-900',
+    caja: 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-950/50 dark:bg-amber-950/30 dark:text-amber-400',
     punto: 'bg-amber-500',
   },
   prescrita: {
     clave: 'estadoPrescrita',
-    caja: 'border-red-200 bg-red-50 text-red-900',
+    caja: 'border-red-200 bg-red-50 text-red-900 dark:border-red-950/50 dark:bg-red-950/30 dark:text-red-400',
     punto: 'bg-red-500',
   },
 }
@@ -248,7 +248,7 @@ export default function Detalle() {
   if (noEncontrada) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-10">
-        <div className="rounded-2xl border border-dashed border-gray-300 bg-white p-8 text-center text-sm text-muted-foreground">
+        <div className="rounded-2xl border border-dashed border-gray-300 bg-white p-8 text-center text-sm text-muted-foreground dark:border-border dark:bg-card">
           <p className="font-semibold text-foreground">{t('errorNoEncontrado')}</p>
           <p className="mt-1">{t('errorNoEncontradoNota')}</p>
         </div>
@@ -322,9 +322,9 @@ export default function Detalle() {
 
   function nodoPaso(p) {
     if (p.clase === 'ok') return 'border-2 border-emerald-600 bg-emerald-600 text-white'
-    if (p.clase === 'current') return `border-2 bg-white ring-4 ${COLOR_FASE[p.id]}`
-    if (p.clase === 'blocked') return 'border-2 border-red-300 bg-red-100 text-red-500'
-    return 'border-2 border-gray-300 bg-white'
+    if (p.clase === 'current') return `border-2 bg-white dark:bg-card ring-4 ${COLOR_FASE[p.id]}`
+    if (p.clase === 'blocked') return 'border-2 border-red-300 bg-red-100 text-red-500 dark:border-red-500/50 dark:bg-red-950/40 dark:text-red-400'
+    return 'border-2 border-gray-300 bg-white dark:border-border dark:bg-card'
   }
 
   const captionTimeline =
@@ -357,10 +357,10 @@ export default function Detalle() {
             <img
               src={entidadObj.imagen}
               alt={entidadLabel}
-              className="absolute right-4 top-1/2 h-16 w-16 -translate-y-1/2 rounded-xl border border-white/30 bg-white/90 object-contain p-1 shadow-lg"
+              className="absolute right-3 top-1/2 h-10 w-10 -translate-y-1/2 rounded-xl border border-white/30 bg-white/90 object-contain p-1 shadow-lg max-sm:top-[16%] sm:right-4 sm:h-16 sm:w-16"
             />
           )}
-          <div className={`relative px-6 py-7 text-white ${entidadObj?.imagen ? 'pr-24' : ''}`}>
+          <div className={`relative px-6 py-7 text-white ${entidadObj?.imagen ? 'pr-16 sm:pr-24' : ''}`}>
             <p className="text-xs font-medium uppercase tracking-widest text-white/70">
               {t('detalleTitulo')}
             </p>
@@ -386,36 +386,36 @@ export default function Detalle() {
         </div>
 
         {/* 1. Datos de la multa — boleta vertical campo + valor */}
-        <section className="mt-5 rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-emerald-700">
+        <section className="mt-5 rounded-3xl border border-gray-100 bg-white p-5 shadow-sm dark:border-border dark:bg-card">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
             {t('detalleTablaTitulo')}
           </h2>
           <dl className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3 dark:bg-muted/50">
               <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                 {t('detalleNoMulta')}
               </dt>
               <dd className="mt-0.5 font-mono text-sm font-semibold">{multa.noMulta}</dd>
             </div>
-            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3 dark:bg-muted/50">
               <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                 {t('detallePlaca')}
               </dt>
               <dd className="mt-0.5 text-sm font-semibold">{multa.placa}</dd>
             </div>
-            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3 dark:bg-muted/50">
               <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                 {t('detalleTipo')}
               </dt>
               <dd className="mt-0.5 text-sm font-medium">{tipoLabel}</dd>
             </div>
-            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3 dark:bg-muted/50">
               <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                 {t('detalleEntidad')}
               </dt>
               <dd className="mt-0.5 text-sm font-medium">{entidadLabel}</dd>
             </div>
-            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3 dark:bg-muted/50">
               <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                 {t('detalleFecha')}
               </dt>
@@ -423,7 +423,7 @@ export default function Detalle() {
                 {formatearFecha(fechaEmision)}
               </dd>
             </div>
-            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3 dark:bg-muted/50">
               <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                 {t('detalleTipoMulta')}
               </dt>
@@ -431,7 +431,7 @@ export default function Detalle() {
                 <span
                   className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase ${
                     TIPO_MULTA_BADGE[multa.tipoMulta] ??
-                    (multa.esFoto ? 'bg-sky-100 text-sky-700' : 'bg-amber-100 text-amber-700')
+                    (multa.esFoto ? 'bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-400' : 'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400')
                   }`}
                 >
                   {tipoMultaLabel ||
@@ -439,7 +439,7 @@ export default function Detalle() {
                 </span>
               </dd>
             </div>
-            <div className="rounded-xl bg-gray-50/80 px-4 py-3 sm:col-span-2">
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3 sm:col-span-2 dark:bg-muted/50">
               <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                 {t('detalleMotivoLegal')}
               </dt>
@@ -447,11 +447,11 @@ export default function Detalle() {
                 {multa.motivoLegal || motivoLegal}
               </dd>
             </div>
-            <div className="rounded-xl bg-emerald-50/80 px-4 py-3">
-              <dt className="text-[11px] font-semibold uppercase tracking-wide text-emerald-700">
+            <div className="rounded-xl bg-emerald-50/80 px-4 py-3 dark:bg-emerald-950/30">
+              <dt className="text-[11px] font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
                 {t('detalleMonto')}
               </dt>
-              <dd className="mt-0.5 font-mono text-base font-bold text-emerald-700">
+              <dd className="mt-0.5 font-mono text-base font-bold text-emerald-700 dark:text-emerald-400">
                 {formatoMonto(montoActual)}
               </dd>
               {montoActual > montoOriginal && (
@@ -459,20 +459,20 @@ export default function Detalle() {
                   <dd className="text-xs text-muted-foreground line-through">
                     {t('montoOriginal')}: {formatoMonto(montoOriginal)}
                   </dd>
-                  <dd className="mt-0.5 text-[10px] leading-snug text-emerald-700/80">
+                  <dd className="mt-0.5 text-[10px] leading-snug text-emerald-700/80 dark:text-emerald-400/80">
                     {t('recargoAnual')}
                   </dd>
                 </>
               )}
             </div>
-            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3 dark:bg-muted/50">
               <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                 {t('detalleEstado')}
               </dt>
               <dd className="mt-0.5">
                 <span
                   className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${
-                    ESTADO_BADGE[multa.estado] ?? 'bg-amber-100 text-amber-700'
+                    ESTADO_BADGE[multa.estado] ?? 'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400'
                   }`}
                 >
                   {estadoTabla}
@@ -483,19 +483,19 @@ export default function Detalle() {
         </section>
 
         {/* 2. Motivo legal + explicación clara */}
-        <section className="mt-4 rounded-3xl border border-emerald-100 bg-gradient-to-b from-emerald-50 to-white p-5 shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">
+        <section className="mt-4 rounded-3xl border border-emerald-100 bg-gradient-to-b from-emerald-50 to-white p-5 shadow-sm dark:border-emerald-950/50 dark:from-emerald-950/30 dark:to-card">
+          <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
             {t('razonFormal')}
           </p>
-          <p className="mt-1 text-sm italic text-gray-400">{motivoLegal}</p>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-emerald-700">
+          <p className="mt-1 text-sm italic text-gray-400 dark:text-muted-foreground">{motivoLegal}</p>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
             {t('explicacion')}
           </p>
-          <p className="mt-1 text-[15px] leading-relaxed text-gray-900">
+          <p className="mt-1 text-[15px] leading-relaxed text-gray-900 dark:text-foreground">
             {razonClara}
           </p>
           {consejo && (
-            <p className="mt-3 flex items-start gap-2 rounded-xl bg-emerald-100/70 px-3 py-2 text-xs leading-relaxed text-emerald-900">
+            <p className="mt-3 flex items-start gap-2 rounded-xl bg-emerald-100/70 px-3 py-2 text-xs leading-relaxed text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-400">
               <FontAwesomeIcon icon={faLightbulb} className="mt-0.5 shrink-0" />
               <span>{consejo}</span>
             </p>
@@ -503,8 +503,8 @@ export default function Detalle() {
         </section>
 
         {/* 3. Proceso legal: línea de tiempo + notificación + prescripción + situación */}
-        <section className="mt-5 rounded-3xl border border-emerald-100 bg-gradient-to-b from-emerald-50 to-white p-5 shadow-sm">
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-emerald-700">
+        <section className="mt-5 rounded-3xl border border-emerald-100 bg-gradient-to-b from-emerald-50 to-white p-5 shadow-sm dark:border-emerald-950/50 dark:from-emerald-950/30 dark:to-card">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
             {t('tlTitulo')}
           </h2>
 
@@ -559,7 +559,7 @@ export default function Detalle() {
                           clase === 'current'
                             ? 'text-foreground'
                             : clase === 'blocked'
-                              ? 'text-gray-400'
+                              ? 'text-gray-400 dark:text-muted-foreground'
                               : 'text-foreground/70'
                         }`}
                       >
@@ -575,38 +575,38 @@ export default function Detalle() {
             </div>
           </div>
           {captionTimeline && (
-            <p className="mt-3 rounded-xl bg-white/70 px-3 py-2 text-xs leading-relaxed text-gray-700">
+            <p className="mt-3 rounded-xl bg-white/70 px-3 py-2 text-xs leading-relaxed text-gray-700 dark:bg-card/70 dark:text-foreground/80">
               {captionTimeline}
             </p>
           )}
 
           {/* Notificación — tonos verdes */}
-          <div className="mt-5 border-t border-emerald-100 pt-4">
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-emerald-700">
+          <div className="mt-5 border-t border-emerald-100 pt-4 dark:border-emerald-950/50">
+            <h3 className="text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
               {t('notifTitulo')}
             </h3>
             <div className="mt-2 space-y-2">
               <div
                 className={`rounded-2xl border-l-4 p-3 text-xs transition ${
                   multa.esFoto
-                    ? 'border-emerald-400 bg-emerald-50/80'
-                    : 'border-gray-200 bg-gray-50/80'
+                    ? 'border-emerald-400 bg-emerald-50/80 dark:border-emerald-500 dark:bg-emerald-950/30'
+                    : 'border-gray-200 bg-gray-50/80 dark:border-border dark:bg-muted/50'
                 }`}
               >
-                <p className="font-bold text-emerald-800">{t('tipoMultaFoto')}</p>
-                <p className="mt-1 leading-relaxed text-emerald-900/80">
+                <p className="font-bold text-emerald-800 dark:text-emerald-400">{t('tipoMultaFoto')}</p>
+                <p className="mt-1 leading-relaxed text-emerald-900/80 dark:text-emerald-400/80">
                   {t('notifFotoDesc')}
                 </p>
               </div>
               <div
                 className={`rounded-2xl border-l-4 p-3 text-xs transition ${
                   multa.esFoto
-                    ? 'border-gray-200 bg-gray-50/80'
-                    : 'border-emerald-400 bg-emerald-50/80'
+                    ? 'border-gray-200 bg-gray-50/80 dark:border-border dark:bg-muted/50'
+                    : 'border-emerald-400 bg-emerald-50/80 dark:border-emerald-500 dark:bg-emerald-950/30'
                 }`}
               >
-                <p className="font-bold text-emerald-800">{t('tipoMultaPapel')}</p>
-                <p className="mt-1 leading-relaxed text-emerald-900/80">
+                <p className="font-bold text-emerald-800 dark:text-emerald-400">{t('tipoMultaPapel')}</p>
+                <p className="mt-1 leading-relaxed text-emerald-900/80 dark:text-emerald-400/80">
                   {t('notifFisicaDesc')}
                 </p>
               </div>
@@ -632,8 +632,8 @@ export default function Detalle() {
                 onClick={() => setFechaNotif(hoyISO())}
                 className={`rounded-xl border px-3 py-2.5 text-xs font-semibold transition-all duration-200 active:scale-95 ${
                   fechaNotif === hoyISO()
-                    ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
-                    : 'border-gray-200 text-gray-500 hover:border-emerald-300 hover:text-emerald-600'
+                    ? 'border-emerald-500 bg-emerald-50 text-emerald-700 dark:border-emerald-500 dark:bg-emerald-950/30 dark:text-emerald-400'
+                    : 'border-gray-200 text-gray-500 hover:border-emerald-300 hover:text-emerald-600 dark:border-border dark:text-muted-foreground dark:hover:border-emerald-500/50 dark:hover:text-emerald-400'
                 }`}
               >
                 ✓ {t('notifHoy')}
@@ -646,9 +646,9 @@ export default function Detalle() {
 
           {/* Prescripción */}
           {!pagada && (
-            <div className="mt-4 rounded-2xl border border-emerald-200 bg-white/70 p-3 text-xs">
-              <p className="font-semibold text-emerald-900">{t('tlPrescripcion')}</p>
-              <p className="mt-1 leading-relaxed text-emerald-800/90">
+            <div className="mt-4 rounded-2xl border border-emerald-200 bg-white/70 p-3 text-xs dark:border-emerald-950/50 dark:bg-card/70">
+              <p className="font-semibold text-emerald-900 dark:text-emerald-400">{t('tlPrescripcion')}</p>
+              <p className="mt-1 leading-relaxed text-emerald-800/90 dark:text-emerald-400/90">
                 {estado === 'prescrita' ? (
                   <>
                     {t('estadoPrescritaDesc')}{' '}
@@ -692,7 +692,7 @@ export default function Detalle() {
         </section>
 
         {/* 4. Acciones — mismo diseño, solo cambia habilitado/deshabilitado */}
-        <section className="mt-5 rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
+        <section className="mt-5 rounded-3xl border border-gray-100 bg-white p-5 shadow-sm dark:border-border dark:bg-card">
           <div className="space-y-3">
             <Button
               size="lg"

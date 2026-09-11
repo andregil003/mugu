@@ -119,7 +119,7 @@ export default function AppShell({ children }) {
         </header>
       )}
 
-      <main className={cn('flex flex-1 flex-col', conHeader && !soloLogo && 'pb-24 lg:pb-10')}>{children}</main>
+      <main className={cn('flex flex-1 flex-col', conHeader && !soloLogo && 'pb-28 lg:pb-10')}>{children}</main>
 
       {conHeader && !soloLogo && (
         <>

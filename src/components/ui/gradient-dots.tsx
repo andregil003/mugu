@@ -11,7 +11,7 @@ export const GradientDots: React.FC<GradientDotsProps> = ({ className = "" }) =>
     >
       {/* Puntos decorativos estáticos (todos visibles) */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 dark:opacity-50"
         style={{
           backgroundImage:
             "radial-gradient(circle, rgba(16, 185, 129, 0.35) 1.5px, transparent 1.5px)",

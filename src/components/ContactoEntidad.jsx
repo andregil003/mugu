@@ -25,32 +25,36 @@ export default function ContactoEntidad({ entidad }) {
     direccion && (!pagoPresencial?.direccion || pagoPresencial.direccion !== direccion)
 
   return (
-    <section className="mt-5 rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
-      <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-emerald-700">
+    <section className="mt-5 rounded-3xl border border-gray-100 bg-white p-5 shadow-sm dark:border-border dark:bg-card">
+      <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
         {t('contactoTitulo')}
       </h2>
       <div className="space-y-2.5">
         {telefono ? (
-          <div className="flex items-start gap-2.5 rounded-xl bg-gray-50/80 px-3 py-2.5 text-sm">
+          <div className="flex items-start gap-2.5 rounded-xl bg-gray-50/80 px-3 py-2.5 text-sm dark:bg-muted/50">
             <FontAwesomeIcon
               icon={faPhone}
-              className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600"
+              className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400"
             />
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                 {t('contactoTelefono')}
               </p>
               <p className="font-semibold">
-                {telefono}
-                {telefonoExtra ? ` · ${telefonoExtra}` : ''}
+                <span>(+502) {telefono}</span>
+                {telefonoExtra && (
+                  <span className="ml-2 text-xs font-medium text-muted-foreground">
+                    Ext. {telefonoExtra}
+                  </span>
+                )}
               </p>
             </div>
           </div>
         ) : (
-          <div className="flex items-start gap-2.5 rounded-xl bg-gray-50/80 px-3 py-2.5 text-sm">
+          <div className="flex items-start gap-2.5 rounded-xl bg-gray-50/80 px-3 py-2.5 text-sm dark:bg-muted/50">
             <FontAwesomeIcon
               icon={faPhone}
-              className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600"
+              className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400"
             />
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
@@ -64,10 +68,10 @@ export default function ContactoEntidad({ entidad }) {
         )}
 
         {mostrarDireccion && (
-          <div className="flex items-start gap-2.5 rounded-xl bg-gray-50/80 px-3 py-2.5 text-sm">
+          <div className="flex items-start gap-2.5 rounded-xl bg-gray-50/80 px-3 py-2.5 text-sm dark:bg-muted/50">
             <FontAwesomeIcon
               icon={faLocationDot}
-              className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600"
+              className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400"
             />
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
@@ -79,10 +83,10 @@ export default function ContactoEntidad({ entidad }) {
         )}
 
         {pagoEnLinea && (
-          <div className="flex items-start gap-2.5 rounded-xl bg-gray-50/80 px-3 py-2.5 text-sm">
+          <div className="flex items-start gap-2.5 rounded-xl bg-gray-50/80 px-3 py-2.5 text-sm dark:bg-muted/50">
             <FontAwesomeIcon
               icon={faGlobe}
-              className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600"
+              className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400"
             />
             <div className="min-w-0 flex-1">
               <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
@@ -114,10 +118,10 @@ export default function ContactoEntidad({ entidad }) {
         )}
 
         {pagoPresencial && (
-          <div className="flex items-start gap-2.5 rounded-xl bg-gray-50/80 px-3 py-2.5 text-sm">
+          <div className="flex items-start gap-2.5 rounded-xl bg-gray-50/80 px-3 py-2.5 text-sm dark:bg-muted/50">
             <FontAwesomeIcon
               icon={faBuildingColumns}
-              className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600"
+              className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400"
             />
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">

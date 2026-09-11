@@ -24,9 +24,9 @@ import { cn } from '@/lib/utils'
 const PAGE_SIZE = 10
 
 const TIPOS_MULTA = [
-  { id: 'papeleta', clave: 'infoTipoPapeleta', color: 'border-amber-300 bg-amber-50 text-amber-800' },
-  { id: 'cepo', clave: 'infoTipoCepo', color: 'border-gray-300 bg-gray-100 text-gray-700' },
-  { id: 'fotovelocimetro', clave: 'infoTipoFotovelocimetro', color: 'border-sky-300 bg-sky-50 text-sky-800' },
+  { id: 'papeleta', clave: 'infoTipoPapeleta', color: 'border-amber-300 bg-amber-50 text-amber-800 dark:border-amber-500/40 dark:bg-amber-950/40 dark:text-amber-400' },
+  { id: 'cepo', clave: 'infoTipoCepo', color: 'border-gray-300 bg-gray-100 text-gray-700 dark:border-border dark:bg-muted dark:text-muted-foreground' },
+  { id: 'fotovelocimetro', clave: 'infoTipoFotovelocimetro', color: 'border-sky-300 bg-sky-50 text-sky-800 dark:border-sky-500/40 dark:bg-sky-950/40 dark:text-sky-400' },
 ]
 
 // El catálogo no trae tipo_multa: se deriva por heurística del texto.
@@ -145,7 +145,7 @@ export default function Info() {
                 'rounded-full border px-3 py-1.5 text-xs font-semibold transition active:scale-95',
                 tipoMulta === c.id
                   ? c.color
-                  : 'border-gray-200 bg-white text-muted-foreground hover:border-gray-300'
+                  : 'border-gray-200 bg-white text-muted-foreground hover:border-gray-300 dark:border-border dark:bg-card dark:hover:border-muted'
               )}
             >
               {t(c.clave)}
@@ -164,7 +164,7 @@ export default function Info() {
           return (
             <div
               key={i.id}
-              className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-md sm:p-5"
+              className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-md sm:p-5 dark:border-border dark:bg-card"
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="min-w-0 flex-1">
@@ -188,7 +188,7 @@ export default function Info() {
                     {i.descripcion ?? ''}
                   </p>
                   {i.consejo && (
-                    <p className="mt-2 flex items-start gap-2 rounded-xl bg-emerald-100/70 px-3 py-2 text-xs leading-relaxed text-emerald-900">
+                    <p className="mt-2 flex items-start gap-2 rounded-xl bg-emerald-100/70 px-3 py-2 text-xs leading-relaxed text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-400">
                       <FontAwesomeIcon icon={faLightbulb} className="mt-0.5 shrink-0" />
                       <span>{i.consejo}</span>
                     </p>
@@ -197,14 +197,14 @@ export default function Info() {
                 <div className="shrink-0 sm:text-right">
                   {conDescuento ? (
                     <>
-                      <p className="font-bold text-gray-900">Q{conDescuento.toFixed(2)}</p>
+                      <p className="font-bold text-gray-900 dark:text-foreground">Q{conDescuento.toFixed(2)}</p>
                       <p className="text-xs text-muted-foreground line-through">Q{monto}</p>
-                      <span className="mt-1 inline-block rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                      <span className="mt-1 inline-block rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400">
                         {t('infoDescuento')}
                       </span>
                     </>
                   ) : (
-                    <p className="font-bold text-gray-900">Q{monto}</p>
+                    <p className="font-bold text-gray-900 dark:text-foreground">Q{monto}</p>
                   )}
                 </div>
               </div>
@@ -226,7 +226,7 @@ export default function Info() {
             disabled={pagina === 1}
             onClick={() => irAPagina(1)}
             aria-label={t('infoPrimera')}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-muted-foreground transition hover:border-gray-300 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-muted-foreground transition hover:border-gray-300 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-40 dark:border-border dark:bg-card dark:hover:border-muted"
           >
             <FontAwesomeIcon icon={faAnglesLeft} className="h-3.5 w-3.5" />
           </button>
@@ -235,7 +235,7 @@ export default function Info() {
             disabled={pagina === 1}
             onClick={() => irAPagina(pagina - 1)}
             aria-label={t('infoAnterior')}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-muted-foreground transition hover:border-gray-300 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-muted-foreground transition hover:border-gray-300 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-40 dark:border-border dark:bg-card dark:hover:border-muted"
           >
             <FontAwesomeIcon icon={faChevronLeft} className="h-3.5 w-3.5" />
           </button>
@@ -254,7 +254,7 @@ export default function Info() {
                   'h-9 w-9 rounded-lg text-sm font-semibold transition active:scale-95',
                   p === pagina
                     ? 'bg-primary text-primary-foreground shadow-sm'
-                    : 'border border-gray-200 bg-white text-muted-foreground hover:border-gray-300 hover:text-foreground'
+                    : 'border border-gray-200 bg-white text-muted-foreground hover:border-gray-300 hover:text-foreground dark:border-border dark:bg-card dark:hover:border-muted'
                 )}
               >
                 {p}
@@ -266,7 +266,7 @@ export default function Info() {
             disabled={pagina === totalPaginas}
             onClick={() => irAPagina(pagina + 1)}
             aria-label={t('infoSiguiente')}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-muted-foreground transition hover:border-gray-300 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-muted-foreground transition hover:border-gray-300 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-40 dark:border-border dark:bg-card dark:hover:border-muted"
           >
             <FontAwesomeIcon icon={faChevronRight} className="h-3.5 w-3.5" />
           </button>
@@ -275,7 +275,7 @@ export default function Info() {
             disabled={pagina === totalPaginas}
             onClick={() => irAPagina(totalPaginas)}
             aria-label={t('infoUltima')}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-muted-foreground transition hover:border-gray-300 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-40"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-muted-foreground transition hover:border-gray-300 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-40 dark:border-border dark:bg-card dark:hover:border-muted"
           >
             <FontAwesomeIcon icon={faAnglesRight} className="h-3.5 w-3.5" />
           </button>
