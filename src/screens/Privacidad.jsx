@@ -34,20 +34,20 @@ export default function Privacidad() {
 
       <PageHero titulo={t('privacidadTitulo')} subtitulo={t('privacidadSubtitulo')} />
 
-      <p className="mt-5 rounded-2xl border border-emerald-100 bg-emerald-50/70 p-4 text-sm leading-relaxed text-emerald-900 dark:border-emerald-950/50 dark:bg-emerald-950/30 dark:text-emerald-400">
+      <p className="mt-5 text-sm leading-relaxed text-gray-700 dark:text-foreground/80">
         {t('privacidadIntro')}
       </p>
 
-      <div className="mt-4 space-y-4">
+      <div className="mt-4">
         {SECCIONES.map((s) => (
           <section
             key={s.clave}
-            className="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm dark:border-border dark:bg-card"
+            className="border-b border-border/40 py-5 last:border-b-0"
           >
             <h2 className="text-sm font-bold text-gray-900 dark:text-foreground">
               {t(s.clave)}
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-gray-700 dark:text-foreground/80">
+            <p className="mt-1.5 text-sm leading-relaxed text-gray-700 dark:text-foreground/80">
               {t(s.texto)}
             </p>
           </section>
