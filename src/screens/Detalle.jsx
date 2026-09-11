@@ -155,6 +155,7 @@ export default function Detalle() {
   const [params] = useSearchParams()
   const placa = params.get('placa') ?? ''
   const entidad = params.get('entidad') ?? ''
+  const entidadNorm = normalizarEntidad(entidad)
   const noMultaParam = params.get('noMulta') ?? ''
   const fechaParam = params.get('fecha') ?? ''
 
@@ -184,7 +185,7 @@ export default function Detalle() {
       const candidatas = reales.filter(
         (m) =>
           String(m.placa ?? '').trim().toUpperCase() === p &&
-          (!entidad || normalizarEntidad(m.entidad) === entidad)
+          (!entidad || normalizarEntidad(m.entidad) === entidadNorm)
       )
       const seleccion =
         candidatas.find(
@@ -211,7 +212,7 @@ export default function Detalle() {
       const inf = infracciones.find((i) => i.id === elegida.infraccion)
       setMotivoLegal(
         elegida.motivoLegal ||
-          (inf ? `ARTÍCULO ${inf.articulo}: ${inf.nombre}` : elegida.infraccion ?? 'Multa de tránsito')
+          (inf ? `${inf.codigo}: ${inf.nombre}` : elegida.infraccion ?? 'Multa de tránsito')
       )
       setRazonClara(
         inf?.descripcion ??
@@ -249,7 +250,7 @@ export default function Detalle() {
   const tipo = multa.tipoVehiculo
   const tipoLabel = t(TIPO_LABEL[tipo] ?? 'tipoOtro')
   const entidadObj = entidades.find(
-    (e) => e.id === entidad || normalizarEntidad(e.corto) === entidad
+    (e) => e.id === entidad || normalizarEntidad(e.corto) === entidadNorm
   )
   const entidadLabel = entidadObj?.corto ?? entidad.toUpperCase()
 

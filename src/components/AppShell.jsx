@@ -44,9 +44,11 @@ export default function AppShell({ children }) {
               className="flex shrink-0 items-center gap-2 transition hover:opacity-80 active:scale-95"
               aria-label={t('appNombre')}
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
-                <FontAwesomeIcon icon={faShieldHalved} className="h-4 w-4" />
-              </span>
+              <img
+                src="/icon-192.png"
+                alt={t('appNombre')}
+                className="h-8 w-8 rounded-lg object-cover shadow-sm"
+              />
               <span className="text-base font-black tracking-tight">
                 {t('appNombre')}
               </span>

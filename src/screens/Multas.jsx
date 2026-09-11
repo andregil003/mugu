@@ -61,7 +61,7 @@ export default function Multas() {
             fecha: m.fecha ?? '',
             infraccion: m.infraccion ?? null,
             motivoLegal: inf
-              ? `ARTÍCULO ${inf.articulo}: ${inf.nombre}`
+              ? `${inf.codigo}: ${inf.nombre}`
               : m.infraccion ?? '—',
             monto: m.monto ?? 0,
             tipoMulta: (m.tipo_multa ?? m.tipo ?? 'PAPELETA').toUpperCase(),
@@ -128,9 +128,9 @@ export default function Multas() {
                 type="button"
                 onClick={() =>
                   navigate(
-                    `/detalle?placa=${encodeURIComponent(placa)}&entidad=${
-                      m.entidad
-                    }&noMulta=${encodeURIComponent(m.noMulta)}`
+                    `/detalle?placa=${encodeURIComponent(placa)}&entidad=${encodeURIComponent(
+                      normalizarEntidad(m.entidad)
+                    )}&noMulta=${encodeURIComponent(m.noMulta)}`
                   )
                 }
                 className="group w-full rounded-2xl border border-gray-200 bg-white p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-500/10 active:scale-[0.99]"
