@@ -51,7 +51,15 @@ export function I18nProvider({ children }) {
     return {
       idioma,
       setIdioma,
-      t: (clave) => dict[clave] ?? es[clave] ?? clave,
+      t: (clave, vars) => {
+        let texto = dict[clave] ?? es[clave] ?? clave
+        if (vars) {
+          Object.entries(vars).forEach(([k, v]) => {
+            texto = texto.replaceAll(`{${k}}`, v)
+          })
+        }
+        return texto
+      },
       idiomas: IDIOMAS,
     }
   }, [idioma])

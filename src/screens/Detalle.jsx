@@ -7,7 +7,8 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import DatePicker from '@/components/DatePicker'
+import LoadingSpinner from '@/components/LoadingSpinner'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
 import { useI18n } from '@/lib/i18n'
@@ -223,11 +224,11 @@ export default function Detalle() {
       const inf = infracciones.find((i) => i.id === elegida.infraccion)
       setMotivoLegal(
         elegida.motivoLegal ||
-          (inf ? `${inf.codigo}: ${inf.nombre}` : elegida.infraccion ?? 'Multa de tránsito')
+          (inf ? `${inf.codigo}: ${inf.nombre}` : elegida.infraccion ?? t('multaTransitoDefault'))
       )
       setRazonClara(
         inf?.descripcion ??
-          'Esta infracción se registró sobre la placa del vehículo según la normativa de tránsito vigente.'
+          t('razonClaraDefault')
       )
       setConsejo(inf?.consejo ?? '')
       setMulta(elegida)
@@ -237,7 +238,7 @@ export default function Detalle() {
     return () => {
       activo = false
     }
-  }, [placa, entidad, noMultaParam, fechaParam])
+  }, [placa, entidad, noMultaParam, fechaParam, t])
 
   if (noEncontrada) {
     return (
@@ -252,8 +253,8 @@ export default function Detalle() {
 
   if (!multa) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-10 text-sm text-muted-foreground">
-        Cargando…
+      <div className="mx-auto max-w-3xl px-4 py-10">
+        <LoadingSpinner />
       </div>
     )
   }
@@ -319,7 +320,7 @@ export default function Detalle() {
 
   const captionTimeline =
     fase === 'apelable'
-      ? `${t('estadoApelableDesc')} ${t('vence')} el ${formatearFecha(fechaApelacionFin)}.`
+      ? `${t('estadoApelableDesc')} ${t('venceEl')} ${formatearFecha(fechaApelacionFin)}.`
       : fase === 'soloPago'
         ? t('estadoSoloPagoDesc')
         : fase === 'prescrita'
@@ -547,14 +548,13 @@ export default function Detalle() {
             {t('notifLabel')}
           </label>
           <div className="mt-1 flex flex-wrap items-center gap-2">
-            <Input
-              id="fechaNotificacion"
-              type="date"
+            <DatePicker
               value={fechaNotif}
+              onChange={(v) => setFechaNotif(v || hoyISO())}
               min={fechaEmision || undefined}
               max={hoyISO()}
-              onChange={(e) => setFechaNotif(e.target.value || hoyISO())}
-              className="h-11 w-full max-w-[200px] rounded-xl transition hover:border-emerald-400 focus-visible:ring-emerald-500/30"
+              placeholder={t('notifLabel')}
+              className="w-full max-w-[200px]"
             />
             <button
               type="button"
@@ -593,12 +593,12 @@ export default function Detalle() {
                 </>
               ) : (
                 <>
-                  {t('tlPrescripcionDetalle')} {t('prescribe')} el{' '}
+                  {t('tlPrescripcionDetalle')} {t('prescribeEl')}{' '}
                   <span className="font-semibold">
                     {formatearFecha(fechaPrescripcion)}
                   </span>{' '}
                   ({diasParaPrescripcion}{' '}
-                  {diasParaPrescripcion === 1 ? 'día' : 'días'}).
+                  {diasParaPrescripcion === 1 ? t('dia') : t('dias')}).
                 </>
               )}
             </p>
@@ -618,7 +618,7 @@ export default function Detalle() {
               <p className="mt-0.5 text-sm leading-relaxed">
                 {t(DESCRIPCION[fase])}
                 {fase === 'apelable' && (
-                  <> {t('vence')} el {formatearFecha(fechaApelacionFin)}.</>
+                  <> {t('venceEl')} {formatearFecha(fechaApelacionFin)}.</>
                 )}
               </p>
             </div>
@@ -683,7 +683,7 @@ export default function Detalle() {
               <p className="text-center text-xs leading-relaxed text-muted-foreground">
                 {fase === 'prescrita'
                   ? t('quitarMultaDesc')
-                  : `${t('quitarMultaDesc')} ${t('vence')} el ${formatearFecha(fechaPrescripcion)}.`}
+                  : `${t('quitarMultaDesc')} ${t('venceEl')} ${formatearFecha(fechaPrescripcion)}.`}
               </p>
             )}
           </div>

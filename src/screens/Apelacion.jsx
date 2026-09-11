@@ -15,6 +15,7 @@ import {
   faClock,
 } from '@fortawesome/free-solid-svg-icons'
 import { useI18n } from '@/lib/i18n'
+import LoadingSpinner from '@/components/LoadingSpinner'
 import { cn } from '@/lib/utils'
 
 export default function Apelacion() {
@@ -83,7 +84,9 @@ export default function Apelacion() {
       </div>
 
       {!gestiones ? (
-        <div className="mt-6 text-sm text-muted-foreground">Cargando…</div>
+        <div className="mt-6 text-sm text-muted-foreground">
+          <LoadingSpinner />
+        </div>
       ) : (
         <div className="mt-5 space-y-5">
           {gestiones.map((g) => (

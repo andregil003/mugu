@@ -33,7 +33,7 @@ export default function Buscar() {
     e.preventDefault()
     const p = placa.trim().toUpperCase()
     if (!validarPlaca(p)) {
-      setError('Formato inválido: verifica tu placa (ej. P123ABC o M123ABC)')
+      setError(t('errorPlacaInvalida'))
       return
     }
     guardarReciente(p)
@@ -47,6 +47,13 @@ export default function Buscar() {
 
   return (
     <div className="mx-auto w-full max-w-md px-4 py-6 lg:py-10">
+      <Button
+        variant="ghost"
+        className="mb-2 -ml-1 text-muted-foreground transition hover:-translate-x-0.5 hover:text-foreground active:scale-95"
+        onClick={() => navigate('/menu')}
+      >
+        ← {t('volver')}
+      </Button>
       <PageHero
         eyebrow={t('appNombre')}
         titulo={t('buscarTitulo')}
@@ -68,7 +75,7 @@ export default function Buscar() {
               <Input
                 value={placa}
                 onChange={(e) => setPlaca(e.target.value.toUpperCase())}
-                placeholder="P123ABC"
+                placeholder={t('placeholderPlaca')}
                 aria-label={t('labelPlaca')}
                 autoFocus
                 className="h-12 rounded-xl text-center text-lg font-semibold tracking-widest transition hover:border-primary/50 focus-visible:ring-primary/30"
@@ -87,8 +94,7 @@ export default function Buscar() {
               {t('botonBuscar')}
             </Button>
             <p className="text-center text-xs text-muted-foreground">
-              {t('labelIdioma')}: escribí la placa tal como aparece en el
-              vehículo.
+              {t('labelIdioma')}: {t('buscarAyudaPlaca')}.
             </p>
           </form>
 

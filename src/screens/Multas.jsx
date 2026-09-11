@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
+import LoadingSpinner from '@/components/LoadingSpinner'
 import { useI18n } from '@/lib/i18n'
 import { cargarInfracciones, sincronizarCacheDiario } from '@/lib/data'
 import { formatearFecha, normalizarEntidad, formatoMonto } from '@/lib/core'
@@ -78,7 +79,7 @@ export default function Multas() {
   if (!multas) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-8">
-        Cargando…
+        <LoadingSpinner />
       </div>
     )
   }

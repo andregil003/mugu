@@ -10,12 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { hoyISO, formatearFecha } from '@/lib/core'
 import { cn } from '@/lib/utils'
-
-const DIAS_SEMANA = ['D', 'L', 'M', 'M', 'J', 'V', 'S']
-const MESES_ES = [
-  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',
-]
+import { useI18n } from '@/lib/i18n'
 
 function isoDe(fecha) {
   return `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}-${String(
@@ -28,7 +23,7 @@ export default function DatePicker({
   onChange,
   min,
   max,
-  placeholder = 'Seleccioná una fecha',
+  placeholder,
   className,
 }) {
   const [abierto, setAbierto] = useState(false)
@@ -37,6 +32,7 @@ export default function DatePicker({
     return new Date(base.getFullYear(), base.getMonth(), 1)
   })
   const ref = useRef(null)
+  const { t } = useI18n()
 
   // Al abrir, posicionar el calendario en el mes de la fecha seleccionada
   function abrir() {
@@ -85,7 +81,7 @@ export default function DatePicker({
       >
         <span className="flex items-center gap-2">
           <FontAwesomeIcon icon={faCalendarDays} className="h-4 w-4 text-primary" />
-          {value ? formatearFecha(value) : placeholder}
+          {value ? formatearFecha(value) : (placeholder ?? t('dpPlaceholder'))}
         </span>
         <FontAwesomeIcon
           icon={faChevronRight}
@@ -101,18 +97,18 @@ export default function DatePicker({
               type="button"
               onClick={() => cambiarMes(-1)}
               className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-emerald-50 hover:text-emerald-700 active:scale-90"
-              aria-label="Mes anterior"
+              aria-label={t('dpMesAnterior')}
             >
               <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
             </button>
             <span className="text-sm font-bold capitalize">
-              {MESES_ES[mes.getMonth()]} {mes.getFullYear()}
+              {t('dpMeses')[mes.getMonth()]} {mes.getFullYear()}
             </span>
             <button
               type="button"
               onClick={() => cambiarMes(1)}
               className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-emerald-50 hover:text-emerald-700 active:scale-90"
-              aria-label="Mes siguiente"
+              aria-label={t('dpMesSiguiente')}
             >
               <FontAwesomeIcon icon={faChevronRight} className="h-4 w-4" />
             </button>
@@ -120,7 +116,7 @@ export default function DatePicker({
 
           {/* Días de la semana */}
           <div className="grid grid-cols-7 gap-1 text-center">
-            {DIAS_SEMANA.map((d, i) => (
+            {t('dpDias').map((d, i) => (
               <span key={i} className="py-1 text-[10px] font-bold uppercase text-muted-foreground">
                 {d}
               </span>

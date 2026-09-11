@@ -6,7 +6,9 @@
 // BACKEND DEMO — Google Sheets + Apps Script
 // Poné acá la URL del Web App (ver backend/apps-script.gs)
 // ============================================================
-const SHEETS_API_URL = 'https://script.google.com/macros/s/AKfycbwIaczpMJr-rI1VWDKGiD9kH7vQFQBP69SdioiQbqpcn4WSwR5jsHrEXGrfcTEpVDvL/exec';
+const SHEETS_API_URL =
+  import.meta.env.VITE_SHEETS_API_URL ??
+  'https://script.google.com/macros/s/AKfycbwIaczpMJr-rI1VWDKGiD9kH7vQFQBP69SdioiQbqpcn4WSwR5jsHrEXGrfcTEpVDvL/exec';
 
 // Cache en localStorage: 1 fetch por día (PWA offline-first)
 const CACHE_KEY = 'mugu_cache';

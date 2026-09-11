@@ -60,7 +60,7 @@ export default function AppShell({ children }) {
 
             {/* Nav desktop (oculto en portada /idioma) */}
             {!soloLogo && (
-              <nav className="hidden items-center gap-1 lg:flex" aria-label="Navegación principal">
+              <nav className="hidden items-center gap-1 lg:flex" aria-label={t('navAria')}>
                 {NAV_ITEMS.map((item) => (
                   <button
                     key={item.ruta}
@@ -111,9 +111,9 @@ export default function AppShell({ children }) {
 
       {conHeader && !soloLogo && (
         <>
-          {/* Footer desktop */}
-          <footer className="hidden border-t border-border/60 py-6 lg:block">
-            <div className="mx-auto w-full max-w-5xl px-4 text-center text-xs leading-relaxed text-muted-foreground">
+          {/* Footer: visible en desktop y móvil (compacto arriba del bottom-nav) */}
+          <footer className="mb-16 border-t border-border/60 py-4 lg:mb-0 lg:py-6">
+            <div className="mx-auto w-full max-w-5xl px-4 text-center text-[10px] leading-relaxed text-muted-foreground lg:text-xs">
               <p>{t('disclaimer')}</p>
               <p className="mt-1">{t('footer')}</p>
             </div>
@@ -122,7 +122,7 @@ export default function AppShell({ children }) {
           {/* Bottom-nav móvil */}
           <nav
             className="fixed inset-x-0 bottom-0 z-40 border-t border-border/60 bg-background/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden"
-            aria-label="Navegación principal"
+            aria-label={t('navAria')}
           >
             <div className="mx-auto grid h-16 max-w-md grid-cols-4">
               {NAV_ITEMS.map((item) => {

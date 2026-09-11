@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import DatePicker from '@/components/DatePicker'
+import PageHero from '@/components/PageHero'
 import { useI18n } from '@/lib/i18n'
 import { validarPlaca, validarFechaNoFutura, hoyISO, normalizarEntidad, PREFIJOS_PLACA } from '@/lib/core'
 import { sincronizarCacheDiario } from '@/lib/data'
@@ -48,19 +49,19 @@ export default function FormFisica() {
 
     const placaCompleta = `${tipoPlaca}${restoPlaca}`.toUpperCase()
     if (!validarPlaca(placaCompleta)) {
-      setError('Formato de placa inválido')
+      setError(t('errorPlacaInvalida'))
       return
     }
     if (!/^\d{6}$/.test(noMulta.trim())) {
-      setError('El número de multa debe tener 6 dígitos')
+      setError(t('errorNoMulta6'))
       return
     }
     if (!validarFechaNoFutura(fecha)) {
-      setError('Fecha de multa inválida')
+      setError(t('errorFechaInvalida'))
       return
     }
     if (!entidad) {
-      setError('Seleccioná la municipalidad')
+      setError(t('errorSeleccionaEntidad'))
       return
     }
 
@@ -87,11 +88,20 @@ export default function FormFisica() {
   }
 
   return (
-    <div className="mx-auto max-w-md px-4 py-8">
-      <Card className="rounded-2xl shadow-sm transition-shadow hover:shadow-md">
-        <CardHeader>
-          <CardTitle className="text-center text-2xl">{t('formFisicaTitulo')}</CardTitle>
-        </CardHeader>
+    <div className="mx-auto max-w-md px-4 py-6">
+      <Button
+        variant="ghost"
+        className="mb-2 -ml-1 text-muted-foreground transition hover:-translate-x-0.5 hover:text-foreground active:scale-95"
+        onClick={() => navigate('/menu')}
+      >
+        ← {t('volver')}
+      </Button>
+      <PageHero
+        eyebrow={t('appNombre')}
+        titulo={t('formFisicaTitulo')}
+        subtitulo={t('formFisicaSubtitulo')}
+      />
+      <Card className="mt-4 rounded-2xl shadow-sm transition-shadow hover:shadow-md">
         <CardContent>
           <form onSubmit={buscar} className="space-y-4">
             {/* Placa: tipo (siglas) + resto */}
@@ -131,7 +141,7 @@ export default function FormFisica() {
               <Input
                 value={noMulta}
                 onChange={(e) => setNoMulta(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                placeholder="123456"
+                placeholder={t('placeholderNoMulta')}
                 inputMode="numeric"
                 maxLength={6}
                 required

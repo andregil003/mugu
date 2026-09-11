@@ -72,6 +72,13 @@ export default function Municipios() {
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-6 lg:py-10">
+      <Button
+        variant="ghost"
+        className="mb-2 -ml-1 text-muted-foreground transition hover:-translate-x-0.5 hover:text-foreground active:scale-95"
+        onClick={() => navigate('/buscar')}
+      >
+        ← {t('volver')}
+      </Button>
       <PageHero
         eyebrow={placa}
         titulo={t('municipiosTitulo')}
@@ -96,7 +103,7 @@ export default function Municipios() {
                       `/multas?placa=${encodeURIComponent(placa)}&entidad=${e.id}`
                     )
                   }
-                  title={`${e.corto}${activo ? ` — ${n} multa(s)` : ' — sin multas'}`}
+                  title={`${e.corto}${activo ? ` — ${n} ${t('municipiosConMultas')}` : ` — ${t('municipiosSinMultas')}`}`}
                   className={`group flex flex-col items-center gap-2 rounded-xl border p-3 text-center transition-all duration-200 ${
                     activo
                       ? 'cursor-pointer border-border bg-card shadow-sm hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 active:scale-95'

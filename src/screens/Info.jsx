@@ -1,10 +1,13 @@
 // pantalla_tabla_informativa (Flujo C): "No entiendo mi multa".
 // Buscador + filtro por categoría (leve/grave/muy grave) + montos con descuento.
 import { useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import LoadingSpinner from '@/components/LoadingSpinner'
 import { useI18n } from '@/lib/i18n'
 import { cargarInfracciones } from '@/lib/data'
 import { cn } from '@/lib/utils'
@@ -25,6 +28,7 @@ function categoriaDe(i) {
 
 export default function Info() {
   const { t } = useI18n()
+  const navigate = useNavigate()
   const [infracciones, setInfracciones] = useState([])
   const [busqueda, setBusqueda] = useState('')
   const [categoria, setCategoria] = useState('')
@@ -44,7 +48,14 @@ export default function Info() {
   }, [infracciones, busqueda, categoria])
 
   return (
-    <div className="mx-auto max-w-md px-4 py-8">
+    <div className="mx-auto max-w-md px-4 py-6">
+      <Button
+        variant="ghost"
+        className="mb-2 -ml-1 text-muted-foreground transition hover:-translate-x-0.5 hover:text-foreground active:scale-95"
+        onClick={() => navigate('/menu')}
+      >
+        ← {t('volver')}
+      </Button>
       <Card className="rounded-2xl shadow-sm transition-shadow hover:shadow-md">
         <CardHeader>
           <CardTitle className="text-center text-2xl">{t('infoTitulo')}</CardTitle>
@@ -133,7 +144,7 @@ export default function Info() {
                   </div>
                   {i.articulo && (
                     <p className="mt-0.5 text-xs font-medium text-muted-foreground">
-                      Art. {i.articulo}
+                      {t('articuloAbrev')} {i.articulo}
                     </p>
                   )}
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
@@ -146,16 +157,20 @@ export default function Info() {
                     </p>
                   )}
                   <div className="mt-2 flex items-center gap-2 text-sm">
-                    <span className="font-bold text-gray-900">Q{monto}</span>
-                    {conDescuento && (
+                    {conDescuento ? (
                       <>
-                        <span className="text-xs text-muted-foreground line-through">
+                        <span className="font-bold text-gray-900">
                           Q{conDescuento.toFixed(2)}
+                        </span>
+                        <span className="text-xs text-muted-foreground line-through">
+                          Q{monto}
                         </span>
                         <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
                           {t('infoDescuento')}
                         </span>
                       </>
+                    ) : (
+                      <span className="font-bold text-gray-900">Q{monto}</span>
                     )}
                   </div>
                 </div>
@@ -163,7 +178,7 @@ export default function Info() {
             })}
             {filtradas.length === 0 && (
               <p className="py-6 text-center text-sm text-muted-foreground">
-                {infracciones.length === 0 ? 'Cargando…' : t('infoBuscar')}
+                {infracciones.length === 0 ? <LoadingSpinner /> : t('infoBuscar')}
               </p>
             )}
           </div>

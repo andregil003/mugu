@@ -3,7 +3,6 @@
 
 import {
   PLAZO_IMPUTACION_DIAS,
-  PLAZO_PAGO_DIAS,
   PLAZO_PRESCRIPCION_DIAS,
 } from './constantes'
 
@@ -107,24 +106,12 @@ export function calcularSemaforo(fechaInfraccion) {
   const dias = diasDesde(fechaInfraccion)
 
   if (dias > PLAZO_PRESCRIPCION_DIAS) {
-    return {
-      color: 'rojo',
-      dias,
-      motivo: `Han pasado ${dias} días (> ${PLAZO_PRESCRIPCION_DIAS}). La multa podría haber prescrito.`,
-    }
+    return { color: 'rojo', dias, motivo: 'prescrito' }
   }
   if (dias > PLAZO_IMPUTACION_DIAS) {
-    return {
-      color: 'amarillo',
-      dias,
-      motivo: `Han pasado ${dias} días. Todavía podés pagar con descuento (${PLAZO_PAGO_DIAS} días), pero revisá si podés impugnar.`,
-    }
+    return { color: 'amarillo', dias, motivo: 'plazo_pago' }
   }
-  return {
-    color: 'verde',
-    dias,
-    motivo: `Han pasado ${dias} días. Estás dentro del plazo de impugnación (${PLAZO_IMPUTACION_DIAS} días).`,
-  }
+  return { color: 'verde', dias, motivo: 'plazo_impugnacion' }
 }
 
 /**
