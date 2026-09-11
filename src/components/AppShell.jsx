@@ -1,5 +1,5 @@
 // AppShell: layout compartido de la app — header con logo + nav responsive.
-// Móvil: bottom-nav fija. Desktop: top-nav en el header. Footer con disclaimer.
+// Móvil: bottom-nav fija. Desktop: top-nav en el header. Footer con enlaces legales.
 // Rutas de onboarding: / (sin nada), /idioma (solo header con logo MUGU).
 import { useLocation, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -126,8 +126,24 @@ export default function AppShell({ children }) {
           {/* Footer: visible en desktop y móvil (compacto arriba del bottom-nav) */}
           <footer className="mb-16 border-t border-border/60 py-4 lg:mb-0 lg:py-6">
             <div className="mx-auto w-full max-w-5xl px-4 text-center text-[10px] leading-relaxed text-muted-foreground lg:text-xs">
-              <p>{t('disclaimer')}</p>
-              <p className="mt-1">{t('footer')}</p>
+              <p>{t('footer')}</p>
+              <div className="mt-1.5 flex items-center justify-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => navigate('/terminos')}
+                  className="underline decoration-border underline-offset-2 transition hover:text-foreground hover:decoration-foreground active:scale-95"
+                >
+                  {t('footerTerminos')}
+                </button>
+                <span aria-hidden="true">·</span>
+                <button
+                  type="button"
+                  onClick={() => navigate('/privacidad')}
+                  className="underline decoration-border underline-offset-2 transition hover:text-foreground hover:decoration-foreground active:scale-95"
+                >
+                  {t('footerPrivacidad')}
+                </button>
+              </div>
             </div>
           </footer>
 

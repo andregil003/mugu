@@ -22,6 +22,8 @@ import Info from '@/screens/Info'
 import Detalle from '@/screens/Detalle'
 import Apelacion from '@/screens/Apelacion'
 import Pago from '@/screens/Pago'
+import Terminos from '@/screens/Terminos'
+import Privacidad from '@/screens/Privacidad'
 
 // Scroll al tope en cada cambio de ruta (no dejar al usuario a media página)
 function ScrollToTop() {
@@ -54,6 +56,8 @@ function App() {
               <Route path="/detalle" element={<Detalle />} />
               <Route path="/apelacion" element={<Apelacion />} />
               <Route path="/pago" element={<Pago />} />
+              <Route path="/terminos" element={<Terminos />} />
+              <Route path="/privacidad" element={<Privacidad />} />
             </Routes>
           </AppShell>
         </HashRouter>
