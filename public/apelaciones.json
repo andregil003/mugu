@@ -1,0 +1,59 @@
+{
+  "pais": "Guatemala",
+  "tema": "Gestiones de apelación relacionadas con multas de tránsito",
+  "fuente": "Decreto 33-2024 (reformas a Ley de Tránsito 132-96) + Reglamento 273-98",
+  "gestiones": [
+    {
+      "id": "oposicion",
+      "nombre": "Apelación por Oposición",
+      "subtitulo": "Inconformidad con los Hechos",
+      "proposito": "Se realiza cuando se considera que la multa es injusta, que el agente de tránsito cometió un error o que existen pruebas para demostrar que no se cometió la infracción.",
+      "lugar_de_presentacion": {
+        "dependencias": [
+          "Departamento de Tránsito de la Dirección General de la Policía Nacional Civil (PNC)",
+          "Juzgado de Asuntos Municipales de Tránsito de la municipalidad correspondiente"
+        ],
+        "criterio": "Depende de la entidad que haya impuesto la esquela."
+      },
+      "documentos_y_pruebas_requeridos": [
+        "Documento Personal de Identificación (DPI)",
+        "Boleta de aviso de la multa o número de esquela",
+        "Medios de prueba físicos o digitales, como fotografías, videos, constancias u otros documentos que respalden la versión de la persona interesada"
+      ],
+      "contenido_del_escrito": [
+        "Dirigirse a la autoridad correspondiente: Jefe del Departamento de Tránsito o Juez de Asuntos Municipales de Tránsito.",
+        "Incluir datos completos de identificación: nombre, DPI, número de licencia y lugar o medio para recibir notificaciones.",
+        "Exponer de forma clara y detallada los hechos que motivaron la esquela y las razones del desacuerdo.",
+        "Ofrecer las pruebas, listando y adjuntando las evidencias.",
+        "Incluir una petición formal para dejar sin efecto y anular la multa impuesta.",
+        "Incluir fecha y firma al pie del documento."
+      ],
+      "plazo_de_presentacion": "No mayor de quince (15) días contados a partir de la notificación de la multa (Decreto 33-2024)."
+    },
+    {
+      "id": "prescripcion",
+      "nombre": "Apelación por Prescripción",
+      "subtitulo": "Caducidad por Falta de Notificación",
+      "proposito": "Solicita que la multa sea anulada de oficio cuando la institución de tránsito excedió el plazo legal para notificar formalmente la sanción a la persona usuaria.",
+      "lugar_de_presentacion": {
+        "dependencias": [
+          "Departamento de Tránsito de la Policía Nacional Civil (PNC)",
+          "Juzgado de Asuntos Municipales de Tránsito de la localidad"
+        ],
+        "criterio": "Debe ingresarse ante la misma dependencia emisora que registró o emitió la sanción."
+      },
+      "documentos_y_pruebas_requeridos": [
+        "Documento Personal de Identificación (DPI)",
+        "Comprobante o constancia de la multa registrada en el sistema que evidencie la fecha de imposición y la fecha de notificación oficial"
+      ],
+      "contenido_del_escrito": [
+        "Dirigirse a la dependencia emisora correspondiente: Departamento de Tránsito o Juzgado de Asuntos Municipales.",
+        "Incluir datos generales de identificación.",
+        "Exponer técnicamente que el plazo legal para la notificación válida transcurrió en exceso sin cumplir el procedimiento formal.",
+        "Solicitar expresamente que se declare la prescripción de la sanción, se retire del sistema y se deje solvente a la persona interesada.",
+        "Incluir fecha y firma de la persona interesada."
+      ],
+      "plazo_de_presentacion": "Puede gestionarse en cualquier momento una vez verificado que el tiempo legal de notificación (120 días) ha vencido sin aviso previo."
+    }
+  ]
+}

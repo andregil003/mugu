@@ -43,7 +43,7 @@ test('Flujo completo P123ABC/EMETRA: listado sin undefined, detalle sale, logo v
   // 7. Listado: sin "ARTÍCULO undefined", con motivo legal real y montos
   await expect(page.getByText('Tus multas')).toBeVisible()
   await expect(page.getByText('ARTÍCULO undefined')).toHaveCount(0)
-  await expect(page.getByText(/Art\. 90/).first()).toBeVisible()
+  await expect(page.getByText(/Art\. 181-14 Reglamento/).first()).toBeVisible()
   await expect(page.getByText('Q200.00').first()).toBeVisible()
   await expect(page.getByText('Q500.00').first()).toBeVisible()
 
@@ -58,7 +58,14 @@ test('Flujo completo P123ABC/EMETRA: listado sin undefined, detalle sale, logo v
   // 9. Logo nuevo en el header (imagen, no icono)
   await expect(page.locator('header img[src="/icon-192.png"]')).toBeVisible()
 
-  // 10. Sin errores de consola (ignorando favicon/404 de assets opcionales)
+  // 10. Pantalla de Apelación con datos de Diego (15 días, documentos)
+  await page.goto('/#/apelacion?placa=P123ABC&entidad=emetra')
+  await expect(page.getByText('Apelación por Oposición')).toBeVisible()
+  await expect(page.getByText('Apelación por Prescripción')).toBeVisible()
+  await expect(page.getByText(/quince \(15\) días/)).toBeVisible()
+  await expect(page.getByText('Documento Personal de Identificación (DPI)').first()).toBeVisible()
+
+  // 12. Sin errores de consola (ignorando favicon/404 de assets opcionales)
   const criticos = errores.filter(
     (e) => !/favicon|Failed to load resource/i.test(e)
   )

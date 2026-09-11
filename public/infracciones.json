@@ -1,121 +1,1489 @@
 {
   "_meta": {
-    "version": "1.0.0",
+    "version": "2.0.0",
     "fuente": "Cartilla de Infracciones y Sanciones de Tránsito (transito.gob.gt) + Decreto 33-2024 (reformas a Ley de Tránsito 132-96)",
-    "fecha": "2026-09-09",
-    "nota": "Los montos marcados como null estan pendientes de verificacion contra la cartilla oficial vigente. NO inventar montos. Descuento por curso vial: 25% segun cartilla (Q100->Q75); algunas municipalidades ofrecen 50-60% (ej. MuniGuate).",
+    "fecha": "2026-09-10",
+    "nota": "Catalogo expandido a 98 infracciones desde el Reglamento de Transito 273-98 (articulos 180-185) + Decreto 33-2024. Montos escalonados: 180=Q100, 181=Q200, 182=Q300, 183=Q400, 184=Q500, 185=Q1000-Q25000. Descuento por curso vial: 25%. Casos especiales fuera del Reglamento: sin_seguro (Q1000), alcohol_drogas (Q25000), licencia_vencida (Q300).",
     "aviso_legal": "Este catalogo es orientativo para prototipo de hackathon. No constituye asesoria legal. Verificar siempre contra la cartilla oficial y la notificacion recibida."
   },
   "infracciones": [
     {
-      "id": "semaforo_rojo",
-      "codigo": "Art. 90 Reglamento (273-98)",
-      "nombre": "No respetar semaforo en rojo o senal de alto",
-      "descripcion": "Pasar con luz roja del semaforo o ignorar una senal de ALTO",
-      "monto": 200,
-      "descuento_curso_vial": 150,
-      "categoria": "grave",
-      "emisores": ["PNC", "EMETRA", "PMT municipal"],
-      "consejo": "Si la notificacion no llego en 120 dias, prescribe. Si llego, el curso vial reduce la multa a Q150."
-    },
-    {
-      "id": "estacionamiento_prohibido",
-      "codigo": "Ley 132-96 / Reglamento 273-98",
-      "nombre": "Estacionar en lugar prohibido",
-      "descripcion": "Estacionar en zonas prohibidas (rampas, pasos de cebra, lugares con senal de no estacionar)",
-      "monto": 500,
-      "descuento_curso_vial": 375,
-      "categoria": "grave",
-      "emisores": ["EMETRA", "PMT municipal"],
-      "consejo": "Verifica si el cepo se coloco legalmente: solo en via publica y se libera al recibir la papeleta, sin pago inmediato obligatorio (Decreto 33-2024)."
-    },
-    {
-      "id": "licencia_vencida",
-      "codigo": "Ley 132-96",
-      "nombre": "Conducir con licencia vencida",
-      "descripcion": "Conducir con licencia de conducir expirada",
-      "monto": 300,
-      "descuento_curso_vial": 225,
+      "id": "art_180_1",
+      "codigo": "Art. 180-1 Reglamento (273-98)",
+      "nombre": "No tener las bicicletas y motobicicletas el equipamiento básico en óptimas condiciones",
+      "descripcion": "Circulabas en tu bicicleta o motobicicleta sin contar con el equipo de iluminación o elementos básicos obligatorios en óptimo funcionamiento.",
+      "monto": 100,
+      "descuento_curso_vial": 75,
       "categoria": "leve",
-      "emisores": ["PNC", "EMETRA", "PMT municipal"],
-      "consejo": "Renueva la licencia antes de pagar: la multa no exime del tramite. El curso vial reduce a Q225."
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
     },
     {
-      "id": "basura_vehiculo",
-      "codigo": "Ley 132-96",
-      "nombre": "Tirar basura desde un vehiculo",
-      "descripcion": "Arrojar desechos a la via publica desde el vehiculo",
-      "monto": 300,
-      "descuento_curso_vial": 225,
+      "id": "art_180_2",
+      "codigo": "Art. 180-2 Reglamento (273-98)",
+      "nombre": "No respetar señales específicas de tránsito",
+      "descripcion": "Ignoraste señales como la de no vehículos, prohibición de silencio, ceder el paso, prohibición de giro, límite de velocidad mínima o la obligación de seguir de frente.",
+      "monto": 100,
+      "descuento_curso_vial": 75,
       "categoria": "leve",
-      "emisores": ["PNC", "EMETRA", "PMT municipal"],
-      "consejo": "Ademas de la multa, es una falta ambiental. El curso vial reduce a Q225."
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
+    },
+    {
+      "id": "art_180_3",
+      "codigo": "Art. 180-3 Reglamento (273-98)",
+      "nombre": "Circular en el arcén sin causa justificada",
+      "descripcion": "Manejaste por el hombro o arcén de la carretera cuando no existía ninguna emergencia u omisión que lo justificara.",
+      "monto": 100,
+      "descuento_curso_vial": 75,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
+    },
+    {
+      "id": "art_180_4",
+      "codigo": "Art. 180-4 Reglamento (273-98)",
+      "nombre": "No facilitar la incorporación al tránsito a otros vehículos",
+      "descripcion": "No cediste el espacio necesario para que otros conductores pudieran integrarse a la circulación de la vía.",
+      "monto": 100,
+      "descuento_curso_vial": 75,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
+    },
+    {
+      "id": "art_180_5",
+      "codigo": "Art. 180-5 Reglamento (273-98)",
+      "nombre": "No utilizar las señales manuales o lumínicas al maniobrar",
+      "descripcion": "Realizaste un cambio de dirección, de carril, una desaceleración, un retroceso o un cambio de sentido sin advertirlo previamente con las luces direccionales o señales manuales.",
+      "monto": 100,
+      "descuento_curso_vial": 75,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
+    },
+    {
+      "id": "art_180_6",
+      "codigo": "Art. 180-6 Reglamento (273-98)",
+      "nombre": "No respetar el derecho preferente a rebasar",
+      "descripcion": "Iniciaste una maniobra de adelantamiento sin respetar el turno o la prioridad que le correspondía a otro conductor.",
+      "monto": 100,
+      "descuento_curso_vial": 75,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
+    },
+    {
+      "id": "art_180_7",
+      "codigo": "Art. 180-7 Reglamento (273-98)",
+      "nombre": "Uso no previsto de advertencias auditivas o luminosas",
+      "descripcion": "Hiciste uso de la bocina, luces altas o avisos lumínicos en situaciones no autorizadas o reglamentadas.",
+      "monto": 100,
+      "descuento_curso_vial": 75,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
+    },
+    {
+      "id": "celular_conduciendo",
+      "codigo": "Art. 180-8 Reglamento (273-98)",
+      "nombre": "Conducir utilizando auriculares o teléfonos",
+      "descripcion": "Ibas al volante conectado a auriculares con reproductores de sonido, o bien utilizando teléfonos celulares y aparatos de comunicación con las manos.",
+      "monto": 100,
+      "descuento_curso_vial": 75,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa a Q75."
     },
     {
       "id": "sin_tarjeta_circulacion",
-      "codigo": "Art. 18 bis (Decreto 33-2024)",
-      "nombre": "Circular sin tarjeta de circulacion o fotocopia autenticada",
-      "descripcion": "No portar la tarjeta de circulacion del vehiculo",
+      "codigo": "Art. 181-1 Reglamento (273-98)",
+      "nombre": "Circular sin portar la tarjeta de circulación",
+      "descripcion": "Conducías un vehículo sin llevar físicamente la tarjeta de circulación original o una fotocopia autenticada de la misma.",
       "monto": 200,
       "descuento_curso_vial": 150,
       "categoria": "leve",
-      "emisores": ["PNC", "EMETRA", "PMT municipal"],
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
       "consejo": "Desde el Decreto 33-2024 se acepta la tarjeta de circulacion ELECTRONICA digital. Si la mostraste en tu telefono y te multaron igual, hay argumento para impugnar."
     },
     {
+      "id": "art_181_10",
+      "codigo": "Art. 181-10 Reglamento (273-98)",
+      "nombre": "Circular en carriles no permitidos para transporte público",
+      "descripcion": "Unidades de transporte colectivo transitaron por vías o carriles exclusivos ajenos a su ruta designada.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_11",
+      "codigo": "Art. 181-11 Reglamento (273-98)",
+      "nombre": "Parada incorrecta de transporte colectivo",
+      "descripcion": "Detuviste un bus o microbús separado de la acera a más de treinta centímetros o en posición no paralela a la misma.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_12",
+      "codigo": "Art. 181-12 Reglamento (273-98)",
+      "nombre": "Parar transporte de pasajeros fuera de zona autorizada",
+      "descripcion": "Efectuaste el ascenso o descenso de pasajeros a una distancia incorrecta de la parada oficial establecida.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_13",
+      "codigo": "Art. 181-13 Reglamento (273-98)",
+      "nombre": "Transporte de carga en carriles prohibidos",
+      "descripcion": "Un camión o vehículo pesado transitó por el carril izquierdo o por zonas prohibidas para su tipo de peso.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "semaforo_rojo",
+      "codigo": "Art. 181-14 Reglamento (273-98)",
+      "nombre": "No respetar señales de Alto, Semáforo o Agente",
+      "descripcion": "Ignoraste una señal de alto, una luz roja del semáforo, el paso prohibido o las órdenes directas de un agente de tránsito.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "Si la notificacion no llego en 120 dias, prescribe. Si llego, el curso vial reduce la multa a Q150."
+    },
+    {
+      "id": "sentido_contrario",
+      "codigo": "Art. 181-15 Reglamento (273-98)",
+      "nombre": "Circular en contra de la vía",
+      "descripcion": "Manejaste tu vehículo en sentido contrario al flujo autorizado o señalizado en la calle o avenida.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "PMT municipal"
+      ],
+      "consejo": "Monto pendiente de verificacion. En 2026 se reportaron multas de Q20,000+ por circular contra la via (caso Puente El Incienso)."
+    },
+    {
+      "id": "art_181_16",
+      "codigo": "Art. 181-16 Reglamento (273-98)",
+      "nombre": "Forzar la marcha afectando al vehículo con prioridad",
+      "descripcion": "Iniciaste la marcha de manera imprudente obligando al conductor que tenía la vía libre a frenar o desviar su trayectoria bruscamente.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_17",
+      "codigo": "Art. 181-17 Reglamento (273-98)",
+      "nombre": "No observar las normas de prioridad de paso",
+      "descripcion": "No cediste el paso en intersecciones o accesos donde la jerarquía vial favorecía a otro conductor.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_18",
+      "codigo": "Art. 181-18 Reglamento (273-98)",
+      "nombre": "No respetar el turno en una fila de espera",
+      "descripcion": "Te adelantaste indebidamente alterando el orden de una fila de vehículos detenidos por el tráfico o semáforos.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_19",
+      "codigo": "Art. 181-19 Reglamento (273-98)",
+      "nombre": "Incorporación incorrecta a la circulación",
+      "descripcion": "Te integraste al flujo vehicular desde un estacionamiento o vía lateral sin tomar las precauciones ni ceder el paso reglamentario.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_2",
+      "codigo": "Art. 181-2 Reglamento (273-98)",
+      "nombre": "Portar placas de circulación en lugares no autorizados",
+      "descripcion": "Llevabas las placas de identificación del vehículo colocadas en una posición distinta o no reglamentaria.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_20",
+      "codigo": "Art. 181-20 Reglamento (273-98)",
+      "nombre": "Virar o girar sin posicionamiento correcto",
+      "descripcion": "Realizaste un giro a la derecha o izquierda colocándote en un carril equivocado o sin hacer la maniobra desde el costado correcto.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_21",
+      "codigo": "Art. 181-21 Reglamento (273-98)",
+      "nombre": "Cambio de carril sin respetar prioridad",
+      "descripcion": "Te pasaste a otro carril interrumpiendo la marcha del vehículo que ya circulaba en él.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_22",
+      "codigo": "Art. 181-22 Reglamento (273-98)",
+      "nombre": "Retroceder indebidamente en la vía pública",
+      "descripcion": "Realizaste una maniobra de reversa en un tramo prohibido o innecesario fuera de los supuestos permitidos por la ley.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_23",
+      "codigo": "Art. 181-23 Reglamento (273-98)",
+      "nombre": "Rebasar por la derecha fuera de casos permitidos",
+      "descripcion": "Adelantaste a otro vehículo por el carril derecho cuando las normas de la vía no lo autorizaban.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_24",
+      "codigo": "Art. 181-24 Reglamento (273-98)",
+      "nombre": "Rebasar e integrarse obligando a modificar velocidad ajena",
+      "descripcion": "Al retornar a tu carril tras rebasar, cortaste el espacio del otro conductor obligándolo a frenar o moverse.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "articulo_181_25",
+      "nombre": "Estacionarse en contra de la vía",
+      "descripcion": "Dejaste tu vehículo aparcado orientado en sentido contrario al flujo del carril más próximo.",
+      "consejo": "Es la clásica multa de cepo. Si te lo pusieron, el cepo se libera al recibir la papeleta, sin pago inmediato obligatorio (Decreto 33-2024).",
+      "monto": 200,
+      "codigo": "Art. 181-25 Reglamento (273-98)",
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "articulo_181_26",
+      "nombre": "Estacionarse a más de 25 cm del bordillo",
+      "descripcion": "Dejaste el automóvil separado de la banqueta a una distancia mayor de la permitida, obstruyendo parcialmente la calzada.",
+      "consejo": "De las más fáciles de evitar: pegá bien el vehículo a la banqueta. Si te multaron igual, revisá que la distancia esté bien medida.",
+      "monto": 200,
+      "codigo": "Art. 181-26 Reglamento (273-98)",
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "articulo_181_27",
+      "nombre": "Estacionar obstaculizando o poniendo en peligro",
+      "descripcion": "Paraste o estacionaste el vehículo en un sitio que complicaba severamente la circulación o creaba riesgos para los usuarios.",
+      "consejo": "Suele venir con cepo. Verificá que el cepo se haya colocado legalmente (solo en vía pública) y que la papeleta tenga los 6 requisitos del Decreto 33-2024.",
+      "monto": 200,
+      "codigo": "Art. 181-27 Reglamento (273-98)",
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "art_181_28",
+      "codigo": "Art. 181-28 Reglamento (273-98)",
+      "nombre": "Circular sin luz baja durante el día",
+      "descripcion": "Manejaste sin encender las luces bajas diurnas en vehículos o circunstancias en las que el reglamento lo exige obligatoriamente.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_29",
+      "codigo": "Art. 181-29 Reglamento (273-98)",
+      "nombre": "No iluminar vehículos inmovilizados",
+      "descripcion": "Dejaste un automotor detenido en una vía con mala iluminación nocturna sin dejar encendidas las luces de posición.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_3",
+      "codigo": "Art. 181-3 Reglamento (273-98)",
+      "nombre": "No portar la licencia de conducir",
+      "descripcion": "Conducías un vehículo sin portar contigo el documento físico de tu licencia de conducir.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_30",
+      "codigo": "Art. 181-30 Reglamento (273-98)",
+      "nombre": "No utilizar luces de emergencia",
+      "descripcion": "Omitiste encender las luces intermitentes de emergencia al detenerte por una incidencia o parada obligatoria bajo baja visibilidad.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_31",
+      "codigo": "Art. 181-31 Reglamento (273-98)",
+      "nombre": "No usar luces en túneles o mala visibilidad",
+      "descripcion": "Conducías sin el sistema de luces de posición, bajas o gálibo encendido al atravesar túneles o con clima adverso.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_33",
+      "codigo": "Art. 181-33 Reglamento (273-98)",
+      "nombre": "No respetar el orden jerárquico de las señales",
+      "descripcion": "Desobedeciste la prelación entre mandos (por ejemplo, ignorar la orden de un agente de tránsito por seguir un semáforo).",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "articulo_181_34",
+      "nombre": "Circular sin cinturón de seguridad",
+      "descripcion": "Conducías o viajabas en los asientos delanteros sin llevar abrochado y tensado el cinturón de seguridad obligatorio.",
+      "consejo": "El cinturón salva vidas y es de las multas más comunes. Si el conductor lo traía pero el copiloto no, la multa aplica igual: revisá quién iba en el vehículo.",
+      "monto": 200,
+      "codigo": "Art. 181-34 Reglamento (273-98)",
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "art_181_35",
+      "codigo": "Art. 181-35 Reglamento (273-98)",
+      "nombre": "Remolcar en medios o lugares prohibidos",
+      "descripcion": "Arrastraste un vehículo averiado utilizando métodos no autorizados o en tramos de vía restringidos (como autopistas).",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_36",
+      "codigo": "Art. 181-36 Reglamento (273-98)",
+      "nombre": "Escape o silenciador inadecuado o deteriorado",
+      "descripcion": "Transitaste con un sistema de escape incompleto, modificado con tubos resonadores o en mal estado que alteraba el ruido normal.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_37",
+      "codigo": "Art. 181-37 Reglamento (273-98)",
+      "nombre": "Circular con llantas lisas o con roturas",
+      "descripcion": "Manejabas un vehículo cuyas llantas carecían de dibujo reglamentario o presentaban daños estructurales visibles.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_38",
+      "codigo": "Art. 181-38 Reglamento (273-98)",
+      "nombre": "Exceder tiempo de reparaciones en la vía pública",
+      "descripcion": "Dejaste un vehículo averiado realizando reparaciones por más de dos horas en ciudad o más de doce horas en áreas extraurbanas.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_39",
+      "codigo": "Art. 181-39 Reglamento (273-98)",
+      "nombre": "Circular sin permiso de aprendizaje vigente",
+      "descripcion": "Conducías en fase de prácticas con un permiso temporal vencido o sin haberlo tramitado formalmente.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_4",
+      "codigo": "Art. 181-4 Reglamento (273-98)",
+      "nombre": "Carecer del equipamiento básico en vehículos automotores",
+      "descripcion": "Tu vehículo de cuatro o más ruedas no contaba con las herramientas, bocina, retrovisores, limpiaparabrisas o triángulos de emergencia obligatorios.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_40",
+      "codigo": "Art. 181-40 Reglamento (273-98)",
+      "nombre": "Reparaciones de emergencia prohibidas en vías urbanas",
+      "descripcion": "Intentaste arreglar una falla mecánica en vías urbanas principales donde la autoridad prohíbe explícitamente estas acciones.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_41",
+      "codigo": "Art. 181-41 Reglamento (273-98)",
+      "nombre": "Negarse a recibir la boleta de notificación",
+      "descripcion": "Rechazaste aceptar la papeleta de aviso, requerimiento de pago o citación entregada por la autoridad de tránsito.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_5",
+      "codigo": "Art. 181-5 Reglamento (273-98)",
+      "nombre": "Vehículo de aprendizaje sin especificaciones",
+      "descripcion": "Utilizaste un automóvil para prácticas de manejo o aprendizaje que no cumplía con los pedales, doble control u otras especificaciones técnicas reglamentarias.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_6",
+      "codigo": "Art. 181-6 Reglamento (273-98)",
+      "nombre": "Producir ruidos estridentes o innecesarios",
+      "descripcion": "Causaste molestias auditivas exageradas mediante el uso de los escapes, bocinas modificadas u otros aditamentos del vehículo.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "sobrecarga_vehiculo",
+      "codigo": "Art. 181-7 Reglamento (273-98)",
+      "nombre": "Transportar carga en forma inadecuada y peligrosa",
+      "descripcion": "Llevabas mercancías mal sujetas que ponían en riesgo la estabilidad del vehículo o representaban un obstáculo en la vía.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "PMT municipal"
+      ],
+      "consejo": "La sobrecarga es factor en volcamientos. El curso vial reduce a Q375."
+    },
+    {
+      "id": "art_181_8",
+      "codigo": "Art. 181-8 Reglamento (273-98)",
+      "nombre": "No señalizar carga que sobresale",
+      "descripcion": "Transportabas objetos largos o anchos que sobresalían de la estructura del vehículo sin colocarles las banderas rojas de día o los reflejantes de noche.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_181_9",
+      "codigo": "Art. 181-9 Reglamento (273-98)",
+      "nombre": "Conductor de transporte colectivo sin identificación",
+      "descripcion": "Operabas una unidad de transporte público o colectivo sin exhibir de forma visible tu identificación reglamentaria.",
+      "monto": 200,
+      "descuento_curso_vial": 150,
+      "categoria": "leve",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+    },
+    {
+      "id": "art_182_1",
+      "codigo": "Art. 182-1 Reglamento (273-98)",
+      "nombre": "Conducir con licencia de conducir vencida",
+      "descripcion": "Manejabas un vehículo portando un documento de licencia cuya fecha de vigencia ya había expirado.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "art_182_10",
+      "codigo": "Art. 182-10 Reglamento (273-98)",
+      "nombre": "Abandonar materiales que entorpezcan la circulación",
+      "descripcion": "Dejaste escombros o materias obstruyendo la calzada y dificultando el paso libre vehicular.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "art_182_11",
+      "codigo": "Art. 182-11 Reglamento (273-98)",
+      "nombre": "Carga y descarga sin autorización",
+      "descripcion": "Realizaste maniobras de distribución de mercancías en la vía pública infringiendo las normas u horarios establecidos por la municipalidad.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "exceso_velocidad",
+      "codigo": "Art. 182-12 Reglamento (273-98)",
+      "nombre": "Exceder los límites de velocidad permitidos",
+      "descripcion": "Conducías a una velocidad superior al límite máximo establecido para esa ruta, detectado por radares o controles.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa a Q225. Guatemala tiene 511 intersecciones con videoanalitica pero aun NO multan automaticamente."
+    },
+    {
+      "id": "art_182_13",
+      "codigo": "Art. 182-13 Reglamento (273-98)",
+      "nombre": "Bloquear una intersección",
+      "descripcion": "Te quedaste detenido en medio de un cruce vehicular o paso peatonal obstruyendo el tráfico transversal a pesar del semáforo.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "art_182_14",
+      "codigo": "Art. 182-14 Reglamento (273-98)",
+      "nombre": "No respetar señales en cruces de ferrocarril",
+      "descripcion": "Ignoraste barreras, luces o avisos de advertencia al aproximarte a una vía férrea.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "art_182_15",
+      "codigo": "Art. 182-15 Reglamento (273-98)",
+      "nombre": "Giro continuo a la derecha incorrecto",
+      "descripcion": "Viraste a la derecha con semáforo en rojo en un lugar no permitido o lo hiciste sin ceder el paso previo al tráfico transversal.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "art_182_16",
+      "codigo": "Art. 182-16 Reglamento (273-98)",
+      "nombre": "Cambio de carril en intersecciones",
+      "descripcion": "Te pasaste de carril justo encima o antes de un cruce, o no seguiste la dirección obligatoria marcada para ese carril.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "art_182_17",
+      "codigo": "Art. 182-17 Reglamento (273-98)",
+      "nombre": "Cambio de sentido en lugares prohibidos",
+      "descripcion": "Realizaste una \"Vuelta en U\" en tramos no autorizados, puentes, túneles o zonas donde se prohíbe rebasar.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "art_182_18",
+      "codigo": "Art. 182-18 Reglamento (273-98)",
+      "nombre": "Rebasar en lugares prohibidos",
+      "descripcion": "Adelantaste a otros vehículos en curvas, pendientes pronunciadas, intersecciones o zonas con visibilidad reducida.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "articulo_182_19",
+      "nombre": "No ceder el paso a peatones",
+      "descripcion": "Omitiste detenerte para darle la prioridad absoluta a los transeúntes en los pasos de cebra o zonas autorizadas.",
+      "consejo": "En un paso de cebra el peatón siempre tiene prioridad. Si te multaron, verificá que el paso estuviera señalizado y que el peatón realmente estuviera cruzando.",
+      "monto": 300,
+      "codigo": "Art. 182-19 Reglamento (273-98)",
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "art_182_2",
+      "codigo": "Art. 182-2 Reglamento (273-98)",
+      "nombre": "Transporte colectivo sin identificación del chofer",
+      "descripcion": "Operabas una unidad de transporte público que carecía de los datos visibles del conductor a la vista de los pasajeros.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "articulo_182_20",
+      "nombre": "No ceder el paso a ciclistas",
+      "descripcion": "No respetaste la prioridad de paso que tienen las bicicletas en ciclovías o al cruzar intersecciones.",
+      "consejo": "Los ciclistas tienen prioridad en ciclovías y cuando circulan por la derecha. Si la multa no describe bien el lugar, hay argumento para impugnar.",
+      "monto": 300,
+      "codigo": "Art. 182-20 Reglamento (273-98)",
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "art_182_3",
+      "codigo": "Art. 182-3 Reglamento (273-98)",
+      "nombre": "Tirar basura o desechos en la vía pública",
+      "descripcion": "Arrojaste papeles, bolsas o desperdicios hacia la calle desde el interior de tu vehículo en marcha o estacionado.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "art_182_4",
+      "codigo": "Art. 182-4 Reglamento (273-98)",
+      "nombre": "Circular sin escape o silenciador",
+      "descripcion": "Conducías un vehículo automotor completamente desprovisto del tubo de escape o silenciador reglamentario.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "art_182_5",
+      "codigo": "Art. 182-5 Reglamento (273-98)",
+      "nombre": "Ruido estridente en zonas sensibles",
+      "descripcion": "Provocaste ruidos exagerados con bocinas o altavoces cerca de hospitales, zonas residenciales o durante horas nocturnas.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "art_182_6",
+      "codigo": "Art. 182-6 Reglamento (273-98)",
+      "nombre": "Uso indebido de sirenas de emergencia",
+      "descripcion": "Instalaste o utilizaste sirenas y bocinas exclusivas de ambulancias, patrullas o bomberos en un vehículo particular.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "art_182_7",
+      "codigo": "Art. 182-7 Reglamento (273-98)",
+      "nombre": "Rebasar a vehículo detenido ante paso peatonal",
+      "descripcion": "Adelantaste a otro automotor que se había frenado correctamente para darle preferencia de paso a un peatón en un cebra.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "art_182_8",
+      "codigo": "Art. 182-8 Reglamento (273-98)",
+      "nombre": "Circular por espacios peatonales",
+      "descripcion": "Metiste un vehículo automotor sobre aceras, paseos o plazas peatonales sin contar con una autorización expresa de señalización.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "art_182_9",
+      "codigo": "Art. 182-9 Reglamento (273-98)",
+      "nombre": "Instalar ventas callejeras u obstáculos en pasos peatonales",
+      "descripcion": "Colocaste comercios informales o estructuras no autorizadas sobre banquetas, pasarelas o áreas públicas de tránsito.",
+      "monto": 300,
+      "descuento_curso_vial": 225,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+    },
+    {
+      "id": "articulo_183_1",
+      "nombre": "Conducir sin haber obtenido licencia",
+      "descripcion": "Manejabas un vehículo automotor sin que las autoridades te hayan emitido jamás una licencia de conducir.",
+      "consejo": "Es distinto a licencia vencida: acá directamente no tenés licencia. El curso vial reduce la multa a Q300.",
+      "monto": 400,
+      "codigo": "Art. 183-1 Reglamento (273-98)",
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "art_183_10",
+      "codigo": "Art. 183-10 Reglamento (273-98)",
+      "nombre": "Incumplir normas de seguridad ante accidentes o averías",
+      "descripcion": "Al quedarte varado o chocar, no colocaste los triángulos reflectivos de emergencia requeridos en las distancias correctas.",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+    },
+    {
+      "id": "art_183_11",
+      "codigo": "Art. 183-11 Reglamento (273-98)",
+      "nombre": "Simular falla mecánica para estacionar en prohibido",
+      "descripcion": "Dejaste el vehículo mal estacionado fingiendo un desperfecto mecánico para evadir la sanción de la autoridad.",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+    },
+    {
+      "id": "art_183_12",
+      "codigo": "Art. 183-12 Reglamento (273-98)",
+      "nombre": "Retroceder en autopistas o vías rápidas",
+      "descripcion": "Realizaste una maniobra de marcha atrás en vías de alta velocidad, poniendo en grave peligro el tráfico.",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+    },
+    {
+      "id": "basura_vehiculo",
+      "codigo": "Art. 183-13 Reglamento (273-98)",
+      "nombre": "Tirar basura u objetos que obstruyan la vía",
+      "descripcion": "Arrojaste a la calle elementos de gran tamaño o basura capaz de entorpecer el desplazamiento seguro de otros vehículos.",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "Ademas de la multa, es una falta ambiental. El curso vial reduce a Q225."
+    },
+    {
+      "id": "art_183_14",
+      "codigo": "Art. 183-14 Reglamento (273-98)",
+      "nombre": "Efectuar reparaciones mecánicas no urgentes en la vía",
+      "descripcion": "Realizaste trabajos de mecánica en plena calle que no correspondían a una emergencia imprevista.",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+    },
+    {
+      "id": "art_183_2",
+      "codigo": "Art. 183-2 Reglamento (273-98)",
+      "nombre": "Usar luces exclusivas de emergencia o mantenimiento",
+      "descripcion": "Llevabas instaladas torretas de colores reservados exclusivamente para patrullas, bomberos, ambulancias o vehículos viales.",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+    },
+    {
+      "id": "art_183_3",
+      "codigo": "Art. 183-3 Reglamento (273-98)",
+      "nombre": "Rebasar unidades de transporte público para hacer parada",
+      "descripcion": "Adelantaste a otro bus o microbús con la única intención de ganarle el pasaje y pararte justo enfrente.",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+    },
+    {
+      "id": "art_183_4",
+      "codigo": "Art. 183-4 Reglamento (273-98)",
+      "nombre": "Conducir con licencia de categoría incorrecta",
+      "descripcion": "Operabas un vehículo (como un camión pesado o transporte colectivo) con una licencia de tipo inferior que no te habilitaba para ello.",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+    },
+    {
+      "id": "art_183_5",
+      "codigo": "Art. 183-5 Reglamento (273-98)",
+      "nombre": "Utilizar carriles exclusivos de otros medios",
+      "descripcion": "Circulaste con un vehículo particular por carriles diseñados exclusivamente para transporte público o ciclovías.",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+    },
+    {
+      "id": "art_183_6",
+      "codigo": "Art. 183-6 Reglamento (273-98)",
+      "nombre": "No ceder el paso a escolares en zona escolar",
+      "descripcion": "Incumpliste los límites de velocidad o las normas de precaución al circular por una zona escolar en horarios establecidos.",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+    },
+    {
+      "id": "sin_luces_noche",
+      "codigo": "Art. 183-7 Reglamento (273-98)",
+      "nombre": "Circular con un lado frontal completamente a oscuras",
+      "descripcion": "Manejabas un vehículo automotor que tenía dañado por completo el sistema de iluminación de un lado de la parte delantera.",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "PMT municipal"
+      ],
+      "consejo": "Monto pendiente de verificacion contra la cartilla oficial."
+    },
+    {
+      "id": "art_183_8",
+      "codigo": "Art. 183-8 Reglamento (273-98)",
+      "nombre": "No señalizar un obstáculo en la vía pública",
+      "descripcion": "Dejaste una carga u objeto estorbando en la calzada sin colocar triángulos o luces reflectivas de advertencia para los conductores.",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+    },
+    {
+      "id": "art_183_9",
+      "codigo": "Art. 183-9 Reglamento (273-98)",
+      "nombre": "Instalar señales de tránsito falsas o confusas",
+      "descripcion": "Colocaste rótulos o artefactos particulares que emulaban señales de tránsito oficiales para confundir a los conductores.",
+      "monto": 400,
+      "descuento_curso_vial": 300,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+    },
+    {
       "id": "sin_placas",
-      "codigo": "Ley 132-96",
-      "nombre": "Circular sin placas",
-      "descripcion": "Circular sin placas de circulacion o con placas no visibles",
+      "codigo": "Art. 184-1 Reglamento (273-98)",
+      "nombre": "Circular sin placas de circulación",
+      "descripcion": "Conducías un vehículo que no portaba las placas metálicas de identificación emitidas por la autoridad fiscal.",
       "monto": 500,
       "descuento_curso_vial": 375,
       "categoria": "grave",
-      "emisores": ["PNC", "PMT municipal"],
+      "emisores": [
+        "PNC",
+        "PMT municipal"
+      ],
       "consejo": "Verifica que la placa este instalada correctamente antes de pagar. El curso vial reduce a Q375."
     },
     {
       "id": "sin_casco_moto",
-      "codigo": "Ley 132-96",
-      "nombre": "Circular en moto sin casco o chaleco reflectivo",
-      "descripcion": "Conducir motocicleta sin casco de seguridad o sin chaleco reflectivo",
+      "codigo": "Art. 184-10 Reglamento (273-98)",
+      "nombre": "Incumplir uso de casco y chaleco en motocicletas",
+      "descripcion": "Conductor o acompañante en moto no portaban el casco protector reglamentario o el chaleco reflectivo con número de placa.",
       "monto": 500,
       "descuento_curso_vial": 375,
       "categoria": "grave",
-      "emisores": ["PNC", "EMETRA", "PMT municipal"],
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
       "consejo": "Las motos son el 53% del parque vehicular y el 58% de las multas. El casco salva vidas: el curso vial reduce a Q375."
     },
     {
-      "id": "sobrecarga_vehiculo",
-      "codigo": "Ley 132-96",
-      "nombre": "Sobrecargar el vehiculo",
-      "descripcion": "Transportar mas pasajeros o carga de la permitida",
+      "id": "articulo_184_11",
+      "nombre": "Motocicletas circulando en banquetas o ciclovías",
+      "descripcion": "Conducías tu moto sobre aceras, pasos peatonales, paseos o carriles exclusivos para bicicletas.",
+      "consejo": "Las motos no pueden circular por espacios peatonales ni ciclovías. Es de las multas más comunes a motociclistas en la ciudad.",
+      "monto": 500,
+      "codigo": "Art. 184-11 Reglamento (273-98)",
+      "descuento_curso_vial": 375,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "articulo_184_12",
+      "nombre": "Motocicletas haciendo zig-zag o entre carriles",
+      "descripcion": "Te desplazaste en moto haciendo maniobras de zig-zag o metiéndote peligrosamente entre los carriles de autos detenidos.",
+      "consejo": "El 'filtrado' entre carriles con tráfico detenido es ilegal. Circulá en tu carril y evitá el zigzag: además de la multa, es causa de accidentes.",
+      "monto": 500,
+      "codigo": "Art. 184-12 Reglamento (273-98)",
+      "descuento_curso_vial": 375,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "articulo_184_2",
+      "nombre": "No tener tarjeta de circulación",
+      "descripcion": "El vehículo carecía por completo de registro y tarjeta de circulación autorizada para su tránsito.",
+      "consejo": "Desde el Decreto 33-2024 se acepta la tarjeta de circulación ELECTRÓNICA digital. Si la mostraste en tu teléfono y te multaron igual, hay argumento para impugnar.",
+      "monto": 500,
+      "codigo": "Art. 184-2 Reglamento (273-98)",
+      "descuento_curso_vial": 375,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "articulo_184_3",
+      "nombre": "Circular ignorando restricciones de la autoridad",
+      "descripcion": "Transitaste en horarios o zonas donde la municipalidad o gobernación había prohibido la circulación general.",
+      "consejo": "Aplica en cierres por obras, manifestaciones o emergencias. Si no había señalización visible del cierre, podés impugnar con fotos del lugar.",
+      "monto": 500,
+      "codigo": "Art. 184-3 Reglamento (273-98)",
+      "descuento_curso_vial": 375,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "articulo_184_4",
+      "nombre": "Vehículos de carga en rutas o horarios prohibidos",
+      "descripcion": "Conducías camiones pesados incumpliendo las restricciones metropolitanas de circulación para el transporte de carga.",
+      "consejo": "Las ciudades restringen horarios y rutas para carga pesada. Verificá el horario permitido de tu ruta; si la señal no estaba visible, impugná.",
+      "monto": 500,
+      "codigo": "Art. 184-4 Reglamento (273-98)",
+      "descuento_curso_vial": 375,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "art_184_5",
+      "codigo": "Art. 184-5 Reglamento (273-98)",
+      "nombre": "Talleres reparando vehículos en la vía pública",
+      "descripcion": "Propietarios de negocios mecánicos utilizaron la calle o avenidas frente a su local como extensión de su taller.",
       "monto": 500,
       "descuento_curso_vial": 375,
       "categoria": "grave",
-      "emisores": ["PNC", "PMT municipal"],
-      "consejo": "La sobrecarga es factor en volcamientos. El curso vial reduce a Q375."
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q500 -> Q375)."
     },
     {
-      "id": "sin_seguro",
-      "codigo": "Ley 132-96",
-      "nombre": "Conducir sin seguro",
-      "descripcion": "Circular sin seguro obligatorio del vehiculo",
+      "id": "estacionamiento_prohibido",
+      "codigo": "Art. 184-6 Reglamento (273-98)",
+      "nombre": "Estacionar en zona prohibida específica / con cepo",
+      "descripcion": "Dejaste el vehículo aparcado en áreas altamente restringidas o prohibidas por los artículos 152 y 153, ameritando inmovilización.",
+      "monto": 500,
+      "descuento_curso_vial": 375,
+      "categoria": "grave",
+      "emisores": [
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "Verifica si el cepo se coloco legalmente: solo en via publica y se libera al recibir la papeleta, sin pago inmediato obligatorio (Decreto 33-2024)."
+    },
+    {
+      "id": "art_184_7",
+      "codigo": "Art. 184-7 Reglamento (273-98)",
+      "nombre": "Transportar exceso de pasajeros sobre el límite legal",
+      "descripcion": "Llevabas a bordo a más personas de las plazas autorizadas en la tarjeta de circulación.",
+      "monto": 500,
+      "descuento_curso_vial": 375,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "El curso vial reduce la multa un 25% (Q500 -> Q375)."
+    },
+    {
+      "id": "articulo_184_8",
+      "nombre": "Transportar personas en lugares exteriores del bus",
+      "descripcion": "Llevabas pasajeros parados en las escaleras, parrillas, estribos o partes externas de unidades de transporte público.",
+      "consejo": "Es peligroso y muy sancionado: nadie puede ir fuera de la cabina en buses o camiones.",
+      "monto": 500,
+      "codigo": "Art. 184-8 Reglamento (273-98)",
+      "descuento_curso_vial": 375,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "articulo_184_9",
+      "nombre": "Recoger o dejar pasajeros en lugares no autorizados",
+      "descripcion": "Unidades de transporte público realizaron paradas de abordaje fuera de las zonas oficialmente señalizadas.",
+      "consejo": "Aplica a transporte público que para fuera de las paradas establecidas. Si la parada no estaba señalizada, hay argumento para revisar la multa.",
+      "monto": 500,
+      "codigo": "Art. 184-9 Reglamento (273-98)",
+      "descuento_curso_vial": 375,
+      "categoria": "grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "articulo_185_a_1",
+      "nombre": "Retirar, dañar o alterar señales de tránsito",
+      "descripcion": "Quitaste, destruiste, pintaste o modificaste intencionalmente las señales viales informativas o reguladoras.",
+      "consejo": "Multa de mayor cuantía (Q1,000). Si la señal ya estaba dañada antes, documentá el estado del lugar.",
       "monto": 1000,
+      "codigo": "Art. 185-A-1 Reglamento (273-98)",
       "descuento_curso_vial": 750,
       "categoria": "muy_grave",
-      "emisores": ["PNC", "PMT municipal"],
-      "consejo": "El seguro obligatorio cubre danos a terceros. Verifica si tu poliza estaba vigente al momento de la multa: si si, impugna con la prueba."
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "articulo_185_a_2",
+      "nombre": "Faltar el respeto o agredir a la autoridad de tránsito",
+      "descripcion": "Insultaste, amenazaste o agrediste verbal o físicamente a los agentes de la PMT, PNC o inspectores viales en funciones.",
+      "consejo": "Además de la multa (Q1,000), el caso puede certificarse al Ministerio Público si constituye delito. Mantené la calma y anotá los datos del agente.",
+      "monto": 1000,
+      "codigo": "Art. 185-A-2 Reglamento (273-98)",
+      "descuento_curso_vial": 750,
+      "categoria": "muy_grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
     },
     {
       "id": "alterar_seguridad_transito",
-      "codigo": "Ley 132-96",
-      "nombre": "Alterar la seguridad del transito sin autorizacion",
-      "descripcion": "Modificar elementos de seguridad vial (senales, semaforos, reductores) sin permiso",
-      "monto": 15000,
+      "codigo": "Art. 185-B Reglamento (273-98)",
+      "nombre": "Alterar la seguridad vial colocando obstáculos para carreras",
+      "descripcion": "Pusiste vallas o elementos imprevisibles en la calle para facilitar competencias o actividades no autorizadas.",
+      "monto": 5000,
       "descuento_curso_vial": null,
       "categoria": "muy_grave",
-      "emisores": ["PNC", "PMT municipal"],
+      "emisores": [
+        "PNC",
+        "PMT municipal"
+      ],
       "consejo": "Multa grave: no aplica curso vial. Si la notificacion no cumple los 6 requisitos del Decreto 33-2024, impugna."
+    },
+    {
+      "id": "articulo_185_b",
+      "nombre": "Alterar la seguridad vial colocando obstáculos para carreras",
+      "descripcion": "Pusiste vallas o elementos imprevisibles en la calle para facilitar competencias o actividades no autorizadas.",
+      "consejo": "Multa de Q5,000. La autoridad avisa al Ministerio Público: puede haber consecuencias penales además de la multa.",
+      "monto": 5000,
+      "codigo": "Art. 185-B Reglamento (273-98)",
+      "descuento_curso_vial": null,
+      "categoria": "muy_grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
+    },
+    {
+      "id": "articulo_185_c",
+      "nombre": "Realizar carreras clandestinas o ignorar a vehículos de emergencia",
+      "descripcion": "Participaste en competencias de velocidad ilegales en la vía pública sin permiso, o te negaste rotundamente a cederle el paso a una unidad de emergencia.",
+      "consejo": "Multa de Q25,000 por cada conductor participante. La autoridad avisa al Ministerio Público obligatoriamente.",
+      "monto": 25000,
+      "codigo": "Art. 185-C Reglamento (273-98)",
+      "descuento_curso_vial": null,
+      "categoria": "muy_grave",
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ]
     },
     {
       "id": "alcohol_drogas",
@@ -125,180 +1493,39 @@
       "monto": 25000,
       "descuento_curso_vial": null,
       "categoria": "muy_grave",
-      "emisores": ["PNC"],
+      "emisores": [
+        "PNC"
+      ],
       "consejo": "La multa administrativa adicional de Q25,000 se suma a otras sanciones. No aplica curso vial. Si el resultado del alcoholimetro fue cuestionable, un abogado puede revisar el procedimiento."
     },
     {
-      "id": "exceso_velocidad",
+      "id": "licencia_vencida",
       "codigo": "Ley 132-96",
-      "nombre": "Exceso de velocidad",
-      "descripcion": "Superar los limites de velocidad establecidos",
+      "nombre": "Conducir con licencia vencida",
+      "descripcion": "Conducir con licencia de conducir expirada",
       "monto": 300,
       "descuento_curso_vial": 225,
-      "categoria": "grave",
-      "emisores": ["PNC", "PMT municipal"],
-      "consejo": "El curso vial reduce la multa a Q225. Guatemala tiene 511 intersecciones con videoanalitica pero aun NO multan automaticamente."
-    },
-    {
-      "id": "celular_conduciendo",
-      "codigo": "Ley 132-96",
-      "nombre": "Uso de telefono celular mientras conduce",
-      "descripcion": "Usar el telefono celular u otro dispositivo mientras se conduce",
-      "monto": 100,
-      "descuento_curso_vial": 75,
-      "categoria": "grave",
-      "emisores": ["PNC", "EMETRA", "PMT municipal"],
-      "consejo": "El curso vial reduce la multa a Q75."
-    },
-    {
-      "id": "sentido_contrario",
-      "codigo": "Ley 132-96",
-      "nombre": "Circular en sentido contrario",
-      "descripcion": "Circular contra el flujo de la via",
-      "monto": null,
-      "descuento_curso_vial": null,
-      "categoria": "muy_grave",
-      "emisores": ["PNC", "PMT municipal"],
-      "verificar": true,
-      "consejo": "Monto pendiente de verificacion. En 2026 se reportaron multas de Q20,000+ por circular contra la via (caso Puente El Incienso)."
-    },
-    {
-      "id": "sin_luces_noche",
-      "codigo": "Ley 132-96",
-      "nombre": "Circular sin luces de noche",
-      "descripcion": "Circular en horario nocturno sin luces encendidas",
-      "monto": null,
-      "descuento_curso_vial": null,
       "categoria": "leve",
-      "emisores": ["PNC", "PMT municipal"],
-      "verificar": true,
-      "consejo": "Monto pendiente de verificacion contra la cartilla oficial."
+      "emisores": [
+        "PNC",
+        "EMETRA",
+        "PMT municipal"
+      ],
+      "consejo": "Renueva la licencia antes de pagar: la multa no exime del tramite. El curso vial reduce a Q225."
     },
     {
-      "id": "articulo_181_25",
-      "nombre": "Artículo 181-25",
-      "descripcion": "Estacionarte en contra de la dirección de la vía (en el carril más próximo pero en sentido contrario)",
-      "consejo": "Es la clásica multa de cepo. Si te lo pusieron, el cepo se libera al recibir la papeleta, sin pago inmediato obligatorio (Decreto 33-2024).",
-      "monto": 200
-    },
-    {
-      "id": "articulo_181_26",
-      "nombre": "Artículo 181-26",
-      "descripcion": "Estacionarte dejando más de 25 centímetros entre el vehículo y la banqueta",
-      "consejo": "De las más fáciles de evitar: pegá bien el vehículo a la banqueta. Si te multaron igual, revisá que la distancia esté bien medida.",
-      "monto": 200
-    },
-    {
-      "id": "articulo_181_27",
-      "nombre": "Artículo 181-27",
-      "descripcion": "Estacionarte o parar donde bloqueás la circulación o ponés en peligro a otros usuarios",
-      "consejo": "Suele venir con cepo. Verificá que el cepo se haya colocado legalmente (solo en vía pública) y que la papeleta tenga los 6 requisitos del Decreto 33-2024.",
-      "monto": 200
-    },
-    {
-      "id": "articulo_181_34",
-      "nombre": "Artículo 181-34",
-      "descripcion": "Circular sin cinturón de seguridad (salvo excepciones del reglamento)",
-      "consejo": "El cinturón salva vidas y es de las multas más comunes. Si el conductor lo traía pero el copiloto no, la multa aplica igual: revisá quién iba en el vehículo.",
-      "monto": 200
-    },
-    {
-      "id": "articulo_182_19",
-      "nombre": "Artículo 182-19",
-      "descripcion": "No ceder el paso a los peatones cuando tienen prioridad (pasos de cebra, cruces)",
-      "consejo": "En un paso de cebra el peatón siempre tiene prioridad. Si te multaron, verificá que el paso estuviera señalizado y que el peatón realmente estuviera cruzando.",
-      "monto": 300
-    },
-    {
-      "id": "articulo_182_20",
-      "nombre": "Artículo 182-20",
-      "descripcion": "No ceder el paso a los ciclistas cuando tienen prioridad",
-      "consejo": "Los ciclistas tienen prioridad en ciclovías y cuando circulan por la derecha. Si la multa no describe bien el lugar, hay argumento para impugnar.",
-      "monto": 300
-    },
-    {
-      "id": "articulo_183_1",
-      "nombre": "Artículo 183-1",
-      "descripcion": "Conducir sin tener licencia de conducir",
-      "consejo": "Es distinto a licencia vencida: acá directamente no tenés licencia. El curso vial reduce la multa a Q300.",
-      "monto": 400
-    },
-    {
-      "id": "articulo_184_2",
-      "nombre": "Artículo 184-2",
-      "descripcion": "No tener la tarjeta de circulación del vehículo",
-      "consejo": "Desde el Decreto 33-2024 se acepta la tarjeta de circulación ELECTRÓNICA digital. Si la mostraste en tu teléfono y te multaron igual, hay argumento para impugnar.",
-      "monto": 500
-    },
-    {
-      "id": "articulo_184_3",
-      "nombre": "Artículo 184-3",
-      "descripcion": "Circular cuando la autoridad dispuso una restricción (cierres, contraflujos, emergencias)",
-      "consejo": "Aplica en cierres por obras, manifestaciones o emergencias. Si no había señalización visible del cierre, podés impugnar con fotos del lugar.",
-      "monto": 500
-    },
-    {
-      "id": "articulo_184_4",
-      "nombre": "Artículo 184-4",
-      "descripcion": "Circular con vehículo de carga en horarios o rutas prohibidas",
-      "consejo": "Las ciudades restringen horarios y rutas para carga pesada. Verificá el horario permitido de tu ruta; si la señal no estaba visible, impugná.",
-      "monto": 500
-    },
-    {
-      "id": "articulo_184_8",
-      "nombre": "Artículo 184-8",
-      "descripcion": "Transportar personas en lugares exteriores de unidades de transporte público (parrillas, estribos)",
-      "consejo": "Es peligroso y muy sancionado: nadie puede ir fuera de la cabina en buses o camiones.",
-      "monto": 500
-    },
-    {
-      "id": "articulo_184_9",
-      "nombre": "Artículo 184-9",
-      "descripcion": "Recoger o dejar pasajeros haciendo parada en lugar no autorizado",
-      "consejo": "Aplica a transporte público que para fuera de las paradas establecidas. Si la parada no estaba señalizada, hay argumento para revisar la multa.",
-      "monto": 500
-    },
-    {
-      "id": "articulo_184_11",
-      "nombre": "Artículo 184-11",
-      "descripcion": "Circular en moto por aceras, banquetas, pasos peatonales o ciclovías",
-      "consejo": "Las motos no pueden circular por espacios peatonales ni ciclovías. Es de las multas más comunes a motociclistas en la ciudad.",
-      "monto": 500
-    },
-    {
-      "id": "articulo_184_12",
-      "nombre": "Artículo 184-12",
-      "descripcion": "Circular en moto entre carriles, parar entre carriles o zigzaguear",
-      "consejo": "El 'filtrado' entre carriles con tráfico detenido es ilegal. Circulá en tu carril y evitá el zigzag: además de la multa, es causa de accidentes.",
-      "monto": 500
-    },
-    {
-      "id": "articulo_185_a_1",
-      "nombre": "Artículo 185-A-1",
-      "descripcion": "Retirar, dañar, alterar o cubrir señales de tránsito",
-      "consejo": "Multa de mayor cuantía (Q1,000). Si la señal ya estaba dañada antes, documentá el estado del lugar.",
-      "monto": 1000
-    },
-    {
-      "id": "articulo_185_a_2",
-      "nombre": "Artículo 185-A-2",
-      "descripcion": "Faltar el respeto, ofender, agredir o insultar a la autoridad de tránsito",
-      "consejo": "Además de la multa (Q1,000), el caso puede certificarse al Ministerio Público si constituye delito. Mantené la calma y anotá los datos del agente.",
-      "monto": 1000
-    },
-    {
-      "id": "articulo_185_b",
-      "nombre": "Artículo 185-B",
-      "descripcion": "Colocar obstáculos en la vía pública para carreras o actividades similares sin permiso",
-      "consejo": "Multa de Q5,000. La autoridad avisa al Ministerio Público: puede haber consecuencias penales además de la multa.",
-      "monto": 5000
-    },
-    {
-      "id": "articulo_185_c",
-      "nombre": "Artículo 185-C",
-      "descripcion": "Usar la vía pública para carreras, concursos o actividades similares sin permiso",
-      "consejo": "Multa de Q25,000 por cada conductor participante. La autoridad avisa al Ministerio Público obligatoriamente.",
-      "monto": 25000
+      "id": "sin_seguro",
+      "codigo": "Ley 132-96",
+      "nombre": "Conducir sin seguro",
+      "descripcion": "Circular sin seguro obligatorio del vehiculo",
+      "monto": 1000,
+      "descuento_curso_vial": 750,
+      "categoria": "muy_grave",
+      "emisores": [
+        "PNC",
+        "PMT municipal"
+      ],
+      "consejo": "El seguro obligatorio cubre danos a terceros. Verifica si tu poliza estaba vigente al momento de la multa: si si, impugna con la prueba."
     }
   ]
 }

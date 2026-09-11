@@ -132,11 +132,15 @@
   "estadoPrescrita": "Multa prescrita",
   "estadoPrescritaDesc": "Pasaron más de 120 días desde la emisión sin que se completara el proceso. Esta multa prescribió y no deberías pagarla.",
   "cursoVialNota": "Algunas entidades ofrecen descuentos por curso vial (25% o más). Verificá en el portal de cada municipalidad.",
-  "botonPagar": "Quiero pagar",
   "botonQuitarMulta": "Quiero quitar la multa",
   "quitarMultaDesc": "¿Creés que la multa no corresponde o ya prescribió? Podemos ayudarte a preparar el recurso para que la quiten.",
   "apelacionTitulo": "Información de apelación",
   "apelacionTexto": "Podés apelar en el juzgado de tránsito correspondiente dentro de los plazos legales. Llevá tu boleta, identificación y los documentos de respaldo.",
   "pagoTitulo": "Información de pago",
-  "pagoTexto": "Podés pagar en las ventanillas de la entidad que emitió la multa o por los canales autorizados. Pagar dentro de los primeros 15 días puede aplicar descuento."
+  "pagoTexto": "Podés pagar en las ventanillas de la entidad que emitió la multa o por los canales autorizados. Pagar dentro de los primeros 15 días puede aplicar descuento.",
+  "apelacionLugar": "Dónde presentarla",
+  "apelacionCriterio": "Criterio",
+  "apelacionDocumentos": "Documentos y pruebas",
+  "apelacionContenido": "Contenido del escrito",
+  "apelacionPlazo": "Plazo"
 }

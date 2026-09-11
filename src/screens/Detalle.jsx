@@ -226,7 +226,7 @@ export default function Detalle() {
     return () => {
       activo = false
     }
-  }, [placa, entidad, noMultaParam, fechaParam])
+  }, [placa, entidad, entidadNorm, noMultaParam, fechaParam])
 
   if (noEncontrada) {
     return (

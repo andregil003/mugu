@@ -137,5 +137,10 @@
   "apelacionTitulo": "Appeal information",
   "apelacionTexto": "You can appeal at the corresponding traffic court within the legal deadlines. Bring your ticket, ID, and supporting documents.",
   "pagoTitulo": "Payment information",
-  "pagoTexto": "You can pay at the counters of the entity that issued the fine or through authorized channels. Paying within the first 15 days may apply a discount."
+  "pagoTexto": "You can pay at the counters of the entity that issued the fine or through authorized channels. Paying within the first 15 days may apply a discount.",
+  "apelacionLugar": "Where to file it",
+  "apelacionCriterio": "Criterion",
+  "apelacionDocumentos": "Documents and evidence",
+  "apelacionContenido": "Content of the document",
+  "apelacionPlazo": "Deadline"
 }

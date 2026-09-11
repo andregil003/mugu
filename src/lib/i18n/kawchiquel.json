@@ -137,5 +137,10 @@
     "estadoPrescritaDesc": "Xq'ax más 120 q'ij chi ri xb'an, man xk'is ta ri proceso. Re multa xk'is, man tatoj ta.",
     "cursoVialNota": "K'o taq entidad kya' descuento ruma curso vial (25% o más). Chasolij pa ri portal rech cada municipalidad.",
     "botonQuitarMulta": "Kawaj kinch'ay ri multa",
-    "quitarMultaDesc": "¿Kachomaj we man utz ta ri multa o xk'is chik? Kakwin nato' awuk' rech kach'ay."
+    "quitarMultaDesc": "¿Kachomaj we man utz ta ri multa o xk'is chik? Kakwin nato' awuk' rech kach'ay.",
+    "apelacionLugar": "Jawje' katya'o",
+    "apelacionCriterio": "Rub'eyal",
+    "apelacionDocumentos": "Taq wuj chuqa' taq retal",
+    "apelacionContenido": "Ri ch'awen pa ri wuj",
+    "apelacionPlazo": "Q'ij"
 }
