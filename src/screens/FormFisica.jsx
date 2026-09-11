@@ -6,7 +6,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { faInfoCircle, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -20,7 +20,13 @@ import {
 import DatePicker from '@/components/DatePicker'
 import PageHero from '@/components/PageHero'
 import { useI18n } from '@/lib/i18n'
-import { validarPlaca, validarFechaNoFutura, hoyISO, normalizarEntidad, PREFIJOS_PLACA } from '@/lib/core'
+import {
+  validarPlaca,
+  validarFechaNoFutura,
+  hoyISO,
+  normalizarEntidad,
+  PREFIJOS_PLACA,
+} from '@/lib/core'
 import { sincronizarCacheDiario } from '@/lib/data'
 
 export default function FormFisica() {
@@ -94,7 +100,8 @@ export default function FormFisica() {
         className="mb-2 -ml-1 text-muted-foreground transition hover:-translate-x-0.5 hover:text-foreground active:scale-95"
         onClick={() => navigate('/menu')}
       >
-        ← {t('volver')}
+        <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
+        {t('volver')}
       </Button>
       <PageHero
         eyebrow={t('appNombre')}
@@ -109,7 +116,10 @@ export default function FormFisica() {
               <label className="mb-1 block text-sm font-medium">{t('labelPlaca')}</label>
               <div className="flex gap-2">
                 <Select value={tipoPlaca} onValueChange={setTipoPlaca}>
-                  <SelectTrigger className="w-28 shrink-0" aria-label={t('tipoPlacaLabel')}>
+                  <SelectTrigger
+                    className="h-11 w-28 shrink-0"
+                    aria-label={t('tipoPlacaLabel')}
+                  >
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
