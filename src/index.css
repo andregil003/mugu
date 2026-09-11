@@ -100,6 +100,8 @@ body {
 }
 
 .dark {
+  /* Controles nativos (scrollbars, inputs, datepicker, autofill) en oscuro */
+  color-scheme: dark;
   --background: oklch(0.185 0.02 152);
   --foreground: oklch(0.985 0.005 152);
   --card: oklch(0.28 0.03 152);
