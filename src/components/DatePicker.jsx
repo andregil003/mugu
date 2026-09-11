@@ -100,7 +100,7 @@ export default function DatePicker({
             <button
               type="button"
               onClick={() => cambiarMes(-1)}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-violet-50 hover:text-violet-700 active:scale-90"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-emerald-50 hover:text-emerald-700 active:scale-90"
               aria-label="Mes anterior"
             >
               <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
@@ -111,7 +111,7 @@ export default function DatePicker({
             <button
               type="button"
               onClick={() => cambiarMes(1)}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-violet-50 hover:text-violet-700 active:scale-90"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-emerald-50 hover:text-emerald-700 active:scale-90"
               aria-label="Mes siguiente"
             >
               <FontAwesomeIcon icon={faChevronRight} className="h-4 w-4" />
@@ -147,10 +147,10 @@ export default function DatePicker({
                     deshabilitado
                       ? 'cursor-not-allowed text-gray-300'
                       : seleccionado
-                        ? 'bg-violet-600 font-bold text-white shadow-md'
+                        ? 'bg-emerald-600 font-bold text-white shadow-md'
                         : esHoy
-                          ? 'font-bold text-violet-700 ring-1 ring-violet-300 hover:bg-violet-50'
-                          : 'text-gray-700 hover:bg-violet-50 hover:text-violet-700'
+                          ? 'font-bold text-emerald-700 ring-1 ring-emerald-300 hover:bg-emerald-50'
+                          : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'
                   )}
                 >
                   {i + 1}

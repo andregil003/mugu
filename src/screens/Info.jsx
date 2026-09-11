@@ -82,8 +82,8 @@ export default function Info() {
               className={cn(
                 'rounded-full border px-3 py-1.5 text-xs font-semibold transition active:scale-95',
                 !categoria
-                  ? 'border-violet-400 bg-violet-600 text-white shadow-sm'
-                  : 'border-gray-200 bg-white text-muted-foreground hover:border-violet-300'
+                  ? 'border-emerald-400 bg-emerald-600 text-white shadow-sm'
+                  : 'border-gray-200 bg-white text-muted-foreground hover:border-emerald-300'
               )}
             >
               {t('infoCategoria')}

@@ -46,14 +46,14 @@ export default function Tamano() {
               onClick={() => setTamano(op.codigo)}
               className={`flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-left transition-all duration-200 active:scale-[0.98] ${
                 activo
-                  ? 'border-violet-400 bg-violet-50 shadow-md ring-2 ring-violet-200'
-                  : 'border-gray-200 bg-white shadow-sm hover:-translate-y-0.5 hover:border-violet-300 hover:shadow-md'
+                  ? 'border-emerald-400 bg-emerald-50 shadow-md ring-2 ring-emerald-200'
+                  : 'border-gray-200 bg-white shadow-sm hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md'
               }`}
             >
               <span className="flex items-center gap-4">
                 <span
                   className={`flex h-11 w-11 items-center justify-center rounded-xl transition ${
-                    activo ? 'bg-violet-600 text-white' : 'bg-violet-100 text-violet-700'
+                    activo ? 'bg-emerald-600 text-white' : 'bg-emerald-100 text-emerald-700'
                   }`}
                 >
                   <FontAwesomeIcon icon={faTextHeight} className="h-5 w-5" />
@@ -72,7 +72,7 @@ export default function Tamano() {
                 </span>
               </span>
               {activo && (
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-violet-600 text-white">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-600 text-white">
                   <FontAwesomeIcon icon={faCheck} className="h-3.5 w-3.5" />
                 </span>
               )}

@@ -115,7 +115,7 @@ export default function Buscar() {
                     key={p}
                     type="button"
                     onClick={() => buscarReciente(p)}
-                    className="rounded-full border border-violet-200 bg-violet-50 px-3.5 py-1.5 font-mono text-sm font-semibold tracking-wider text-violet-800 transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-400 hover:bg-violet-100 hover:shadow-md active:scale-95"
+                    className="rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 font-mono text-sm font-semibold tracking-wider text-emerald-800 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-400 hover:bg-emerald-100 hover:shadow-md active:scale-95"
                   >
                     {p}
                   </button>
