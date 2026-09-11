@@ -7,8 +7,8 @@ Todos los cambios notables del proyecto. Formato basado en [Keep a Changelog](ht
 ### BIG 2 — 30 cambios en 10 módulos (PUCK main + Bat Puck)
 
 **M0 — Portada / idioma / bienvenida (PUCK main)**
-- Fondo dotted + gradiente violeta→fucsia→rosa (sutil, con variante `.dark`).
-- `Idioma.jsx` reescrito: sin tarjeta MUGU previa, sin "Selecciona tu idioma", bienvenida por idioma con degradado + animación izquierda→derecha.
+- Fondo verde institucional MultaClara (sin gradientes rosados — decisión de André).
+- `Idioma.jsx` reescrito: sin tarjeta MUGU previa, sin "Selecciona tu idioma", bienvenida por idioma con degradado verde + animación izquierda→derecha.
 - `Bienvenida.jsx` sin escudo (solo título).
 - Saludos reales: k'iche' "Saqirik!", kaqchikel "Xsaqär" (verificados).
 
