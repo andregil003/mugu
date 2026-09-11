@@ -13,6 +13,7 @@ import {
   faFileLines,
   faPenToSquare,
   faClock,
+  faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons'
 import { useI18n } from '@/lib/i18n'
 import LoadingSpinner from '@/components/LoadingSpinner'
@@ -72,7 +73,8 @@ export default function Apelacion() {
           )
         }
       >
-        ← {t('volver')}
+        <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
+        {t('volver')}
       </Button>
 
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-700 via-amber-600 to-orange-500 shadow-lg">

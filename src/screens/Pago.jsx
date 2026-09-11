@@ -1,17 +1,27 @@
-// pantalla_pago: cómo pagar la multa — canales, bancos por entidad y pasos.
-// Constraint del reto: la app NO procesa pagos; solo orienta dónde y cómo pagar.
+// pantalla_pago: pasarela de pago SIMULADA (prototipo educativo) + canales reales.
+// La app NO procesa pagos reales: el formulario es una simulación visual.
+// Opción secundaria: redirigir al portal oficial de la entidad que emitió la multa.
+import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBuildingColumns,
+  faCircleCheck,
   faCircleInfo,
   faCreditCard,
   faHandHoldingDollar,
   faLandmark,
   faLightbulb,
+  faLock,
+  faChevronLeft,
+  faArrowUpRightFromSquare,
+  faSpinner,
 } from '@fortawesome/free-solid-svg-icons'
 import { useI18n } from '@/lib/i18n'
+import { normalizarEntidad } from '@/lib/core'
+import { sincronizarCacheDiario } from '@/lib/data'
 
 // Bancos autorizados según la entidad que emitió la multa.
 // Fuente: public/entidades.json (campo dondePagar) + verificación SAT.
@@ -24,6 +34,21 @@ const BANCOS_POR_ENTIDAD = {
 
 const PASOS = ['pagoPaso1', 'pagoPaso2', 'pagoPaso3', 'pagoPaso4', 'pagoPaso5']
 
+// Monto de demostración si la multa no aparece en el caché local.
+const MONTO_DEMO = 250
+
+function formatearTarjeta(v) {
+  return v
+    .replace(/\D/g, '')
+    .slice(0, 16)
+    .replace(/(\d{4})(?=\d)/g, '$1 ')
+}
+
+function formatearVencimiento(v) {
+  const d = v.replace(/\D/g, '').slice(0, 4)
+  return d.length > 2 ? `${d.slice(0, 2)}/${d.slice(2)}` : d
+}
+
 export default function Pago() {
   const { t } = useI18n()
   const navigate = useNavigate()
@@ -31,11 +56,82 @@ export default function Pago() {
   const placa = params.get('placa') ?? ''
   const entidad = params.get('entidad') ?? ''
 
-  const bancos = BANCOS_POR_ENTIDAD[entidad] ?? [
-    'pagoBanrural',
-    'pagoBancoIndustrial',
-    'pagoBancosSistema',
-  ]
+  const [portal, setPortal] = useState('')
+  const [entidadLabel, setEntidadLabel] = useState(entidad.toUpperCase())
+  const [monto, setMonto] = useState(null)
+
+  const [tarjeta, setTarjeta] = useState('')
+  const [titular, setTitular] = useState('')
+  const [vencimiento, setVencimiento] = useState('')
+  const [cvv, setCvv] = useState('')
+  const [estado, setEstado] = useState('form') // form | procesando | exito
+
+  useEffect(() => {
+    let activo = true
+    async function cargar() {
+      const [entidades, reales] = await Promise.all([
+        fetch('/entidades.json')
+          .then((r) => r.json())
+          .then((d) => d.entidades ?? [])
+          .catch(() => []),
+        sincronizarCacheDiario().catch(() => []),
+      ])
+      if (!activo) return
+
+      const e = entidades.find(
+        (x) =>
+          x.id === entidad ||
+          normalizarEntidad(x.corto) === normalizarEntidad(entidad)
+      )
+      if (e) {
+        setEntidadLabel(e.corto ?? e.nombre ?? entidad.toUpperCase())
+        setPortal(e.portal ?? '')
+      }
+
+      const p = placa.trim().toUpperCase()
+      const multa = reales.find(
+        (m) =>
+          String(m.placa ?? '').trim().toUpperCase() === p &&
+          (!entidad || normalizarEntidad(m.entidad) === normalizarEntidad(entidad))
+      )
+      if (multa) {
+        const n = Number(String(multa.monto ?? '').replace(/[^0-9.]/g, ''))
+        if (Number.isFinite(n) && n > 0) setMonto(n)
+      }
+    }
+    cargar()
+    return () => {
+      activo = false
+    }
+  }, [placa, entidad])
+
+  const bancos =
+    BANCOS_POR_ENTIDAD[entidad] ?? [
+      'pagoBanrural',
+      'pagoBancoIndustrial',
+      'pagoBancosSistema',
+    ]
+  const montoMostrado = monto ?? MONTO_DEMO
+  const formularioCompleto =
+    tarjeta.replace(/\s/g, '').length === 16 &&
+    titular.trim().length > 0 &&
+    vencimiento.length === 5 &&
+    cvv.length >= 3
+
+  function pagar(e) {
+    e.preventDefault()
+    if (!formularioCompleto || estado === 'procesando') return
+    setEstado('procesando')
+    setTimeout(() => setEstado('exito'), 1800)
+  }
+
+  function reiniciar() {
+    setTarjeta('')
+    setTitular('')
+    setVencimiento('')
+    setCvv('')
+    setEstado('form')
+  }
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-6">
@@ -48,7 +144,8 @@ export default function Pago() {
           )
         }
       >
-        ← {t('volver')}
+        <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
+        {t('volver')}
       </Button>
 
       {/* Encabezado */}
@@ -63,6 +160,173 @@ export default function Pago() {
           <p className="mt-1 text-sm text-white/80">{t('pagoTexto')}</p>
         </div>
       </div>
+
+      {/* Pasarela de pago simulada */}
+      <section className="mt-4 overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 bg-gradient-to-r from-emerald-50 to-white px-5 py-4">
+          <div>
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-emerald-700">
+              {t('pagoPasarelaTitulo')}
+            </h2>
+            <p className="text-xs text-muted-foreground">{t('pagoPasarelaSubtitulo')}</p>
+          </div>
+          <span className="flex items-center gap-1.5 rounded-full bg-emerald-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-emerald-800">
+            <FontAwesomeIcon icon={faLock} className="h-3 w-3" />
+            {t('pagoSimulacionNota')}
+          </span>
+        </div>
+
+        {estado === 'exito' ? (
+          <div className="px-5 py-10 text-center">
+            <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+              <FontAwesomeIcon icon={faCircleCheck} className="h-8 w-8" />
+            </span>
+            <h3 className="mt-4 text-lg font-bold text-gray-900">{t('pagoExito')}</h3>
+            <p className="mt-1 text-sm text-muted-foreground">{t('pagoExitoDesc')}</p>
+            <Button variant="outline" className="mt-5" onClick={reiniciar}>
+              {t('pagoNuevaSimulacion')}
+            </Button>
+          </div>
+        ) : (
+          <form onSubmit={pagar} className="px-5 py-4">
+            {/* Datos de la multa */}
+            <div className="rounded-2xl border border-gray-100 bg-gray-50/60 p-3">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                {t('pagoDatosMulta')}
+              </p>
+              <div className="mt-2 grid grid-cols-2 gap-2 text-sm sm:grid-cols-4">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                    {t('detallePlaca')}
+                  </p>
+                  <p className="font-mono font-semibold">{placa}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                    {t('detalleEntidad')}
+                  </p>
+                  <p className="font-medium">{entidadLabel}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                    {t('pagoBancoAsociado')}
+                  </p>
+                  <p className="flex items-center gap-1.5 font-medium">
+                    <FontAwesomeIcon
+                      icon={faBuildingColumns}
+                      className="h-3.5 w-3.5 text-emerald-600"
+                    />
+                    {t(bancos[0])}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                    {t('pagoMonto')}
+                  </p>
+                  <p className="font-mono text-base font-bold text-emerald-700">
+                    Q{montoMostrado.toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Formulario de tarjeta */}
+            <div className="mt-4 space-y-3">
+              <div>
+                <label className="mb-1 block text-sm font-medium">
+                  {t('pagoNumeroTarjeta')}
+                </label>
+                <Input
+                  value={tarjeta}
+                  onChange={(e) => setTarjeta(formatearTarjeta(e.target.value))}
+                  placeholder={t('pagoTarjetaPlaceholder')}
+                  inputMode="numeric"
+                  className="h-11 font-mono"
+                  required
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm font-medium">
+                  {t('pagoNombreTitular')}
+                </label>
+                <Input
+                  value={titular}
+                  onChange={(e) => setTitular(e.target.value.toUpperCase())}
+                  placeholder="JUAN PEREZ"
+                  className="h-11"
+                  required
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="mb-1 block text-sm font-medium">
+                    {t('pagoVencimiento')}
+                  </label>
+                  <Input
+                    value={vencimiento}
+                    onChange={(e) => setVencimiento(formatearVencimiento(e.target.value))}
+                    placeholder="MM/AA"
+                    inputMode="numeric"
+                    className="h-11 font-mono"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="mb-1 block text-sm font-medium">{t('pagoCvv')}</label>
+                  <Input
+                    value={cvv}
+                    onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 4))}
+                    placeholder={t('pagoCvvPlaceholder')}
+                    inputMode="numeric"
+                    type="password"
+                    className="h-11 font-mono"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              size="lg"
+              disabled={!formularioCompleto || estado === 'procesando'}
+              className="mt-4 w-full rounded-2xl bg-primary text-sm font-bold shadow-md transition-all hover:shadow-lg hover:brightness-110 active:scale-[0.98]"
+            >
+              {estado === 'procesando' ? (
+                <>
+                  <FontAwesomeIcon icon={faSpinner} className="h-4 w-4 animate-spin" />
+                  {t('pagoProcesando')}
+                </>
+              ) : (
+                <>
+                  <FontAwesomeIcon icon={faCreditCard} className="h-4 w-4" />
+                  {t('pagoBotonPagar')}
+                </>
+              )}
+            </Button>
+
+            {/* Opción secundaria: portal oficial de la entidad */}
+            {portal && (
+              <div className="mt-3 rounded-2xl border border-dashed border-gray-200 p-3 text-center">
+                <p className="text-xs font-semibold text-gray-700">{t('pagoPortalOficial')}</p>
+                <p className="mt-0.5 text-[11px] text-muted-foreground">
+                  {t('pagoPortalOficialDesc')}
+                </p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="mt-2"
+                  onClick={() => window.open(portal, '_blank', 'noopener,noreferrer')}
+                >
+                  {entidadLabel}
+                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="h-3.5 w-3.5" />
+                </Button>
+              </div>
+            )}
+          </form>
+        )}
+      </section>
 
       {/* Nota de descuento */}
       <div className="mt-4 flex items-start gap-2 rounded-2xl border border-emerald-200 bg-emerald-50 p-3 text-xs leading-relaxed text-emerald-900">

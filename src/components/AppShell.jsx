@@ -4,7 +4,7 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faShieldHalved,
+  faHouse,
   faMagnifyingGlass,
   faFileLines,
   faCircleQuestion,
@@ -18,7 +18,7 @@ const RUTAS_SIN_NAV = ['/']
 const RUTAS_SOLO_LOGO = ['/idioma']
 
 const NAV_ITEMS = [
-  { ruta: '/menu', icono: faShieldHalved, clave: 'navInicio', activas: ['/menu', '/bienvenida'] },
+  { ruta: '/menu', icono: faHouse, clave: 'navInicio', activas: ['/menu', '/bienvenida'] },
   { ruta: '/buscar', icono: faMagnifyingGlass, clave: 'navBuscar', activas: ['/buscar', '/resultados', '/detalle', '/apelacion', '/pago'] },
   { ruta: '/multa-fisica', icono: faFileLines, clave: 'navMulta', activas: ['/multa-fisica'] },
   { ruta: '/info', icono: faCircleQuestion, clave: 'navInfo', activas: ['/info'] },
@@ -40,12 +40,12 @@ export default function AppShell({ children }) {
     <div className="flex min-h-svh flex-col">
       {conHeader && (
         <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
-          <div className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between gap-3 px-4">
+          <div className="mx-auto grid h-14 w-full max-w-5xl grid-cols-[1fr_auto_1fr] items-center gap-3 px-4">
             {/* Logo */}
             <button
               type="button"
               onClick={() => navigate(soloLogo ? '/idioma' : '/menu')}
-              className="flex shrink-0 items-center gap-2 transition hover:opacity-80 active:scale-95"
+              className="flex shrink-0 items-center gap-2 justify-self-start transition hover:opacity-80 active:scale-95"
               aria-label={t('appNombre')}
             >
               <img
@@ -53,14 +53,22 @@ export default function AppShell({ children }) {
                 alt={t('appNombre')}
                 className="h-8 w-8 rounded-lg object-cover shadow-sm"
               />
-              <span className="text-base font-black tracking-tight">
-                {t('appNombre')}
+              <span className="flex flex-col items-start leading-none">
+                <span className="text-base font-black tracking-tight">
+                  {t('appNombre')}
+                </span>
+                <span className="hidden text-[10px] font-medium text-muted-foreground sm:inline">
+                  {t('tagline')}
+                </span>
               </span>
             </button>
 
-            {/* Nav desktop (oculto en portada /idioma) */}
+            {/* Nav desktop (oculto en portada /idioma) — centrado */}
             {!soloLogo && (
-              <nav className="hidden items-center gap-1 lg:flex" aria-label={t('navAria')}>
+              <nav
+                className="hidden items-center justify-center gap-1 lg:flex"
+                aria-label={t('navAria')}
+              >
                 {NAV_ITEMS.map((item) => (
                   <button
                     key={item.ruta}
@@ -80,7 +88,7 @@ export default function AppShell({ children }) {
               </nav>
             )}
 
-            <div className="flex items-center gap-1">
+            <div className="flex items-center justify-end gap-1">
               {/* Tamaño de texto (accesibilidad) */}
               <button
                 type="button"

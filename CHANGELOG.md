@@ -2,6 +2,49 @@
 
 Todos los cambios notables del proyecto. Formato basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/) y versionado semver.
 
+## [0.7.0] — 2026-09-10
+
+### BIG 2 — 30 cambios en 10 módulos (PUCK main + Bat Puck)
+
+**M0 — Portada / idioma / bienvenida (PUCK main)**
+- Fondo dotted + gradiente violeta→fucsia→rosa (sutil, con variante `.dark`).
+- `Idioma.jsx` reescrito: sin tarjeta MUGU previa, sin "Selecciona tu idioma", bienvenida por idioma con degradado + animación izquierda→derecha.
+- `Bienvenida.jsx` sin escudo (solo título).
+- Saludos reales: k'iche' "Saqirik!", kaqchikel "Xsaqär" (verificados).
+
+**M1 — Identidad / tipografía / tamaño / PWA (PUCK main)**
+- Fuente Noto Sans Variable (glifos completos para k'iche'/kaqchikel) + fallback en `--font-sans`.
+- `Tamano.jsx` con botones "Aa" horizontales.
+- manifest.json con `id`/`scope`/`display_override`; index.html con `mobile-web-app-capable`.
+
+**M2 — AppShell / menú / back buttons (Bat Puck)**
+- Nav desktop centrado (grid 1fr-auto-1fr), bottom-nav móvil con safe-area, footer visible en móvil.
+- Menu con cards que rematan en acción "Comenzar".
+
+**M3 — Buscar / municipios / multas (PUCK main)**
+- Buscar: desplegable de sigla de placa (P123ABC) + placas recientes en slider horizontal con "X" en hover (límite 5, auto-elimina la más vieja).
+- Municipios: loading animado (sin botón "Actualizar datos"); si la muni tiene 1 multa → va directo al detalle.
+- Multas: logo de la municipalidad en el header verde.
+
+**M4 — Detalle (Bat Puck)**
+- Boleta vertical campo+valor, sección "Explicación", línea de tiempo SVG con gradiente verde→ámbar→rojo.
+
+**M5 — DatePicker (PUCK main)**
+- Calendario convertido en popup modal con blur overlay (ya no se corta por las tarjetas).
+
+**M6 — FormFisica (Bat Puck)**
+- Ajustes menores de consistencia.
+
+**M7 — Info (Bat Puck)**
+- Contenido paginado (Anterior/Siguiente), tipos de multa (Papeleta/Cepo/Fotovelocímetro).
+
+**M8 — Pago (Bat Puck)**
+- Pasarela de pago SIMULADA (prototipo educativo): formulario de tarjeta con validación, estado procesando/éxito, "Nueva simulación", y opción de redirigir al portal oficial de la entidad.
+
+**M9 — i18n + sugerir idioma (PUCK main)**
+- Popup modal "Sugerir idioma" (blur overlay, formulario con confirmación local).
+- Keys nuevas de Bat Puck propagadas a k'iche'/kaqchikel (placeholder es, TODO Uriel).
+
 ## [0.6.0] — 2026-09-10
 
 ### Fase 2 — i18n completo (PUCK main)

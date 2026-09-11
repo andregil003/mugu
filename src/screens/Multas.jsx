@@ -1,5 +1,6 @@
 // pantalla_multas (Flujo A): listado previo de multas de una placa+entidad.
 // Muestra una tarjeta por multa pendiente; al elegir una se va a /detalle.
+// BIG2-M3: logo de la municipalidad al lado derecho del cuadro verde.
 // Los datos vienen del backend (cache diario) — sin datos de demostración.
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
@@ -18,6 +19,7 @@ export default function Multas() {
 
   const [multas, setMultas] = useState(null)
   const [entidadLabel, setEntidadLabel] = useState('')
+  const [entidadImagen, setEntidadImagen] = useState('')
 
   useEffect(() => {
     let activo = true
@@ -69,6 +71,7 @@ export default function Multas() {
       )
       setMultas(lista)
       setEntidadLabel(ent?.corto ?? entidad.toUpperCase())
+      setEntidadImagen(ent?.imagen ?? '')
     }
     cargar()
     return () => {
@@ -98,7 +101,14 @@ export default function Multas() {
 
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-800 via-green-700 to-emerald-600 shadow-lg">
         <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
-        <div className="relative px-6 py-6 text-white">
+        {entidadImagen && (
+          <img
+            src={entidadImagen}
+            alt={entidadLabel}
+            className="absolute right-4 top-1/2 h-16 w-16 -translate-y-1/2 rounded-xl border border-white/30 bg-white/90 object-contain p-1 shadow-lg"
+          />
+        )}
+        <div className={`relative px-6 py-6 text-white ${entidadImagen ? 'pr-24' : ''}`}>
           <p className="text-xs font-medium uppercase tracking-widest text-white/70">
             {entidadLabel}
           </p>

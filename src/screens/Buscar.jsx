@@ -1,6 +1,7 @@
-// pantalla_ingreso_placa (Flujo A): búsqueda general solo con placa.
-// Guarda placas recientes en localStorage (caché local, sin cuentas) y
-// permite re-buscar con un toque o limpiar el historial.
+// pantalla_ingreso_placa (Flujo A): búsqueda general con placa.
+// BIG2-M3: desplegable de sigla (P123ABC, igual que multa física) + placas
+// recientes en slider horizontal (límite 5, "X" en hover para quitar, la más
+// vieja se elimina automáticamente al agregar una nueva).
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,9 +9,16 @@ import { faClockRotateLeft, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import PageHero from '@/components/PageHero'
 import { useI18n } from '@/lib/i18n'
-import { validarPlaca } from '@/lib/core'
+import { validarPlaca, PREFIJOS_PLACA } from '@/lib/core'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 
 const MAX_RECIENTES = 5
@@ -18,7 +26,8 @@ const MAX_RECIENTES = 5
 export default function Buscar() {
   const { t } = useI18n()
   const navigate = useNavigate()
-  const [placa, setPlaca] = useState('')
+  const [tipoPlaca, setTipoPlaca] = useState('P')
+  const [restoPlaca, setRestoPlaca] = useState('')
   const [error, setError] = useState('')
   const [recientes, setRecientes] = useLocalStorage('placas', [])
 
@@ -26,12 +35,17 @@ export default function Buscar() {
     const sinDuplicados = recientes.filter(
       (x) => x.toUpperCase() !== p.toUpperCase()
     )
+    // Límite 5: la más vieja se elimina automáticamente
     setRecientes([p, ...sinDuplicados].slice(0, MAX_RECIENTES))
+  }
+
+  function quitarReciente(p) {
+    setRecientes(recientes.filter((x) => x.toUpperCase() !== p.toUpperCase()))
   }
 
   function buscar(e) {
     e.preventDefault()
-    const p = placa.trim().toUpperCase()
+    const p = `${tipoPlaca}${restoPlaca}`.trim().toUpperCase()
     if (!validarPlaca(p)) {
       setError(t('errorPlacaInvalida'))
       return
@@ -72,14 +86,28 @@ export default function Buscar() {
               <label className="mb-1 block text-sm font-medium">
                 {t('labelPlaca')}
               </label>
-              <Input
-                value={placa}
-                onChange={(e) => setPlaca(e.target.value.toUpperCase())}
-                placeholder={t('placeholderPlaca')}
-                aria-label={t('labelPlaca')}
-                autoFocus
-                className="h-12 rounded-xl text-center text-lg font-semibold tracking-widest transition hover:border-primary/50 focus-visible:ring-primary/30"
-              />
+              <div className="flex gap-2">
+                <Select value={tipoPlaca} onValueChange={setTipoPlaca}>
+                  <SelectTrigger className="h-12 w-24 shrink-0 rounded-xl">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {PREFIJOS_PLACA.map((p) => (
+                      <SelectItem key={p} value={p}>
+                        {p}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Input
+                  value={restoPlaca}
+                  onChange={(e) => setRestoPlaca(e.target.value.toUpperCase())}
+                  placeholder="123ABC"
+                  aria-label={t('labelPlaca')}
+                  autoFocus
+                  className="h-12 rounded-xl text-center text-lg font-semibold tracking-widest transition hover:border-primary/50 focus-visible:ring-primary/30"
+                />
+              </div>
               {error && (
                 <p className="mt-1.5 text-sm text-red-600 animate-in slide-in-from-top-1">
                   {error}
@@ -98,7 +126,7 @@ export default function Buscar() {
             </p>
           </form>
 
-          {/* Placas recientes (caché local) */}
+          {/* Placas recientes (caché local): slider horizontal + X en hover */}
           {recientes.length > 0 && (
             <div className="mt-5 border-t border-gray-100 pt-4">
               <div className="mb-2 flex items-center justify-between">
@@ -115,16 +143,25 @@ export default function Buscar() {
                   {t('limpiar')}
                 </button>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {recientes.map((p) => (
-                  <button
-                    key={p}
-                    type="button"
-                    onClick={() => buscarReciente(p)}
-                    className="rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 font-mono text-sm font-semibold tracking-wider text-emerald-800 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-400 hover:bg-emerald-100 hover:shadow-md active:scale-95"
-                  >
-                    {p}
-                  </button>
+                  <div key={p} className="group relative shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => buscarReciente(p)}
+                      className="rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 font-mono text-sm font-semibold tracking-wider text-emerald-800 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-400 hover:bg-emerald-100 hover:shadow-md active:scale-95"
+                    >
+                      {p}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => quitarReciente(p)}
+                      aria-label={`${t('quitar')} ${p}`}
+                      className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white opacity-0 shadow transition-opacity group-hover:opacity-100 focus:opacity-100 active:scale-90"
+                    >
+                      <FontAwesomeIcon icon={faXmark} className="h-3 w-3" />
+                    </button>
+                  </div>
                 ))}
               </div>
             </div>

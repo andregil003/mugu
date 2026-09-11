@@ -10,7 +10,12 @@ import { Button } from '@/components/ui/button'
 import DatePicker from '@/components/DatePicker'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
+import {
+  faLightbulb,
+  faChevronLeft,
+  faCheck,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons'
 import { useI18n } from '@/lib/i18n'
 import {
   inferirTipoVehiculo,
@@ -109,11 +114,11 @@ function calcularEstado(fechaEmision, fechaNotif) {
 }
 
 const COLOR_FASE = {
-  emitida: 'border-blue-500 text-blue-600 ring-blue-500/20',
+  emitida: 'border-emerald-500 text-emerald-600 ring-emerald-500/20',
   notificada: 'border-emerald-500 text-emerald-600 ring-emerald-500/20',
   apelacion: 'border-amber-500 text-amber-600 ring-amber-500/20',
-  solopago: 'border-red-500 text-red-600 ring-red-500/20',
-  prescripcion: 'border-violet-500 text-violet-600 ring-violet-500/20',
+  solopago: 'border-orange-500 text-orange-600 ring-orange-500/20',
+  prescripcion: 'border-red-500 text-red-600 ring-red-500/20',
 }
 
 const PASOS_LEGALES = [
@@ -147,8 +152,6 @@ const DESCRIPCION = {
   soloPago: 'estadoSoloPagoDesc',
   prescrita: 'estadoPrescritaDesc',
 }
-
-const PANEL = 'rounded-3xl border border-gray-100 bg-white p-5 shadow-sm transition-shadow hover:shadow-md'
 
 export default function Detalle() {
   const { t } = useI18n()
@@ -312,9 +315,9 @@ export default function Detalle() {
   }
 
   function nodoPaso(p) {
-    if (p.clase === 'ok') return 'border-2 border-blue-600 bg-blue-600 text-white'
+    if (p.clase === 'ok') return 'border-2 border-emerald-600 bg-emerald-600 text-white'
     if (p.clase === 'current') return `border-2 bg-white ring-4 ${COLOR_FASE[p.id]}`
-    if (p.clase === 'blocked') return 'border-2 border-gray-200 bg-gray-200'
+    if (p.clase === 'blocked') return 'border-2 border-red-300 bg-red-100 text-red-500'
     return 'border-2 border-gray-300 bg-white'
   }
 
@@ -336,7 +339,8 @@ export default function Detalle() {
             navigate(`/multas?placa=${encodeURIComponent(placa)}&entidad=${entidad}`)
           }
         >
-          ← {t('volver')}
+          <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
+          {t('volver')}
         </Button>
 
         {/* Encabezado */}
@@ -368,65 +372,91 @@ export default function Detalle() {
           </div>
         </div>
 
-        {/* 1. Datos de la multa */}
-        <section className="mt-5 rounded-3xl border border-gray-100 bg-white p-4 shadow-sm sm:p-5">
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-emerald-700">
+        {/* 1. Datos de la multa — boleta vertical campo + valor */}
+        <section className="mt-5 rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-emerald-700">
             {t('detalleTablaTitulo')}
           </h2>
-          <div className="overflow-x-auto rounded-2xl border border-gray-200">
-            <table className="w-full min-w-[620px] table-auto text-left text-sm">
-              <thead>
-                <tr className="border-b border-gray-200 bg-gradient-to-r from-emerald-50 via-green-50 to-transparent text-[11px] uppercase tracking-wide text-gray-500">
-                  <th className="px-3 py-2.5 font-semibold">{t('detalleNoMulta')}</th>
-                  <th className="px-3 py-2.5 font-semibold">{t('detallePlaca')}</th>
-                  <th className="px-3 py-2.5 font-semibold">{t('detalleTipo')}</th>
-                  <th className="px-3 py-2.5 font-semibold">{t('detalleEntidad')}</th>
-                  <th className="px-3 py-2.5 font-semibold">{t('detalleFecha')}</th>
-                  <th className="px-3 py-2.5 font-semibold">{t('detalleTipoMulta')}</th>
-                  <th className="px-3 py-2.5 font-semibold">{t('detalleMotivoLegal')}</th>
-                  <th className="px-3 py-2.5 font-semibold">{t('detalleMonto')}</th>
-                  <th className="px-3 py-2.5 font-semibold">{t('detalleEstado')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="align-top even:bg-gray-50/50">
-                  <td className="px-3 py-3 font-mono text-xs font-semibold">{multa.noMulta}</td>
-                  <td className="px-3 py-3 font-semibold">{multa.placa}</td>
-                  <td className="px-3 py-3">{tipoLabel}</td>
-                  <td className="px-3 py-3">{entidadLabel}</td>
-                  <td className="px-3 py-3 whitespace-nowrap">
-                    {formatearFecha(fechaEmision)}
-                  </td>
-                  <td className="px-3 py-3">
-                    <span
-                      className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase ${
-                        TIPO_MULTA_BADGE[multa.tipoMulta] ??
-                        (multa.esFoto ? 'bg-sky-100 text-sky-700' : 'bg-amber-100 text-amber-700')
-                      }`}
-                    >
-                      {tipoMultaLabel ||
-                        (multa.esFoto ? t('tipoMultaFoto') : t('tipoMultaPapel'))}
-                    </span>
-                  </td>
-                  <td className="px-3 py-3 text-[13px] font-medium leading-snug">
-                    {multa.motivoLegal || motivoLegal}
-                  </td>
-                  <td className="px-3 py-3 font-mono font-semibold whitespace-nowrap">
-                    {formatoMonto(multa.monto)}
-                  </td>
-                  <td className="px-3 py-3 whitespace-nowrap">
-                    <span
-                      className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${
-                        ESTADO_BADGE[multa.estado] ?? 'bg-amber-100 text-amber-700'
-                      }`}
-                    >
-                      {estadoTabla}
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <dl className="grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+              <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                {t('detalleNoMulta')}
+              </dt>
+              <dd className="mt-0.5 font-mono text-sm font-semibold">{multa.noMulta}</dd>
+            </div>
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+              <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                {t('detallePlaca')}
+              </dt>
+              <dd className="mt-0.5 text-sm font-semibold">{multa.placa}</dd>
+            </div>
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+              <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                {t('detalleTipo')}
+              </dt>
+              <dd className="mt-0.5 text-sm font-medium">{tipoLabel}</dd>
+            </div>
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+              <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                {t('detalleEntidad')}
+              </dt>
+              <dd className="mt-0.5 text-sm font-medium">{entidadLabel}</dd>
+            </div>
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+              <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                {t('detalleFecha')}
+              </dt>
+              <dd className="mt-0.5 text-sm font-medium whitespace-nowrap">
+                {formatearFecha(fechaEmision)}
+              </dd>
+            </div>
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+              <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                {t('detalleTipoMulta')}
+              </dt>
+              <dd className="mt-0.5">
+                <span
+                  className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase ${
+                    TIPO_MULTA_BADGE[multa.tipoMulta] ??
+                    (multa.esFoto ? 'bg-sky-100 text-sky-700' : 'bg-amber-100 text-amber-700')
+                  }`}
+                >
+                  {tipoMultaLabel ||
+                    (multa.esFoto ? t('tipoMultaFoto') : t('tipoMultaPapel'))}
+                </span>
+              </dd>
+            </div>
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3 sm:col-span-2">
+              <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                {t('detalleMotivoLegal')}
+              </dt>
+              <dd className="mt-0.5 text-[13px] font-medium leading-snug">
+                {multa.motivoLegal || motivoLegal}
+              </dd>
+            </div>
+            <div className="rounded-xl bg-emerald-50/80 px-4 py-3">
+              <dt className="text-[11px] font-semibold uppercase tracking-wide text-emerald-700">
+                {t('detalleMonto')}
+              </dt>
+              <dd className="mt-0.5 font-mono text-base font-bold text-emerald-700">
+                {formatoMonto(multa.monto)}
+              </dd>
+            </div>
+            <div className="rounded-xl bg-gray-50/80 px-4 py-3">
+              <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                {t('detalleEstado')}
+              </dt>
+              <dd className="mt-0.5">
+                <span
+                  className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${
+                    ESTADO_BADGE[multa.estado] ?? 'bg-amber-100 text-amber-700'
+                  }`}
+                >
+                  {estadoTabla}
+                </span>
+              </dd>
+            </div>
+          </dl>
         </section>
 
         {/* 2. Motivo legal + explicación clara */}
@@ -436,7 +466,7 @@ export default function Detalle() {
           </p>
           <p className="mt-1 text-sm italic text-gray-400">{motivoLegal}</p>
           <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-emerald-700">
-            {t('razonClara')}
+            {t('explicacion')}
           </p>
           <p className="mt-1 text-[15px] leading-relaxed text-gray-900">
             {razonClara}
@@ -449,57 +479,76 @@ export default function Detalle() {
           )}
         </section>
 
-        {/* 3. Línea de tiempo horizontal */}
-        <section className="mt-4 rounded-3xl border border-emerald-100 bg-gradient-to-b from-emerald-50 to-white p-5 shadow-sm">
+        {/* 3. Proceso legal: línea de tiempo + notificación + prescripción + situación */}
+        <section className="mt-5 rounded-3xl border border-emerald-100 bg-gradient-to-b from-emerald-50 to-white p-5 shadow-sm">
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-emerald-700">
             {t('tlTitulo')}
           </h2>
-          <div className="overflow-x-auto pb-1">
-            <div className="flex min-w-[400px] items-start justify-between">
-              {PASOS_LEGALES.map((p, i) => {
-                const clase = estadoPaso(p.id)
-                const previa = i > 0 ? estadoPaso(PASOS_LEGALES[i - 1].id) : null
-                return (
-                  <div key={p.id} className="relative flex flex-1 flex-col items-center text-center">
-                    {i < PASOS_LEGALES.length - 1 && (
+
+          {/* Línea de tiempo horizontal (onda verde → rojo) */}
+          <div className="overflow-x-auto px-2 pb-2">
+            <div className="relative min-w-[400px]">
+              <svg
+                className="absolute left-0 right-0 top-[11px] h-2 w-full"
+                viewBox="0 0 400 6"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <defs>
+                  <linearGradient id="tl-grad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor="#10b981" />
+                    <stop offset="55%" stopColor="#f59e0b" />
+                    <stop offset="100%" stopColor="#ef4444" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M0 3 Q 50 0, 100 3 T 200 3 T 300 3 T 400 3"
+                  fill="none"
+                  stroke="url(#tl-grad)"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  vectorEffect="non-scaling-stroke"
+                />
+              </svg>
+              <div className="flex items-start justify-between">
+                {PASOS_LEGALES.map((p) => {
+                  const clase = estadoPaso(p.id)
+                  return (
+                    <div
+                      key={p.id}
+                      className="relative flex flex-1 flex-col items-center text-center"
+                    >
                       <span
-                        className={`absolute left-1/2 top-[11px] h-0.5 w-full -translate-y-1/2 rounded-full ${
-                          previa === 'ok'
-                            ? 'bg-blue-400'
-                            : previa === 'blocked'
-                              ? 'bg-red-300'
-                              : 'bg-gray-200'
+                        className={`relative z-10 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full text-[10px] transition-all duration-300 ${nodoPaso(
+                          { ...p, clase }
+                        )}`}
+                      >
+                        {clase === 'current' && (
+                          <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-current" />
+                        )}
+                        {clase === 'ok' && <FontAwesomeIcon icon={faCheck} className="h-3 w-3" />}
+                        {clase === 'blocked' && (
+                          <FontAwesomeIcon icon={faXmark} className="h-3 w-3" />
+                        )}
+                      </span>
+                      <p
+                        className={`mt-1.5 px-0.5 text-[11px] font-semibold leading-tight ${
+                          clase === 'current'
+                            ? 'text-foreground'
+                            : clase === 'blocked'
+                              ? 'text-gray-400'
+                              : 'text-foreground/70'
                         }`}
-                      />
-                    )}
-                    <span
-                      className={`relative z-10 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full text-[10px] transition-all duration-300 ${nodoPaso(
-                        { ...p, clase }
-                      )}`}
-                    >
-                      {clase === 'current' && (
-                        <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-current" />
-                      )}
-                      {clase === 'ok' && <span className="font-bold">✓</span>}
-                      {clase === 'blocked' && <span className="font-bold text-red-500">✕</span>}
-                    </span>
-                    <p
-                      className={`mt-1.5 px-0.5 text-[11px] font-semibold leading-tight ${
-                        clase === 'current'
-                          ? 'text-foreground'
-                          : clase === 'blocked'
-                            ? 'text-gray-400'
-                            : 'text-foreground/70'
-                      }`}
-                    >
-                      {t(p.clave)}
-                    </p>
-                    <p className="mt-0.5 px-0.5 text-[10px] font-medium leading-tight text-muted-foreground">
-                      {subEtiqueta(p.id)}
-                    </p>
-                  </div>
-                )
-              })}
+                      >
+                        {t(p.clave)}
+                      </p>
+                      <p className="mt-0.5 px-0.5 text-[10px] font-medium leading-tight text-muted-foreground">
+                        {subEtiqueta(p.id)}
+                      </p>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
           </div>
           {captionTimeline && (
@@ -507,130 +556,124 @@ export default function Detalle() {
               {captionTimeline}
             </p>
           )}
-        </section>
 
-        {/* 4. Fecha de notificación */}
-        <section className={PANEL}>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-sky-700">
-            {t('notifTitulo')}
-          </h2>
-          <div className="space-y-2.5">
-            <div
-              className={`rounded-2xl border-l-4 p-3 text-xs transition ${
-                multa.esFoto
-                  ? 'border-sky-400 bg-sky-50/80'
-                  : 'border-gray-200 bg-gray-50/80'
-              }`}
-            >
-              <p className="font-bold text-sky-800">{t('tipoMultaFoto')}</p>
-              <p className="mt-1 leading-relaxed text-sky-900/80">
-                {t('notifFotoDesc')}
-              </p>
+          {/* Notificación — tonos verdes */}
+          <div className="mt-5 border-t border-emerald-100 pt-4">
+            <h3 className="text-xs font-semibold uppercase tracking-wide text-emerald-700">
+              {t('notifTitulo')}
+            </h3>
+            <div className="mt-2 space-y-2">
+              <div
+                className={`rounded-2xl border-l-4 p-3 text-xs transition ${
+                  multa.esFoto
+                    ? 'border-emerald-400 bg-emerald-50/80'
+                    : 'border-gray-200 bg-gray-50/80'
+                }`}
+              >
+                <p className="font-bold text-emerald-800">{t('tipoMultaFoto')}</p>
+                <p className="mt-1 leading-relaxed text-emerald-900/80">
+                  {t('notifFotoDesc')}
+                </p>
+              </div>
+              <div
+                className={`rounded-2xl border-l-4 p-3 text-xs transition ${
+                  multa.esFoto
+                    ? 'border-gray-200 bg-gray-50/80'
+                    : 'border-emerald-400 bg-emerald-50/80'
+                }`}
+              >
+                <p className="font-bold text-emerald-800">{t('tipoMultaPapel')}</p>
+                <p className="mt-1 leading-relaxed text-emerald-900/80">
+                  {t('notifFisicaDesc')}
+                </p>
+              </div>
             </div>
-            <div
-              className={`rounded-2xl border-l-4 p-3 text-xs transition ${
-                multa.esFoto
-                  ? 'border-gray-200 bg-gray-50/80'
-                  : 'border-amber-400 bg-amber-50/80'
-              }`}
+
+            <label
+              htmlFor="fechaNotificacion"
+              className="mt-4 block text-sm font-medium"
             >
-              <p className="font-bold text-amber-800">{t('tipoMultaPapel')}</p>
-              <p className="mt-1 leading-relaxed text-amber-900/80">
-                {t('notifFisicaDesc')}
-              </p>
+              {t('notifLabel')}
+            </label>
+            <div className="mt-1 flex flex-wrap items-center gap-2">
+              <DatePicker
+                value={fechaNotif}
+                onChange={(v) => setFechaNotif(v || hoyISO())}
+                min={fechaEmision || undefined}
+                max={hoyISO()}
+                placeholder={t('notifLabel')}
+                className="w-full max-w-[200px]"
+              />
+              <button
+                type="button"
+                onClick={() => setFechaNotif(hoyISO())}
+                className={`rounded-xl border px-3 py-2.5 text-xs font-semibold transition-all duration-200 active:scale-95 ${
+                  fechaNotif === hoyISO()
+                    ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
+                    : 'border-gray-200 text-gray-500 hover:border-emerald-300 hover:text-emerald-600'
+                }`}
+              >
+                ✓ {t('notifHoy')}
+              </button>
             </div>
-          </div>
-
-          <label
-            htmlFor="fechaNotificacion"
-            className="mt-4 block text-sm font-medium"
-          >
-            {t('notifLabel')}
-          </label>
-          <div className="mt-1 flex flex-wrap items-center gap-2">
-            <DatePicker
-              value={fechaNotif}
-              onChange={(v) => setFechaNotif(v || hoyISO())}
-              min={fechaEmision || undefined}
-              max={hoyISO()}
-              placeholder={t('notifLabel')}
-              className="w-full max-w-[200px]"
-            />
-            <button
-              type="button"
-              onClick={() => setFechaNotif(hoyISO())}
-              className={`rounded-xl border px-3 py-2.5 text-xs font-semibold transition-all duration-200 active:scale-95 ${
-                fechaNotif === hoyISO()
-                  ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
-                  : 'border-gray-200 text-gray-500 hover:border-emerald-300 hover:text-emerald-600'
-              }`}
-            >
-              ✓ {t('notifHoy')}
-            </button>
-          </div>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-            {t('notifNota')}
-          </p>
-        </section>
-
-        {/* 5. Prescripción */}
-        {!pagada && (
-          <section
-            className={`mt-4 rounded-3xl border p-4 text-sm shadow-sm ${
-              estado === 'prescrita'
-                ? 'border-red-200 bg-red-50 text-red-900'
-                : 'border-emerald-100 bg-white text-emerald-900'
-            }`}
-          >
-            <p className="font-semibold">{t('tlPrescripcion')}</p>
-            <p className="mt-1 text-xs leading-relaxed">
-              {estado === 'prescrita' ? (
-                <>
-                  {t('estadoPrescritaDesc')}{' '}
-                  <span className="font-semibold">
-                    {formatearFecha(fechaPrescripcion)}
-                  </span>.
-                </>
-              ) : (
-                <>
-                  {t('tlPrescripcionDetalle')} {t('prescribeEl')}{' '}
-                  <span className="font-semibold">
-                    {formatearFecha(fechaPrescripcion)}
-                  </span>{' '}
-                  ({diasParaPrescripcion}{' '}
-                  {diasParaPrescripcion === 1 ? t('dia') : t('dias')}).
-                </>
-              )}
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+              {t('notifNota')}
             </p>
-          </section>
-        )}
+          </div>
 
-        {/* 6. Situación actual */}
-        {situacion && (
-          <section
-            className={`flex items-start gap-3 rounded-3xl border px-4 py-3 shadow-sm ${situacion.caja}`}
-          >
-            <span
-              className={`mt-1 h-3 w-3 shrink-0 animate-pulse rounded-full ${situacion.punto}`}
-            />
-            <div>
-              <p className="font-semibold">{t(situacion.clave)}</p>
-              <p className="mt-0.5 text-sm leading-relaxed">
-                {t(DESCRIPCION[fase])}
-                {fase === 'apelable' && (
-                  <> {t('venceEl')} {formatearFecha(fechaApelacionFin)}.</>
+          {/* Prescripción */}
+          {!pagada && (
+            <div className="mt-4 rounded-2xl border border-emerald-200 bg-white/70 p-3 text-xs">
+              <p className="font-semibold text-emerald-900">{t('tlPrescripcion')}</p>
+              <p className="mt-1 leading-relaxed text-emerald-800/90">
+                {estado === 'prescrita' ? (
+                  <>
+                    {t('estadoPrescritaDesc')}{' '}
+                    <span className="font-semibold">
+                      {formatearFecha(fechaPrescripcion)}
+                    </span>.
+                  </>
+                ) : (
+                  <>
+                    {t('tlPrescripcionDetalle')} {t('prescribeEl')}{' '}
+                    <span className="font-semibold">
+                      {formatearFecha(fechaPrescripcion)}
+                    </span>{' '}
+                    ({diasParaPrescripcion}{' '}
+                    {diasParaPrescripcion === 1 ? t('dia') : t('dias')}).
+                  </>
                 )}
               </p>
             </div>
-          </section>
-        )}
+          )}
 
-        {/* 7. Acciones */}
-        <section className="mt-4 rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
-          <div className="space-y-2.5">
+          {/* Situación actual */}
+          {situacion && (
+            <div
+              className={`mt-4 flex items-start gap-3 rounded-2xl border px-4 py-3 ${situacion.caja}`}
+            >
+              <span
+                className={`mt-1 h-3 w-3 shrink-0 animate-pulse rounded-full ${situacion.punto}`}
+              />
+              <div>
+                <p className="font-semibold">{t(situacion.clave)}</p>
+                <p className="mt-0.5 text-sm leading-relaxed">
+                  {t(DESCRIPCION[fase])}
+                  {fase === 'apelable' && (
+                    <> {t('venceEl')} {formatearFecha(fechaApelacionFin)}.</>
+                  )}
+                </p>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* 4. Acciones — mismo diseño, solo cambia habilitado/deshabilitado */}
+        <section className="mt-5 rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
+          <div className="space-y-3">
             <Button
               size="lg"
-              className="w-full rounded-2xl bg-gradient-to-r from-green-800 via-green-700 to-emerald-600 text-sm font-bold shadow-md transition-all hover:shadow-lg hover:brightness-110 active:scale-[0.98]"
+              className="w-full rounded-2xl bg-primary text-sm font-bold shadow-md transition-all hover:shadow-lg hover:brightness-110 active:scale-[0.98]"
               onClick={() =>
                 navigate(
                   `/pago?placa=${encodeURIComponent(placa)}&entidad=${entidad}`
@@ -641,14 +684,9 @@ export default function Detalle() {
             </Button>
 
             <Button
-              variant="outline"
               size="lg"
               disabled={!fase || fase !== 'apelable' || pagada}
-              className={`w-full rounded-2xl text-sm font-semibold transition-all active:scale-[0.98] ${
-                fase === 'apelable' && !pagada
-                  ? 'border-amber-300 bg-amber-50 text-amber-800 hover:bg-amber-100'
-                  : ''
-              }`}
+              className="w-full rounded-2xl bg-primary text-sm font-bold shadow-md transition-all hover:shadow-lg hover:brightness-110 active:scale-[0.98]"
               onClick={() =>
                 navigate(
                   `/apelacion?placa=${encodeURIComponent(placa)}&entidad=${entidad}&gestion=oposicion`
@@ -657,20 +695,11 @@ export default function Detalle() {
             >
               {t('botonApelar')}
             </Button>
-            {fase === 'soloPago' && !pagada && (
-              <p className="text-center text-xs text-muted-foreground">
-                {t('estadoSoloPagoDesc')}
-              </p>
-            )}
 
             <Button
-              variant="ghost"
+              size="lg"
               disabled={pagada || fase !== 'prescrita'}
-              className={`w-full rounded-2xl text-sm font-semibold transition-all active:scale-[0.98] ${
-                fase === 'prescrita'
-                  ? 'border border-red-200 bg-red-50 text-red-700 hover:bg-red-100'
-                  : 'border border-red-100 text-red-600 hover:bg-red-50'
-              }`}
+              className="w-full rounded-2xl bg-primary text-sm font-bold shadow-md transition-all hover:shadow-lg hover:brightness-110 active:scale-[0.98]"
               onClick={() =>
                 navigate(
                   `/apelacion?placa=${encodeURIComponent(placa)}&entidad=${entidad}&gestion=prescripcion`
