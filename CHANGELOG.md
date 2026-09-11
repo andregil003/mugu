@@ -11,6 +11,13 @@ Todos los cambios notables del proyecto. Formato basado en [Keep a Changelog](ht
 - Integrado UNA vez en `AppShell` (layout global, cubre todas las rutas) con wrapper `relative isolate` — el fondo queda en `-z-10` y todo el contenido (header z-40, main, footer, bottom-nav) por encima.
 - QA: build OK + 2/2 tests Playwright + verificación DOM (fondo presente, contenido visible, header por encima).
 
+### Animación corregida (onda ascendente, no reloj)
+
+- Se eliminó el gradiente cónico giratorio (se veía como reloj y dejaba puntos apagados).
+- Ahora: TODOS los puntos visibles (tenues, emerald-500 al 35%) + una onda de luz verde (green-400) que sube de abajo hacia arriba (`translateY 110% → -250%`, 7s, loop) e ilumina los puntos a su paso (misma máscara de puntos 22px).
+- `prefers-reduced-motion`: la onda se detiene (accesibilidad).
+- QA: build OK + 2/2 tests Playwright + verificación DOM (onda presente, animación corriendo, transform cambia en el tiempo).
+
 ## [0.8.0] — 2026-09-11
 
 ### Ronda UX — 14 cambios de André (PUCK main)

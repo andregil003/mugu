@@ -6,7 +6,7 @@ interface GradientDotsProps {
 }
 
 export const GradientDots: React.FC<GradientDotsProps> = ({
-  duration = 20,
+  duration = 7,
   className = "",
 }) => {
   return (
@@ -15,26 +15,37 @@ export const GradientDots: React.FC<GradientDotsProps> = ({
     >
       <style>
         {`
-          @keyframes rotate-gradient {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+          @keyframes onda-subir {
+            0% { transform: translateY(110%); }
+            100% { transform: translateY(-250%); }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .gradient-dots-onda { animation: none !important; transform: translateY(0); }
           }
         `}
       </style>
 
-      {/* Contenedor del gradiente animado */}
+      {/* Capa base: TODOS los puntos visibles (tenues) */}
       <div
-        className="absolute left-1/2 top-1/2 h-[200vw] w-[200vw] md:h-[150vw] md:w-[150vw]"
+        className="absolute inset-0"
         style={{
-          animation: `rotate-gradient ${duration}s linear infinite`,
-          /* Gradiente basado en la paleta verde institucional (MultaClara) */
           backgroundImage:
-            "conic-gradient(from 0deg, transparent 15%, #4ade80 30%, transparent 45%, transparent 65%, #34d399 80%, transparent 95%)",
-          /* Máscara de puntos que revela el gradiente de atrás */
+            "radial-gradient(circle, rgba(16, 185, 129, 0.35) 1.5px, transparent 1.5px)",
+          backgroundSize: "22px 22px",
+        }}
+      />
+
+      {/* Onda de luz que sube de abajo hacia arriba e ilumina los puntos a su paso */}
+      <div
+        className="gradient-dots-onda absolute inset-x-0 bottom-0 h-[70%]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to top, transparent 0%, rgba(74, 222, 128, 0.85) 50%, transparent 100%)",
           WebkitMaskImage: "radial-gradient(circle, white 1.5px, transparent 1.5px)",
           WebkitMaskSize: "22px 22px",
           maskImage: "radial-gradient(circle, white 1.5px, transparent 1.5px)",
           maskSize: "22px 22px",
+          animation: `onda-subir ${duration}s linear infinite`,
         }}
       />
 
