@@ -2,6 +2,14 @@
 
 Todos los cambios notables del proyecto. Formato basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/) y versionado semver.
 
+## [Unreleased]
+
+### Fixes móvil + i18n
+
+- **i18n EN**: `appNombre` en `en.json` corregido de "MultaClara" a **"MUGU"** — el nombre de la app ya no cambia al poner el idioma en inglés.
+- **Overflow móvil Detalle**: el `<dl>` de datos ahora fuerza `min-w-0` en sus hijos (`[&>*]:min-w-0`) y el nº de multa usa `break-all` — un `noMulta` largo ya no desborda la tarjeta en pantallas angostas.
+- **Overflow móvil ContactoEntidad**: el link de pago en línea ahora tiene `max-w-full` + texto con `min-w-0 break-all` — URLs largas (ej. S. Catarina Pinula) ya no se salen del margen.
+
 ## [0.8.3] — 2026-09-11
 
 ### Header, nav e idiomas

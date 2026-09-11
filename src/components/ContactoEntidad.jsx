@@ -100,10 +100,12 @@ export default function ContactoEntidad({ entidad }) {
                       href={pagoEnLinea.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-1 inline-flex items-center gap-1 rounded-lg bg-emerald-600 px-2.5 py-1 text-xs font-semibold text-white transition hover:bg-emerald-700 active:scale-95"
+                      className="mt-1 inline-flex max-w-full items-center gap-1 rounded-lg bg-emerald-600 px-2.5 py-1 text-xs font-semibold text-white transition hover:bg-emerald-700 active:scale-95"
                     >
-                      {pagoEnLinea.url.replace(/^https?:\/\/(www\.)?/, '')}
-                      <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="h-3 w-3" />
+                      <span className="min-w-0 break-all">
+                        {pagoEnLinea.url.replace(/^https?:\/\/(www\.)?/, '')}
+                      </span>
+                      <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="h-3 w-3 shrink-0" />
                     </a>
                   )}
                 </>

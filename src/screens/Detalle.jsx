@@ -396,12 +396,12 @@ export default function Detalle() {
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
             {t('detalleTablaTitulo')}
           </h2>
-          <dl className="grid gap-3 sm:grid-cols-2">
+          <dl className="grid gap-3 sm:grid-cols-2 [&>*]:min-w-0">
             <div className="rounded-xl bg-gray-50/80 px-4 py-3 dark:bg-muted/50">
               <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                 {t('detalleNoMulta')}
               </dt>
-              <dd className="mt-0.5 font-mono text-sm font-semibold">{multa.noMulta}</dd>
+              <dd className="mt-0.5 break-all font-mono text-sm font-semibold">{multa.noMulta}</dd>
             </div>
             <div className="rounded-xl bg-gray-50/80 px-4 py-3 dark:bg-muted/50">
               <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
