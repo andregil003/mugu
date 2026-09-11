@@ -21,9 +21,20 @@ export const IDIOMAS = [
     bienvenida: 'We help you understand and resolve your traffic fines.',
     diccionario: en,
   },
-  // TODO(Uriel): traducción real de la bienvenida (saludo real por ahora)
-  { codigo: 'kiche', nombre: "K'iche'", bienvenida: 'Saqirik!', diccionario: kiche },
-  { codigo: 'kawchiquel', nombre: 'Kaqchikel', bienvenida: 'Xsaqär', diccionario: kawchiquel },
+  {
+    codigo: 'kiche',
+    nombre: "K'iche'",
+    bienvenida:
+      "Nqato' chawe rech kanab'ej chuqa' kasolij ri taq ak'ayewal rech ri b'ey.",
+    diccionario: kiche,
+  },
+  {
+    codigo: 'kawchiquel',
+    nombre: 'Kaqchikel',
+    bienvenida:
+      "Yoj awik'in richin kanab'ej chuqa' kasolij ri taq amultas rech ri b'ey.",
+    diccionario: kawchiquel,
+  },
 ]
 
 const CLAVE_IDIOMA = 'mugu_idioma'
