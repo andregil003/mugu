@@ -190,7 +190,7 @@
     "pagoPaso5": "Verificá en el portal que la multa aparezca como pagada",
     "explicacion": "Explicación",
     "menuComenzar": "Comenzar",
-    "infoBuscarArticulo": "Artículo 1: …",
+    "infoBuscarArticulo": "Artículo o palabras clave",
     "infoTipoMulta": "Tipo de multa",
     "infoTipoPapeleta": "Papeleta",
     "infoTipoCepo": "Cepo",
@@ -266,5 +266,14 @@
     "privacidadS6Titulo": "6. Cambios a la política",
     "privacidadS6Texto": "Podemos actualizar esta política. Los cambios se publicarán en esta página.",
     "privacidadS7Titulo": "7. Contacto",
-    "privacidadS7Texto": "Si tenés dudas sobre privacidad, escribinos a través del formulario \"Sugerir idioma\" o los canales del proyecto."
+    "privacidadS7Texto": "Si tenés dudas sobre privacidad, escribinos a través del formulario \"Sugerir idioma\" o los canales del proyecto.",
+    "limpiarFiltros": "Limpiar filtros",
+    "noNotificado": "No fui notificado",
+    "noNotificadoDesc": "Si no recibiste la notificación, el plazo de 120 días corre desde la fecha de emisión.",
+    "notifAyuda": "Los plazos de apelación (15 días) y prescripción (120 días) se calculan desde esta fecha. Si no es correcta, los plazos cambian.",
+    "tlAyuda": "La línea de tiempo muestra el proceso legal de la multa: emisión, notificación, apelación, pago y prescripción.",
+    "tlNota": "Los plazos dependen de que la fecha de notificación sea correcta. Si la fecha cambia, los plazos se recalculan.",
+    "prescripcionAyuda": "La multa prescribe a los 120 días. Si fuiste notificado, el plazo corre desde la notificación; si no, desde la emisión.",
+    "situacionAyuda": "Resumen de tu situación legal según las fechas de emisión y notificación.",
+    "montoAyuda": "El monto aumenta 20% anual a partir del primer año desde la notificación."
 }

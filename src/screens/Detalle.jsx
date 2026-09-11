@@ -30,6 +30,7 @@ import {
 } from '@/lib/core'
 import { cargarInfracciones, sincronizarCacheDiario } from '@/lib/data'
 import ContactoEntidad from '@/components/ContactoEntidad'
+import InfoPopup from '@/components/InfoPopup'
 import {
   PLAZO_IMPUTACION_DIAS,
   PLAZO_PRESCRIPCION_DIAS,
@@ -107,11 +108,14 @@ function normalizar(m, placa) {
   }
 }
 
-// Fase del proceso legal según fechas de emisión y notificación
-function calcularEstado(fechaEmision, fechaNotif) {
-  const prescrita = diasDesde(fechaEmision) > PLAZO_PRESCRIPCION_DIAS
+// Fase del proceso legal según fechas de emisión y notificación.
+// Regla: la prescripción (120 días) corre desde la emisión SOLO si no fue
+// notificado; si fue notificado, corre desde la notificación.
+function calcularEstado(fechaEmision, fechaNotif, noNotificado) {
+  const base = noNotificado ? fechaEmision : fechaNotif
+  const prescrita = diasDesde(base) > PLAZO_PRESCRIPCION_DIAS
   if (prescrita) return 'prescrita'
-  if (diasDesde(fechaNotif) <= PLAZO_IMPUTACION_DIAS) return 'apelable'
+  if (diasDesde(base) <= PLAZO_IMPUTACION_DIAS) return 'apelable'
   return 'soloPago'
 }
 
@@ -172,6 +176,7 @@ export default function Detalle() {
   const [razonClara, setRazonClara] = useState('')
   const [consejo, setConsejo] = useState('')
   const [fechaNotif, setFechaNotif] = useState(() => hoyISO())
+  const [noNotificado, setNoNotificado] = useState(false)
 
   useEffect(() => {
     let activo = true
@@ -278,12 +283,13 @@ export default function Detalle() {
 
   // Fechas y plazos
   const fechaEmision = multa.fecha
-  const fechaApelacionFin = fechaMasDias(fechaNotif, PLAZO_IMPUTACION_DIAS)
-  const fechaPrescripcion = fechaMasDias(fechaEmision, PLAZO_PRESCRIPCION_DIAS)
+  const basePlazos = noNotificado ? fechaEmision : fechaNotif
+  const fechaApelacionFin = fechaMasDias(basePlazos, PLAZO_IMPUTACION_DIAS)
+  const fechaPrescripcion = fechaMasDias(basePlazos, PLAZO_PRESCRIPCION_DIAS)
   const diasParaPrescripcion = diasRestantesPara(fechaPrescripcion)
 
   // Situación
-  const estado = calcularEstado(fechaEmision, fechaNotif)
+  const estado = calcularEstado(fechaEmision, fechaNotif, noNotificado)
   const pagada = multa.estado === 'pagada'
   const fase = pagada ? null : estado
   const situacion = SITUACION[fase]
@@ -448,8 +454,9 @@ export default function Detalle() {
               </dd>
             </div>
             <div className="rounded-xl bg-emerald-50/80 px-4 py-3 dark:bg-emerald-950/30">
-              <dt className="text-[11px] font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
+              <dt className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
                 {t('detalleMonto')}
+                <InfoPopup texto={t('montoAyuda')} />
               </dt>
               <dd className="mt-0.5 font-mono text-base font-bold text-emerald-700 dark:text-emerald-400">
                 {formatoMonto(montoActual)}
@@ -508,82 +515,11 @@ export default function Detalle() {
             {t('tlTitulo')}
           </h2>
 
-          {/* Línea de tiempo horizontal (onda verde → rojo) */}
-          <div className="overflow-x-auto px-2 pb-2 pt-2">
-            <div className="relative min-w-[400px]">
-              <svg
-                className="absolute left-0 right-0 top-[11px] h-2 w-full"
-                viewBox="0 0 400 6"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                <defs>
-                  <linearGradient id="tl-grad" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#10b981" />
-                    <stop offset="55%" stopColor="#f59e0b" />
-                    <stop offset="100%" stopColor="#ef4444" />
-                  </linearGradient>
-                </defs>
-                <path
-                  d="M0 3 Q 50 0, 100 3 T 200 3 T 300 3 T 400 3"
-                  fill="none"
-                  stroke="url(#tl-grad)"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  vectorEffect="non-scaling-stroke"
-                />
-              </svg>
-              <div className="flex items-start justify-between">
-                {PASOS_LEGALES.map((p) => {
-                  const clase = estadoPaso(p.id)
-                  return (
-                    <div
-                      key={p.id}
-                      className="relative flex flex-1 flex-col items-center text-center"
-                    >
-                      <span
-                        className={`relative z-10 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full text-[10px] transition-all duration-300 ${nodoPaso(
-                          { ...p, clase }
-                        )}`}
-                      >
-                        {clase === 'current' && (
-                          <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-current" />
-                        )}
-                        {clase === 'ok' && <FontAwesomeIcon icon={faCheck} className="h-3 w-3" />}
-                        {clase === 'blocked' && (
-                          <FontAwesomeIcon icon={faXmark} className="h-3 w-3" />
-                        )}
-                      </span>
-                      <p
-                        className={`mt-1.5 px-0.5 text-[11px] font-semibold leading-tight ${
-                          clase === 'current'
-                            ? 'text-foreground'
-                            : clase === 'blocked'
-                              ? 'text-gray-400 dark:text-muted-foreground'
-                              : 'text-foreground/70'
-                        }`}
-                      >
-                        {t(p.clave)}
-                      </p>
-                      <p className="mt-0.5 px-0.5 text-[10px] font-medium leading-tight text-muted-foreground">
-                        {subEtiqueta(p.id)}
-                      </p>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
-          {captionTimeline && (
-            <p className="mt-3 rounded-xl bg-white/70 px-3 py-2 text-xs leading-relaxed text-gray-700 dark:bg-card/70 dark:text-foreground/80">
-              {captionTimeline}
-            </p>
-          )}
-
           {/* Notificación — tonos verdes */}
-          <div className="mt-5 border-t border-emerald-100 pt-4 dark:border-emerald-950/50">
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
+          <div className="border-t border-emerald-100 pt-4 dark:border-emerald-950/50">
+            <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
               {t('notifTitulo')}
+              <InfoPopup texto={t('notifAyuda')} />
             </h3>
             <div className="mt-2 space-y-2">
               <div
@@ -642,12 +578,123 @@ export default function Detalle() {
             <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
               {t('notifNota')}
             </p>
+
+            {/* No fui notificado — cambia la base del plazo de prescripción */}
+            <button
+              type="button"
+              onClick={() => setNoNotificado((v) => !v)}
+              className={`mt-3 flex items-center gap-2 rounded-xl border px-3 py-2 text-xs font-semibold transition active:scale-95 ${
+                noNotificado
+                  ? 'border-emerald-500 bg-emerald-50 text-emerald-700 dark:border-emerald-500 dark:bg-emerald-950/30 dark:text-emerald-400'
+                  : 'border-gray-200 text-gray-500 hover:border-emerald-300 hover:text-emerald-600 dark:border-border dark:text-muted-foreground dark:hover:border-emerald-500/50 dark:hover:text-emerald-400'
+              }`}
+            >
+              <span
+                className={`flex h-4 w-4 items-center justify-center rounded border ${
+                  noNotificado
+                    ? 'border-emerald-500 bg-emerald-500 text-white'
+                    : 'border-gray-300 bg-white dark:border-border dark:bg-card'
+                }`}
+              >
+                {noNotificado && <FontAwesomeIcon icon={faCheck} className="h-2.5 w-2.5" />}
+              </span>
+              {t('noNotificado')}
+            </button>
+            {noNotificado && (
+              <p className="mt-1.5 text-xs leading-relaxed text-emerald-700/80 dark:text-emerald-400/80">
+                {t('noNotificadoDesc')}
+              </p>
+            )}
+          </div>
+
+          {/* Línea de tiempo horizontal (onda verde → rojo) */}
+          <div className="mt-5 border-t border-emerald-100 pt-4 dark:border-emerald-950/50">
+            <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
+              {t('tlTitulo')}
+              <InfoPopup texto={t('tlAyuda')} />
+            </h3>
+            <div className="overflow-x-auto px-2 pb-2 pt-2">
+              <div className="relative min-w-[400px]">
+                <svg
+                  className="absolute left-0 right-0 top-[11px] h-2 w-full"
+                  viewBox="0 0 400 6"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <linearGradient id="tl-grad" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#10b981" />
+                      <stop offset="55%" stopColor="#f59e0b" />
+                      <stop offset="100%" stopColor="#ef4444" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M0 3 Q 50 0, 100 3 T 200 3 T 300 3 T 400 3"
+                    fill="none"
+                    stroke="url(#tl-grad)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                </svg>
+                <div className="flex items-start justify-between">
+                  {PASOS_LEGALES.map((p) => {
+                    const clase = estadoPaso(p.id)
+                    return (
+                      <div
+                        key={p.id}
+                        className="relative flex flex-1 flex-col items-center text-center"
+                      >
+                        <span
+                          className={`relative z-10 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full text-[10px] transition-all duration-300 ${nodoPaso(
+                            { ...p, clase }
+                          )}`}
+                        >
+                          {clase === 'current' && (
+                            <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-current" />
+                          )}
+                          {clase === 'ok' && <FontAwesomeIcon icon={faCheck} className="h-3 w-3" />}
+                          {clase === 'blocked' && (
+                            <FontAwesomeIcon icon={faXmark} className="h-3 w-3" />
+                          )}
+                        </span>
+                        <p
+                          className={`mt-1.5 px-0.5 text-[11px] font-semibold leading-tight ${
+                            clase === 'current'
+                              ? 'text-foreground'
+                              : clase === 'blocked'
+                                ? 'text-gray-400 dark:text-muted-foreground'
+                                : 'text-foreground/70'
+                          }`}
+                        >
+                          {t(p.clave)}
+                        </p>
+                        <p className="mt-0.5 px-0.5 text-[10px] font-medium leading-tight text-muted-foreground">
+                          {subEtiqueta(p.id)}
+                        </p>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+            {captionTimeline && (
+              <p className="mt-3 rounded-xl bg-white/70 px-3 py-2 text-xs leading-relaxed text-gray-700 dark:bg-card/70 dark:text-foreground/80">
+                {captionTimeline}
+              </p>
+            )}
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+              {t('tlNota')}
+            </p>
           </div>
 
           {/* Prescripción */}
           {!pagada && (
             <div className="mt-4 rounded-2xl border border-emerald-200 bg-white/70 p-3 text-xs dark:border-emerald-950/50 dark:bg-card/70">
-              <p className="font-semibold text-emerald-900 dark:text-emerald-400">{t('tlPrescripcion')}</p>
+              <p className="flex items-center gap-1.5 font-semibold text-emerald-900 dark:text-emerald-400">
+                {t('tlPrescripcion')}
+                <InfoPopup texto={t('prescripcionAyuda')} />
+              </p>
               <p className="mt-1 leading-relaxed text-emerald-800/90 dark:text-emerald-400/90">
                 {estado === 'prescrita' ? (
                   <>
@@ -678,8 +725,11 @@ export default function Detalle() {
               <span
                 className={`mt-1 h-3 w-3 shrink-0 animate-pulse rounded-full ${situacion.punto}`}
               />
-              <div>
-                <p className="font-semibold">{t(situacion.clave)}</p>
+              <div className="min-w-0 flex-1">
+                <p className="flex items-center gap-1.5 font-semibold">
+                  {t(situacion.clave)}
+                  <InfoPopup texto={t('situacionAyuda')} />
+                </p>
                 <p className="mt-0.5 text-sm leading-relaxed">
                   {t(DESCRIPCION[fase])}
                   {fase === 'apelable' && (

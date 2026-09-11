@@ -132,9 +132,24 @@ export default function Info() {
 
       {/* Filtro por tipo de multa (explicativo, no botón principal) */}
       <div className="mt-4">
-        <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-          {t('infoTipoMulta')}
-        </p>
+        <div className="mb-1.5 flex items-center justify-between gap-2">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            {t('infoTipoMulta')}
+          </p>
+          {(busqueda || tipoMulta) && (
+            <button
+              type="button"
+              onClick={() => {
+                cambiarBusqueda('')
+                cambiarTipoMulta('')
+              }}
+              className="flex items-center gap-1 rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[11px] font-semibold text-muted-foreground transition hover:border-red-300 hover:text-red-600 active:scale-95 dark:border-border dark:bg-card dark:hover:border-red-500/50 dark:hover:text-red-400"
+            >
+              <FontAwesomeIcon icon={faXmark} className="h-3 w-3" />
+              {t('limpiarFiltros')}
+            </button>
+          )}
+        </div>
         <div className="flex flex-wrap items-center gap-1.5">
           {TIPOS_MULTA.map((c) => (
             <button

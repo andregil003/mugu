@@ -190,7 +190,7 @@
   "pagoPaso5": "Verify on the portal that the fine shows as paid",
   "explicacion": "Explanation",
   "menuComenzar": "Start",
-  "infoBuscarArticulo": "Article 1: …",
+  "infoBuscarArticulo": "Article or keywords",
   "infoTipoMulta": "Fine type",
   "infoTipoPapeleta": "Ticket",
   "infoTipoCepo": "Wheel clamp",
@@ -266,5 +266,14 @@
   "privacidadS6Titulo": "6. Changes to policy",
   "privacidadS6Texto": "We may update this policy. Changes will be published on this page.",
   "privacidadS7Titulo": "7. Contact",
-  "privacidadS7Texto": "If you have privacy questions, write to us through the \"Suggest language\" form or the project channels."
+  "privacidadS7Texto": "If you have privacy questions, write to us through the \"Suggest language\" form or the project channels.",
+  "limpiarFiltros": "Clear filters",
+  "noNotificado": "I wasn't notified",
+  "noNotificadoDesc": "If you weren't notified, the 120-day period runs from the issue date.",
+  "notifAyuda": "The appeal (15 days) and prescription (120 days) deadlines are calculated from this date. If it's not correct, the deadlines change.",
+  "tlAyuda": "The timeline shows the legal process of the fine: issue, notification, appeal, payment and prescription.",
+  "tlNota": "Deadlines depend on the notification date being correct. If the date changes, deadlines are recalculated.",
+  "prescripcionAyuda": "The fine prescribes after 120 days. If you were notified, the period runs from notification; if not, from issue.",
+  "situacionAyuda": "Summary of your legal situation based on the issue and notification dates.",
+  "montoAyuda": "The amount increases 20% per year starting one year after notification."
 }
