@@ -14,7 +14,7 @@ export const GradientDots: React.FC<GradientDotsProps> = ({ className = "" }) =>
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(circle, rgba(16, 185, 129, var(--dots-opacity)) 1.5px, transparent 1.5px)",
+            "radial-gradient(circle, rgba(16, 185, 129, var(--dots-opacity)) 2px, transparent 2px)",
           backgroundSize: "22px 22px",
         }}
       />
