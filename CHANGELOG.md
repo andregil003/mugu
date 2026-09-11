@@ -2,7 +2,13 @@
 
 Todos los cambios notables del proyecto. Formato basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/) y versionado semver.
 
-## [0.8.2] — 2026-09-11
+## [0.8.3] — 2026-09-11
+
+### Header, nav e idiomas
+
+- Header + bottom-nav de vuelta a **blanco** (antes se habían cambiado a verde).
+- Bottom-nav móvil: **solo iconos grandes** (`h-7 w-7`, antes `h-6 w-6` con texto debajo). Sin labels de sección.
+- Pantalla de idiomas (`/idioma`): **logo h-20** centrado + texto MUGU grande (`text-3xl`) + tagline. Grid de idiomas en **2 columnas**.
 
 ### UI/UX ronda André
 

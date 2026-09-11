@@ -37,36 +37,33 @@ export default function Idioma() {
 
   return (
     <div className="mx-auto w-full max-w-md px-4 py-10">
-      {/* Logo + MUGU alineados a la derecha (móvil) */}
-      <div className="mb-6 flex items-center justify-end gap-2.5">
+      {/* Logo + MUGU centrados y destacados */}
+      <div className="mb-8 flex flex-col items-center gap-2">
         <img
           src="/icon-192.png"
           alt={t('appNombre')}
-          className="h-10 w-10 rounded-xl object-cover shadow-sm"
+          className="h-20 w-20 rounded-2xl object-cover shadow-md"
         />
-        <span className="flex flex-col items-start leading-none">
-          <span className="text-lg font-black tracking-tight">{t('appNombre')}</span>
-          <span className="text-[10px] font-medium text-muted-foreground">
-            {t('tagline')}
-          </span>
+        <span className="text-3xl font-black tracking-tight">{t('appNombre')}</span>
+        <span className="text-sm font-medium text-muted-foreground">
+          {t('tagline')}
         </span>
       </div>
-      <div className="space-y-3">
+      {/* Idiomas en grid 2 columnas */}
+      <div className="grid grid-cols-2 gap-3">
         {idiomas.map((i) => (
           <button
             key={i.codigo}
             type="button"
             onClick={() => elegir(i.codigo)}
-            className="group flex w-full items-center justify-between rounded-2xl border border-emerald-300 bg-gradient-to-br from-emerald-600 to-green-700 px-5 py-4 text-left text-white shadow-md shadow-emerald-900/10 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/25 active:scale-[0.98]"
+            className="group flex flex-col items-center justify-center gap-2 rounded-2xl border border-emerald-300 bg-gradient-to-br from-emerald-600 to-green-700 px-3 py-5 text-center text-white shadow-md shadow-emerald-900/10 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/25 active:scale-[0.98]"
           >
-            <span className="flex flex-col gap-1">
-              <span className="text-lg font-bold">{i.nombre}</span>
-              <span className="animar-izq-der text-sm font-medium text-emerald-50/90">
-                {i.bienvenida}
-              </span>
+            <span className="text-base font-bold leading-tight">{i.nombre}</span>
+            <span className="text-[11px] font-medium leading-tight text-emerald-50/90">
+              {i.bienvenida}
             </span>
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/20 text-white transition-all duration-200 group-hover:bg-white group-hover:text-emerald-700 group-hover:translate-x-0.5">
-              <FontAwesomeIcon icon={faArrowRight} className="h-3.5 w-3.5" />
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 text-white transition-all duration-200 group-hover:bg-white group-hover:text-emerald-700 group-hover:translate-x-0.5">
+              <FontAwesomeIcon icon={faArrowRight} className="h-3 w-3" />
             </span>
           </button>
         ))}
