@@ -1,8 +1,9 @@
 // pantalla_tamano: accesibilidad — elegir tamaño de texto (Normal/Grande/Extra).
+// BIG2-M1: botones con letras "Aa" de distintos tamaños, uno al lado del otro (horizontal).
 // Aplica el escalado en toda la app y persiste la preferencia.
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTextHeight, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { useI18n } from '@/lib/i18n'
 import { useTamano } from '@/lib/tamano'
@@ -36,7 +37,7 @@ export default function Tamano() {
         </div>
       </div>
 
-      <div className="mt-5 space-y-3">
+      <div className="mt-5 grid grid-cols-3 gap-3">
         {tamanos.map((op) => {
           const activo = tamano === op.codigo
           return (
@@ -44,38 +45,19 @@ export default function Tamano() {
               key={op.codigo}
               type="button"
               onClick={() => setTamano(op.codigo)}
-              className={`flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-left transition-all duration-200 active:scale-[0.98] ${
+              aria-label={t(CLAVE_TAMANO[op.codigo])}
+              aria-pressed={activo}
+              className={`flex flex-col items-center justify-center gap-2 rounded-2xl border px-3 py-6 transition-all duration-200 active:scale-[0.98] ${
                 activo
                   ? 'border-emerald-400 bg-emerald-50 shadow-md ring-2 ring-emerald-200'
                   : 'border-gray-200 bg-white shadow-sm hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md'
               }`}
             >
-              <span className="flex items-center gap-4">
-                <span
-                  className={`flex h-11 w-11 items-center justify-center rounded-xl transition ${
-                    activo ? 'bg-emerald-600 text-white' : 'bg-emerald-100 text-emerald-700'
-                  }`}
-                >
-                  <FontAwesomeIcon icon={faTextHeight} className="h-5 w-5" />
-                </span>
-                <span>
-                  <span className={`block font-bold ${TAMANO_CLASE[op.codigo]}`}>
-                    {t(CLAVE_TAMANO[op.codigo])}
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    {op.codigo === 'normal'
-                      ? 'Aa'
-                      : op.codigo === 'grande'
-                        ? 'Aa Aa'
-                        : 'Aa Aa Aa'}
-                  </span>
-                </span>
+              <span className={`font-black leading-none ${TAMANO_CLASE[op.codigo]}`}>Aa</span>
+              <span className="text-xs font-medium text-muted-foreground">
+                {t(CLAVE_TAMANO[op.codigo])}
               </span>
-              {activo && (
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-600 text-white">
-                  <FontAwesomeIcon icon={faCheck} className="h-3.5 w-3.5" />
-                </span>
-              )}
+              {activo && <FontAwesomeIcon icon={faCheck} className="h-4 w-4 text-emerald-600" />}
             </button>
           )
         })}

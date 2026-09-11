@@ -1,7 +1,8 @@
 // pantalla_bienvenida: Landing "¿HAS SIDO MULTADO?" — hero verde institucional.
+// BIG2-M0: sin icono de escudo — solo el título.
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShieldHalved, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { useI18n } from '@/lib/i18n'
 
@@ -12,10 +13,6 @@ export default function Bienvenida() {
   return (
     <div className="mx-auto w-full max-w-2xl px-4 py-10 lg:py-16">
       <div className="hero-gradient rounded-3xl p-8 text-center text-white shadow-xl lg:p-12">
-        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20">
-          <FontAwesomeIcon icon={faShieldHalved} className="h-10 w-10 text-green-100" />
-        </div>
-
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-green-200">
           {t('appNombre')}
         </p>

@@ -1,7 +1,8 @@
-// DatePicker: calendario desplegable (date picker) sin dependencias externas.
-// Reemplaza la escritura manual de fechas: se elige el día en un grid mensual.
+// DatePicker: calendario pop-up MODAL con fondo difuminado (blur overlay).
+// BIG2-M5: el calendario ya no es un dropdown absoluto que se corta por las
+// tarjetas — se abre centrado en pantalla sobre un backdrop con blur.
 // Respeta min/max y muestra la fecha seleccionada formateada.
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
@@ -31,7 +32,6 @@ export default function DatePicker({
     const base = value ? new Date(value) : new Date()
     return new Date(base.getFullYear(), base.getMonth(), 1)
   })
-  const ref = useRef(null)
   const { t } = useI18n()
 
   // Al abrir, posicionar el calendario en el mes de la fecha seleccionada
@@ -42,15 +42,6 @@ export default function DatePicker({
     }
     setAbierto(true)
   }
-
-  // Cerrar al hacer click fuera
-  useEffect(() => {
-    function handler(e) {
-      if (ref.current && !ref.current.contains(e.target)) setAbierto(false)
-    }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
-  }, [])
 
   const primerDia = new Date(mes.getFullYear(), mes.getMonth(), 1)
   const offset = primerDia.getDay()
@@ -70,7 +61,7 @@ export default function DatePicker({
   }
 
   return (
-    <div className={cn('relative', className)} ref={ref}>
+    <div className={cn('relative', className)}>
       <button
         type="button"
         onClick={abrir}
@@ -90,69 +81,83 @@ export default function DatePicker({
       </button>
 
       {abierto && (
-        <div className="absolute left-0 top-full z-50 mt-1.5 w-72 rounded-2xl border border-gray-200 bg-white p-3 shadow-xl">
-          {/* Cabecera del mes */}
-          <div className="mb-2 flex items-center justify-between">
-            <button
-              type="button"
-              onClick={() => cambiarMes(-1)}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-emerald-50 hover:text-emerald-700 active:scale-90"
-              aria-label={t('dpMesAnterior')}
-            >
-              <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
-            </button>
-            <span className="text-sm font-bold capitalize">
-              {t('dpMeses')[mes.getMonth()]} {mes.getFullYear()}
-            </span>
-            <button
-              type="button"
-              onClick={() => cambiarMes(1)}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-emerald-50 hover:text-emerald-700 active:scale-90"
-              aria-label={t('dpMesSiguiente')}
-            >
-              <FontAwesomeIcon icon={faChevronRight} className="h-4 w-4" />
-            </button>
-          </div>
-
-          {/* Días de la semana */}
-          <div className="grid grid-cols-7 gap-1 text-center">
-            {t('dpDias').map((d, i) => (
-              <span key={i} className="py-1 text-[10px] font-bold uppercase text-muted-foreground">
-                {d}
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop con blur: cierra al hacer click fuera */}
+          <div
+            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+            onClick={() => setAbierto(false)}
+            aria-hidden="true"
+          />
+          {/* Calendario modal */}
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={t('dpPlaceholder')}
+            className="relative w-72 animate-in zoom-in-95 fade-in rounded-2xl border border-gray-200 bg-white p-3 shadow-2xl"
+          >
+            {/* Cabecera del mes */}
+            <div className="mb-2 flex items-center justify-between">
+              <button
+                type="button"
+                onClick={() => cambiarMes(-1)}
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-emerald-50 hover:text-emerald-700 active:scale-90"
+                aria-label={t('dpMesAnterior')}
+              >
+                <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
+              </button>
+              <span className="text-sm font-bold capitalize">
+                {t('dpMeses')[mes.getMonth()]} {mes.getFullYear()}
               </span>
-            ))}
-            {/* Celdas vacías antes del día 1 */}
-            {Array.from({ length: offset }).map((_, i) => (
-              <span key={`e${i}`} />
-            ))}
-            {/* Días del mes */}
-            {Array.from({ length: diasEnMes }).map((_, i) => {
-              const d = new Date(mes.getFullYear(), mes.getMonth(), i + 1)
-              const s = isoDe(d)
-              const deshabilitado = (min && s < min) || (max && s > max)
-              const seleccionado = s === value
-              const esHoy = s === hoy
-              return (
-                <button
-                  key={s}
-                  type="button"
-                  disabled={deshabilitado}
-                  onClick={() => elegir(d)}
-                  className={cn(
-                    'flex h-9 w-9 items-center justify-center rounded-lg text-sm transition active:scale-90',
-                    deshabilitado
-                      ? 'cursor-not-allowed text-gray-300'
-                      : seleccionado
-                        ? 'bg-emerald-600 font-bold text-white shadow-md'
-                        : esHoy
-                          ? 'font-bold text-emerald-700 ring-1 ring-emerald-300 hover:bg-emerald-50'
-                          : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'
-                  )}
-                >
-                  {i + 1}
-                </button>
-              )
-            })}
+              <button
+                type="button"
+                onClick={() => cambiarMes(1)}
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-emerald-50 hover:text-emerald-700 active:scale-90"
+                aria-label={t('dpMesSiguiente')}
+              >
+                <FontAwesomeIcon icon={faChevronRight} className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* Días de la semana */}
+            <div className="grid grid-cols-7 gap-1 text-center">
+              {t('dpDias').map((d, i) => (
+                <span key={i} className="py-1 text-[10px] font-bold uppercase text-muted-foreground">
+                  {d}
+                </span>
+              ))}
+              {/* Celdas vacías antes del día 1 */}
+              {Array.from({ length: offset }).map((_, i) => (
+                <span key={`e${i}`} />
+              ))}
+              {/* Días del mes */}
+              {Array.from({ length: diasEnMes }).map((_, i) => {
+                const d = new Date(mes.getFullYear(), mes.getMonth(), i + 1)
+                const s = isoDe(d)
+                const deshabilitado = (min && s < min) || (max && s > max)
+                const seleccionado = s === value
+                const esHoy = s === hoy
+                return (
+                  <button
+                    key={s}
+                    type="button"
+                    disabled={deshabilitado}
+                    onClick={() => elegir(d)}
+                    className={cn(
+                      'flex h-9 w-9 items-center justify-center rounded-lg text-sm transition active:scale-90',
+                      deshabilitado
+                        ? 'cursor-not-allowed text-gray-300'
+                        : seleccionado
+                          ? 'bg-emerald-600 font-bold text-white shadow-md'
+                          : esHoy
+                            ? 'font-bold text-emerald-700 ring-1 ring-emerald-300 hover:bg-emerald-50'
+                            : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-700'
+                    )}
+                  >
+                    {i + 1}
+                  </button>
+                )
+              })}
+            </div>
           </div>
         </div>
       )}

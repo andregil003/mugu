@@ -9,10 +9,21 @@ import kiche from './kiche.json'
 import kawchiquel from './kawchiquel.json'
 
 export const IDIOMAS = [
-  { codigo: 'es', nombre: 'Español', diccionario: es },
-  { codigo: 'en', nombre: 'English', diccionario: en },
-  { codigo: 'kiche', nombre: "K'iche'", diccionario: kiche },
-  { codigo: 'kawchiquel', nombre: 'Kaqchikel', diccionario: kawchiquel },
+  {
+    codigo: 'es',
+    nombre: 'Español',
+    bienvenida: 'Te ayudamos a entender y resolver tus multas de tránsito.',
+    diccionario: es,
+  },
+  {
+    codigo: 'en',
+    nombre: 'English',
+    bienvenida: 'We help you understand and resolve your traffic fines.',
+    diccionario: en,
+  },
+  // TODO(Uriel): traducción real de la bienvenida (saludo real por ahora)
+  { codigo: 'kiche', nombre: "K'iche'", bienvenida: 'Saqirik!', diccionario: kiche },
+  { codigo: 'kawchiquel', nombre: 'Kaqchikel', bienvenida: 'Xsaqär', diccionario: kawchiquel },
 ]
 
 const CLAVE_IDIOMA = 'mugu_idioma'

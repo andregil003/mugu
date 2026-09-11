@@ -1,15 +1,15 @@
 // pantalla_resultados_muni (Flujo A): grilla de entidades al estilo portal SAT.
-// Cada botón muestra la imagen de la entidad + badge (notificación estilo iPhone).
-// Con multas → rojo activo y navegable. Sin multas → gris y no seleccionable.
+// BIG2-M3: loading animado mientras carga (sin botón "Actualizar datos");
+// si la municipalidad tiene UNA sola multa → va directo al detalle;
+// si tiene varias → abre la lista de multas.
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRotate } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import LoadingSpinner from '@/components/LoadingSpinner'
 import PageHero from '@/components/PageHero'
 import { useI18n } from '@/lib/i18n'
-import { sincronizarCacheDiario, forzarActualizacion } from '@/lib/data'
+import { sincronizarCacheDiario } from '@/lib/data'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { inferirTipoVehiculo, TIPO_LABEL, normalizarEntidad } from '@/lib/core'
 
@@ -24,13 +24,15 @@ export default function Municipios() {
 
   const [entidades, setEntidades] = useState([])
   const [conteo, setConteo] = useState({})
+  const [multasPlaca, setMultasPlaca] = useState([])
   const [tipoVehiculo, setTipoVehiculo] = useState('')
-  const [actualizando, setActualizando] = useState(false)
+  const [cargando, setCargando] = useState(true)
 
   useEffect(() => {
     let activo = true
     async function cargar() {
       if (!placa) return
+      setCargando(true)
       setTipoVehiculo(inferirTipoVehiculo(placa))
 
       const [lista, multas] = await Promise.all([
@@ -42,20 +44,21 @@ export default function Municipios() {
       ])
       if (!activo) return
 
-      // Contar multas pendientes por entidad (campo 'entidad' del backend)
+      // Multas pendientes de esta placa (campo 'entidad' del backend)
+      const p = placa.trim().toUpperCase()
+      const dePlaca = multas.filter(
+        (m) => m.placa?.trim().toUpperCase() === p && m.estado !== 'pagada'
+      )
       const conteos = {}
-      if (multas.length > 0) {
-        const p = placa.trim().toUpperCase()
-        multas
-          .filter((m) => m.placa?.trim().toUpperCase() === p && m.estado !== 'pagada')
-          .forEach((m) => {
-            const id = normalizarEntidad(m.entidad)
-            conteos[id] = (conteos[id] ?? 0) + 1
-          })
-      }
+      dePlaca.forEach((m) => {
+        const id = normalizarEntidad(m.entidad)
+        conteos[id] = (conteos[id] ?? 0) + 1
+      })
 
       setConteo(conteos)
+      setMultasPlaca(dePlaca)
       setEntidades(lista)
+      setCargando(false)
     }
     cargar()
     return () => {
@@ -63,11 +66,30 @@ export default function Municipios() {
     }
   }, [placa])
 
-  async function actualizar() {
-    setActualizando(true)
-    await forzarActualizacion()
-    setActualizando(false)
-    window.location.reload()
+  function abrirEntidad(e) {
+    const n = conteo[e.id] ?? 0
+    if (n === 0) return
+    if (n === 1) {
+      // Una sola multa → directo al detalle
+      const unica = multasPlaca.find(
+        (m) => normalizarEntidad(m.entidad) === e.id
+      )
+      const noMulta =
+        unica?.no_multa ?? unica?.noMulta ?? unica?.numero ?? unica?.remision ?? ''
+      navigate(
+        `/detalle?placa=${encodeURIComponent(placa)}&entidad=${e.id}&noMulta=${encodeURIComponent(noMulta)}`
+      )
+      return
+    }
+    navigate(`/multas?placa=${encodeURIComponent(placa)}&entidad=${e.id}`)
+  }
+
+  if (cargando) {
+    return (
+      <div className="mx-auto max-w-4xl px-4 py-8">
+        <LoadingSpinner />
+      </div>
+    )
   }
 
   return (
@@ -98,11 +120,7 @@ export default function Municipios() {
                   key={e.id}
                   type="button"
                   disabled={!activo}
-                  onClick={() =>
-                    navigate(
-                      `/multas?placa=${encodeURIComponent(placa)}&entidad=${e.id}`
-                    )
-                  }
+                  onClick={() => abrirEntidad(e)}
                   title={`${e.corto}${activo ? ` — ${n} ${t('municipiosConMultas')}` : ` — ${t('municipiosSinMultas')}`}`}
                   className={`group flex flex-col items-center gap-2 rounded-xl border p-3 text-center transition-all duration-200 ${
                     activo
@@ -144,15 +162,6 @@ export default function Municipios() {
               )
             })}
           </div>
-
-          <Button
-            variant="ghost"
-            className="w-full transition hover:bg-primary/10 hover:text-primary active:scale-[0.98]"
-            onClick={actualizar}
-            disabled={actualizando}
-          >
-            {actualizando ? t('actualizando') : <><FontAwesomeIcon icon={faRotate} className="mr-2" />{t('actualizarDatos')}</>}
-          </Button>
         </CardContent>
       </Card>
     </div>
