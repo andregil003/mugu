@@ -4,6 +4,12 @@ Todos los cambios notables del proyecto. Formato basado en [Keep a Changelog](ht
 
 ## [Unreleased]
 
+### i18n EN completo (toda la app en inglés)
+
+- **`en.json` traducido al 100%**: pasó de 75 a 280 claves — se tradujeron las 205 claves que faltaban (menú, detalle, timeline, pago, apelación, contacto, términos, privacidad, datepicker, errores, etc.). Antes el inglés mezclaba español por el fallback a `es`.
+- **`<html lang>` y título dinámico**: nuevo componente `DocumentMeta` en `App.jsx` que sincroniza `document.documentElement.lang`, `document.title` y la meta description con el idioma activo (claves nuevas `metaTitulo`/`metaDescripcion` en es/en).
+- **DatePicker en inglés**: días de la semana (`S M T W T F S`) y meses (`January…December`) traducidos.
+
 ### Fixes móvil + i18n
 
 - **i18n EN**: `appNombre` en `en.json` corregido de "MultaClara" a **"MUGU"** — el nombre de la app ya no cambia al poner el idioma en inglés.

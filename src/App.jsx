@@ -5,7 +5,7 @@
 // Detalle → Apelacion | Pago
 import { useEffect } from 'react'
 import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'
-import { I18nProvider } from '@/lib/i18n'
+import { I18nProvider, useI18n } from '@/lib/i18n'
 import { TamanoProvider } from '@/lib/tamano'
 import { useDarkMode } from '@/hooks/useDarkMode'
 import AppShell from '@/components/AppShell'
@@ -34,6 +34,18 @@ function ScrollToTop() {
   return null
 }
 
+// Mantiene <html lang> y el título del documento sincronizados con el idioma activo.
+function DocumentMeta() {
+  const { idioma, t } = useI18n()
+  useEffect(() => {
+    document.documentElement.lang = idioma
+    document.title = t('metaTitulo')
+    const meta = document.querySelector('meta[name="description"]')
+    if (meta) meta.setAttribute('content', t('metaDescripcion'))
+  }, [idioma, t])
+  return null
+}
+
 function App() {
   useDarkMode()
   return (
@@ -41,6 +53,7 @@ function App() {
       <TamanoProvider>
         <HashRouter>
           <ScrollToTop />
+          <DocumentMeta />
           <AppShell>
             <Routes>
               <Route path="/" element={<Entrada />} />
