@@ -7,7 +7,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -133,8 +133,8 @@ body {
   --sidebar-accent-foreground: oklch(0.985 0.005 152);
   --sidebar-border: oklch(1 0 0 / 16%);
   --sidebar-ring: oklch(0.627 0.194 149.214);
-  /* Fondo de puntos decorativos: visibles pero sutiles en dark */
-  --dots-opacity: 0.18;
+  /* Fondo de puntos decorativos: visibles en dark (emerald 40% sobre fondo oscuro) */
+  --dots-opacity: 0.4;
 }
 
 @layer base {

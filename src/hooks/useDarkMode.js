@@ -6,7 +6,9 @@ function getInitialDark() {
   const stored = localStorage.getItem(LS_KEY)
   if (stored === 'true') return true
   if (stored === 'false') return false
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
+  // Decisión de André: la app SIEMPRE arranca en light mode
+  // (no sigue prefers-color-scheme del sistema)
+  return false
 }
 
 export function useDarkMode() {

@@ -15,15 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <script>
       // Anti-flash de tema: aplica .dark en <html> ANTES del paint.
-      // Misma lógica que src/hooks/useDarkMode.js (localStorage 'darkMode' + prefers-color-scheme).
+      // La app SIEMPRE arranca en light; solo dark si el usuario lo guardó.
       ;(function () {
         try {
           var stored = localStorage.getItem('darkMode')
-          var dark =
-            stored === 'true' ||
-            (stored !== 'false' &&
-              window.matchMedia('(prefers-color-scheme: dark)').matches)
-          if (dark) document.documentElement.classList.add('dark')
+          if (stored === 'true') document.documentElement.classList.add('dark')
         } catch (e) {}
       })()
     </script>

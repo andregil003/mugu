@@ -1,7 +1,7 @@
 // pantalla_tamano: accesibilidad — elegir tamaño de texto (Normal/Grande/Extra).
 // BIG2-M1: botones con letras "Aa" de distintos tamaños, uno al lado del otro (horizontal).
 // Aplica el escalado en toda la app y persiste la preferencia.
-// Iron Puck: tema oscuro/claro con persistencia y respeto a prefers-color-scheme.
+// Iron Puck: tema oscuro/claro con persistencia. La app SIEMPRE arranca en light (decisión de André).
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
