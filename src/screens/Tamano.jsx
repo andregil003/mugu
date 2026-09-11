@@ -1,12 +1,19 @@
 // pantalla_tamano: accesibilidad — elegir tamaño de texto (Normal/Grande/Extra).
 // BIG2-M1: botones con letras "Aa" de distintos tamaños, uno al lado del otro (horizontal).
 // Aplica el escalado en toda la app y persiste la preferencia.
+// Iron Puck: tema oscuro/claro con persistencia y respeto a prefers-color-scheme.
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCheck,
+  faChevronLeft,
+  faMoon,
+  faSun,
+} from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { useI18n } from '@/lib/i18n'
 import { useTamano } from '@/lib/tamano'
+import { useDarkMode } from '@/hooks/useDarkMode'
 
 const CLAVE_TAMANO = {
   normal: 'tamanoNormal',
@@ -23,7 +30,13 @@ const TAMANO_CLASE = {
 export default function Tamano() {
   const { t } = useI18n()
   const { tamano, setTamano, tamanos } = useTamano()
+  const { isDark, toggle } = useDarkMode()
   const navigate = useNavigate()
+
+  const TEMAS = [
+    { id: 'claro', clave: 'tamanoTemaClaro', icono: faSun },
+    { id: 'oscuro', clave: 'tamanoTemaOscuro', icono: faMoon },
+  ]
 
   return (
     <div className="mx-auto w-full max-w-md px-4 py-8">
@@ -58,6 +71,46 @@ export default function Tamano() {
             </button>
           )
         })}
+      </div>
+
+      {/* Tema: claro/oscuro (pill toggle, como los botones Aa) */}
+      <div className="mt-6">
+        <p className="mb-2 text-sm font-semibold">{t('tamanoTema')}</p>
+        <div className="grid grid-cols-2 gap-3">
+          {TEMAS.map((op) => {
+            const activo =
+              (op.id === 'oscuro' && isDark) || (op.id === 'claro' && !isDark)
+            return (
+              <button
+                key={op.id}
+                type="button"
+                onClick={() => {
+                  if ((op.id === 'oscuro' && !isDark) || (op.id === 'claro' && isDark)) {
+                    toggle()
+                  }
+                }}
+                aria-label={t(op.clave)}
+                aria-pressed={activo}
+                className={`flex flex-col items-center justify-center gap-2 rounded-2xl border px-3 py-5 transition-all duration-200 active:scale-[0.98] ${
+                  activo
+                    ? 'border-emerald-400 bg-emerald-50 shadow-md ring-2 ring-emerald-200'
+                    : 'border-gray-200 bg-white shadow-sm hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md'
+                }`}
+              >
+                <FontAwesomeIcon
+                  icon={op.icono}
+                  className={`h-6 w-6 ${
+                    op.id === 'oscuro' ? 'text-indigo-500' : 'text-amber-500'
+                  }`}
+                />
+                <span className="text-xs font-medium text-muted-foreground">
+                  {t(op.clave)}
+                </span>
+                {activo && <FontAwesomeIcon icon={faCheck} className="h-4 w-4 text-emerald-600" />}
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       <Button

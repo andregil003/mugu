@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { I18nProvider } from '@/lib/i18n'
 import { TamanoProvider } from '@/lib/tamano'
+import { useDarkMode } from '@/hooks/useDarkMode'
 import AppShell from '@/components/AppShell'
 import Entrada from '@/screens/Entrada'
 import Idioma from '@/screens/Idioma'
@@ -32,6 +33,7 @@ function ScrollToTop() {
 }
 
 function App() {
+  useDarkMode()
   return (
     <I18nProvider>
       <TamanoProvider>
