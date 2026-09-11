@@ -9,12 +9,12 @@ export const GradientDots: React.FC<GradientDotsProps> = ({ className = "" }) =>
     <div
       className={`absolute inset-0 -z-10 h-full w-full bg-background overflow-hidden ${className}`}
     >
-      {/* Puntos decorativos estáticos (todos visibles) */}
+      {/* Puntos decorativos estáticos (todos visibles) — opacidad por tema via --dots-opacity */}
       <div
-        className="absolute inset-0 dark:opacity-50"
+        className="absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(circle, rgba(16, 185, 129, 0.35) 1.5px, transparent 1.5px)",
+            "radial-gradient(circle, rgba(16, 185, 129, var(--dots-opacity)) 1.5px, transparent 1.5px)",
           backgroundSize: "22px 22px",
         }}
       />
