@@ -2,6 +2,15 @@
 
 Todos los cambios notables del proyecto. Formato basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/) y versionado semver.
 
+## [0.8.1] — 2026-09-11
+
+### Fondo global GradientDots
+
+- Nuevo componente `src/components/ui/gradient-dots.tsx`: fondo de puntos con gradiente cónico verde animado (rotación 20s), máscara de puntos 22px y viñeta.
+- Adaptado a la paleta institucional: gradiente `#4ade80` + `#34d399` (sin rojo), fondo `bg-background` + viñeta `var(--background)` para mantener legible el texto oscuro de la app (el `#09090b` original haría ilegible el tema claro).
+- Integrado UNA vez en `AppShell` (layout global, cubre todas las rutas) con wrapper `relative isolate` — el fondo queda en `-z-10` y todo el contenido (header z-40, main, footer, bottom-nav) por encima.
+- QA: build OK + 2/2 tests Playwright + verificación DOM (fondo presente, contenido visible, header por encima).
+
 ## [0.8.0] — 2026-09-11
 
 ### Ronda UX — 14 cambios de André (PUCK main)
