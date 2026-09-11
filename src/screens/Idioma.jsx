@@ -36,7 +36,8 @@ export default function Idioma() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md px-4 py-10">
+    <div className="flex flex-1 items-center justify-center px-4">
+      <div className="w-full max-w-md space-y-6">
       {/* Logo + MUGU centrados y destacados */}
       <div className="mb-8 flex flex-col items-center gap-2">
         <img
@@ -140,6 +141,7 @@ export default function Idioma() {
           </div>
         </div>
       )}
+      </div>
     </div>
   )
 }
