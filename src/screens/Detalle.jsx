@@ -71,7 +71,7 @@ const ESTADO_BADGE = {
   pendiente: 'bg-amber-100 text-amber-700',
   pagada: 'bg-emerald-100 text-emerald-700',
   impugnada: 'bg-blue-100 text-blue-700',
-  prescrita: 'bg-violet-100 text-violet-700',
+  prescrita: 'bg-emerald-100 text-emerald-700',
 }
 
 const TIPO_MULTA_BADGE = {

@@ -140,7 +140,7 @@ export default function Municipios() {
                       }`}
                     />
                     {activo ? (
-                      <span className="absolute -right-2 -top-2 flex h-6 min-w-6 animate-in zoom-in-95 fade-in items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-rose-600 px-1.5 text-xs font-bold text-white shadow-md ring-2 ring-white transition-transform group-hover:scale-110">
+                      <span className="absolute -right-2 -top-2 flex h-6 min-w-6 animate-in zoom-in-95 fade-in items-center justify-center rounded-full bg-gradient-to-br from-green-700 to-emerald-600 px-1.5 text-xs font-bold text-white shadow-md ring-2 ring-white transition-transform group-hover:scale-110">
                         {n}
                       </span>
                     ) : (
