@@ -3,7 +3,7 @@
     "version": "2.0.0",
     "fuente": "Cartilla de Infracciones y Sanciones de Tránsito (transito.gob.gt) + Decreto 33-2024 (reformas a Ley de Tránsito 132-96)",
     "fecha": "2026-09-10",
-    "nota": "Catalogo expandido a 98 infracciones desde el Reglamento de Transito 273-98 (articulos 180-185) + Decreto 33-2024. Montos escalonados: 180=Q100, 181=Q200, 182=Q300, 183=Q400, 184=Q500, 185=Q1000-Q25000. Descuento por curso vial: 25%. Casos especiales fuera del Reglamento: sin_seguro (Q1000), alcohol_drogas (Q25000), licencia_vencida (Q300).",
+    "nota": "Catalogo expandido a 98 infracciones desde el Reglamento de Transito 273-98 (articulos 180-185) + Decreto 33-2024. Montos escalonados: 180=Q100, 181=Q200, 182=Q300, 183=Q400, 184=Q500, 185=Q1000-Q25000. Descuento por pago anticipado (15 días): 25%. Casos especiales fuera del Reglamento: sin_seguro (Q1000), alcohol_drogas (Q25000), licencia_vencida (Q300).",
     "aviso_legal": "Este catalogo es orientativo para prototipo de hackathon. No constituye asesoria legal. Verificar siempre contra la cartilla oficial y la notificacion recibida."
   },
   "infracciones": [
@@ -20,7 +20,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q100 -> Q75)."
     },
     {
       "id": "art_180_2",
@@ -35,7 +35,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q100 -> Q75)."
     },
     {
       "id": "art_180_3",
@@ -50,7 +50,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q100 -> Q75)."
     },
     {
       "id": "art_180_4",
@@ -65,7 +65,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q100 -> Q75)."
     },
     {
       "id": "art_180_5",
@@ -80,7 +80,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q100 -> Q75)."
     },
     {
       "id": "art_180_6",
@@ -95,7 +95,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q100 -> Q75)."
     },
     {
       "id": "art_180_7",
@@ -110,7 +110,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q100 -> Q75)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q100 -> Q75)."
     },
     {
       "id": "celular_conduciendo",
@@ -125,7 +125,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa a Q75."
+      "consejo": "Pagar antes de los 15 días reduce la multa a Q75."
     },
     {
       "id": "sin_tarjeta_circulacion",
@@ -155,7 +155,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_11",
@@ -170,7 +170,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_12",
@@ -185,7 +185,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_13",
@@ -200,7 +200,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "semaforo_rojo",
@@ -215,7 +215,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "Si la notificacion no llego en 120 dias, prescribe. Si llego, el curso vial reduce la multa a Q150."
+      "consejo": "Si la notificacion no llego en 120 dias, prescribe. Si llego, pagar antes de los 15 días reduce la multa a Q150."
     },
     {
       "id": "sentido_contrario",
@@ -244,7 +244,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_17",
@@ -259,7 +259,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_18",
@@ -274,7 +274,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_19",
@@ -289,7 +289,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_2",
@@ -304,7 +304,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_20",
@@ -319,7 +319,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_21",
@@ -334,7 +334,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_22",
@@ -349,7 +349,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_23",
@@ -364,7 +364,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_24",
@@ -379,7 +379,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "articulo_181_25",
@@ -439,7 +439,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_29",
@@ -454,7 +454,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_3",
@@ -469,7 +469,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_30",
@@ -484,7 +484,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_31",
@@ -499,7 +499,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_33",
@@ -514,7 +514,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "articulo_181_34",
@@ -544,7 +544,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_36",
@@ -559,7 +559,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_37",
@@ -574,7 +574,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_38",
@@ -589,7 +589,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_39",
@@ -604,7 +604,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_4",
@@ -619,7 +619,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_40",
@@ -634,7 +634,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_41",
@@ -649,7 +649,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_5",
@@ -664,7 +664,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_6",
@@ -679,7 +679,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "sobrecarga_vehiculo",
@@ -693,7 +693,7 @@
         "PNC",
         "PMT municipal"
       ],
-      "consejo": "La sobrecarga es factor en volcamientos. El curso vial reduce a Q375."
+      "consejo": "La sobrecarga es factor en volcamientos. Pagar antes de los 15 días reduce a Q375."
     },
     {
       "id": "art_181_8",
@@ -708,7 +708,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_181_9",
@@ -723,7 +723,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q200 -> Q150)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q200 -> Q150)."
     },
     {
       "id": "art_182_1",
@@ -738,7 +738,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "art_182_10",
@@ -753,7 +753,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "art_182_11",
@@ -768,7 +768,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "exceso_velocidad",
@@ -782,7 +782,7 @@
         "PNC",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa a Q225. Guatemala tiene 511 intersecciones con videoanalitica pero aun NO multan automaticamente."
+      "consejo": "Pagar antes de los 15 días reduce la multa a Q225. Guatemala tiene 511 intersecciones con videoanalitica pero aun NO multan automaticamente."
     },
     {
       "id": "art_182_13",
@@ -797,7 +797,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "art_182_14",
@@ -812,7 +812,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "art_182_15",
@@ -827,7 +827,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "art_182_16",
@@ -842,7 +842,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "art_182_17",
@@ -857,7 +857,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "art_182_18",
@@ -872,7 +872,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "articulo_182_19",
@@ -902,7 +902,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "articulo_182_20",
@@ -932,7 +932,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "art_182_4",
@@ -947,7 +947,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "art_182_5",
@@ -962,7 +962,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "art_182_6",
@@ -977,7 +977,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "art_182_7",
@@ -992,7 +992,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "art_182_8",
@@ -1007,7 +1007,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "art_182_9",
@@ -1022,13 +1022,13 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q300 -> Q225)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q300 -> Q225)."
     },
     {
       "id": "articulo_183_1",
       "nombre": "Conducir sin haber obtenido licencia",
       "descripcion": "Manejabas un vehículo automotor sin que las autoridades te hayan emitido jamás una licencia de conducir.",
-      "consejo": "Es distinto a licencia vencida: acá directamente no tenés licencia. El curso vial reduce la multa a Q300.",
+      "consejo": "Es distinto a licencia vencida: acá directamente no tenés licencia. Pagar antes de los 15 días reduce la multa a Q300.",
       "monto": 400,
       "codigo": "Art. 183-1 Reglamento (273-98)",
       "descuento_curso_vial": 300,
@@ -1052,7 +1052,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q400 -> Q300)."
     },
     {
       "id": "art_183_11",
@@ -1067,7 +1067,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q400 -> Q300)."
     },
     {
       "id": "art_183_12",
@@ -1082,7 +1082,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q400 -> Q300)."
     },
     {
       "id": "basura_vehiculo",
@@ -1097,7 +1097,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "Ademas de la multa, es una falta ambiental. El curso vial reduce a Q225."
+      "consejo": "Ademas de la multa, es una falta ambiental. Pagar antes de los 15 días reduce a Q225."
     },
     {
       "id": "art_183_14",
@@ -1112,7 +1112,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q400 -> Q300)."
     },
     {
       "id": "art_183_2",
@@ -1127,7 +1127,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q400 -> Q300)."
     },
     {
       "id": "art_183_3",
@@ -1142,7 +1142,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q400 -> Q300)."
     },
     {
       "id": "art_183_4",
@@ -1157,7 +1157,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q400 -> Q300)."
     },
     {
       "id": "art_183_5",
@@ -1172,7 +1172,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q400 -> Q300)."
     },
     {
       "id": "art_183_6",
@@ -1187,7 +1187,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q400 -> Q300)."
     },
     {
       "id": "sin_luces_noche",
@@ -1216,7 +1216,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q400 -> Q300)."
     },
     {
       "id": "art_183_9",
@@ -1231,7 +1231,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q400 -> Q300)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q400 -> Q300)."
     },
     {
       "id": "sin_placas",
@@ -1245,7 +1245,7 @@
         "PNC",
         "PMT municipal"
       ],
-      "consejo": "Verifica que la placa este instalada correctamente antes de pagar. El curso vial reduce a Q375."
+      "consejo": "Verifica que la placa este instalada correctamente antes de pagar. Pagar antes de los 15 días reduce a Q375."
     },
     {
       "id": "sin_casco_moto",
@@ -1260,7 +1260,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "Las motos son el 53% del parque vehicular y el 58% de las multas. El casco salva vidas: el curso vial reduce a Q375."
+      "consejo": "Las motos son el 53% del parque vehicular y el 58% de las multas. El casco salva vidas: pagar antes de los 15 días reduce a Q375."
     },
     {
       "id": "articulo_184_11",
@@ -1350,7 +1350,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q500 -> Q375)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q500 -> Q375)."
     },
     {
       "id": "estacionamiento_prohibido",
@@ -1379,7 +1379,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "El curso vial reduce la multa un 25% (Q500 -> Q375)."
+      "consejo": "Pagar antes de los 15 días reduce la multa un 25% (Q500 -> Q375)."
     },
     {
       "id": "articulo_184_8",
@@ -1453,7 +1453,7 @@
         "PNC",
         "PMT municipal"
       ],
-      "consejo": "Multa grave: no aplica curso vial. Si la notificacion no cumple los 6 requisitos del Decreto 33-2024, impugna."
+      "consejo": "Multa grave: no aplica descuento por pago anticipado. Si la notificacion no cumple los 6 requisitos del Decreto 33-2024, impugna."
     },
     {
       "id": "articulo_185_b",
@@ -1496,7 +1496,7 @@
       "emisores": [
         "PNC"
       ],
-      "consejo": "La multa administrativa adicional de Q25,000 se suma a otras sanciones. No aplica curso vial. Si el resultado del alcoholimetro fue cuestionable, un abogado puede revisar el procedimiento."
+      "consejo": "La multa administrativa adicional de Q25,000 se suma a otras sanciones. No aplica descuento por pago anticipado. Si el resultado del alcoholimetro fue cuestionable, un abogado puede revisar el procedimiento."
     },
     {
       "id": "licencia_vencida",
@@ -1511,7 +1511,7 @@
         "EMETRA",
         "PMT municipal"
       ],
-      "consejo": "Renueva la licencia antes de pagar: la multa no exime del tramite. El curso vial reduce a Q225."
+      "consejo": "Renueva la licencia antes de pagar: la multa no exime del tramite. Pagar antes de los 15 días reduce a Q225."
     },
     {
       "id": "sin_seguro",

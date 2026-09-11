@@ -7,6 +7,12 @@ export default defineConfig({
   testDir: './tests',
   timeout: 45000,
   retries: 0,
+  webServer: {
+    command: 'npm run preview',
+    url: 'http://localhost:4173',
+    reuseExistingServer: !process.env.CI,
+    timeout: 30000,
+  },
   use: {
     baseURL: process.env.BASE_URL || 'http://localhost:4173',
     viewport: { width: 390, height: 844 }, // móvil (público objetivo)

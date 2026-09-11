@@ -3,7 +3,7 @@
 // Aplica el escalado en toda la app y persiste la preferencia.
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { useI18n } from '@/lib/i18n'
 import { useTamano } from '@/lib/tamano'
@@ -29,10 +29,7 @@ export default function Tamano() {
     <div className="mx-auto w-full max-w-md px-4 py-8">
       <div className="hero-gradient overflow-hidden rounded-3xl shadow-lg">
         <div className="px-6 py-7 text-white">
-          <p className="text-xs font-medium uppercase tracking-widest text-white/70">
-            {t('appNombre')}
-          </p>
-          <h1 className="mt-1 text-2xl font-bold">{t('tamanoTitulo')}</h1>
+          <h1 className="text-2xl font-bold">{t('tamanoTitulo')}</h1>
           <p className="mt-1 text-sm text-white/80">{t('tamanoDesc')}</p>
         </div>
       </div>
@@ -64,11 +61,19 @@ export default function Tamano() {
       </div>
 
       <Button
-        variant="outline"
         className="mt-6 w-full rounded-xl py-5"
+        onClick={() => navigate('/menu')}
+      >
+        {t('tamanoContinuar')}
+      </Button>
+
+      <Button
+        variant="outline"
+        className="mt-3 w-full rounded-xl py-5"
         onClick={() => navigate(-1)}
       >
-        ← {t('volver')}
+        <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
+        {t('volver')}
       </Button>
     </div>
   )

@@ -4,6 +4,8 @@
 // si tiene varias → abre la lista de multas.
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import LoadingSpinner from '@/components/LoadingSpinner'
@@ -99,7 +101,8 @@ export default function Municipios() {
         className="mb-2 -ml-1 text-muted-foreground transition hover:-translate-x-0.5 hover:text-foreground active:scale-95"
         onClick={() => navigate('/buscar')}
       >
-        ← {t('volver')}
+        <FontAwesomeIcon icon={faChevronLeft} className="h-3.5 w-3.5" />{' '}
+        {t('volver')}
       </Button>
       <PageHero
         eyebrow={placa}

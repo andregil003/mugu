@@ -2,6 +2,47 @@
 
 Todos los cambios notables del proyecto. Formato basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/) y versionado semver.
 
+## [0.8.0] — 2026-09-11
+
+### Ronda UX — 14 cambios de André (PUCK main)
+
+**Flujo de entrada**
+- Elegir idioma ahora lleva directo a `/tamano`; "Continuar" va al menú (se salta Bienvenida).
+- `/idioma` sin navbar/header/footer (`RUTAS_SIN_NAV`); botones de idioma en verde institucional.
+
+**Buscar / placas recientes**
+- Contenedor más ancho (`max-w-2xl`), select de sigla alineado (`!h-12` — el `data-[size=default]:h-8` de shadcn pisaba el alto).
+- Placas recientes con scrollbar visible y padding superior (la "X" ya no se corta).
+
+**Navegación atrás**
+- Todos los botones "←" textuales → icono `faChevronLeft` (Buscar, Municipios, Multas, Tamano).
+- `Detalle` propaga `noMulta` (+`fechaNotif` a Pago) a `/pago` y `/apelacion`; ambas gestiones vuelven a `/detalle` con el número.
+- Fix bug en `Multas.jsx`: `aliasesEntidad` se construye SOLO con la entidad del query param (antes listaba multas de cualquier municipalidad).
+
+**Detalle / monto**
+- Imagen de la municipalidad a la derecha del header verde (con `pr-24` cuando hay imagen).
+- Timeline con `pt-2` (el borde superior ya no se corta).
+- Recargo anual +20% compuesto (`calcularMontoConRecargo` en core.js): se muestra monto original tachado + monto actual + nota, solo cuando pasaron 365+ días desde la notificación. Aplicado en Detalle y Pago (no en el listado, no hay fecha ahí).
+
+**Info / descuento**
+- Eliminadas categorías Leve/Grave/Muy grave del filtro y de las tarjetas; "Tipo de multa" ahora es etiqueta + chips.
+- "Curso vial" renombrado a "pago anticipado (15 días)" en i18n y en los `consejo` de `infracciones.json` (era un descuento de un evento pasado).
+
+**Apelación / contacto**
+- Tarjetas de gestión en monocromo gris (antes verde/ámbar/rojo).
+- Nuevo componente `ContactoEntidad`: teléfono(s), dirección, pago en línea (con "No confirmado" ≠ "No disponible") y pago presencial.
+- `entidades.json` completado con los datos de los MDs (contactos SAT + tabla de pagos por municipalidad): teléfonos, direcciones, portales de pago y notas de confirmación para las 11 entidades.
+
+**QA**
+- Tests Playwright actualizados al flujo nuevo (idioma → tamano → menú) y al select de tipo de placa (se llena solo el número); `webServer` en playwright.config.js.
+- Build OK + 2/2 tests E2E verdes.
+
+**Repasadita (auditoría de datos)**
+- `entidades.json`: eliminados campos legacy `contacto` y `dondePagar` (info vieja contradictoria: EMETRA→Banrural vs MD→MuniGuate); portal de Villa Nueva actualizado a `consultas-pmt` (era constancias-y-solvencias); campo `confirmado` en `pagoPresencial`.
+- `ContactoEntidad`: label "Dónde consultar el pago presencial" para entidades no confirmadas (instrucción del MD: no "Pagá aquí"); teléfono "Pendiente de verificar" para Jutiapa.
+- Keys i18n nuevas verificadas en los 4 idiomas (es/en/k'iche'/kaqchikel).
+- Limpieza de dead keys: 46 keys sin uso eliminadas de los 4 JSON de i18n (pantallas viejas, semáforo anterior, steppers, `cursoVialNota`, `catLeve/Grave/MuyGrave`, `infoCategoria`, `montoActual`, etc.). Quedan 206 keys por idioma, todas referenciadas en código.
+
 ## [0.7.0] — 2026-09-10
 
 ### BIG 2 — 30 cambios en 10 módulos (PUCK main + Bat Puck)

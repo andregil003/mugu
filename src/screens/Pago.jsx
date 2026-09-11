@@ -20,11 +20,12 @@ import {
   faSpinner,
 } from '@fortawesome/free-solid-svg-icons'
 import { useI18n } from '@/lib/i18n'
-import { normalizarEntidad } from '@/lib/core'
+import { normalizarEntidad, calcularMontoConRecargo } from '@/lib/core'
 import { sincronizarCacheDiario } from '@/lib/data'
+import ContactoEntidad from '@/components/ContactoEntidad'
 
 // Bancos autorizados según la entidad que emitió la multa.
-// Fuente: public/entidades.json (campo dondePagar) + verificación SAT.
+// Fuente: public/entidades.json (campos pagoEnLinea/pagoPresencial) + verificación SAT.
 const BANCOS_POR_ENTIDAD = {
   pnc: ['pagoBancosSistema'],
   emetra: ['pagoBanrural'],
@@ -55,9 +56,12 @@ export default function Pago() {
   const [params] = useSearchParams()
   const placa = params.get('placa') ?? ''
   const entidad = params.get('entidad') ?? ''
+  const noMulta = params.get('noMulta') ?? ''
+  const fechaNotif = params.get('fechaNotif') ?? ''
 
   const [portal, setPortal] = useState('')
   const [entidadLabel, setEntidadLabel] = useState(entidad.toUpperCase())
+  const [entidadObj, setEntidadObj] = useState(null)
   const [monto, setMonto] = useState(null)
 
   const [tarjeta, setTarjeta] = useState('')
@@ -86,6 +90,7 @@ export default function Pago() {
       if (e) {
         setEntidadLabel(e.corto ?? e.nombre ?? entidad.toUpperCase())
         setPortal(e.portal ?? '')
+        setEntidadObj(e)
       }
 
       const p = placa.trim().toUpperCase()
@@ -111,7 +116,10 @@ export default function Pago() {
       'pagoBancoIndustrial',
       'pagoBancosSistema',
     ]
-  const montoMostrado = monto ?? MONTO_DEMO
+  const montoBase = monto ?? MONTO_DEMO
+  const montoMostrado = calcularMontoConRecargo(montoBase, fechaNotif)
+  const hayRecargo = montoMostrado > montoBase
+  const portalUrl = entidadObj?.pagoEnLinea?.url || portal
   const formularioCompleto =
     tarjeta.replace(/\s/g, '').length === 16 &&
     titular.trim().length > 0 &&
@@ -140,7 +148,9 @@ export default function Pago() {
         className="mb-4 -ml-1 text-muted-foreground transition hover:-translate-x-0.5 hover:text-foreground active:scale-95"
         onClick={() =>
           navigate(
-            `/detalle?placa=${encodeURIComponent(placa)}&entidad=${encodeURIComponent(entidad)}`
+            `/detalle?placa=${encodeURIComponent(placa)}&entidad=${encodeURIComponent(
+              entidad
+            )}${noMulta ? `&noMulta=${encodeURIComponent(noMulta)}` : ''}`
           )
         }
       >
@@ -226,6 +236,16 @@ export default function Pago() {
                   <p className="font-mono text-base font-bold text-emerald-700">
                     Q{montoMostrado.toFixed(2)}
                   </p>
+                  {hayRecargo && (
+                    <>
+                      <p className="text-[10px] text-muted-foreground line-through">
+                        {t('montoOriginal')}: Q{montoBase.toFixed(2)}
+                      </p>
+                      <p className="text-[9px] leading-snug text-emerald-700/80">
+                        {t('recargoAnual')}
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -306,18 +326,18 @@ export default function Pago() {
             </Button>
 
             {/* Opción secundaria: portal oficial de la entidad */}
-            {portal && (
+            {portalUrl && (
               <div className="mt-3 rounded-2xl border border-dashed border-gray-200 p-3 text-center">
                 <p className="text-xs font-semibold text-gray-700">{t('pagoPortalOficial')}</p>
                 <p className="mt-0.5 text-[11px] text-muted-foreground">
-                  {t('pagoPortalOficialDesc')}
+                  {entidadObj?.pagoEnLinea?.descripcion ?? t('pagoPortalOficialDesc')}
                 </p>
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
                   className="mt-2"
-                  onClick={() => window.open(portal, '_blank', 'noopener,noreferrer')}
+                  onClick={() => window.open(portalUrl, '_blank', 'noopener,noreferrer')}
                 >
                   {entidadLabel}
                   <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="h-3.5 w-3.5" />
@@ -403,6 +423,9 @@ export default function Pago() {
           </p>
         </div>
       </section>
+
+      {/* Contacto de la entidad (fuente: contactos SAT + tabla de pagos) */}
+      <ContactoEntidad entidad={entidadObj} />
 
       {/* Disclaimer */}
       <div className="mt-4 flex items-start gap-2 rounded-2xl border border-gray-200 bg-gray-50 p-3 text-xs leading-relaxed text-muted-foreground">

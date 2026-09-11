@@ -5,7 +5,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClockRotateLeft, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faClockRotateLeft, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -60,16 +60,16 @@ export default function Buscar() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md px-4 py-6 lg:py-10">
+    <div className="mx-auto w-full max-w-2xl px-4 py-6 lg:py-10">
       <Button
         variant="ghost"
         className="mb-2 -ml-1 text-muted-foreground transition hover:-translate-x-0.5 hover:text-foreground active:scale-95"
         onClick={() => navigate('/menu')}
       >
-        ← {t('volver')}
+        <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
+        {t('volver')}
       </Button>
       <PageHero
-        eyebrow={t('appNombre')}
         titulo={t('buscarTitulo')}
         subtitulo={t('heroSubtitulo')}
       />
@@ -88,7 +88,7 @@ export default function Buscar() {
               </label>
               <div className="flex gap-2">
                 <Select value={tipoPlaca} onValueChange={setTipoPlaca}>
-                  <SelectTrigger className="h-12 w-24 shrink-0 rounded-xl">
+                  <SelectTrigger className="!h-12 w-24 shrink-0 rounded-xl">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -143,7 +143,7 @@ export default function Buscar() {
                   {t('limpiar')}
                 </button>
               </div>
-              <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div className="flex gap-2 overflow-x-auto pb-2 pt-2">
                 {recientes.map((p) => (
                   <div key={p} className="group relative shrink-0">
                     <button

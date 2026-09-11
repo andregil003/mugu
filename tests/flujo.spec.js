@@ -1,4 +1,4 @@
-// flujo.spec.js — E2E del flujo crítico: idioma → bienvenida → menú → buscar →
+// flujo.spec.js — E2E del flujo crítico: idioma → tamaño → menú → buscar →
 // resultados → multas → detalle. Verifica los bugs reportados por André:
 // 1) "ARTÍCULO undefined" en el listado  2) detalle que no salía  3) logo en header.
 import { test, expect } from '@playwright/test'
@@ -16,22 +16,21 @@ test('Flujo completo P123ABC/EMETRA: listado sin undefined, detalle sale, logo v
   await page.goto('/#/')
   await page.waitForTimeout(800)
 
-  // 2. Idioma → Español
+  // 2. Idioma → Español (ahora lleva a /tamano)
   await page.goto('/#/idioma')
   await page.getByRole('button', { name: 'Español' }).click()
-  await page.waitForURL(/#\/bienvenida/)
+  await page.waitForURL(/#\/tamano/)
 
-  // 3. Bienvenida → Menú
-  await expect(page.getByText('¿HAS SIDO MULTADO?')).toBeVisible()
-  await page.getByRole('button', { name: '¿Qué procede?' }).click()
+  // 3. Tamaño → Continuar → Menú
+  await page.getByRole('button', { name: 'Continuar' }).click()
   await page.waitForURL(/#\/menu/)
 
   // 4. Menú → Buscar
   await page.getByRole('button', { name: /Buscar mis multas/ }).click()
   await page.waitForURL(/#\/buscar/)
 
-  // 5. Buscar placa P123ABC
-  await page.getByLabel('Número de placa').fill('P123ABC')
+  // 5. Buscar placa P123ABC (tipo P + número 123ABC)
+  await page.getByLabel('Número de placa').fill('123ABC')
   await page.getByRole('button', { name: 'BUSCAR', exact: true }).click()
   await page.waitForURL(/#\/resultados/)
 
@@ -75,24 +74,24 @@ test('Flujo completo P123ABC/EMETRA: listado sin undefined, detalle sale, logo v
 test('Nuevos módulos: tamaño de texto, placas recientes, tipo placa + datepicker', async ({
   page,
 }) => {
-  // 1. Idioma → Español
+  // 1. Idioma → Español (ahora lleva a /tamano)
   await page.goto('/#/idioma')
   await page.getByRole('button', { name: 'Español' }).click()
-  await page.waitForURL(/#\/bienvenida/)
+  await page.waitForURL(/#\/tamano/)
 
   // 2. Tamaño de texto: ir a /tamano, elegir Grande → clase en <html>
   await page.goto('/#/tamano')
   await page.getByRole('button', { name: /Grande/ }).click()
   await expect(page.locator('html.texto-grande')).toHaveCount(1)
 
-  // 3. Buscar P123ABC → vuelve a /buscar → chip de placa reciente + limpiar
+  // 3. Buscar P123ABC (tipo P + número 123ABC) → vuelve a /buscar → chip de placa reciente + limpiar
   await page.goto('/#/buscar')
-  await page.getByLabel('Número de placa').fill('P123ABC')
+  await page.getByLabel('Número de placa').fill('123ABC')
   await page.getByRole('button', { name: 'BUSCAR', exact: true }).click()
   await page.waitForURL(/#\/resultados/)
   await page.goto('/#/buscar')
   await expect(page.getByText('Placas recientes')).toBeVisible()
-  await expect(page.getByRole('button', { name: 'P123ABC' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'P123ABC', exact: true })).toBeVisible()
   await page.getByRole('button', { name: 'Limpiar' }).click()
   await expect(page.getByText('Placas recientes')).toHaveCount(0)
 

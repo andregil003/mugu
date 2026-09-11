@@ -26,8 +26,10 @@ import {
   diasDesde,
   diasRestantesPara,
   normalizarEntidad,
+  calcularMontoConRecargo,
 } from '@/lib/core'
 import { cargarInfracciones, sincronizarCacheDiario } from '@/lib/data'
+import ContactoEntidad from '@/components/ContactoEntidad'
 import {
   PLAZO_IMPUTACION_DIAS,
   PLAZO_PRESCRIPCION_DIAS,
@@ -286,6 +288,10 @@ export default function Detalle() {
   const fase = pagada ? null : estado
   const situacion = SITUACION[fase]
 
+  // Monto con recargo: +20% anual a partir del primer año desde la notificación
+  const montoOriginal = Number(String(multa.monto ?? '').replace(/[^0-9.]/g, ''))
+  const montoActual = calcularMontoConRecargo(montoOriginal, fechaNotif)
+
   // Línea de tiempo
   const estadoPaso = (id) => {
     if (pagada) return 'ok'
@@ -347,7 +353,14 @@ export default function Detalle() {
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-800 via-green-700 to-emerald-600 shadow-lg">
           <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
           <div className="absolute -bottom-14 -left-8 h-36 w-36 rounded-full bg-white/10 blur-2xl" />
-          <div className="relative px-6 py-7 text-white">
+          {entidadObj?.imagen && (
+            <img
+              src={entidadObj.imagen}
+              alt={entidadLabel}
+              className="absolute right-4 top-1/2 h-16 w-16 -translate-y-1/2 rounded-xl border border-white/30 bg-white/90 object-contain p-1 shadow-lg"
+            />
+          )}
+          <div className={`relative px-6 py-7 text-white ${entidadObj?.imagen ? 'pr-24' : ''}`}>
             <p className="text-xs font-medium uppercase tracking-widest text-white/70">
               {t('detalleTitulo')}
             </p>
@@ -439,8 +452,18 @@ export default function Detalle() {
                 {t('detalleMonto')}
               </dt>
               <dd className="mt-0.5 font-mono text-base font-bold text-emerald-700">
-                {formatoMonto(multa.monto)}
+                {formatoMonto(montoActual)}
               </dd>
+              {montoActual > montoOriginal && (
+                <>
+                  <dd className="text-xs text-muted-foreground line-through">
+                    {t('montoOriginal')}: {formatoMonto(montoOriginal)}
+                  </dd>
+                  <dd className="mt-0.5 text-[10px] leading-snug text-emerald-700/80">
+                    {t('recargoAnual')}
+                  </dd>
+                </>
+              )}
             </div>
             <div className="rounded-xl bg-gray-50/80 px-4 py-3">
               <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
@@ -486,7 +509,7 @@ export default function Detalle() {
           </h2>
 
           {/* Línea de tiempo horizontal (onda verde → rojo) */}
-          <div className="overflow-x-auto px-2 pb-2">
+          <div className="overflow-x-auto px-2 pb-2 pt-2">
             <div className="relative min-w-[400px]">
               <svg
                 className="absolute left-0 right-0 top-[11px] h-2 w-full"
@@ -676,7 +699,9 @@ export default function Detalle() {
               className="w-full rounded-2xl bg-primary text-sm font-bold shadow-md transition-all hover:shadow-lg hover:brightness-110 active:scale-[0.98]"
               onClick={() =>
                 navigate(
-                  `/pago?placa=${encodeURIComponent(placa)}&entidad=${entidad}`
+                  `/pago?placa=${encodeURIComponent(placa)}&entidad=${entidad}&noMulta=${encodeURIComponent(
+                    multa.noMulta
+                  )}&fechaNotif=${fechaNotif}`
                 )
               }
             >
@@ -689,7 +714,9 @@ export default function Detalle() {
               className="w-full rounded-2xl bg-primary text-sm font-bold shadow-md transition-all hover:shadow-lg hover:brightness-110 active:scale-[0.98]"
               onClick={() =>
                 navigate(
-                  `/apelacion?placa=${encodeURIComponent(placa)}&entidad=${entidad}&gestion=oposicion`
+                  `/apelacion?placa=${encodeURIComponent(placa)}&entidad=${entidad}&gestion=oposicion&noMulta=${encodeURIComponent(
+                    multa.noMulta
+                  )}`
                 )
               }
             >
@@ -702,7 +729,9 @@ export default function Detalle() {
               className="w-full rounded-2xl bg-primary text-sm font-bold shadow-md transition-all hover:shadow-lg hover:brightness-110 active:scale-[0.98]"
               onClick={() =>
                 navigate(
-                  `/apelacion?placa=${encodeURIComponent(placa)}&entidad=${entidad}&gestion=prescripcion`
+                  `/apelacion?placa=${encodeURIComponent(placa)}&entidad=${entidad}&gestion=prescripcion&noMulta=${encodeURIComponent(
+                    multa.noMulta
+                  )}`
                 )
               }
             >
@@ -717,6 +746,9 @@ export default function Detalle() {
             )}
           </div>
         </section>
+
+        {/* 5. Contacto de la entidad (fuente: contactos SAT + tabla de pagos) */}
+        <ContactoEntidad entidad={entidadObj} />
       </div>
   )
 }

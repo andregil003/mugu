@@ -4,6 +4,8 @@
 // Los datos vienen del backend (cache diario) — sin datos de demostración.
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import { useI18n } from '@/lib/i18n'
@@ -35,15 +37,18 @@ export default function Multas() {
       if (!activo) return
 
       const p = placa.trim().toUpperCase()
-      // Aliases de la entidad (id, corto, nombre, jurisdicción) para matchear
-      // lo que manda el backend contra el id que viene en el query.
+      // Aliases SOLO de la entidad seleccionada (id, corto, nombre, jurisdicción)
+      // para matchear lo que manda el backend contra el id del query.
+      const ent = entidades.find(
+        (e) => e.id === entidad || normalizarEntidad(e.corto) === entidad
+      )
       const aliasesEntidad = new Set()
-      entidades.forEach((e) => {
-        aliasesEntidad.add(normalizarEntidad(e.id))
-        aliasesEntidad.add(normalizarEntidad(e.corto))
-        aliasesEntidad.add(normalizarEntidad(e.nombre))
-        aliasesEntidad.add(normalizarEntidad(e.jurisdiccion))
-      })
+      if (ent) {
+        aliasesEntidad.add(normalizarEntidad(ent.id))
+        aliasesEntidad.add(normalizarEntidad(ent.corto))
+        aliasesEntidad.add(normalizarEntidad(ent.nombre))
+        aliasesEntidad.add(normalizarEntidad(ent.jurisdiccion))
+      }
       const lista = reales
         .filter(
           (m) =>
@@ -66,9 +71,6 @@ export default function Multas() {
             estado: m.estado ?? 'pendiente',
           }
         })
-      const ent = entidades.find(
-        (e) => e.id === entidad || normalizarEntidad(e.corto) === entidad
-      )
       setMultas(lista)
       setEntidadLabel(ent?.corto ?? entidad.toUpperCase())
       setEntidadImagen(ent?.imagen ?? '')
@@ -96,7 +98,8 @@ export default function Multas() {
           navigate(`/resultados?placa=${encodeURIComponent(placa)}`)
         }
       >
-        ← {t('volver')}
+        <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
+        {t('volver')}
       </Button>
 
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-800 via-green-700 to-emerald-600 shadow-lg">

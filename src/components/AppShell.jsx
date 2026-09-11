@@ -14,7 +14,7 @@ import {
 import { useI18n } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 
-const RUTAS_SIN_NAV = ['/']
+const RUTAS_SIN_NAV = ['/', '/idioma']
 const RUTAS_SOLO_LOGO = ['/idioma']
 
 const NAV_ITEMS = [

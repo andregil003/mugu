@@ -217,6 +217,22 @@ export function formatoMonto(monto) {
 }
 
 /**
+ * Calcula el monto con recargo: la multa aumenta 20% anual a partir de
+ * UN AÑO desde la fecha de notificación (compuesto por año cumplido).
+ * @param {number|string} monto
+ * @param {string} fechaNotificacion ISO (YYYY-MM-DD)
+ * @returns {number} monto con recargo (monto original si no aplica)
+ */
+export function calcularMontoConRecargo(monto, fechaNotificacion) {
+  const n = Number(String(monto ?? '').replace(/[^0-9.]/g, ''))
+  if (!Number.isFinite(n) || n <= 0 || !fechaNotificacion) return n
+  const dias = diasDesde(fechaNotificacion)
+  if (dias <= 365) return n
+  const anios = Math.floor(dias / 365)
+  return n * Math.pow(1.2, anios)
+}
+
+/**
  * Etiquetas visibles por tipo de vehículo (claves de i18n).
  */
 export const TIPO_LABEL = {

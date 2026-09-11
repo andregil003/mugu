@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -94,7 +93,7 @@ export default function FormFisica() {
   }
 
   return (
-    <div className="mx-auto max-w-md px-4 py-6">
+    <div className="mx-auto w-full max-w-2xl px-4 py-6">
       <Button
         variant="ghost"
         className="mb-2 -ml-1 text-muted-foreground transition hover:-translate-x-0.5 hover:text-foreground active:scale-95"
@@ -104,20 +103,17 @@ export default function FormFisica() {
         {t('volver')}
       </Button>
       <PageHero
-        eyebrow={t('appNombre')}
         titulo={t('formFisicaTitulo')}
         subtitulo={t('formFisicaSubtitulo')}
       />
-      <Card className="mt-4 rounded-2xl shadow-sm transition-shadow hover:shadow-md">
-        <CardContent>
-          <form onSubmit={buscar} className="space-y-4">
+      <form onSubmit={buscar} className="mt-4 space-y-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-foreground/10 transition-shadow hover:shadow-md">
             {/* Placa: tipo (siglas) + resto */}
             <div>
               <label className="mb-1 block text-sm font-medium">{t('labelPlaca')}</label>
               <div className="flex gap-2">
                 <Select value={tipoPlaca} onValueChange={setTipoPlaca}>
                   <SelectTrigger
-                    className="h-11 w-28 shrink-0"
+                    className="!h-11 w-28 shrink-0"
                     aria-label={t('tipoPlacaLabel')}
                   >
                     <SelectValue />
@@ -211,8 +207,6 @@ export default function FormFisica() {
               {buscando ? '…' : t('botonBuscar')}
             </Button>
           </form>
-        </CardContent>
-      </Card>
     </div>
   )
 }

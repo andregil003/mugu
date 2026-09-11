@@ -1,6 +1,6 @@
 // pantalla_tabla_informativa (Flujo C): "No entiendo mi multa".
-// Buscador + filtro por categoría (leve/grave/muy grave) + filtro por tipo de multa
-// (papeleta/cepo/fotovelocímetro) + paginación de 10 + montos con descuento.
+// Buscador + filtro por tipo de multa (papeleta/cepo/fotovelocímetro) +
+// paginación de 10 + montos con descuento.
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -21,25 +21,11 @@ import { cn } from '@/lib/utils'
 
 const PAGE_SIZE = 10
 
-const CATEGORIAS = [
-  { id: 'leve', clave: 'catLeve', color: 'border-emerald-300 bg-emerald-50 text-emerald-800' },
-  { id: 'grave', clave: 'catGrave', color: 'border-amber-300 bg-amber-50 text-amber-800' },
-  { id: 'muy_grave', clave: 'catMuyGrave', color: 'border-red-300 bg-red-50 text-red-800' },
-]
-
 const TIPOS_MULTA = [
   { id: 'papeleta', clave: 'infoTipoPapeleta', color: 'border-amber-300 bg-amber-50 text-amber-800' },
   { id: 'cepo', clave: 'infoTipoCepo', color: 'border-gray-300 bg-gray-100 text-gray-700' },
   { id: 'fotovelocimetro', clave: 'infoTipoFotovelocimetro', color: 'border-sky-300 bg-sky-50 text-sky-800' },
 ]
-
-function categoriaDe(i) {
-  if (i.categoria) return i.categoria
-  const monto = i.monto ?? i.multa ?? 0
-  if (monto <= 200) return 'leve'
-  if (monto <= 500) return 'grave'
-  return 'muy_grave'
-}
 
 // El catálogo no trae tipo_multa: se deriva por heurística del texto.
 function tipoMultaDe(i) {
@@ -54,7 +40,6 @@ export default function Info() {
   const navigate = useNavigate()
   const [infracciones, setInfracciones] = useState([])
   const [busqueda, setBusqueda] = useState('')
-  const [categoria, setCategoria] = useState('')
   const [tipoMulta, setTipoMulta] = useState('')
   const [pagina, setPagina] = useState(1)
 
@@ -67,11 +52,6 @@ export default function Info() {
     setPagina(1)
   }
 
-  function cambiarCategoria(v) {
-    setCategoria(v)
-    setPagina(1)
-  }
-
   function cambiarTipoMulta(v) {
     setTipoMulta(v)
     setPagina(1)
@@ -80,13 +60,12 @@ export default function Info() {
   const filtradas = useMemo(() => {
     const q = busqueda.trim().toLowerCase()
     return infracciones.filter((i) => {
-      if (categoria && categoriaDe(i) !== categoria) return false
       if (tipoMulta && tipoMultaDe(i) !== tipoMulta) return false
       if (!q) return true
       const texto = `${i.nombre ?? ''} ${i.descripcion ?? ''} ${i.id ?? ''} ${i.codigo ?? ''} ${i.articulo ?? ''}`.toLowerCase()
       return texto.includes(q)
     })
-  }, [infracciones, busqueda, categoria, tipoMulta])
+  }, [infracciones, busqueda, tipoMulta])
 
   const totalPaginas = Math.max(1, Math.ceil(filtradas.length / PAGE_SIZE))
   const paginaActual = filtradas.slice((pagina - 1) * PAGE_SIZE, pagina * PAGE_SIZE)
@@ -103,7 +82,6 @@ export default function Info() {
       </Button>
 
       <PageHero
-        eyebrow={t('appNombre')}
         titulo={t('infoTitulo')}
         subtitulo={t('menuInfoDesc')}
       />
@@ -132,65 +110,28 @@ export default function Info() {
         )}
       </div>
 
-      {/* Filtros: categoría + tipo de multa */}
-      <div className="mt-3 flex flex-wrap items-center gap-1.5">
-        <button
-          type="button"
-          onClick={() => cambiarCategoria('')}
-          className={cn(
-            'rounded-full border px-3 py-1.5 text-xs font-semibold transition active:scale-95',
-            !categoria
-              ? 'border-emerald-400 bg-emerald-600 text-white shadow-sm'
-              : 'border-gray-200 bg-white text-muted-foreground hover:border-emerald-300'
-          )}
-        >
-          {t('infoCategoria')}
-        </button>
-        {CATEGORIAS.map((c) => (
-          <button
-            key={c.id}
-            type="button"
-            onClick={() => cambiarCategoria(categoria === c.id ? '' : c.id)}
-            className={cn(
-              'rounded-full border px-3 py-1.5 text-xs font-semibold transition active:scale-95',
-              categoria === c.id
-                ? c.color
-                : 'border-gray-200 bg-white text-muted-foreground hover:border-gray-300'
-            )}
-          >
-            {t(c.clave)}
-          </button>
-        ))}
-
-        <span className="mx-1 h-5 w-px bg-border" aria-hidden="true" />
-
-        <button
-          type="button"
-          onClick={() => cambiarTipoMulta('')}
-          className={cn(
-            'rounded-full border px-3 py-1.5 text-xs font-semibold transition active:scale-95',
-            !tipoMulta
-              ? 'border-emerald-400 bg-emerald-600 text-white shadow-sm'
-              : 'border-gray-200 bg-white text-muted-foreground hover:border-emerald-300'
-          )}
-        >
+      {/* Filtro por tipo de multa (explicativo, no botón principal) */}
+      <div className="mt-4">
+        <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {t('infoTipoMulta')}
-        </button>
-        {TIPOS_MULTA.map((c) => (
-          <button
-            key={c.id}
-            type="button"
-            onClick={() => cambiarTipoMulta(tipoMulta === c.id ? '' : c.id)}
-            className={cn(
-              'rounded-full border px-3 py-1.5 text-xs font-semibold transition active:scale-95',
-              tipoMulta === c.id
-                ? c.color
-                : 'border-gray-200 bg-white text-muted-foreground hover:border-gray-300'
-            )}
-          >
-            {t(c.clave)}
-          </button>
-        ))}
+        </p>
+        <div className="flex flex-wrap items-center gap-1.5">
+          {TIPOS_MULTA.map((c) => (
+            <button
+              key={c.id}
+              type="button"
+              onClick={() => cambiarTipoMulta(tipoMulta === c.id ? '' : c.id)}
+              className={cn(
+                'rounded-full border px-3 py-1.5 text-xs font-semibold transition active:scale-95',
+                tipoMulta === c.id
+                  ? c.color
+                  : 'border-gray-200 bg-white text-muted-foreground hover:border-gray-300'
+              )}
+            >
+              {t(c.clave)}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Lista paginada */}
@@ -199,8 +140,6 @@ export default function Info() {
           const monto = i.monto ?? i.multa
           const descuento = i.descuento ?? (monto <= 1000 ? 0.25 : null)
           const conDescuento = descuento ? monto * (1 - descuento) : null
-          const cat = categoriaDe(i)
-          const chip = CATEGORIAS.find((c) => c.id === cat)
           const tipo = TIPOS_MULTA.find((c) => c.id === tipoMultaDe(i)) ?? TIPOS_MULTA[0]
           return (
             <div
@@ -218,16 +157,6 @@ export default function Info() {
                     >
                       {t(tipo.clave)}
                     </span>
-                    {chip && (
-                      <span
-                        className={cn(
-                          'rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide',
-                          chip.color
-                        )}
-                      >
-                        {t(chip.clave)}
-                      </span>
-                    )}
                   </div>
                   <p className="mt-1.5 font-semibold leading-snug">{i.nombre ?? i.id}</p>
                   {i.codigo && (

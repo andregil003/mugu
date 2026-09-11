@@ -1,8 +1,8 @@
 {
   "_meta": {
-    "version": "1.0.0",
-    "nota": "Las 11 entidades que emiten multas de tránsito según el portal SAT (portal.sat.gob.gt/portal/multas) y el análisis Reto 05. Jurisdicciones y portales verificados contra fuentes oficiales.",
-    "aviso_legal": "Catálogo orientativo para prototipo de hackathon. Verificar contra fuentes oficiales."
+    "version": "1.1.0",
+    "nota": "Las 11 entidades que emiten multas de tránsito según el portal SAT (portal.sat.gob.gt/portal/multas) y el análisis Reto 05. Teléfonos y direcciones verificados contra el directorio de contactos SAT y la tabla de pagos por municipalidad (revisada el 10 de septiembre de 2026).",
+    "aviso_legal": "Catálogo orientativo para prototipo de hackathon. Verificar contra fuentes oficiales. «No confirmado» no significa que el pago en línea no exista."
   },
   "entidades": [
     {
@@ -12,8 +12,11 @@
       "jurisdiccion": "Rutas nacionales, departamentales y centroamericanas",
       "portal": "http://sistemas.transito.gob.gt/consultaremisiones/consultaremisiones.aspx",
       "imagen": "/entidades/pnc.jpg",
-      "contacto": "",
-      "dondePagar": "Bancos del sistema o banca en línea"
+      "telefono": "1520",
+      "telefonoExtra": "",
+      "direccion": "",
+      "pagoEnLinea": null,
+      "pagoPresencial": null
     },
     {
       "id": "emetra",
@@ -22,8 +25,19 @@
       "jurisdiccion": "Ciudad de Guatemala",
       "portal": "http://especiales.muniguate.com/remisiones.htm",
       "imagen": "/entidades/emetra.jpg",
-      "contacto": "",
-      "dondePagar": "Presencial en agencias Banrural o banca virtual Banrural"
+      "telefono": "1551",
+      "telefonoExtra": "2380-1099",
+      "direccion": "Palacio Municipal: 21 calle 6-77, zona 1, Guatemala",
+      "pagoEnLinea": {
+        "disponible": true,
+        "descripcion": "MuniGuate → Pago de servicios en línea → Multas",
+        "url": "https://www.muniguate.com/"
+      },
+      "pagoPresencial": {
+        "confirmado": true,
+        "direccion": "Palacio Municipal: 21 calle 6-77, zona 1, Guatemala",
+        "nota": "Atención de remisiones en primer nivel; allí indican la caja correspondiente."
+      }
     },
     {
       "id": "emixtra",
@@ -32,18 +46,40 @@
       "jurisdiccion": "Mixco",
       "portal": "https://consultas.munimixco.gob.gt/app/pagov2/",
       "imagen": "/entidades/emixtra.jpg",
-      "contacto": "",
-      "dondePagar": "Banco Industrial (BI en línea)"
+      "telefono": "2307-7300",
+      "telefonoExtra": "",
+      "direccion": "Municipalidad de Mixco: 4.ª calle 4-98, zona 1, Mixco",
+      "pagoEnLinea": {
+        "disponible": true,
+        "descripcion": "Portal de consulta y pago",
+        "url": "https://consultas.munimixco.gob.gt/app/pagov2/"
+      },
+      "pagoPresencial": {
+        "confirmado": true,
+        "direccion": "Municipalidad de Mixco: 4.ª calle 4-98, zona 1, Mixco",
+        "nota": "Consultar caja habilitada para multas."
+      }
     },
     {
       "id": "villa_nueva",
       "nombre": "PMT — Municipalidad de Villa Nueva",
       "corto": "Villa Nueva",
       "jurisdiccion": "Villa Nueva",
-      "portal": "https://www.villanueva.gob.gt/constancias-y-solvencias/",
+      "portal": "https://www.villanueva.gob.gt/consultas-pmt/",
       "imagen": "/entidades/villa_nueva.jpg",
-      "contacto": "",
-      "dondePagar": ""
+      "telefono": "1581",
+      "telefonoExtra": "2269-1100",
+      "direccion": "Edificio municipal: 5.ª avenida 4-45, zona 1, Villa Nueva",
+      "pagoEnLinea": {
+        "disponible": true,
+        "descripcion": "Consulta y pago de multas PMT",
+        "url": "https://www.villanueva.gob.gt/consultas-pmt/"
+      },
+      "pagoPresencial": {
+        "confirmado": true,
+        "direccion": "Edificio municipal: 5.ª avenida 4-45, zona 1, Villa Nueva",
+        "nota": ""
+      }
     },
     {
       "id": "santa_catarina_pinula",
@@ -52,8 +88,19 @@
       "jurisdiccion": "Santa Catarina Pinula",
       "portal": "http://www.consultas.scp.gob.gt/transito/",
       "imagen": "/entidades/santa_catarina_pinula.jpg",
-      "contacto": "",
-      "dondePagar": "Banco Industrial (BI en línea)"
+      "telefono": "1525",
+      "telefonoExtra": "2411-1000",
+      "direccion": "Municipalidad: 1.ª calle 5-50, zona 1, Santa Catarina Pinula",
+      "pagoEnLinea": {
+        "disponible": true,
+        "descripcion": "Bi en Línea App o Web (guía oficial del banco, no pantalla de cobro)",
+        "url": "https://www.corporacionbi.com/gt/bancoindustrial/productos-bi/pagar-multas-de-transito-en-linea-seo/"
+      },
+      "pagoPresencial": {
+        "confirmado": true,
+        "direccion": "Municipalidad: 1.ª calle 5-50, zona 1, Santa Catarina Pinula",
+        "nota": "Confirmar caja de multas al 1525."
+      }
     },
     {
       "id": "palencia",
@@ -62,8 +109,20 @@
       "jurisdiccion": "Palencia",
       "portal": "http://consultamulta.munipalencia.gob.gt/",
       "imagen": "/entidades/palencia.jpg",
-      "contacto": "",
-      "dondePagar": ""
+      "telefono": "6644-6800",
+      "telefonoExtra": "Ext. 8113",
+      "direccion": "Municipalidad: Cantón Pueblo Nuevo 0-93, Palencia",
+      "pagoEnLinea": {
+        "disponible": false,
+        "descripcion": "",
+        "url": "",
+        "nota": ""
+      },
+      "pagoPresencial": {
+        "confirmado": false,
+        "direccion": "Municipalidad: Cantón Pueblo Nuevo 0-93, Palencia",
+        "nota": "Solicitar indicaciones de PMT/Tesorería al 6644-6800."
+      }
     },
     {
       "id": "san_lucas_sacatepequez",
@@ -72,8 +131,19 @@
       "jurisdiccion": "San Lucas Sacatepéquez",
       "portal": "http://www.munisanlucas.gob.gt/Municipalidad_de_San_Lucas/Consulta_de_Remisiones.html",
       "imagen": "/entidades/san_lucas_sacatepequez.jpg",
-      "contacto": "",
-      "dondePagar": ""
+      "telefono": "7791-2537",
+      "telefonoExtra": "7873-1333 Ext. 123",
+      "direccion": "Edificio municipal: 6.ª avenida, zona 1, San Lucas Sacatepéquez",
+      "pagoEnLinea": {
+        "disponible": true,
+        "descripcion": "Pagos municipales → Multas",
+        "url": "https://munisanlucas.gob.gt/page-21/"
+      },
+      "pagoPresencial": {
+        "confirmado": true,
+        "direccion": "Edificio municipal: 6.ª avenida, zona 1, San Lucas Sacatepéquez",
+        "nota": "Confirmar caja al 7873-1333."
+      }
     },
     {
       "id": "amatitlan",
@@ -82,8 +152,20 @@
       "jurisdiccion": "Amatitlán",
       "portal": "http://amatitlanpmt.com/",
       "imagen": "/entidades/amatitlan.jpg",
-      "contacto": "",
-      "dondePagar": ""
+      "telefono": "4005-3381",
+      "telefonoExtra": "",
+      "direccion": "Municipalidad: 5.ª avenida y 6.ª calle, esquina, Amatitlán",
+      "pagoEnLinea": {
+        "disponible": false,
+        "descripcion": "",
+        "url": "",
+        "nota": ""
+      },
+      "pagoPresencial": {
+        "confirmado": false,
+        "direccion": "Municipalidad: 5.ª avenida y 6.ª calle, esquina, Amatitlán",
+        "nota": "Confirmar caja de multas al 6643-8383."
+      }
     },
     {
       "id": "escuintla",
@@ -92,8 +174,20 @@
       "jurisdiccion": "Escuintla",
       "portal": "https://muniescuintla.gob.gt/multas-de-transito-municipalidad-de-escuintla/",
       "imagen": "/entidades/escuintla.jpg",
-      "contacto": "",
-      "dondePagar": ""
+      "telefono": "7961-3600",
+      "telefonoExtra": "Ext. 232",
+      "direccion": "Municipalidad: 9.ª calle 3-16, zona 1, Escuintla",
+      "pagoEnLinea": {
+        "disponible": false,
+        "descripcion": "",
+        "url": "",
+        "nota": ""
+      },
+      "pagoPresencial": {
+        "confirmado": false,
+        "direccion": "Municipalidad: 9.ª calle 3-16, zona 1, Escuintla",
+        "nota": "Solicitar caja de multas al 7961-3600."
+      }
     },
     {
       "id": "antigua_guatemala",
@@ -102,8 +196,20 @@
       "jurisdiccion": "Antigua Guatemala",
       "portal": "https://portal.muniantigua.gob.gt/#/remisiones",
       "imagen": "/entidades/antigua_guatemala.png",
-      "contacto": "",
-      "dondePagar": ""
+      "telefono": "7720-7799",
+      "telefonoExtra": "7968-5304",
+      "direccion": "Palacio del Noble Ayuntamiento: 4.ª calle Oriente y 4.ª avenida Norte, Antigua Guatemala",
+      "pagoEnLinea": {
+        "disponible": false,
+        "descripcion": "",
+        "url": "",
+        "nota": "Existe un portal específico, pero no se verificaron los pasos finales de cobro."
+      },
+      "pagoPresencial": {
+        "confirmado": false,
+        "direccion": "Palacio del Noble Ayuntamiento: 4.ª calle Oriente y 4.ª avenida Norte, Antigua Guatemala",
+        "nota": "Confirmar caja de multas al 1552."
+      }
     },
     {
       "id": "jutiapa",
@@ -112,8 +218,20 @@
       "jurisdiccion": "Jutiapa",
       "portal": "https://munisoftware.com/jutiapa.php",
       "imagen": "/entidades/jutiapa.png",
-      "contacto": "",
-      "dondePagar": ""
+      "telefono": "",
+      "telefonoExtra": "",
+      "direccion": "Tesorería, primer nivel del edificio municipal: calle 15 de Septiembre 2-19, zona 2, Jutiapa",
+      "pagoEnLinea": {
+        "disponible": false,
+        "descripcion": "",
+        "url": "",
+        "nota": ""
+      },
+      "pagoPresencial": {
+        "confirmado": false,
+        "direccion": "Tesorería, primer nivel del edificio municipal: calle 15 de Septiembre 2-19, zona 2, Jutiapa",
+        "nota": "Confirmar que recibe la remisión específica."
+      }
     }
   ]
 }
