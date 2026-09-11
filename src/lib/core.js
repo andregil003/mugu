@@ -218,3 +218,43 @@ export function inferirTipoVehiculo(placa) {
   }
   return prefijo ? (tipos[prefijo] ?? 'otro') : 'otro'
 }
+
+/**
+ * Formatea un monto numérico a formato quetzal (Q).
+ * @param {number|string} monto
+ * @returns {string}
+ */
+export function formatoMonto(monto) {
+  const n = Number(String(monto ?? '').replace(/[^0-9.]/g, ''))
+  return Number.isFinite(n) ? `Q${n.toFixed(2)}` : '—'
+}
+
+/**
+ * Etiquetas visibles por tipo de vehículo (claves de i18n).
+ */
+export const TIPO_LABEL = {
+  particular: 'tipoParticular',
+  motocicleta: 'tipoMotocicleta',
+  mototaxi: 'tipoMototaxi',
+  alquiler: 'tipoAlquiler',
+  comercial: 'tipoComercial',
+  urbano: 'tipoUrbano',
+  extraurbano: 'tipoExtraurbano',
+  remolque: 'tipoRemolque',
+  agricola: 'tipoAgricola',
+  oficial: 'tipoOficial',
+  diplomatico: 'tipoDiplomatico',
+  consular: 'tipoConsular',
+  mision_internacional: 'tipoMisionInternacional',
+  distribuidor: 'tipoDistribuidor',
+  bus: 'tipoBus',
+  taxi: 'tipoTaxi',
+  otro: 'tipoOtro',
+}
+
+/**
+ * Prefijos de placas de Guatemala (siglas del tipo de vehículo).
+ */
+export const PREFIJOS_PLACA = [
+  'P', 'M', 'A', 'C', 'TE', 'U', 'TRC', 'MT', 'TC', 'O', 'CD', 'CC', 'MI',
+]

@@ -6,21 +6,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { useI18n } from '@/lib/i18n'
 import { cargarInfracciones, sincronizarCacheDiario } from '@/lib/data'
-import { formatearFecha } from '@/lib/core'
-
-function normalizarEntidad(nombre = '') {
-  return String(nombre)
-    .trim()
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '_')
-}
-
-function formatoMonto(monto) {
-  const n = Number(String(monto ?? '').replace(/[^0-9.]/g, ''))
-  return Number.isFinite(n) ? `Q${n.toFixed(2)}` : '—'
-}
+import { formatearFecha, normalizarEntidad, formatoMonto } from '@/lib/core'
 
 export default function Multas() {
   const { t } = useI18n()

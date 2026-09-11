@@ -11,32 +11,7 @@ import PageHero from '@/components/PageHero'
 import { useI18n } from '@/lib/i18n'
 import { sincronizarCacheDiario, forzarActualizacion } from '@/lib/data'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
-import { inferirTipoVehiculo } from '@/lib/core'
-
-// Etiquetas visibles por tipo de vehículo (claves de i18n)
-const TIPO_LABEL = {
-  particular: 'tipoParticular',
-  motocicleta: 'tipoMotocicleta',
-  mototaxi: 'tipoMototaxi',
-  alquiler: 'tipoAlquiler',
-  comercial: 'tipoComercial',
-  urbano: 'tipoUrbano',
-  extraurbano: 'tipoExtraurbano',
-  remolque: 'tipoRemolque',
-  agricola: 'tipoAgricola',
-  oficial: 'tipoOficial',
-  diplomatico: 'tipoDiplomatico',
-  consular: 'tipoConsular',
-  mision_internacional: 'tipoMisionInternacional',
-  distribuidor: 'tipoDistribuidor',
-  bus: 'tipoBus',
-  taxi: 'tipoTaxi',
-  otro: 'tipoOtro',
-}
-
-function normalizarEntidad(nombre = '') {
-  return nombre.toLowerCase().replace(/[^a-z0-9]+/g, '_')
-}
+import { inferirTipoVehiculo, TIPO_LABEL, normalizarEntidad } from '@/lib/core'
 
 export default function Municipios() {
   const { t } = useI18n()

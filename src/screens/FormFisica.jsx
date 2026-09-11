@@ -19,17 +19,8 @@ import {
 } from '@/components/ui/select'
 import DatePicker from '@/components/DatePicker'
 import { useI18n } from '@/lib/i18n'
-import { validarPlaca, validarFechaNoFutura, hoyISO } from '@/lib/core'
+import { validarPlaca, validarFechaNoFutura, hoyISO, normalizarEntidad, PREFIJOS_PLACA } from '@/lib/core'
 import { sincronizarCacheDiario } from '@/lib/data'
-
-function normalizarEntidad(nombre = '') {
-  return nombre.toLowerCase().replace(/[^a-z0-9]+/g, '_')
-}
-
-// Prefijos de placas de Guatemala (siglas del tipo de vehículo)
-const PREFIJOS_PLACA = [
-  'P', 'M', 'A', 'C', 'TE', 'U', 'TRC', 'MT', 'TC', 'O', 'CD', 'CC', 'MI',
-]
 
 export default function FormFisica() {
   const { t } = useI18n()
